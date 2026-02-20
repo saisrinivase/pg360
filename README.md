@@ -27,9 +27,9 @@ It provides:
 - PostgreSQL target: 13 to 18
 - Validated locally on PostgreSQL 18
 
-## Quick Start (Command Line)
+## Quick Start (One Command For Everything)
 
-### 1) Unified PG360 Pack (recommended)
+Run this one script to generate all PG360 outputs (main page + all subreports):
 
 ```bash
 psql -X -v ON_ERROR_STOP=1 -d pgbench_test \
@@ -40,24 +40,15 @@ psql -X -v ON_ERROR_STOP=1 -d pgbench_test \
 Open:
 - `samples/pg360_topics_main.html`
 
-### 2) Core 9 Report Pack only
+Generated output set from this single command:
+- `samples/pg360_topics_main.html` (main index)
+- `samples/pg360_topic_01...40...html` (40 operational topic reports)
+- `samples/pg360_report.html` (core main report)
+- `samples/pg360_01...09...html` (9 core migration reports)
+- `samples/migration_assessment_v1.json`
+- `samples/migration_gate_v1.txt`
 
-```bash
-psql -X -v ON_ERROR_STOP=1 -d pgbench_test \
-  -v report_file='samples/pg360_report.html' \
-  -v report_01_file='samples/pg360_01_type_consistency.html' \
-  -v report_02_file='samples/pg360_02_casting_issues.html' \
-  -v report_03_file='samples/pg360_03_indexes_needed.html' \
-  -v report_04_file='samples/pg360_04_unused_duplicate_indexes.html' \
-  -v report_05_file='samples/pg360_05_bloat_report.html' \
-  -v report_06_file='samples/pg360_06_partition_health.html' \
-  -v report_07_file='samples/pg360_07_config_readiness.html' \
-  -v report_08_file='samples/pg360_08_compatibility_matrix.html' \
-  -v gate_html_file='samples/pg360_09_gate_summary.html' \
-  -v json_file='samples/migration_assessment_v1.json' \
-  -v gate_output_file='samples/migration_gate_v1.txt' \
-  -f "scripts/10_migration_assessor_v1.sql"
-```
+Optional: run only the core 9 report pack with `scripts/10_migration_assessor_v1.sql`.
 
 ## pgAdmin / DBeaver Usage
 

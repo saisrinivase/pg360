@@ -2,7 +2,7 @@
 
 ## Command Line (psql)
 
-Run unified index + core + topics:
+Run one script to generate all outputs:
 
 ```bash
 psql -X -v ON_ERROR_STOP=1 -d pgbench_test \
@@ -12,6 +12,11 @@ psql -X -v ON_ERROR_STOP=1 -d pgbench_test \
 
 Open:
 - `samples/pg360_topics_main.html`
+
+This single run generates:
+- main index + 40 topic reports
+- core main + 9 core reports
+- JSON and gate text outputs
 
 ## pgAdmin
 
@@ -42,6 +47,7 @@ Steps:
 
 ## Notes
 
+- `scripts/12_migration_topic_report_pack_v1.sql` is the primary entrypoint for full PG360.
 - `scripts/10_migration_assessor_v1.sql` and `scripts/12_migration_topic_report_pack_v1.sql` are psql-oriented because they use psql meta-commands for file generation.
 - `scripts/migration_assessor_v1_gui.sql` is GUI-safe and pure SELECT.
 - Query Tool does not execute psql meta-commands like `\o`, `\i`, `\set`, `\qecho`.
