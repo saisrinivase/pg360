@@ -61,14 +61,20 @@ psql -X -v ON_ERROR_STOP=1 -d pgbench_test \
 
 ## pgAdmin / DBeaver Usage
 
-Use GUI-safe script:
+For full PG360 main index + all subreports in pgAdmin, use `PSQL Tool`:
+
+```sql
+\cd '/Users/saiendla/Documents/PostgreSQl SCripts /pg360'
+\i scripts/12_migration_topic_report_pack_v1.sql
+```
+
+Then open:
+- `samples/pg360_topics_main.html`
+
+For Query Tool / DBeaver SQL Editor (pure SQL only), use:
 - `scripts/migration_assessor_v1_gui.sql`
 
-Steps:
-1. Open Query Tool / SQL Editor on target database
-2. Open and execute full script
-3. Review sectioned outputs
-4. Use section `10. HTML Report Payload` to export `html_report` into an `.html` file
+This produces one HTML payload row (`html_report`) that you export manually.
 
 ## Deployment Contexts
 

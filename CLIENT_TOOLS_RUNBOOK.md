@@ -15,14 +15,20 @@ Open:
 
 ## pgAdmin
 
-Use:
-- `scripts/migration_assessor_v1_gui.sql`
+For full main page + all subreports, use `PSQL Tool` in pgAdmin.
 
-Steps:
-1. Open Query Tool on target DB
-2. Execute full script
-3. Review section outputs
-4. In section `10. HTML Report Payload`, export `html_report` as `.html`
+Steps (PSQL Tool):
+1. Right-click your database in pgAdmin and open `PSQL Tool`.
+2. Run:
+```sql
+\cd '/Users/saiendla/Documents/PostgreSQl SCripts /pg360'
+\i scripts/12_migration_topic_report_pack_v1.sql
+```
+3. Open generated main page:
+- `samples/pg360_topics_main.html`
+
+For single GUI payload only, use Query Tool script:
+- `scripts/migration_assessor_v1_gui.sql`
 
 ## DBeaver
 
@@ -38,3 +44,4 @@ Steps:
 
 - `scripts/10_migration_assessor_v1.sql` and `scripts/12_migration_topic_report_pack_v1.sql` are psql-oriented because they use psql meta-commands for file generation.
 - `scripts/migration_assessor_v1_gui.sql` is GUI-safe and pure SELECT.
+- Query Tool does not execute psql meta-commands like `\o`, `\i`, `\set`, `\qecho`.

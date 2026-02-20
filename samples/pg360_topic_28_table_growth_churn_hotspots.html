@@ -8,7 +8,7 @@
   <tr valign="top">
     <td align="left">pgbench_test</td>
     <td align="left">saiendla</td>
-    <td align="left">2026-02-20 15:10:35.820658-05</td>
+    <td align="left">2026-02-20 17:01:41.462898-05</td>
   </tr>
 </table>
 
@@ -264,6 +264,16 @@
     <td align="right">0</td>
   </tr>
   <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">object_size_snap</td>
+    <td align="right">5240</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">5240</td>
+    <td align="right">0</td>
+  </tr>
+  <tr valign="top">
     <td align="left">migration_v2_lab</td>
     <td align="left">quoted_orders</td>
     <td align="right">5000</td>
@@ -275,32 +285,22 @@
   </tr>
   <tr valign="top">
     <td align="left">dba_metrics</td>
-    <td align="left">object_size_snap</td>
-    <td align="right">3808</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">3808</td>
-    <td align="right">0</td>
-  </tr>
-  <tr valign="top">
-    <td align="left">dba_metrics</td>
     <td align="left">index_usage_snap</td>
-    <td align="right">1649</td>
+    <td align="right">2265</td>
     <td align="right">0</td>
     <td align="right">0</td>
     <td align="right">0</td>
-    <td align="right">1638</td>
+    <td align="right">2254</td>
     <td align="right">0</td>
   </tr>
   <tr valign="top">
     <td align="left">dba_metrics</td>
     <td align="left">table_mod_snap</td>
-    <td align="right">1469</td>
+    <td align="right">2021</td>
     <td align="right">0</td>
     <td align="right">0</td>
     <td align="right">0</td>
-    <td align="right">1469</td>
+    <td align="right">2021</td>
     <td align="right">0</td>
   </tr>
   <tr valign="top">
@@ -336,21 +336,51 @@
   <tr valign="top">
     <td align="left">dba_metrics</td>
     <td align="left">ddl_event_log</td>
-    <td align="right">385</td>
+    <td align="right">475</td>
     <td align="right">0</td>
     <td align="right">0</td>
-    <td align="right">24</td>
-    <td align="right">385</td>
+    <td align="right">0</td>
+    <td align="right">475</td>
     <td align="right">0</td>
   </tr>
   <tr valign="top">
     <td align="left">dba_metrics</td>
     <td align="left">tablespace_size_snap</td>
-    <td align="right">64</td>
+    <td align="right">88</td>
     <td align="right">0</td>
     <td align="right">0</td>
+    <td align="right">24</td>
+    <td align="right">88</td>
     <td align="right">0</td>
-    <td align="right">64</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">capture_run</td>
+    <td align="right">45</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">44</td>
+    <td align="right">44</td>
+    <td align="right">1</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">database_size_snap</td>
+    <td align="right">44</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">44</td>
+    <td align="right">44</td>
+    <td align="right">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">db_stats_reset_snap</td>
+    <td align="right">44</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">44</td>
+    <td align="right">44</td>
     <td align="right">0</td>
   </tr>
   <tr valign="top">
@@ -361,36 +391,6 @@
     <td align="right">0</td>
     <td align="right">39</td>
     <td align="right">39</td>
-    <td align="right">0</td>
-  </tr>
-  <tr valign="top">
-    <td align="left">dba_metrics</td>
-    <td align="left">capture_run</td>
-    <td align="right">33</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">32</td>
-    <td align="right">32</td>
-    <td align="right">1</td>
-  </tr>
-  <tr valign="top">
-    <td align="left">dba_metrics</td>
-    <td align="left">db_stats_reset_snap</td>
-    <td align="right">32</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">32</td>
-    <td align="right">32</td>
-    <td align="right">0</td>
-  </tr>
-  <tr valign="top">
-    <td align="left">dba_metrics</td>
-    <td align="left">database_size_snap</td>
-    <td align="right">32</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">32</td>
-    <td align="right">32</td>
     <td align="right">0</td>
   </tr>
   <tr valign="top">
@@ -414,16 +414,6 @@
     <td align="right">0</td>
   </tr>
   <tr valign="top">
-    <td align="left">dba_metrics</td>
-    <td align="left">wal_snapshots</td>
-    <td align="right">3</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">3</td>
-    <td align="right">3</td>
-    <td align="right">0</td>
-  </tr>
-  <tr valign="top">
     <td align="left">pg360_lab</td>
     <td align="left">deadlock_b</td>
     <td align="right">1</td>
@@ -434,13 +424,13 @@
     <td align="right">2</td>
   </tr>
   <tr valign="top">
-    <td align="left">migration_v2_lab</td>
-    <td align="left">mv_daily_order_volume</td>
-    <td align="right">2</td>
+    <td align="left">dba_metrics</td>
+    <td align="left">wal_snapshots</td>
+    <td align="right">3</td>
     <td align="right">0</td>
     <td align="right">0</td>
-    <td align="right">2</td>
-    <td align="right">1</td>
+    <td align="right">3</td>
+    <td align="right">3</td>
     <td align="right">0</td>
   </tr>
   <tr valign="top">
@@ -454,6 +444,16 @@
     <td align="right">1</td>
   </tr>
   <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">mv_daily_order_volume</td>
+    <td align="right">2</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">2</td>
+    <td align="right">1</td>
+    <td align="right">0</td>
+  </tr>
+  <tr valign="top">
     <td align="left">pg360_lab</td>
     <td align="left">lock_demo</td>
     <td align="right">1</td>
@@ -464,8 +464,8 @@
     <td align="right">0</td>
   </tr>
   <tr valign="top">
-    <td align="left">pg_temp_89</td>
-    <td align="left">tmp_config_readiness</td>
+    <td align="left">pg_temp_47</td>
+    <td align="left">tmp_main_findings</td>
     <td align="right">0</td>
     <td align="right">0</td>
     <td align="right">0</td>
@@ -474,7 +474,17 @@
     <td align="right">0</td>
   </tr>
   <tr valign="top">
-    <td align="left">pg_temp_89</td>
+    <td align="left">pg_temp_47</td>
+    <td align="left">tmp_mig_v1_summary</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_47</td>
     <td align="left">tmp_duplicate_indexes</td>
     <td align="right">0</td>
     <td align="right">0</td>
@@ -484,8 +494,28 @@
     <td align="right">0</td>
   </tr>
   <tr valign="top">
-    <td align="left">pg_temp_89</td>
-    <td align="left">tmp_schema_type_consistency</td>
+    <td align="left">pg_temp_47</td>
+    <td align="left">tmp_config_readiness</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_47</td>
+    <td align="left">tmp_fk_index_coverage</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_47</td>
+    <td align="left">tmp_unused_indexes</td>
     <td align="right">0</td>
     <td align="right">0</td>
     <td align="right">0</td>
@@ -504,7 +534,17 @@
     <td align="right">0</td>
   </tr>
   <tr valign="top">
-    <td align="left">pg_temp_89</td>
+    <td align="left">pg_temp_47</td>
+    <td align="left">tmp_schema_type_consistency</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_47</td>
     <td align="left">tmp_casting_issues</td>
     <td align="right">0</td>
     <td align="right">0</td>
@@ -514,27 +554,7 @@
     <td align="right">0</td>
   </tr>
   <tr valign="top">
-    <td align="left">pg_temp_89</td>
-    <td align="left">tmp_fk_index_coverage</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-  </tr>
-  <tr valign="top">
-    <td align="left">pg_temp_89</td>
-    <td align="left">tmp_main_findings</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-  </tr>
-  <tr valign="top">
-    <td align="left">pg_temp_89</td>
+    <td align="left">pg_temp_47</td>
     <td align="left">tmp_bloat_report</td>
     <td align="right">0</td>
     <td align="right">0</td>
@@ -544,28 +564,8 @@
     <td align="right">0</td>
   </tr>
   <tr valign="top">
-    <td align="left">pg_temp_89</td>
+    <td align="left">pg_temp_47</td>
     <td align="left">tmp_partition_health</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-  </tr>
-  <tr valign="top">
-    <td align="left">pg_temp_89</td>
-    <td align="left">tmp_mig_v1_summary</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-    <td align="right">0</td>
-  </tr>
-  <tr valign="top">
-    <td align="left">pg_temp_89</td>
-    <td align="left">tmp_unused_indexes</td>
     <td align="right">0</td>
     <td align="right">0</td>
     <td align="right">0</td>

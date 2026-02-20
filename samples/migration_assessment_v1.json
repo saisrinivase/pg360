@@ -125,6 +125,16 @@
                 "dead_pct": 0.00,
                 "total_size": "14 MB",
                 "dead_tuples": 0,
+                "object_name": "index_demo_orders",
+                "object_type": "TABLE",
+                "schema_name": "dba_metrics_lab",
+                "total_bytes": 14770176,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 0.00,
+                "total_size": "14 MB",
+                "dead_tuples": 0,
                 "object_name": "sales_catalog",
                 "object_type": "TABLE",
                 "schema_name": "migration_v2_lab",
@@ -343,6 +353,16 @@
             },
             {
                 "dead_pct": 0,
+                "total_size": "2648 kB",
+                "dead_tuples": 0,
+                "object_name": "index_demo_orders_pkey",
+                "object_type": "INDEX",
+                "schema_name": "dba_metrics_lab",
+                "total_bytes": 2711552,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 0,
                 "total_size": "2640 kB",
                 "dead_tuples": 0,
                 "object_name": "sales_catalog_pkey",
@@ -432,13 +452,13 @@
                 "recommended_action": "MONITOR"
             },
             {
-                "dead_pct": 0,
-                "total_size": "1112 kB",
+                "dead_pct": 0.00,
+                "total_size": "1216 kB",
                 "dead_tuples": 0,
-                "object_name": "product_catalog_pkey",
-                "object_type": "INDEX",
-                "schema_name": "migration_v1_lab",
-                "total_bytes": 1138688,
+                "object_name": "object_size_snap",
+                "object_type": "TABLE",
+                "schema_name": "dba_metrics",
+                "total_bytes": 1245184,
                 "recommended_action": "MONITOR"
             },
             {
@@ -453,12 +473,32 @@
             },
             {
                 "dead_pct": 0,
+                "total_size": "1112 kB",
+                "dead_tuples": 0,
+                "object_name": "product_catalog_pkey",
+                "object_type": "INDEX",
+                "schema_name": "migration_v1_lab",
+                "total_bytes": 1138688,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 0,
                 "total_size": "1056 kB",
                 "dead_tuples": 0,
                 "object_name": "idx_child_transactions_account_id",
                 "object_type": "INDEX",
                 "schema_name": "migration_v1_lab",
                 "total_bytes": 1081344,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 0,
+                "total_size": "912 kB",
+                "dead_tuples": 0,
+                "object_name": "idx_demo_orders_customer",
+                "object_type": "INDEX",
+                "schema_name": "dba_metrics_lab",
+                "total_bytes": 933888,
                 "recommended_action": "MONITOR"
             },
             {
@@ -482,6 +522,26 @@
                 "recommended_action": "MONITOR"
             },
             {
+                "dead_pct": 0.00,
+                "total_size": "672 kB",
+                "dead_tuples": 0,
+                "object_name": "index_usage_snap",
+                "object_type": "TABLE",
+                "schema_name": "dba_metrics",
+                "total_bytes": 688128,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 0.00,
+                "total_size": "648 kB",
+                "dead_tuples": 0,
+                "object_name": "table_mod_snap",
+                "object_type": "TABLE",
+                "schema_name": "dba_metrics",
+                "total_bytes": 663552,
+                "recommended_action": "MONITOR"
+            },
+            {
                 "dead_pct": 0,
                 "total_size": "568 kB",
                 "dead_tuples": 0,
@@ -502,13 +562,13 @@
                 "recommended_action": "MONITOR"
             },
             {
-                "dead_pct": 0,
-                "total_size": "240 kB",
+                "dead_pct": 0.00,
+                "total_size": "280 kB",
                 "dead_tuples": 0,
-                "object_name": "parent_accounts_pkey",
-                "object_type": "INDEX",
-                "schema_name": "migration_v1_lab",
-                "total_bytes": 245760,
+                "object_name": "ddl_event_log",
+                "object_type": "TABLE",
+                "schema_name": "dba_metrics",
+                "total_bytes": 286720,
                 "recommended_action": "MONITOR"
             },
             {
@@ -522,13 +582,33 @@
                 "recommended_action": "MONITOR"
             },
             {
-                "dead_pct": 0.00,
-                "total_size": "160 kB",
+                "dead_pct": 0,
+                "total_size": "240 kB",
                 "dead_tuples": 0,
-                "object_name": "object_size_snap",
-                "object_type": "TABLE",
+                "object_name": "parent_accounts_pkey",
+                "object_type": "INDEX",
+                "schema_name": "migration_v1_lab",
+                "total_bytes": 245760,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 0,
+                "total_size": "208 kB",
+                "dead_tuples": 0,
+                "object_name": "idx_object_size_snap_object_oid",
+                "object_type": "INDEX",
                 "schema_name": "dba_metrics",
-                "total_bytes": 163840,
+                "total_bytes": 212992,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 0,
+                "total_size": "176 kB",
+                "dead_tuples": 0,
+                "object_name": "object_size_snap_pkey",
+                "object_type": "INDEX",
+                "schema_name": "dba_metrics",
+                "total_bytes": 180224,
                 "recommended_action": "MONITOR"
             },
             {
@@ -572,37 +652,57 @@
                 "recommended_action": "MONITOR"
             },
             {
-                "dead_pct": 0.00,
+                "dead_pct": 0,
                 "total_size": "96 kB",
                 "dead_tuples": 0,
-                "object_name": "table_mod_snap",
-                "object_type": "TABLE",
+                "object_name": "idx_index_usage_snap_index_oid",
+                "object_type": "INDEX",
                 "schema_name": "dba_metrics",
                 "total_bytes": 98304,
                 "recommended_action": "MONITOR"
             },
             {
-                "dead_pct": 6.96,
-                "total_size": "96 kB",
-                "dead_tuples": 11,
-                "object_name": "index_usage_snap",
-                "object_type": "TABLE",
-                "schema_name": "dba_metrics",
-                "total_bytes": 98304,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": 0.00,
+                "dead_pct": 0,
                 "total_size": "96 kB",
                 "dead_tuples": 0,
-                "object_name": "ddl_event_log",
-                "object_type": "TABLE",
+                "object_name": "idx_table_mod_snap_table_oid",
+                "object_type": "INDEX",
                 "schema_name": "dba_metrics",
                 "total_bytes": 98304,
                 "recommended_action": "MONITOR"
             },
             {
-                "dead_pct": 25.00,
+                "dead_pct": 0,
+                "total_size": "88 kB",
+                "dead_tuples": 0,
+                "object_name": "index_usage_snap_pkey",
+                "object_type": "INDEX",
+                "schema_name": "dba_metrics",
+                "total_bytes": 90112,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 0,
+                "total_size": "80 kB",
+                "dead_tuples": 0,
+                "object_name": "table_mod_snap_pkey",
+                "object_type": "INDEX",
+                "schema_name": "dba_metrics",
+                "total_bytes": 81920,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 0,
+                "total_size": "64 kB",
+                "dead_tuples": 0,
+                "object_name": "idx_ddl_event_log_object_identity",
+                "object_type": "INDEX",
+                "schema_name": "dba_metrics",
+                "total_bytes": 65536,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 2.22,
                 "total_size": "48 kB",
                 "dead_tuples": 1,
                 "object_name": "capture_run",
@@ -625,30 +725,10 @@
                 "dead_pct": 0,
                 "total_size": "40 kB",
                 "dead_tuples": 0,
-                "object_name": "idx_object_size_snap_object_oid",
+                "object_name": "idx_ddl_event_log_object_type",
                 "object_type": "INDEX",
                 "schema_name": "dba_metrics",
                 "total_bytes": 40960,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": 0.00,
-                "total_size": "32 kB",
-                "dead_tuples": 0,
-                "object_name": "db_stats_reset_snap",
-                "object_type": "TABLE",
-                "schema_name": "dba_metrics",
-                "total_bytes": 32768,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": 0,
-                "total_size": "32 kB",
-                "dead_tuples": 0,
-                "object_name": "object_size_snap_pkey",
-                "object_type": "INDEX",
-                "schema_name": "dba_metrics",
-                "total_bytes": 32768,
                 "recommended_action": "MONITOR"
             },
             {
@@ -665,7 +745,7 @@
                 "dead_pct": 0.00,
                 "total_size": "32 kB",
                 "dead_tuples": 0,
-                "object_name": "database_size_snap",
+                "object_name": "db_stats_reset_snap",
                 "object_type": "TABLE",
                 "schema_name": "dba_metrics",
                 "total_bytes": 32768,
@@ -682,6 +762,16 @@
                 "recommended_action": "MONITOR"
             },
             {
+                "dead_pct": 0,
+                "total_size": "32 kB",
+                "dead_tuples": 0,
+                "object_name": "ddl_event_log_pkey",
+                "object_type": "INDEX",
+                "schema_name": "dba_metrics",
+                "total_bytes": 32768,
+                "recommended_action": "MONITOR"
+            },
+            {
                 "dead_pct": 0.00,
                 "total_size": "32 kB",
                 "dead_tuples": 0,
@@ -692,13 +782,13 @@
                 "recommended_action": "MONITOR"
             },
             {
-                "dead_pct": 66.67,
-                "total_size": "24 kB",
-                "dead_tuples": 2,
-                "object_name": "deadlock_b",
+                "dead_pct": 0.00,
+                "total_size": "32 kB",
+                "dead_tuples": 0,
+                "object_name": "database_size_snap",
                 "object_type": "TABLE",
-                "schema_name": "pg360_lab",
-                "total_bytes": 24576,
+                "schema_name": "dba_metrics",
+                "total_bytes": 32768,
                 "recommended_action": "MONITOR"
             },
             {
@@ -722,42 +812,22 @@
                 "recommended_action": "MONITOR"
             },
             {
-                "dead_pct": 0,
-                "total_size": "16 kB",
-                "dead_tuples": 0,
-                "object_name": "index_usage_snap_pkey",
-                "object_type": "INDEX",
-                "schema_name": "dba_metrics",
-                "total_bytes": 16384,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": 0,
-                "total_size": "16 kB",
-                "dead_tuples": 0,
-                "object_name": "idx_index_usage_snap_index_oid",
-                "object_type": "INDEX",
-                "schema_name": "dba_metrics",
-                "total_bytes": 16384,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": null,
-                "total_size": "16 kB",
-                "dead_tuples": 0,
-                "object_name": "trigger_audit_demo",
+                "dead_pct": 66.67,
+                "total_size": "24 kB",
+                "dead_tuples": 2,
+                "object_name": "deadlock_b",
                 "object_type": "TABLE",
-                "schema_name": "migration_v2_lab",
-                "total_bytes": 16384,
+                "schema_name": "pg360_lab",
+                "total_bytes": 24576,
                 "recommended_action": "MONITOR"
             },
             {
-                "dead_pct": 0.00,
+                "dead_pct": 0,
                 "total_size": "16 kB",
                 "dead_tuples": 0,
-                "object_name": "connection_snapshots",
-                "object_type": "TABLE",
-                "schema_name": "dba_metrics",
+                "object_name": "deadlock_b_pkey",
+                "object_type": "INDEX",
+                "schema_name": "pg360_lab",
                 "total_bytes": 16384,
                 "recommended_action": "MONITOR"
             },
@@ -765,28 +835,8 @@
                 "dead_pct": 0,
                 "total_size": "16 kB",
                 "dead_tuples": 0,
-                "object_name": "table_mod_snap_pkey",
+                "object_name": "capture_run_pkey",
                 "object_type": "INDEX",
-                "schema_name": "dba_metrics",
-                "total_bytes": 16384,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": 0,
-                "total_size": "16 kB",
-                "dead_tuples": 0,
-                "object_name": "idx_table_mod_snap_table_oid",
-                "object_type": "INDEX",
-                "schema_name": "dba_metrics",
-                "total_bytes": 16384,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": 0.00,
-                "total_size": "16 kB",
-                "dead_tuples": 0,
-                "object_name": "wal_snapshots",
-                "object_type": "TABLE",
                 "schema_name": "dba_metrics",
                 "total_bytes": 16384,
                 "recommended_action": "MONITOR"
@@ -798,26 +848,6 @@
                 "object_name": "idx_capture_run_captured_at",
                 "object_type": "INDEX",
                 "schema_name": "dba_metrics",
-                "total_bytes": 16384,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": 0,
-                "total_size": "16 kB",
-                "dead_tuples": 0,
-                "object_name": "issue_manifest_pkey",
-                "object_type": "INDEX",
-                "schema_name": "migration_v2_lab",
-                "total_bytes": 16384,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": 0,
-                "total_size": "16 kB",
-                "dead_tuples": 0,
-                "object_name": "deadlock_b_pkey",
-                "object_type": "INDEX",
-                "schema_name": "pg360_lab",
                 "total_bytes": 16384,
                 "recommended_action": "MONITOR"
             },
@@ -842,51 +872,11 @@
                 "recommended_action": "MONITOR"
             },
             {
-                "dead_pct": 0,
+                "dead_pct": 0.00,
                 "total_size": "16 kB",
                 "dead_tuples": 0,
-                "object_name": "ddl_event_log_pkey",
-                "object_type": "INDEX",
-                "schema_name": "dba_metrics",
-                "total_bytes": 16384,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": 0,
-                "total_size": "16 kB",
-                "dead_tuples": 0,
-                "object_name": "idx_ddl_event_log_object_identity",
-                "object_type": "INDEX",
-                "schema_name": "dba_metrics",
-                "total_bytes": 16384,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": 0,
-                "total_size": "16 kB",
-                "dead_tuples": 0,
-                "object_name": "idx_ddl_event_log_object_type",
-                "object_type": "INDEX",
-                "schema_name": "dba_metrics",
-                "total_bytes": 16384,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": 0,
-                "total_size": "16 kB",
-                "dead_tuples": 0,
-                "object_name": "tablespace_size_snap_pkey",
-                "object_type": "INDEX",
-                "schema_name": "dba_metrics",
-                "total_bytes": 16384,
-                "recommended_action": "MONITOR"
-            },
-            {
-                "dead_pct": 0,
-                "total_size": "16 kB",
-                "dead_tuples": 0,
-                "object_name": "capture_run_pkey",
-                "object_type": "INDEX",
+                "object_name": "connection_snapshots",
+                "object_type": "TABLE",
                 "schema_name": "dba_metrics",
                 "total_bytes": 16384,
                 "recommended_action": "MONITOR"
@@ -896,6 +886,26 @@
                 "total_size": "16 kB",
                 "dead_tuples": 0,
                 "object_name": "database_size_snapshots",
+                "object_type": "TABLE",
+                "schema_name": "dba_metrics",
+                "total_bytes": 16384,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": null,
+                "total_size": "16 kB",
+                "dead_tuples": 0,
+                "object_name": "trigger_audit_demo",
+                "object_type": "TABLE",
+                "schema_name": "migration_v2_lab",
+                "total_bytes": 16384,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 0.00,
+                "total_size": "16 kB",
+                "dead_tuples": 0,
+                "object_name": "wal_snapshots",
                 "object_type": "TABLE",
                 "schema_name": "dba_metrics",
                 "total_bytes": 16384,
@@ -918,6 +928,26 @@
                 "object_name": "db_stats_reset_snap_pkey",
                 "object_type": "INDEX",
                 "schema_name": "dba_metrics",
+                "total_bytes": 16384,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 0,
+                "total_size": "16 kB",
+                "dead_tuples": 0,
+                "object_name": "tablespace_size_snap_pkey",
+                "object_type": "INDEX",
+                "schema_name": "dba_metrics",
+                "total_bytes": 16384,
+                "recommended_action": "MONITOR"
+            },
+            {
+                "dead_pct": 0,
+                "total_size": "16 kB",
+                "dead_tuples": 0,
+                "object_name": "issue_manifest_pkey",
+                "object_type": "INDEX",
+                "schema_name": "migration_v2_lab",
                 "total_bytes": 16384,
                 "recommended_action": "MONITOR"
             },
@@ -966,12 +996,12 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "bigint",
-                "expression": "5",
+                "expression": "0",
                 "risk_level": "HIGH",
                 "object_name": "vw_capacity_action_queue",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "5"
+                "column_guess": "0"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -986,12 +1016,22 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "bigint",
-                "expression": "1024",
+                "expression": "5",
                 "risk_level": "HIGH",
                 "object_name": "vw_capacity_action_queue",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "1024"
+                "column_guess": "5"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "bigint",
+                "expression": "64",
+                "risk_level": "HIGH",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "64"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1006,12 +1046,12 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "bigint",
-                "expression": "64",
+                "expression": "1024",
                 "risk_level": "HIGH",
                 "object_name": "vw_capacity_action_queue",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "64"
+                "column_guess": "1024"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1076,22 +1116,12 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "bigint",
-                "expression": "0",
+                "expression": "64",
                 "risk_level": "HIGH",
                 "object_name": "vw_capacity_action_queue",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "0"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "numeric as metric_value",
-                "expression": "i.current_idx_scan",
-                "risk_level": "HIGH",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "current_idx_scan"
+                "column_guess": "64"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1116,12 +1146,12 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "numeric",
-                "expression": "null",
+                "expression": "prev_size_bytes",
                 "risk_level": "HIGH",
                 "object_name": "vw_database_growth_monthly",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "null"
+                "column_guess": "prev_size_bytes"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1136,12 +1166,62 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "numeric",
-                "expression": "prev_size_bytes",
+                "expression": "null",
                 "risk_level": "HIGH",
                 "object_name": "vw_database_growth_monthly",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "prev_size_bytes"
+                "column_guess": "null"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "numeric",
+                "expression": "86400",
+                "risk_level": "HIGH",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "86400"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "numeric",
+                "expression": "86400",
+                "risk_level": "HIGH",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "86400"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "integer",
+                "expression": "null",
+                "risk_level": "HIGH",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "null"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "integer",
+                "expression": "null",
+                "risk_level": "HIGH",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "null"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "timestamp with time zone",
+                "expression": "null",
+                "risk_level": "HIGH",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "null"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1185,13 +1265,13 @@
             },
             {
                 "syntax": "DOUBLE_COLON",
-                "cast_to": "numeric",
-                "expression": "null",
+                "cast_to": "bigint",
+                "expression": "0",
                 "risk_level": "HIGH",
                 "object_name": "vw_object_growth_monthly",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "null"
+                "column_guess": "0"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1205,10 +1285,30 @@
             },
             {
                 "syntax": "DOUBLE_COLON",
+                "cast_to": "numeric",
+                "expression": "null",
+                "risk_level": "HIGH",
+                "object_name": "vw_object_growth_monthly",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "null"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "bigint",
+                "expression": "null",
+                "risk_level": "HIGH",
+                "object_name": "vw_table_modification_delta",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "null"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
                 "cast_to": "bigint",
                 "expression": "0",
                 "risk_level": "HIGH",
-                "object_name": "vw_object_growth_monthly",
+                "object_name": "vw_table_modification_delta",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
                 "column_guess": "0"
@@ -1222,6 +1322,16 @@
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
                 "column_guess": "0"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "bigint",
+                "expression": "null",
+                "risk_level": "HIGH",
+                "object_name": "vw_table_modification_delta",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "null"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1282,36 +1392,6 @@
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
                 "column_guess": "null"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "bigint",
-                "expression": "null",
-                "risk_level": "HIGH",
-                "object_name": "vw_table_modification_delta",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "null"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "bigint",
-                "expression": "null",
-                "risk_level": "HIGH",
-                "object_name": "vw_table_modification_delta",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "null"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "bigint",
-                "expression": "0",
-                "risk_level": "HIGH",
-                "object_name": "vw_table_modification_delta",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "0"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1406,16 +1486,6 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "text",
-                "expression": "null",
-                "risk_level": "MED",
-                "object_name": "sp_capture_operational_snapshot",
-                "object_type": "FUNCTION",
-                "schema_name": "dba_metrics",
-                "column_guess": "null"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
                 "expression": "'manual'",
                 "risk_level": "MED",
                 "object_name": "sp_capture_operational_snapshot",
@@ -1425,133 +1495,13 @@
             },
             {
                 "syntax": "DOUBLE_COLON",
-                "cast_to": "text as recommendation",
-                "expression": "pattern.'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text as finding_type",
-                "expression": "'unused_large_index'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'unused_large_index'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
                 "cast_to": "text",
-                "expression": "'high'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'high'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'medium'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'medium'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text as recommendation",
-                "expression": "amplification.'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'never_used_30d'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'never_used_30d'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'stale_30d'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'stale_30d'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text as finding_type",
-                "expression": "'fast_growing_object'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'fast_growing_object'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'high'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'high'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'medium'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'medium'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'low'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'low'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text as table_name",
                 "expression": "null",
                 "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
+                "object_name": "sp_capture_operational_snapshot",
+                "object_type": "FUNCTION",
                 "schema_name": "dba_metrics",
                 "column_guess": "null"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text as lifecycle_status",
-                "expression": "'monthly_growth'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'monthly_growth'"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1565,43 +1515,43 @@
             },
             {
                 "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'high'",
+                "cast_to": "text as recommendation",
+                "expression": "pattern.'",
                 "risk_level": "MED",
                 "object_name": "vw_capacity_action_queue",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "'high'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'medium'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'medium'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'low'",
-                "risk_level": "MED",
-                "object_name": "vw_capacity_action_queue",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'low'"
+                "column_guess": "'"
             },
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "text as lifecycle_status",
-                "expression": "'monthly_dml'",
+                "expression": "'monthly_growth'",
                 "risk_level": "MED",
                 "object_name": "vw_capacity_action_queue",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "'monthly_dml'"
+                "column_guess": "'monthly_growth'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text as table_name",
+                "expression": "null",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "null"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text as recommendation",
+                "expression": "window.'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1616,6 +1566,236 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "text",
+                "expression": "'medium'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'medium'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text and i",
+                "expression": "'eligible_after_review'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'eligible_after_review'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'low'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'low'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text as finding_type",
+                "expression": "'unused_index_blocked'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'unused_index_blocked'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text as lifecycle_status",
+                "expression": "'monthly_dml'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'monthly_dml'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'high'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'high'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text as finding_type",
+                "expression": "'unused_large_index'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'unused_large_index'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'never_used_30d'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'never_used_30d'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'high'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'high'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'medium'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'medium'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'low'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'low'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'medium'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'medium'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'high'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'high'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text as finding_type",
+                "expression": "'fast_growing_object'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'fast_growing_object'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'hold_45d'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'hold_45d'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'block_unique'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'block_unique'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'block_constraint'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'block_constraint'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'block_primary'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'block_primary'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'stale_30d'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'stale_30d'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'never_used_30d'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'never_used_30d'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text as recommendation",
+                "expression": "changes.'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text as severity",
+                "expression": "'low'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'low'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'stale_30d'",
+                "risk_level": "MED",
+                "object_name": "vw_capacity_action_queue",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'stale_30d'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
                 "expression": "'month'",
                 "risk_level": "MED",
                 "object_name": "vw_database_growth_monthly",
@@ -1632,6 +1812,136 @@
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
                 "column_guess": "'month'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'no_scan_delta_yet'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'no_scan_delta_yet'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'stale_30d'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'stale_30d'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'active'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'active'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "log.'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "history.'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "found.'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "drop.'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "''",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "''"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text then",
+                "expression": "''",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "''"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "drop.'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "automation.'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "action.'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "index.'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1666,6 +1976,116 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "text",
+                "expression": "'not_present'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'not_present'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'block_primary'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'block_primary'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "''",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "''"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text then",
+                "expression": "''",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "''"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'block_constraint'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'block_constraint'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'block_unique'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'block_unique'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'review_index_state'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'review_index_state'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'insufficient_history'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'insufficient_history'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'hold_45d'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'hold_45d'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'eligible_after_review'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'eligible_after_review'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'event_only'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'event_only'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
                 "expression": "i'",
                 "risk_level": "MED",
                 "object_name": "vw_index_lifecycle",
@@ -1696,16 +2116,6 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "text",
-                "expression": "i'",
-                "risk_level": "MED",
-                "object_name": "vw_index_lifecycle",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "i'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
                 "expression": "'\"'",
                 "risk_level": "MED",
                 "object_name": "vw_index_lifecycle",
@@ -1726,82 +2136,12 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "text",
-                "expression": "coverage.'",
+                "expression": "$'",
                 "risk_level": "MED",
                 "object_name": "vw_index_lifecycle",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'active'",
-                "risk_level": "MED",
-                "object_name": "vw_index_lifecycle",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'active'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'stale_30d'",
-                "risk_level": "MED",
-                "object_name": "vw_index_lifecycle",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'stale_30d'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'no_scan_delta_yet'",
-                "risk_level": "MED",
-                "object_name": "vw_index_lifecycle",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'no_scan_delta_yet'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'never_used_30d'",
-                "risk_level": "MED",
-                "object_name": "vw_index_lifecycle",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'never_used_30d'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'\"'",
-                "risk_level": "MED",
-                "object_name": "vw_index_lifecycle",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'\"'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "index.'",
-                "risk_level": "MED",
-                "object_name": "vw_index_lifecycle",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'\"'",
-                "risk_level": "MED",
-                "object_name": "vw_index_lifecycle",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'\"'"
+                "column_guess": "$'"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1815,13 +2155,33 @@
             },
             {
                 "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
-                "expression": "'\"'",
+                "cast_to": "text and ddl_event_log",
+                "expression": "'ddl_command_end'",
                 "risk_level": "MED",
                 "object_name": "vw_index_lifecycle",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "'\"'"
+                "column_guess": "'ddl_command_end'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text and coalesce",
+                "expression": "'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "''",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "''"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1836,6 +2196,16 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "text",
+                "expression": "'\"'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'\"'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
                 "expression": "''",
                 "risk_level": "MED",
                 "object_name": "vw_index_lifecycle",
@@ -1845,7 +2215,77 @@
             },
             {
                 "syntax": "DOUBLE_COLON",
-                "cast_to": "text and coalesce",
+                "cast_to": "text",
+                "expression": "$'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "$'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "''",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "''"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'\"'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'\"'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "''",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "''"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "$'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "$'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "''",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "''"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text and ddl_event_log",
+                "expression": "'sql_drop'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'sql_drop'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
                 "expression": "'",
                 "risk_level": "MED",
                 "object_name": "vw_index_lifecycle",
@@ -1855,13 +2295,73 @@
             },
             {
                 "syntax": "DOUBLE_COLON",
-                "cast_to": "text and ddl_event_log",
-                "expression": "'ddl_command_end'",
+                "cast_to": "text",
+                "expression": "'\"'",
                 "risk_level": "MED",
                 "object_name": "vw_index_lifecycle",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "'ddl_command_end'"
+                "column_guess": "'\"'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "''",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "''"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "$'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "$'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "''",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "''"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'.'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "''",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "''"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'.'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'"
             },
             {
                 "syntax": "DOUBLE_COLON",
@@ -1886,19 +2386,29 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "text",
-                "expression": "''",
+                "expression": "'dropped_event_present'",
                 "risk_level": "MED",
                 "object_name": "vw_index_lifecycle",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
-                "column_guess": "''"
+                "column_guess": "'dropped_event_present'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
+                "expression": "'never_used_30d'",
+                "risk_level": "MED",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "'never_used_30d'"
             },
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "text",
                 "expression": "'\"'",
                 "risk_level": "MED",
-                "object_name": "vw_index_lifecycle",
+                "object_name": "vw_index_usage_delta",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
                 "column_guess": "'\"'"
@@ -1906,29 +2416,9 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "text",
-                "expression": "'",
-                "risk_level": "MED",
-                "object_name": "vw_index_lifecycle",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text and ddl_event_log",
-                "expression": "'sql_drop'",
-                "risk_level": "MED",
-                "object_name": "vw_index_lifecycle",
-                "object_type": "VIEW",
-                "schema_name": "dba_metrics",
-                "column_guess": "'sql_drop'"
-            },
-            {
-                "syntax": "DOUBLE_COLON",
-                "cast_to": "text",
                 "expression": "''",
                 "risk_level": "MED",
-                "object_name": "vw_index_lifecycle",
+                "object_name": "vw_index_usage_delta",
                 "object_type": "VIEW",
                 "schema_name": "dba_metrics",
                 "column_guess": "''"
@@ -1936,6 +2426,16 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "text",
+                "expression": "i'",
+                "risk_level": "MED",
+                "object_name": "vw_index_usage_delta",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "i'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "text",
                 "expression": "'month'",
                 "risk_level": "MED",
                 "object_name": "vw_object_growth_monthly",
@@ -2006,6 +2506,26 @@
             {
                 "syntax": "DOUBLE_COLON",
                 "cast_to": "interval then",
+                "expression": "days'",
+                "risk_level": "LOW",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "days'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "interval as eligible_to_drop_after",
+                "expression": "days'",
+                "risk_level": "LOW",
+                "object_name": "vw_index_lifecycle",
+                "object_type": "VIEW",
+                "schema_name": "dba_metrics",
+                "column_guess": "days'"
+            },
+            {
+                "syntax": "DOUBLE_COLON",
+                "cast_to": "interval",
                 "expression": "days'",
                 "risk_level": "LOW",
                 "object_name": "vw_index_lifecycle",
@@ -2079,9 +2599,9 @@
                 "status": "MONITOR",
                 "idx_scan": 0,
                 "index_name": "idx_object_size_snap_object_oid",
-                "index_size": "40 kB",
+                "index_size": "208 kB",
                 "table_name": "object_size_snap",
-                "index_bytes": 40960,
+                "index_bytes": 212992,
                 "schema_name": "dba_metrics",
                 "recommendation": "Monitor; may be seasonal or batch-driven index"
             },
@@ -2089,29 +2609,9 @@
                 "status": "MONITOR",
                 "idx_scan": 0,
                 "index_name": "idx_index_usage_snap_index_oid",
-                "index_size": "16 kB",
+                "index_size": "96 kB",
                 "table_name": "index_usage_snap",
-                "index_bytes": 16384,
-                "schema_name": "dba_metrics",
-                "recommendation": "Monitor; may be seasonal or batch-driven index"
-            },
-            {
-                "status": "MONITOR",
-                "idx_scan": 0,
-                "index_name": "idx_ddl_event_log_object_type",
-                "index_size": "16 kB",
-                "table_name": "ddl_event_log",
-                "index_bytes": 16384,
-                "schema_name": "dba_metrics",
-                "recommendation": "Monitor; may be seasonal or batch-driven index"
-            },
-            {
-                "status": "MONITOR",
-                "idx_scan": 0,
-                "index_name": "idx_ddl_event_log_object_identity",
-                "index_size": "16 kB",
-                "table_name": "ddl_event_log",
-                "index_bytes": 16384,
+                "index_bytes": 98304,
                 "schema_name": "dba_metrics",
                 "recommendation": "Monitor; may be seasonal or batch-driven index"
             },
@@ -2119,9 +2619,29 @@
                 "status": "MONITOR",
                 "idx_scan": 0,
                 "index_name": "idx_table_mod_snap_table_oid",
-                "index_size": "16 kB",
+                "index_size": "96 kB",
                 "table_name": "table_mod_snap",
-                "index_bytes": 16384,
+                "index_bytes": 98304,
+                "schema_name": "dba_metrics",
+                "recommendation": "Monitor; may be seasonal or batch-driven index"
+            },
+            {
+                "status": "MONITOR",
+                "idx_scan": 0,
+                "index_name": "idx_ddl_event_log_object_identity",
+                "index_size": "64 kB",
+                "table_name": "ddl_event_log",
+                "index_bytes": 65536,
+                "schema_name": "dba_metrics",
+                "recommendation": "Monitor; may be seasonal or batch-driven index"
+            },
+            {
+                "status": "MONITOR",
+                "idx_scan": 0,
+                "index_name": "idx_ddl_event_log_object_type",
+                "index_size": "40 kB",
+                "table_name": "ddl_event_log",
+                "index_bytes": 40960,
                 "schema_name": "dba_metrics",
                 "recommendation": "Monitor; may be seasonal or batch-driven index"
             },
@@ -2452,6 +2972,28 @@
                 "all_types_used": "numeric(12,2), numeric(14,2)",
                 "recommendation": "Review and standardize",
                 "total_occurrences": 3
+            },
+            {
+                "status": "REVIEW",
+                "table_name": "index_demo_orders",
+                "type_count": 2,
+                "column_name": "customer_id",
+                "schema_name": "dba_metrics_lab",
+                "current_type": "integer",
+                "all_types_used": "bigint, integer",
+                "recommendation": "Review and standardize",
+                "total_occurrences": 2
+            },
+            {
+                "status": "REVIEW",
+                "table_name": "customer_contact_compat",
+                "type_count": 2,
+                "column_name": "customer_id",
+                "schema_name": "migration_v2_lab",
+                "current_type": "bigint",
+                "all_types_used": "bigint, integer",
+                "recommendation": "Review and standardize",
+                "total_occurrences": 2
             }
         ]
     },
@@ -2463,30 +3005,30 @@
         "fail_checks": 2,
         "pass_checks": 5,
         "warn_checks": 4,
-        "generated_at": "2026-02-20T14:10:59.648291-05:00",
+        "generated_at": "2026-02-20T17:01:41.404669-05:00",
         "total_checks": 11,
         "open_findings": 6,
         "final_decision": "NO_GO"
     },
     "metadata": {
         "executed_by": "saiendla",
-        "generated_at": "2026-02-20T14:10:59.653627-05:00",
+        "generated_at": "2026-02-20T17:01:41.41014-05:00",
         "database_name": "pgbench_test",
         "target_schema_regex": ".*",
         "critical_schema_regex": ".*"
     },
     "report_files": {
-        "gate_html": "migration/samples/pg360_09_gate_summary.html",
-        "gate_text": "migration_gate_v1.txt",
-        "main_report": "migration/samples/pg360_report.html",
-        "bloat_report": "migration/samples/pg360_05_bloat_report.html",
-        "casting_issues": "migration/samples/pg360_02_casting_issues.html",
-        "indexes_needed": "migration/samples/pg360_03_indexes_needed.html",
-        "config_readiness": "migration/samples/pg360_07_config_readiness.html",
-        "partition_health": "migration/samples/pg360_06_partition_health.html",
-        "compatibility_matrix": "migration/samples/pg360_08_compatibility_matrix.html",
-        "schema_type_consistency": "migration/samples/pg360_01_type_consistency.html",
-        "unused_duplicate_indexes": "migration/samples/pg360_04_unused_duplicate_indexes.html"
+        "gate_html": "samples/pg360_09_gate_summary.html",
+        "gate_text": "samples/migration_gate_v1.txt",
+        "main_report": "samples/pg360_report.html",
+        "bloat_report": "samples/pg360_05_bloat_report.html",
+        "casting_issues": "samples/pg360_02_casting_issues.html",
+        "indexes_needed": "samples/pg360_03_indexes_needed.html",
+        "config_readiness": "samples/pg360_07_config_readiness.html",
+        "partition_health": "samples/pg360_06_partition_health.html",
+        "compatibility_matrix": "samples/pg360_08_compatibility_matrix.html",
+        "schema_type_consistency": "samples/pg360_01_type_consistency.html",
+        "unused_duplicate_indexes": "samples/pg360_04_unused_duplicate_indexes.html"
     },
     "main_findings": [
         {
@@ -2527,10 +3069,10 @@
         },
         {
             "status": "WARN",
-            "evidence": "high_cast_issues=44",
+            "evidence": "high_cast_issues=49",
             "severity": "P2",
             "finding_id": "MIG-CAST-001",
-            "issue_count": 44,
+            "issue_count": 49,
             "finding_title": "Casting issues: HIGH risk",
             "recommended_action": "Prioritize removing HIGH-risk casts in JOIN/WHERE/business logic"
         },
@@ -2545,10 +3087,10 @@
         },
         {
             "status": "WARN",
-            "evidence": "type_review_rows=17",
+            "evidence": "type_review_rows=19",
             "severity": "P2",
             "finding_id": "MIG-TYPE-002",
-            "issue_count": 17,
+            "issue_count": 19,
             "finding_title": "Schema type consistency: REVIEW rows",
             "recommended_action": "Review and standardize remaining mixed-type columns"
         },
