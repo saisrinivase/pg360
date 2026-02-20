@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>4. Unused and Duplicate Indexes Report</title><style>body{font-family:Segoe UI,Arial,sans-serif;margin:0;padding:20px;color:#1d2b3a;background:linear-gradient(180deg,#f8fbff 0%,#eef5fb 100%);}h1{color:#1f4e79;margin:0 0 12px 0;font-size:24px;}p{color:#35506b;}a{color:#1d5ea8;text-decoration:none;font-weight:600;}a:hover{text-decoration:underline;}table{border-collapse:collapse;width:100%;background:#fff;margin:14px 0 18px;border:1px solid #d8e4f2;}th{background:#eaf2fb;color:#1f3f63;border:1px solid #d8e4f2;padding:8px;}td{border:1px solid #deebf7;padding:8px;vertical-align:top;}tr:nth-child(even) td{background:#f9fcff;}caption{caption-side:top;text-align:left;font-weight:700;color:#244b74;background:#f3f8fe;border:1px solid #d8e4f2;border-bottom:none;padding:9px 10px;}</style></head><body>
+<h1>4. Unused and Duplicate Indexes Report</h1>
+<p><a href="pg360_report.html">Back to Main Migration Report</a></p>
+<table border="1">
+  <caption>4.1 Unused Index Candidates</caption>
+  <tr>
+    <th align="center">schema_name</th>
+    <th align="center">table_name</th>
+    <th align="center">index_name</th>
+    <th align="center">index_size</th>
+    <th align="center">idx_scan</th>
+    <th align="center">status</th>
+    <th align="center">recommendation</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">order_fact</td>
+    <td align="left">idx_v2_order_fact_search_lower</td>
+    <td align="left">14 MB</td>
+    <td align="right">0</td>
+    <td align="left">MONITOR</td>
+    <td align="left">Monitor; may be seasonal or batch-driven index</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">sales_catalog</td>
+    <td align="left">idx_v2_sales_ref_a</td>
+    <td align="left">3720 kB</td>
+    <td align="right">0</td>
+    <td align="left">MONITOR</td>
+    <td align="left">Monitor; may be seasonal or batch-driven index</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">child_events</td>
+    <td align="left">idx_v2_child_events_account_id</td>
+    <td align="left">2904 kB</td>
+    <td align="right">0</td>
+    <td align="left">MONITOR</td>
+    <td align="left">Monitor; may be seasonal or batch-driven index</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">order_fact</td>
+    <td align="left">idx_v2_order_fact_filter_key</td>
+    <td align="left">2152 kB</td>
+    <td align="right">0</td>
+    <td align="left">MONITOR</td>
+    <td align="left">Monitor; may be seasonal or batch-driven index</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v1_lab</td>
+    <td align="left">product_catalog</td>
+    <td align="left">idx_product_sku_a</td>
+    <td align="left">1544 kB</td>
+    <td align="right">0</td>
+    <td align="left">MONITOR</td>
+    <td align="left">Monitor; may be seasonal or batch-driven index</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v1_lab</td>
+    <td align="left">child_transactions</td>
+    <td align="left">idx_child_transactions_account_id</td>
+    <td align="left">1056 kB</td>
+    <td align="right">0</td>
+    <td align="left">MONITOR</td>
+    <td align="left">Monitor; may be seasonal or batch-driven index</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">object_size_snap</td>
+    <td align="left">idx_object_size_snap_object_oid</td>
+    <td align="left">168 kB</td>
+    <td align="right">0</td>
+    <td align="left">MONITOR</td>
+    <td align="left">Monitor; may be seasonal or batch-driven index</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">index_usage_snap</td>
+    <td align="left">idx_index_usage_snap_index_oid</td>
+    <td align="left">88 kB</td>
+    <td align="right">0</td>
+    <td align="left">MONITOR</td>
+    <td align="left">Monitor; may be seasonal or batch-driven index</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">table_mod_snap</td>
+    <td align="left">idx_table_mod_snap_table_oid</td>
+    <td align="left">88 kB</td>
+    <td align="right">0</td>
+    <td align="left">MONITOR</td>
+    <td align="left">Monitor; may be seasonal or batch-driven index</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">ddl_event_log</td>
+    <td align="left">idx_ddl_event_log_object_identity</td>
+    <td align="left">56 kB</td>
+    <td align="right">0</td>
+    <td align="left">MONITOR</td>
+    <td align="left">Monitor; may be seasonal or batch-driven index</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">ddl_event_log</td>
+    <td align="left">idx_ddl_event_log_object_type</td>
+    <td align="left">40 kB</td>
+    <td align="right">0</td>
+    <td align="left">MONITOR</td>
+    <td align="left">Monitor; may be seasonal or batch-driven index</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">capture_run</td>
+    <td align="left">idx_capture_run_captured_at</td>
+    <td align="left">16 kB</td>
+    <td align="right">0</td>
+    <td align="left">MONITOR</td>
+    <td align="left">Monitor; may be seasonal or batch-driven index</td>
+  </tr>
+</table>
+
+<table border="1">
+  <caption>4.2 Duplicate Index Groups</caption>
+  <tr>
+    <th align="center">schema_name</th>
+    <th align="center">table_name</th>
+    <th align="center">duplicate_count</th>
+    <th align="center">duplicate_indexes</th>
+    <th align="center">recommendation</th>
+  </tr>
+</table>
+
+</body></html>
