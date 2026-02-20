@@ -1,3 +1,5 @@
 .DS_Store
 *.tmp
 *.swp
+samples/pg360_bundle/
+samples/pg360_bundle.zip

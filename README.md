@@ -10,6 +10,8 @@ It provides:
 
 ## Repository Layout
 
+- `pg360.sql`
+  - one-command wrapper for full generation + zip packaging
 - `scripts/10_migration_assessor_v1.sql`
   - psql script that generates `pg360_report.html` + 9 core subreports
 - `scripts/12_migration_topic_report_pack_v1.sql`
@@ -29,26 +31,30 @@ It provides:
 
 ## Quick Start (One Command For Everything)
 
-Run this one script to generate all PG360 outputs (main page + all subreports):
+Run this one script to generate all PG360 outputs and package them as a zip:
 
 ```bash
 psql -X -v ON_ERROR_STOP=1 -d pgbench_test \
   -v target_schema_regex='.*' \
-  -f "scripts/12_migration_topic_report_pack_v1.sql"
+  -f "pg360.sql"
 ```
 
-Open:
-- `samples/pg360_topics_main.html`
+Primary output:
+- `samples/pg360_bundle.zip`
 
-Generated output set from this single command:
+Open inside zip:
+- `pg360_bundle/pg360_topics_main.html`
+
+Generated output set in this single run:
 - `samples/pg360_topics_main.html` (main index)
 - `samples/pg360_topic_01...40...html` (40 operational topic reports)
 - `samples/pg360_report.html` (core main report)
 - `samples/pg360_01...09...html` (9 core migration reports)
 - `samples/migration_assessment_v1.json`
 - `samples/migration_gate_v1.txt`
+- `samples/pg360_bundle.zip` (packaged bundle)
 
-Optional: run only the core 9 report pack with `scripts/10_migration_assessor_v1.sql`.
+Optional: run only the report generator internals with `scripts/12_migration_topic_report_pack_v1.sql` or core-only `scripts/10_migration_assessor_v1.sql`.
 
 ## pgAdmin / DBeaver Usage
 

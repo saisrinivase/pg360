@@ -563,12 +563,12 @@
             },
             {
                 "dead_pct": 0.00,
-                "total_size": "280 kB",
+                "total_size": "288 kB",
                 "dead_tuples": 0,
                 "object_name": "ddl_event_log",
                 "object_type": "TABLE",
                 "schema_name": "dba_metrics",
-                "total_bytes": 286720,
+                "total_bytes": 294912,
                 "recommended_action": "MONITOR"
             },
             {
@@ -3005,14 +3005,14 @@
         "fail_checks": 2,
         "pass_checks": 5,
         "warn_checks": 4,
-        "generated_at": "2026-02-20T17:01:41.404669-05:00",
+        "generated_at": "2026-02-20T17:06:22.455714-05:00",
         "total_checks": 11,
         "open_findings": 6,
         "final_decision": "NO_GO"
     },
     "metadata": {
         "executed_by": "saiendla",
-        "generated_at": "2026-02-20T17:01:41.41014-05:00",
+        "generated_at": "2026-02-20T17:06:22.461711-05:00",
         "database_name": "pgbench_test",
         "target_schema_regex": ".*",
         "critical_schema_regex": ".*"
