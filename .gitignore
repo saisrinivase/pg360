@@ -1,5 +1,7 @@
 .DS_Store
 *.tmp
 *.swp
-samples/pg360_bundle/
-samples/pg360_bundle.zip
+reports/pg360_bundle_*/
+reports/pg360_bundle_*.zip
+reports/pg360_bundle_latest.zip
+reports/.last_bundle_ts

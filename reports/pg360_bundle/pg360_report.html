@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Migration Report</title>
+<style>
+body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; padding: 24px; color: #1d2b3a; background: linear-gradient(180deg, #f8fbff 0%, #eef5fb 100%); }
+h1 { color: #1f4e79; margin: 0 0 8px 0; letter-spacing: 0.2px; }
+h2 { color: #245580; margin-top: 22px; padding: 8px 10px; background: #f1f6fc; border: 1px solid #d8e4f2; border-radius: 8px; }
+.meta { color: #36506b; margin: 12px 0; background: #ffffff; border: 1px solid #d8e4f2; border-radius: 10px; padding: 10px 12px; box-shadow: 0 1px 2px rgba(14, 39, 72, 0.06); }
+table { border-collapse: collapse; width: 100%; background: #ffffff; margin: 14px 0 18px 0; border: 1px solid #d8e4f2; }
+caption { caption-side: top; text-align: left; font-weight: 700; color: #244b74; background: #f3f8fe; border: 1px solid #d8e4f2; border-bottom: none; padding: 9px 10px; }
+th { background: #eaf2fb; color: #1f3f63; padding: 8px; border: 1px solid #d8e4f2; text-align: left; }
+td { padding: 8px; border: 1px solid #deebf7; vertical-align: top; }
+tr:nth-child(even) td { background: #f9fcff; }
+a { color: #1d5ea8; text-decoration: none; font-weight: 600; }
+a:hover { text-decoration: underline; }
+li { margin: 8px 0; }
+.foot { margin-top: 18px; color: #4a5f79; font-size: 12px; }
+</style>
+</head>
+<body>
+<h1>PG360 Migration Dashboard</h1>
+<div class="meta">Summary checks with links to detailed sub-reports.</div>
+<table border="1">
+  <caption>Metadata</caption>
+  <tr>
+    <th align="center">database_name</th>
+    <th align="center">executed_by</th>
+    <th align="center">postgres_version</th>
+    <th align="center">target_schema_regex</th>
+    <th align="center">critical_schema_regex</th>
+    <th align="center">report_generated_at</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">pgbench_test</td>
+    <td align="left">postgres</td>
+    <td align="left">PostgreSQL 18.0 (Homebrew) on aarch64-apple-darwin25.0.0, compiled by Apple clang version 17.0.0 (clang-1700.3.19.1), 64-bit</td>
+    <td align="left">.*</td>
+    <td align="left">.*</td>
+    <td align="left">2026-02-20 17:28:02.179905-05</td>
+  </tr>
+</table>
+
+<table border="1">
+  <caption>Gate Decision and Risk Score</caption>
+  <tr>
+    <th align="center">final_decision</th>
+    <th align="center">risk_score</th>
+    <th align="center">total_checks</th>
+    <th align="center">pass_checks</th>
+    <th align="center">warn_checks</th>
+    <th align="center">fail_checks</th>
+    <th align="center">p1_open</th>
+    <th align="center">p2_open</th>
+    <th align="center">p3_open</th>
+    <th align="center">open_findings</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">NO_GO</td>
+    <td align="right">130</td>
+    <td align="right">11</td>
+    <td align="right">5</td>
+    <td align="right">4</td>
+    <td align="right">2</td>
+    <td align="right">2</td>
+    <td align="right">3</td>
+    <td align="right">1</td>
+    <td align="right">6</td>
+  </tr>
+</table>
+
+<table border="1">
+  <caption>Main Findings (Action Queue)</caption>
+  <tr>
+    <th align="center">finding_id</th>
+    <th align="center">finding_title</th>
+    <th align="center">severity</th>
+    <th align="center">status</th>
+    <th align="center">issue_count</th>
+    <th align="center">evidence</th>
+    <th align="center">recommended_action</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">MIG-CONFIG-001</td>
+    <td align="left">Critical configuration failures</td>
+    <td align="left">P1</td>
+    <td align="left">FAIL</td>
+    <td align="right">1</td>
+    <td align="left">critical_config_fails=1</td>
+    <td align="left">Fix FAIL-level configuration parameters before migration takeover</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">MIG-INDEX-001</td>
+    <td align="left">Indexes needed: FK coverage gaps</td>
+    <td align="left">P1</td>
+    <td align="left">FAIL</td>
+    <td align="right">8</td>
+    <td align="left">missing_fk_indexes=8</td>
+    <td align="left">Create supporting indexes for FK columns before Day-1</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">MIG-APP-001</td>
+    <td align="left">Idle-in-transaction session risk</td>
+    <td align="left">P1</td>
+    <td align="left">PASS</td>
+    <td align="right">0</td>
+    <td align="left">idle_in_tx_over_10m=0</td>
+    <td align="left">Fix app transaction boundaries and enforce transaction timeout policies</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">MIG-TYPE-001</td>
+    <td align="left">Schema type consistency: PROBLEM rows</td>
+    <td align="left">P1</td>
+    <td align="left">PASS</td>
+    <td align="right">0</td>
+    <td align="left">type_problem_rows=0</td>
+    <td align="left">Standardize inconsistent key/business column types before cutover</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">MIG-CAST-001</td>
+    <td align="left">Casting issues: HIGH risk</td>
+    <td align="left">P2</td>
+    <td align="left">WARN</td>
+    <td align="right">49</td>
+    <td align="left">high_cast_issues=49</td>
+    <td align="left">Prioritize removing HIGH-risk casts in JOIN/WHERE/business logic</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">MIG-CONFIG-002</td>
+    <td align="left">Configuration warnings</td>
+    <td align="left">P2</td>
+    <td align="left">WARN</td>
+    <td align="right">3</td>
+    <td align="left">config_warns=3</td>
+    <td align="left">Tune WARN-level settings and validate with performance test runs</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">MIG-TYPE-002</td>
+    <td align="left">Schema type consistency: REVIEW rows</td>
+    <td align="left">P2</td>
+    <td align="left">WARN</td>
+    <td align="right">19</td>
+    <td align="left">type_review_rows=19</td>
+    <td align="left">Review and standardize remaining mixed-type columns</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">MIG-BLOAT-001</td>
+    <td align="left">Table bloat pressure</td>
+    <td align="left">P2</td>
+    <td align="left">PASS</td>
+    <td align="right">0</td>
+    <td align="left">high_bloat_tables=0</td>
+    <td align="left">Run VACUUM (ANALYZE) and tune autovacuum thresholds for heavy tables</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">MIG-PART-001</td>
+    <td align="left">Partition index coverage review</td>
+    <td align="left">P2</td>
+    <td align="left">PASS</td>
+    <td align="right">0</td>
+    <td align="left">partition_index_review=0</td>
+    <td align="left">Ensure partitioned parent tables have appropriate indexing strategy</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">MIG-INDEX-002</td>
+    <td align="left">Unused index candidates</td>
+    <td align="left">P3</td>
+    <td align="left">WARN</td>
+    <td align="right">12</td>
+    <td align="left">unused_indexes=12</td>
+    <td align="left">Review and drop large unused indexes only after workload replay validation</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">MIG-INDEX-003</td>
+    <td align="left">Duplicate index candidates</td>
+    <td align="left">P3</td>
+    <td align="left">PASS</td>
+    <td align="right">0</td>
+    <td align="left">duplicate_index_groups=0</td>
+    <td align="left">Retain one index per equivalent key/expression/predicate set</td>
+  </tr>
+</table>
+
+<h2>Sub-Reports</h2>
+<ol>
+<li><a href="pg360_01_type_consistency.html">1. Schema Type Consistency Report</a></li>
+<li><a href="pg360_02_casting_issues.html">2. Casting Issues Report</a></li>
+<li><a href="pg360_03_indexes_needed.html">3. Indexes Needed Report (FK Coverage)</a></li>
+<li><a href="pg360_04_unused_duplicate_indexes.html">4. Unused and Duplicate Indexes Report</a></li>
+<li><a href="pg360_05_bloat_report.html">5. Table and Index Bloat Report</a></li>
+<li><a href="pg360_06_partition_health.html">6. Partition Health Report</a></li>
+<li><a href="pg360_07_config_readiness.html">7. Configuration Readiness Report</a></li>
+<li><a href="pg360_08_compatibility_matrix.html">8. Compatibility Matrix Report</a></li>
+<li><a href="pg360_09_gate_summary.html">9. Gate Summary Report</a></li>
+</ol>
+<div class="foot">Generated by scripts/10_migration_assessor_v1.sql</div>
+</body>
+</html>

@@ -5,18 +5,18 @@ Usage:
   psql "host=<host> port=<port> dbname=<db> user=<user>" \
     -v target_schema_regex='.*' \
     -v critical_schema_regex='.*' \
-    -v report_file='samples/pg360_report.html' \
-    -v report_01_file='samples/pg360_01_type_consistency.html' \
-    -v report_02_file='samples/pg360_02_casting_issues.html' \
-    -v report_03_file='samples/pg360_03_indexes_needed.html' \
-    -v report_04_file='samples/pg360_04_unused_duplicate_indexes.html' \
-    -v report_05_file='samples/pg360_05_bloat_report.html' \
-    -v report_06_file='samples/pg360_06_partition_health.html' \
-    -v report_07_file='samples/pg360_07_config_readiness.html' \
-    -v report_08_file='samples/pg360_08_compatibility_matrix.html' \
-    -v gate_html_file='samples/pg360_09_gate_summary.html' \
-    -v json_file='samples/migration_assessment_v1.json' \
-    -v gate_output_file='samples/migration_gate_v1.txt' \
+    -v report_file='reports/pg360_report.html' \
+    -v report_01_file='reports/pg360_01_type_consistency.html' \
+    -v report_02_file='reports/pg360_02_casting_issues.html' \
+    -v report_03_file='reports/pg360_03_indexes_needed.html' \
+    -v report_04_file='reports/pg360_04_unused_duplicate_indexes.html' \
+    -v report_05_file='reports/pg360_05_bloat_report.html' \
+    -v report_06_file='reports/pg360_06_partition_health.html' \
+    -v report_07_file='reports/pg360_07_config_readiness.html' \
+    -v report_08_file='reports/pg360_08_compatibility_matrix.html' \
+    -v gate_html_file='reports/pg360_09_gate_summary.html' \
+    -v json_file='reports/migration_assessment_v1.json' \
+    -v gate_output_file='reports/migration_gate_v1.txt' \
     -v enforce_exit=false \
     -f scripts/10_migration_assessor_v1.sql
 
@@ -45,62 +45,62 @@ Notes:
 
 \if :{?report_file}
 \else
-\set report_file 'samples/pg360_report.html'
+\set report_file 'reports/pg360_report.html'
 \endif
 
 \if :{?report_01_file}
 \else
-\set report_01_file 'samples/pg360_01_type_consistency.html'
+\set report_01_file 'reports/pg360_01_type_consistency.html'
 \endif
 
 \if :{?report_02_file}
 \else
-\set report_02_file 'samples/pg360_02_casting_issues.html'
+\set report_02_file 'reports/pg360_02_casting_issues.html'
 \endif
 
 \if :{?report_03_file}
 \else
-\set report_03_file 'samples/pg360_03_indexes_needed.html'
+\set report_03_file 'reports/pg360_03_indexes_needed.html'
 \endif
 
 \if :{?report_04_file}
 \else
-\set report_04_file 'samples/pg360_04_unused_duplicate_indexes.html'
+\set report_04_file 'reports/pg360_04_unused_duplicate_indexes.html'
 \endif
 
 \if :{?report_05_file}
 \else
-\set report_05_file 'samples/pg360_05_bloat_report.html'
+\set report_05_file 'reports/pg360_05_bloat_report.html'
 \endif
 
 \if :{?report_06_file}
 \else
-\set report_06_file 'samples/pg360_06_partition_health.html'
+\set report_06_file 'reports/pg360_06_partition_health.html'
 \endif
 
 \if :{?report_07_file}
 \else
-\set report_07_file 'samples/pg360_07_config_readiness.html'
+\set report_07_file 'reports/pg360_07_config_readiness.html'
 \endif
 
 \if :{?report_08_file}
 \else
-\set report_08_file 'samples/pg360_08_compatibility_matrix.html'
+\set report_08_file 'reports/pg360_08_compatibility_matrix.html'
 \endif
 
 \if :{?gate_html_file}
 \else
-\set gate_html_file 'samples/pg360_09_gate_summary.html'
+\set gate_html_file 'reports/pg360_09_gate_summary.html'
 \endif
 
 \if :{?json_file}
 \else
-\set json_file 'samples/migration_assessment_v1.json'
+\set json_file 'reports/migration_assessment_v1.json'
 \endif
 
 \if :{?gate_output_file}
 \else
-\set gate_output_file 'samples/migration_gate_v1.txt'
+\set gate_output_file 'reports/migration_gate_v1.txt'
 \endif
 
 \if :{?enforce_exit}
@@ -108,7 +108,7 @@ Notes:
 \set enforce_exit false
 \endif
 
-\! mkdir -p samples
+\! mkdir -p reports
 
 \set QUIET 1
 

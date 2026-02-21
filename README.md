@@ -15,7 +15,7 @@ It generates:
 - `scripts/12_migration_topic_report_pack_v1.sql`: full HTML generation logic (core + topics)
 - `scripts/10_migration_assessor_v1.sql`: core 9-report pack only
 - `scripts/migration_assessor_v1_gui.sql`: pure SELECT script for Query Tool / DBeaver
-- `samples/`: generated outputs and sample artifacts
+- `reports/`: generated outputs and sample artifacts
 
 ## Compatibility
 
@@ -28,9 +28,9 @@ It generates:
 ## Prerequisites
 
 1. `psql` is installed and available in terminal.
-2. `zip` is installed (required for `samples/pg360_bundle.zip`).
+2. `zip` is installed (required for bundle creation).
 3. User has read access to system views (`pg_catalog`, `pg_stat_*`).
-4. User can write files under repository `samples/`.
+4. User can write files under repository `reports/`.
 5. Current directory is repo root:
 `/Users/saiendla/Documents/PostgreSQl SCripts /pg360`
 
@@ -48,16 +48,17 @@ psql -X -v ON_ERROR_STOP=1 -d pgbench_test \
 ## Expected Output Files
 
 After successful run:
-1. `samples/pg360_topics_main.html` (main page)
-2. `samples/pg360_topic_01...40...html` (40 topic reports)
-3. `samples/pg360_report.html` (core main report)
-4. `samples/pg360_01...09...html` (9 core reports)
-5. `samples/migration_assessment_v1.json`
-6. `samples/migration_gate_v1.txt`
-7. `samples/pg360_bundle.zip`
+1. `reports/pg360_topics_main.html` (main page)
+2. `reports/pg360_topic_01...40...html` (40 topic reports)
+3. `reports/pg360_report.html` (core main report)
+4. `reports/pg360_01...09...html` (9 core reports)
+5. `reports/migration_assessment_v1.json`
+6. `reports/migration_gate_v1.txt`
+7. `reports/pg360_bundle_YYYYMMDD_HHMMSS.zip`
+8. `reports/pg360_bundle_latest.zip` (latest-run alias)
 
-Inside zip:
-1. `pg360_bundle/pg360_topics_main.html` (start here)
+Inside timestamped zip:
+1. `pg360_bundle_YYYYMMDD_HHMMSS/pg360_topics_main.html` (start here)
 2. all 40 topic reports
 3. all 9 core reports
 4. `pg360_report.html`, JSON, gate text, `START_HERE.txt`
@@ -68,11 +69,12 @@ Run these after execution:
 
 ```bash
 cd "/Users/saiendla/Documents/PostgreSQl SCripts /pg360"
-ls -1 samples/pg360_topics_main.html
-ls -1 samples/pg360_topic_*.html | wc -l
-ls -1 samples/pg360_0*.html | wc -l
-ls -1 samples/pg360_bundle.zip
-unzip -l samples/pg360_bundle.zip | grep "pg360_bundle/pg360_topics_main.html"
+ls -1 reports/pg360_topics_main.html
+ls -1 reports/pg360_topic_*.html | wc -l
+ls -1 reports/pg360_0*.html | wc -l
+ls -1 reports/pg360_bundle_*.zip | tail -n 1
+ls -1 reports/pg360_bundle_latest.zip
+unzip -l reports/pg360_bundle_latest.zip | grep "pg360_topics_main.html"
 ```
 
 Expected counts:
@@ -82,13 +84,13 @@ Expected counts:
 ## Open Main Report
 
 ```bash
-open "/Users/saiendla/Documents/PostgreSQl SCripts /pg360/samples/pg360_topics_main.html"
+open "/Users/saiendla/Documents/PostgreSQl SCripts /pg360/reports/pg360_topics_main.html"
 ```
 
 or open from zip:
 
 ```bash
-open "/Users/saiendla/Documents/PostgreSQl SCripts /pg360/samples/pg360_bundle.zip"
+open "/Users/saiendla/Documents/PostgreSQl SCripts /pg360/reports/pg360_bundle_latest.zip"
 ```
 
 ## pgAdmin Usage
@@ -106,7 +108,7 @@ Steps:
 ```
 
 4. Open:
-`samples/pg360_topics_main.html` or `samples/pg360_bundle.zip`.
+`reports/pg360_topics_main.html` or `reports/pg360_bundle_latest.zip`.
 
 ## Query Tool / DBeaver Usage
 
@@ -135,7 +137,7 @@ Fix: `cd "/Users/saiendla/Documents/PostgreSQl SCripts /pg360"` before run.
 Cause: `zip` utility missing.
 Fix: install zip and rerun `pg360.sql`.
 
-4. Error: permission denied writing `samples/`
+4. Error: permission denied writing `reports/`
 Cause: filesystem permissions.
 Fix: grant write access to repo folder and rerun.
 

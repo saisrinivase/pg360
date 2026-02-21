@@ -1,0 +1,76 @@
+<!doctype html><html><head><meta charset="utf-8"><title>PG360 Migration Readiness Command Center</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;margin:0;padding:24px;color:#1d2b3a;background:linear-gradient(180deg,#f8fbff 0%,#eef5fb 100%);}h1{color:#1f4e79;margin:0 0 8px 0;}h2{color:#245580;margin:18px 0 8px 0;padding:8px 10px;background:#f1f6fc;border:1px solid #d8e4f2;border-radius:8px;}ol,ul{line-height:1.6;margin:8px 0 0 20px;}li{margin:6px 0;}a{color:#1d5ea8;text-decoration:none;font-weight:600;}a:hover{text-decoration:underline;}.meta{background:#fff;border:1px solid #d8e4f2;border-radius:10px;padding:10px 12px;box-shadow:0 1px 2px rgba(14,39,72,0.06);}table{border-collapse:collapse;width:100%;background:#fff;margin:8px 0 10px;border:1px solid #d8e4f2;}th{background:#eaf2fb;color:#1f3f63;border:1px solid #d8e4f2;padding:8px;}td{border:1px solid #deebf7;padding:8px;}tr:nth-child(even) td{background:#f9fcff;}</style></head><body>
+<h1>PG360 Migration Readiness Command Center</h1>
+<div class="meta">
+<table border="1">
+  <tr>
+    <th align="center">database_name</th>
+    <th align="center">executed_by</th>
+    <th align="center">generated_at</th>
+    <th align="center">target_schema_regex</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">pgbench_test</td>
+    <td align="left">saiendla</td>
+    <td align="left">2026-02-20 20:29:58.841298-05</td>
+    <td align="left">.*</td>
+  </tr>
+</table>
+
+</div>
+<h2>A. Core Migration Checks (9 Reports)</h2>
+<ol>
+<li><a href="pg360_01_type_consistency.html">Schema Type Consistency Report</a></li>
+<li><a href="pg360_02_casting_issues.html">Casting Issues Report</a></li>
+<li><a href="pg360_03_indexes_needed.html">Indexes Needed Report (FK Coverage)</a></li>
+<li><a href="pg360_04_unused_duplicate_indexes.html">Unused and Duplicate Indexes Report</a></li>
+<li><a href="pg360_05_bloat_report.html">Table and Index Bloat Report</a></li>
+<li><a href="pg360_06_partition_health.html">Partition Health Report</a></li>
+<li><a href="pg360_07_config_readiness.html">Configuration Readiness Report</a></li>
+<li><a href="pg360_08_compatibility_matrix.html">Compatibility Matrix Report</a></li>
+<li><a href="pg360_09_gate_summary.html">Gate Summary Report</a></li>
+</ol>
+<h2>B. Operational Deep-Dive Topics (40 Reports)</h2>
+<ol>
+<li><a href="pg360_topic_01_connection_pooling_pressure.html">Connection Pooling Pressure</a></li>
+<li><a href="pg360_topic_02_logical_replication_slots_publications.html">Logical Replication Slots Publications</a></li>
+<li><a href="pg360_topic_03_instance_configuration.html">Instance Configuration</a></li>
+<li><a href="pg360_topic_04_activity_and_waits.html">Activity and Waits</a></li>
+<li><a href="pg360_topic_05_locks_and_blocking.html">Locks and Blocking</a></li>
+<li><a href="pg360_topic_06_database_and_io_health.html">Database and IO Health</a></li>
+<li><a href="pg360_topic_07_table_and_index_health.html">Table and Index Health</a></li>
+<li><a href="pg360_topic_08_bloat_and_xid_risk.html">Bloat and XID Risk</a></li>
+<li><a href="pg360_topic_09_replication_health.html">Replication Health</a></li>
+<li><a href="pg360_topic_10_executive_findings_action_queue.html">Executive Findings and Action Queue</a></li>
+<li><a href="pg360_topic_11_sql_hotspots_pg_stat_statements.html">SQL Hotspots (pg_stat_statements)</a></li>
+<li><a href="pg360_topic_12_maintenance_progress.html">Maintenance Progress</a></li>
+<li><a href="pg360_topic_13_diagnostic_readiness.html">Diagnostic Readiness</a></li>
+<li><a href="pg360_topic_14_io_profile_pg_stat_io.html">IO Profile (pg_stat_io)</a></li>
+<li><a href="pg360_topic_15_security_roles_privileges.html">Security Roles Privileges</a></li>
+<li><a href="pg360_topic_16_authentication_connections.html">Authentication Connections</a></li>
+<li><a href="pg360_topic_17_schema_object_inventory.html">Schema Object Inventory</a></li>
+<li><a href="pg360_topic_18_tablespace_storage_layout.html">Tablespace Storage Layout</a></li>
+<li><a href="pg360_topic_19_top_objects_by_size.html">Top Objects By Size</a></li>
+<li><a href="pg360_topic_20_partitioning_inventory.html">Partitioning Inventory</a></li>
+<li><a href="pg360_topic_21_constraint_fk_health.html">Constraint Fk Health</a></li>
+<li><a href="pg360_topic_22_index_bloat_usage_patterns.html">Index Bloat Usage Patterns</a></li>
+<li><a href="pg360_topic_23_toast_large_values.html">Toast Large Values</a></li>
+<li><a href="pg360_topic_24_long_running_transactions_detail.html">Long Running Transactions Detail</a></li>
+<li><a href="pg360_topic_25_wal_checkpoint_pressure.html">Wal Checkpoint Pressure</a></li>
+<li><a href="pg360_topic_26_autovacuum_worker_thresholds.html">Autovacuum Worker Thresholds</a></li>
+<li><a href="pg360_topic_27_statistics_quality_analyze_health.html">Statistics Quality Analyze Health</a></li>
+<li><a href="pg360_topic_28_table_growth_churn_hotspots.html">Table Growth Churn Hotspots</a></li>
+<li><a href="pg360_topic_29_sequence_health.html">Sequence Health</a></li>
+<li><a href="pg360_topic_30_materialized_foreign_unlogged_inventory.html">Materialized Foreign Unlogged Inventory</a></li>
+<li><a href="pg360_topic_31_function_trigger_profile.html">Function Trigger Profile</a></li>
+<li><a href="pg360_topic_32_extension_fdw_runtime_audit.html">Extension Fdw Runtime Audit</a></li>
+<li><a href="pg360_topic_33_lock_conflict_matrix.html">Lock Conflict Matrix</a></li>
+<li><a href="pg360_topic_34_partition_maintenance_risk.html">Partition Maintenance Risk</a></li>
+<li><a href="pg360_topic_35_settings_antipatterns.html">Settings Antipatterns</a></li>
+<li><a href="pg360_topic_36_plan_cache_prepared_advisory_locks.html">Plan Cache Prepared And Advisory Locks</a></li>
+<li><a href="pg360_topic_37_wait_event_classification_live.html">Wait Event Classification Live</a></li>
+<li><a href="pg360_topic_38_xid_multixact_wraparound_watch.html">Xid Multixact Wraparound Watch</a></li>
+<li><a href="pg360_topic_39_checkpoint_wal_rate_estimates.html">Checkpoint Wal Rate Estimates</a></li>
+<li><a href="pg360_topic_40_database_growth_objects_90d.html">Database Growth Objects 90D</a></li>
+</ol>
+</body></html>

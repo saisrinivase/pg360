@@ -1,0 +1,423 @@
+<!doctype html><html><head><meta charset="utf-8"><title>IO Profile (pg_stat_io)</title><style>body{font-family:Segoe UI,Arial,sans-serif;margin:0;padding:20px;color:#1d2b3a;background:linear-gradient(180deg,#f8fbff 0%,#eef5fb 100%);}h1{color:#1f4e79;margin:0 0 12px 0;font-size:24px;}p{color:#35506b;}a{color:#1d5ea8;text-decoration:none;font-weight:600;}a:hover{text-decoration:underline;}table{border-collapse:collapse;width:100%;background:#fff;margin:14px 0 18px;border:1px solid #d8e4f2;}th{background:#eaf2fb;color:#1f3f63;border:1px solid #d8e4f2;padding:8px;}td{border:1px solid #deebf7;padding:8px;vertical-align:top;}tr:nth-child(even) td{background:#f9fcff;}caption{caption-side:top;text-align:left;font-weight:700;color:#244b74;background:#f3f8fe;border:1px solid #d8e4f2;border-bottom:none;padding:9px 10px;}</style></head><body><h1>IO Profile (pg_stat_io)</h1><p><a href="pg360_topics_main.html">Back to main</a></p>
+<table border="1">
+  <tr>
+    <th align="center">database_name</th>
+    <th align="center">executed_by</th>
+    <th align="center">generated_at</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">pgbench_test</td>
+    <td align="left">postgres</td>
+    <td align="left">2026-02-20 17:28:02.211131-05</td>
+  </tr>
+</table>
+
+<table border="1">
+  <tr>
+    <th align="center">schemaname</th>
+    <th align="center">relname</th>
+    <th align="center">blocks_read</th>
+    <th align="center">blocks_hit</th>
+    <th align="center">cache_hit_pct</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">partition_lab</td>
+    <td align="left">fact_events_10y_unpartitioned</td>
+    <td align="right">1329610</td>
+    <td align="right">11165477</td>
+    <td align="right">89.36</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">stale_stats_table</td>
+    <td align="right">2366</td>
+    <td align="right">520373</td>
+    <td align="right">99.55</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">child_events</td>
+    <td align="right">2000</td>
+    <td align="right">913614</td>
+    <td align="right">99.78</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">sales_catalog</td>
+    <td align="right">1748</td>
+    <td align="right">366178</td>
+    <td align="right">99.52</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">parent_accounts</td>
+    <td align="right">853</td>
+    <td align="right">1151089</td>
+    <td align="right">99.93</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v1_lab</td>
+    <td align="left">stale_stats_table</td>
+    <td align="right">805</td>
+    <td align="right">182956</td>
+    <td align="right">99.56</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">customer_staging_no_pk</td>
+    <td align="right">660</td>
+    <td align="right">62534</td>
+    <td align="right">98.96</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v1_lab</td>
+    <td align="left">product_catalog</td>
+    <td align="right">423</td>
+    <td align="right">152231</td>
+    <td align="right">99.72</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v1_lab</td>
+    <td align="left">orders_no_pk</td>
+    <td align="right">78</td>
+    <td align="right">10368</td>
+    <td align="right">99.25</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v1_lab</td>
+    <td align="left">parent_accounts</td>
+    <td align="right">69</td>
+    <td align="right">509876</td>
+    <td align="right">99.99</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">quoted_orders</td>
+    <td align="right">46</td>
+    <td align="right">14811</td>
+    <td align="right">99.69</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics_lab</td>
+    <td align="left">index_demo_orders</td>
+    <td align="right">23</td>
+    <td align="right">373557</td>
+    <td align="right">99.99</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">order_fact</td>
+    <td align="right">4</td>
+    <td align="right">785949</td>
+    <td align="right">100.00</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">ddl_event_log</td>
+    <td align="right">3</td>
+    <td align="right">3701</td>
+    <td align="right">99.92</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg360_lab</td>
+    <td align="left">lock_demo</td>
+    <td align="right">3</td>
+    <td align="right">14</td>
+    <td align="right">82.35</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">bloat_pressure_table</td>
+    <td align="right">3</td>
+    <td align="right">327833</td>
+    <td align="right">100.00</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">table_mod_snap</td>
+    <td align="right">2</td>
+    <td align="right">13165</td>
+    <td align="right">99.98</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">capture_run</td>
+    <td align="right">2</td>
+    <td align="right">29454</td>
+    <td align="right">99.99</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v1_lab</td>
+    <td align="left">dml_bloat_table</td>
+    <td align="right">2</td>
+    <td align="right">90699</td>
+    <td align="right">100.00</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">partitioned_events_2026</td>
+    <td align="right">2</td>
+    <td align="right">146889</td>
+    <td align="right">100.00</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">index_usage_snap</td>
+    <td align="right">2</td>
+    <td align="right">15079</td>
+    <td align="right">99.99</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">customer_contact_compat</td>
+    <td align="right">2</td>
+    <td align="right">607671</td>
+    <td align="right">100.00</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">object_size_snap</td>
+    <td align="right">2</td>
+    <td align="right">32718</td>
+    <td align="right">99.99</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">partitioned_events_2025</td>
+    <td align="right">2</td>
+    <td align="right">160397</td>
+    <td align="right">100.00</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v1_lab</td>
+    <td align="left">sales_orders</td>
+    <td align="right">1</td>
+    <td align="right">2614</td>
+    <td align="right">99.96</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">tablespace_size_snap</td>
+    <td align="right">1</td>
+    <td align="right">300</td>
+    <td align="right">99.67</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">database_size_snap</td>
+    <td align="right">1</td>
+    <td align="right">171</td>
+    <td align="right">99.42</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">db_stats_reset_snap</td>
+    <td align="right">1</td>
+    <td align="right">152</td>
+    <td align="right">99.35</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg360_lab</td>
+    <td align="left">dead_tuple_demo</td>
+    <td align="right">1</td>
+    <td align="right">767334</td>
+    <td align="right">100.00</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">issue_manifest</td>
+    <td align="right">1</td>
+    <td align="right">22</td>
+    <td align="right">95.65</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">trigger_audit_demo</td>
+    <td align="right">0</td>
+    <td align="right">0</td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">mv_daily_order_volume</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">amount_mapping_risk</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">database_size_snapshots</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">table_size_snapshots</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">index_size_snapshots</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">connection_snapshots</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">wal_snapshots</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">public</td>
+    <td align="left">pgbench_history</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v1_lab</td>
+    <td align="left">child_transactions</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg360_lab</td>
+    <td align="left">deadlock_b</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg360_lab</td>
+    <td align="left">deadlock_a</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">public</td>
+    <td align="left">pgbench_tellers</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_61</td>
+    <td align="left">tmp_schema_type_consistency</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">public</td>
+    <td align="left">pgbench_branches</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_61</td>
+    <td align="left">tmp_casting_issues</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_61</td>
+    <td align="left">tmp_fk_index_coverage</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_61</td>
+    <td align="left">tmp_unused_indexes</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_61</td>
+    <td align="left">tmp_duplicate_indexes</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_61</td>
+    <td align="left">tmp_bloat_report</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_61</td>
+    <td align="left">tmp_partition_health</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_61</td>
+    <td align="left">tmp_config_readiness</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_61</td>
+    <td align="left">tmp_main_findings</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">pg_temp_61</td>
+    <td align="left">tmp_mig_v1_summary</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">public</td>
+    <td align="left">pgbench_accounts</td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+    <td align="right">&nbsp; </td>
+  </tr>
+</table>
+
+<table border="1">
+  <tr>
+    <th align="center">server_version_num</th>
+    <th align="center">pg_stat_io_available</th>
+    <th align="center">note</th>
+  </tr>
+  <tr valign="top">
+    <td align="right">180000</td>
+    <td align="left">YES</td>
+    <td align="left">pg_stat_io available for deeper object/context I/O split</td>
+  </tr>
+</table>
+
+</body></html>

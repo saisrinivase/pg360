@@ -1,0 +1,55 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Executive Findings and Action Queue</title><style>body{font-family:Segoe UI,Arial,sans-serif;margin:0;padding:20px;color:#1d2b3a;background:linear-gradient(180deg,#f8fbff 0%,#eef5fb 100%);}h1{color:#1f4e79;margin:0 0 12px 0;font-size:24px;}p{color:#35506b;}a{color:#1d5ea8;text-decoration:none;font-weight:600;}a:hover{text-decoration:underline;}table{border-collapse:collapse;width:100%;background:#fff;margin:14px 0 18px;border:1px solid #d8e4f2;}th{background:#eaf2fb;color:#1f3f63;border:1px solid #d8e4f2;padding:8px;}td{border:1px solid #deebf7;padding:8px;vertical-align:top;}tr:nth-child(even) td{background:#f9fcff;}caption{caption-side:top;text-align:left;font-weight:700;color:#244b74;background:#f3f8fe;border:1px solid #d8e4f2;border-bottom:none;padding:9px 10px;}</style></head><body><h1>Executive Findings and Action Queue</h1><p><a href="pg360_topics_main.html">Back to main</a></p>
+<table border="1">
+  <tr>
+    <th align="center">database_name</th>
+    <th align="center">executed_by</th>
+    <th align="center">generated_at</th>
+    <th align="center">target_schema_regex</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">pgbench_test</td>
+    <td align="left">saiendla</td>
+    <td align="left">2026-02-20 20:29:58.853631-05</td>
+    <td align="left">.*</td>
+  </tr>
+</table>
+
+<table border="1">
+  <tr>
+    <th align="center">check_name</th>
+    <th align="center">severity</th>
+    <th align="center">status</th>
+    <th align="center">issue_count</th>
+    <th align="center">recommendation</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">Critical config failures</td>
+    <td align="left">P1</td>
+    <td align="left">FAIL</td>
+    <td align="right">1</td>
+    <td align="left">Fix autovacuum/archive_mode/wal_level before cutover</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">Idle in transaction &gt; 10 minutes</td>
+    <td align="left">P1</td>
+    <td align="left">PASS</td>
+    <td align="right">0</td>
+    <td align="left">Fix transaction boundaries and enforce timeout controls</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">Missing FK supporting indexes</td>
+    <td align="left">P1</td>
+    <td align="left">FAIL</td>
+    <td align="right">8</td>
+    <td align="left">Create btree index on FK columns as leading keys</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">Unused index candidates</td>
+    <td align="left">P3</td>
+    <td align="left">WARN</td>
+    <td align="right">12</td>
+    <td align="left">Validate with workload replay before dropping</td>
+  </tr>
+</table>
+
+</body></html>

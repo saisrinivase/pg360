@@ -10,9 +10,9 @@ Usage:
     -f pg360.sql
 
 Primary output:
-  samples/pg360_bundle.zip
+  reports/pg360_bundle_YYYYMMDD_HHMMSS.zip
 Entry point inside zip:
-  pg360_bundle/pg360_topics_main.html
+  pg360_bundle_YYYYMMDD_HHMMSS/pg360_topics_main.html
 */
 
 \set ON_ERROR_STOP on
@@ -23,11 +23,14 @@ Entry point inside zip:
 \set target_schema_regex '.*'
 \endif
 
--- Generate full PG360 report set into samples/
+-- Generate full PG360 report set into reports/
 \ir scripts/12_migration_topic_report_pack_v1.sql
 
--- Package all generated artifacts into a single zip bundle.
-\! /bin/sh -c "set -e; rm -rf samples/pg360_bundle samples/pg360_bundle.zip; mkdir -p samples/pg360_bundle; cp -f samples/pg360_topics_main.html samples/pg360_report.html samples/migration_assessment_v1.json samples/migration_gate_v1.txt samples/pg360_0*.html samples/pg360_topic_*.html samples/pg360_bundle/; printf 'Open pg360_topics_main.html to start.\n' > samples/pg360_bundle/START_HERE.txt; (cd samples && zip -qr pg360_bundle.zip pg360_bundle)"
+-- Package all generated artifacts into a timestamped zip bundle.
+\! /bin/sh -c 'set -e; ts="$(date +%Y%m%d_%H%M%S)"; bundle_dir="reports/pg360_bundle_${ts}"; bundle_zip="reports/pg360_bundle_${ts}.zip"; rm -rf "$bundle_dir"; mkdir -p "$bundle_dir"; cp -f reports/pg360_topics_main.html reports/pg360_report.html reports/migration_assessment_v1.json reports/migration_gate_v1.txt reports/pg360_0*.html reports/pg360_topic_*.html "$bundle_dir"/; printf "Open pg360_topics_main.html to start.\n" > "$bundle_dir/START_HERE.txt"; (cd reports && zip -qr "pg360_bundle_${ts}.zip" "pg360_bundle_${ts}"); cp -f "$bundle_zip" reports/pg360_bundle_latest.zip; printf "%s" "$ts" > reports/.last_bundle_ts'
 
-\echo 'PG360 bundle generated: samples/pg360_bundle.zip'
-\echo 'Open: pg360_bundle/pg360_topics_main.html'
+\set run_ts `cat reports/.last_bundle_ts`
+
+\echo PG360 bundle generated: reports/pg360_bundle_:run_ts.zip
+\echo Latest bundle alias: reports/pg360_bundle_latest.zip
+\echo Open: pg360_bundle_:run_ts/pg360_topics_main.html

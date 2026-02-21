@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>2. Casting Issues Report</title><style>body{font-family:Segoe UI,Arial,sans-serif;margin:0;padding:20px;color:#1d2b3a;background:linear-gradient(180deg,#f8fbff 0%,#eef5fb 100%);}h1{color:#1f4e79;margin:0 0 12px 0;font-size:24px;}p{color:#35506b;}a{color:#1d5ea8;text-decoration:none;font-weight:600;}a:hover{text-decoration:underline;}table{border-collapse:collapse;width:100%;background:#fff;margin:14px 0 18px;border:1px solid #d8e4f2;}th{background:#eaf2fb;color:#1f3f63;border:1px solid #d8e4f2;padding:8px;}td{border:1px solid #deebf7;padding:8px;vertical-align:top;}tr:nth-child(even) td{background:#f9fcff;}caption{caption-side:top;text-align:left;font-weight:700;color:#244b74;background:#f3f8fe;border:1px solid #d8e4f2;border-bottom:none;padding:9px 10px;}</style></head><body>
+<h1>2. Casting Issues Report</h1>
+<p><a href="pg360_report.html">Back to Main Migration Report</a></p>
+<table border="1">
+  <caption>2.1 Casting Summary by Risk</caption>
+  <tr>
+    <th align="center">risk_level</th>
+    <th align="center">issue_count</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">HIGH</td>
+    <td align="right">49</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">MED</td>
+    <td align="right">101</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">LOW</td>
+    <td align="right">6</td>
+  </tr>
+</table>
+
+<table border="1">
+  <caption>2.2 Casting Issue Details</caption>
+  <tr>
+    <th align="center">schema_name</th>
+    <th align="center">object_type</th>
+    <th align="center">object_name</th>
+    <th align="center">syntax</th>
+    <th align="center">expression</th>
+    <th align="center">cast_to</th>
+    <th align="center">risk_level</th>
+    <th align="center">column_guess</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">FUNCTION</td>
+    <td align="left">sp_capture_operational_snapshot</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">c.reltuples</td>
+    <td align="left">bigint else null end as estimated_rows</td>
+    <td align="left">HIGH</td>
+    <td align="left">reltuples</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">1000000</td>
+    <td align="left">numeric</td>
+    <td align="left">HIGH</td>
+    <td align="left">1000000</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">5</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">5</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">64</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">64</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">1000000</td>
+    <td align="left">numeric then</td>
+    <td align="left">HIGH</td>
+    <td align="left">1000000</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">1024</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">1024</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">10000000</td>
+    <td align="left">numeric then</td>
+    <td align="left">HIGH</td>
+    <td align="left">10000000</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">20</td>
+    <td align="left">numeric</td>
+    <td align="left">HIGH</td>
+    <td align="left">20</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">numeric</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">1</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">1</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">64</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">64</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">1</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">1</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_database_growth_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">prev_size_bytes</td>
+    <td align="left">numeric</td>
+    <td align="left">HIGH</td>
+    <td align="left">prev_size_bytes</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_database_growth_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_database_growth_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">numeric</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">86400</td>
+    <td align="left">numeric</td>
+    <td align="left">HIGH</td>
+    <td align="left">86400</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">86400</td>
+    <td align="left">numeric</td>
+    <td align="left">HIGH</td>
+    <td align="left">86400</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">integer</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">integer</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">timestamp with time zone</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_usage_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_usage_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_usage_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_object_growth_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_object_growth_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">prev_total_size_bytes</td>
+    <td align="left">numeric</td>
+    <td align="left">HIGH</td>
+    <td align="left">prev_total_size_bytes</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_object_growth_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">numeric</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modification_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modification_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modification_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">numeric</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modification_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modification_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modification_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">n_live_tup</td>
+    <td align="left">numeric</td>
+    <td align="left">HIGH</td>
+    <td align="left">n_live_tup</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modification_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modification_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modification_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modification_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modification_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modification_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modifications_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modifications_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modifications_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modifications_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">0</td>
+    <td align="left">bigint</td>
+    <td align="left">HIGH</td>
+    <td align="left">0</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">migration_v2_lab</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_high_value_orders</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">2000</td>
+    <td align="left">numeric</td>
+    <td align="left">HIGH</td>
+    <td align="left">2000</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">FUNCTION</td>
+    <td align="left">fn_log_ddl_command_end</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">cmd.classid</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">classid</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">FUNCTION</td>
+    <td align="left">fn_log_ddl_command_end</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">cmd.objid</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">objid</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">FUNCTION</td>
+    <td align="left">sp_capture_operational_snapshot</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'manual'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'manual'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">FUNCTION</td>
+    <td align="left">sp_capture_operational_snapshot</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'high_dml_pressure_table'</td>
+    <td align="left">text as finding_type</td>
+    <td align="left">MED</td>
+    <td align="left">'high_dml_pressure_table'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">pattern.'</td>
+    <td align="left">text as recommendation</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'monthly_growth'</td>
+    <td align="left">text as lifecycle_status</td>
+    <td align="left">MED</td>
+    <td align="left">'monthly_growth'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">null</td>
+    <td align="left">text as table_name</td>
+    <td align="left">MED</td>
+    <td align="left">null</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">window.'</td>
+    <td align="left">text as recommendation</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">pressure.'</td>
+    <td align="left">text as recommendation</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'medium'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'medium'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'eligible_after_review'</td>
+    <td align="left">text and i</td>
+    <td align="left">MED</td>
+    <td align="left">'eligible_after_review'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'low'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'low'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'unused_index_blocked'</td>
+    <td align="left">text as finding_type</td>
+    <td align="left">MED</td>
+    <td align="left">'unused_index_blocked'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'monthly_dml'</td>
+    <td align="left">text as lifecycle_status</td>
+    <td align="left">MED</td>
+    <td align="left">'monthly_dml'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'high'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'high'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'unused_large_index'</td>
+    <td align="left">text as finding_type</td>
+    <td align="left">MED</td>
+    <td align="left">'unused_large_index'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'never_used_30d'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'never_used_30d'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'high'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'high'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'medium'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'medium'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'low'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'low'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'medium'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'medium'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'high'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'high'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'fast_growing_object'</td>
+    <td align="left">text as finding_type</td>
+    <td align="left">MED</td>
+    <td align="left">'fast_growing_object'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'hold_45d'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'hold_45d'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'block_unique'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'block_unique'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'block_constraint'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'block_constraint'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'block_primary'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'block_primary'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'stale_30d'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'stale_30d'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'never_used_30d'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'never_used_30d'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">changes.'</td>
+    <td align="left">text as recommendation</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'low'</td>
+    <td align="left">text as severity</td>
+    <td align="left">MED</td>
+    <td align="left">'low'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_capacity_action_queue</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'stale_30d'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'stale_30d'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_database_growth_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'month'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'month'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_database_growth_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'month'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'month'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'no_scan_delta_yet'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'no_scan_delta_yet'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'stale_30d'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'stale_30d'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'active'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'active'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">log.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">history.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">found.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">drop.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text then</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">drop.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">automation.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">action.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">index.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">yet.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">window.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">action.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'not_present'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'not_present'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'block_primary'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'block_primary'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text then</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'block_constraint'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'block_constraint'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'block_unique'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'block_unique'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'review_index_state'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'review_index_state'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'insufficient_history'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'insufficient_history'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'hold_45d'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'hold_45d'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'eligible_after_review'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'eligible_after_review'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'event_only'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'event_only'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">i'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">i'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'&quot;'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'&quot;'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'&quot;'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'&quot;'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">$'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">$'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'ddl_command_end'</td>
+    <td align="left">text and ddl_event_log</td>
+    <td align="left">MED</td>
+    <td align="left">'ddl_command_end'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'</td>
+    <td align="left">text and coalesce</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">drop'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">drop'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'&quot;'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'&quot;'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">$'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">$'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'&quot;'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'&quot;'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">$'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">$'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'sql_drop'</td>
+    <td align="left">text and ddl_event_log</td>
+    <td align="left">MED</td>
+    <td align="left">'sql_drop'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'&quot;'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'&quot;'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">$'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">$'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'.'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'dropped'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'dropped'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'dropped_event_present'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'dropped_event_present'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'never_used_30d'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'never_used_30d'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_usage_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'&quot;'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'&quot;'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_usage_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">''</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">''</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_usage_delta</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">i'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">i'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_object_growth_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'month'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'month'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_object_growth_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'month'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'month'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modifications_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'month'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'month'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_table_modifications_monthly</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">'month'</td>
+    <td align="left">text</td>
+    <td align="left">MED</td>
+    <td align="left">'month'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">days'</td>
+    <td align="left">interval then</td>
+    <td align="left">LOW</td>
+    <td align="left">days'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">days'</td>
+    <td align="left">interval then</td>
+    <td align="left">LOW</td>
+    <td align="left">days'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">days'</td>
+    <td align="left">interval then</td>
+    <td align="left">LOW</td>
+    <td align="left">days'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">days'</td>
+    <td align="left">interval then</td>
+    <td align="left">LOW</td>
+    <td align="left">days'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">days'</td>
+    <td align="left">interval as eligible_to_drop_after</td>
+    <td align="left">LOW</td>
+    <td align="left">days'</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">dba_metrics</td>
+    <td align="left">VIEW</td>
+    <td align="left">vw_index_lifecycle</td>
+    <td align="left">DOUBLE_COLON</td>
+    <td align="left">days'</td>
+    <td align="left">interval</td>
+    <td align="left">LOW</td>
+    <td align="left">days'</td>
+  </tr>
+</table>
+
+</body></html>

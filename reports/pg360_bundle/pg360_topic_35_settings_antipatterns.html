@@ -1,0 +1,38 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Settings Antipatterns</title><style>body{font-family:Segoe UI,Arial,sans-serif;margin:0;padding:20px;color:#1d2b3a;background:linear-gradient(180deg,#f8fbff 0%,#eef5fb 100%);}h1{color:#1f4e79;margin:0 0 12px 0;font-size:24px;}p{color:#35506b;}a{color:#1d5ea8;text-decoration:none;font-weight:600;}a:hover{text-decoration:underline;}table{border-collapse:collapse;width:100%;background:#fff;margin:14px 0 18px;border:1px solid #d8e4f2;}th{background:#eaf2fb;color:#1f3f63;border:1px solid #d8e4f2;padding:8px;}td{border:1px solid #deebf7;padding:8px;vertical-align:top;}tr:nth-child(even) td{background:#f9fcff;}caption{caption-side:top;text-align:left;font-weight:700;color:#244b74;background:#f3f8fe;border:1px solid #d8e4f2;border-bottom:none;padding:9px 10px;}</style></head><body><h1>Settings Antipatterns</h1><p><a href="pg360_topics_main.html">Back to main</a></p>
+<table border="1">
+  <tr>
+    <th align="center">database_name</th>
+    <th align="center">executed_by</th>
+    <th align="center">generated_at</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">pgbench_test</td>
+    <td align="left">postgres</td>
+    <td align="left">2026-02-20 17:28:02.249889-05</td>
+  </tr>
+</table>
+
+<table border="1">
+  <tr>
+    <th align="center">antipattern</th>
+    <th align="center">present</th>
+    <th align="center">impact</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">autovacuum_off</td>
+    <td align="left">NO</td>
+    <td align="left">Must be OFF only in exceptional controlled scenarios</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">low_max_wal_size</td>
+    <td align="left">YES</td>
+    <td align="left">May increase checkpoint pressure on write-heavy systems</td>
+  </tr>
+  <tr valign="top">
+    <td align="left">low_checkpoint_timeout</td>
+    <td align="left">YES</td>
+    <td align="left">Frequent checkpoints can increase I/O spikes</td>
+  </tr>
+</table>
+
+</body></html>

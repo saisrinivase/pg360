@@ -22,16 +22,17 @@ psql -X -v ON_ERROR_STOP=1 -d pgbench_test \
 3. Validate:
 
 ```bash
-ls -1 samples/pg360_topics_main.html
-ls -1 samples/pg360_topic_*.html | wc -l
-ls -1 samples/pg360_0*.html | wc -l
-ls -1 samples/pg360_bundle.zip
+ls -1 reports/pg360_topics_main.html
+ls -1 reports/pg360_topic_*.html | wc -l
+ls -1 reports/pg360_0*.html | wc -l
+ls -1 reports/pg360_bundle_*.zip | tail -n 1
+ls -1 reports/pg360_bundle_latest.zip
 ```
 
 4. Open:
 
 ```bash
-open samples/pg360_topics_main.html
+open reports/pg360_topics_main.html
 ```
 
 ## Method B: pgAdmin PSQL Tool (Full Output Supported)
@@ -45,7 +46,7 @@ open samples/pg360_topics_main.html
 \i pg360.sql
 ```
 
-4. Open generated files from `samples/`.
+4. Open generated files from `reports/`.
 
 ## Method C: pgAdmin Query Tool / DBeaver SQL Editor (GUI-Only)
 
