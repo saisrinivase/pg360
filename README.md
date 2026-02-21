@@ -45,6 +45,32 @@ psql -X -v ON_ERROR_STOP=1 -d pgbench_test \
   -f "pg360.sql"
 ```
 
+Command definition:
+1. `-X`: ignore local `~/.psqlrc` so run is consistent.
+2. `-v ON_ERROR_STOP=1`: stop immediately on first SQL error.
+3. `-d pgbench_test`: target database name.
+4. `-v target_schema_regex='.*'`: include all non-system schemas.
+5. `-f "pg360.sql"`: run the one-command PG360 wrapper.
+
+Template using host/port/user:
+
+```bash
+cd "/Users/saiendla/Documents/PostgreSQl SCripts /pg360"
+psql "host=<host> port=5432 dbname=<database> user=<user> sslmode=require" \
+  -X -v ON_ERROR_STOP=1 \
+  -v target_schema_regex='^(public|app|reporting)$' \
+  -f "pg360.sql"
+```
+
+Template for local socket auth:
+
+```bash
+cd "/Users/saiendla/Documents/PostgreSQl SCripts /pg360"
+psql -X -v ON_ERROR_STOP=1 -d <database_name> \
+  -v target_schema_regex='.*' \
+  -f "pg360.sql"
+```
+
 ## Expected Output Files
 
 After successful run:

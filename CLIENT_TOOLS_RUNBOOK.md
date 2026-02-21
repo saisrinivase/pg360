@@ -19,6 +19,23 @@ psql -X -v ON_ERROR_STOP=1 -d pgbench_test \
   -f "pg360.sql"
 ```
 
+Command meaning:
+1. `-X` keeps execution deterministic (ignores local `psqlrc`).
+2. `-v ON_ERROR_STOP=1` fails fast on first error.
+3. `-d pgbench_test` is target DB.
+4. `-v target_schema_regex='.*'` includes all non-system schemas.
+5. `-f "pg360.sql"` runs full PG360 and zip packaging.
+
+Alternate command with explicit endpoint:
+
+```bash
+cd "/Users/saiendla/Documents/PostgreSQl SCripts /pg360"
+psql "host=<host> port=5432 dbname=<database> user=<user> sslmode=require" \
+  -X -v ON_ERROR_STOP=1 \
+  -v target_schema_regex='^(public|app|reporting)$' \
+  -f "pg360.sql"
+```
+
 3. Validate:
 
 ```bash
