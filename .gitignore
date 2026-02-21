@@ -5,3 +5,4 @@ reports/pg360_bundle_*/
 reports/pg360_bundle_*.zip
 reports/pg360_bundle_latest.zip
 reports/.last_bundle_ts
+reports/run_*.txt
