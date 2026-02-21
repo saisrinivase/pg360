@@ -27,7 +27,7 @@ Entry point inside zip:
 \ir scripts/12_migration_topic_report_pack_v1.sql
 
 -- Package all generated artifacts into a timestamped zip bundle.
-\! /bin/sh -c 'set -e; ts="$(date +%Y%m%d_%H%M%S)"; bundle_dir="reports/pg360_bundle_${ts}"; bundle_zip="reports/pg360_bundle_${ts}.zip"; rm -rf "$bundle_dir"; mkdir -p "$bundle_dir"; cp -f reports/pg360_topics_main.html reports/pg360_report.html reports/migration_assessment_v1.json reports/migration_gate_v1.txt reports/pg360_0*.html reports/pg360_topic_*.html "$bundle_dir"/; printf "Open pg360_topics_main.html to start.\n" > "$bundle_dir/START_HERE.txt"; (cd reports && zip -qr "pg360_bundle_${ts}.zip" "pg360_bundle_${ts}"); cp -f "$bundle_zip" reports/pg360_bundle_latest.zip; printf "%s" "$ts" > reports/.last_bundle_ts'
+\! /bin/sh -c 'set -e; ts="$(date +%Y%m%d_%H%M%S)"; bundle_name="pg360_bundle_${ts}"; bundle_zip="reports/${bundle_name}.zip"; tmp_root="$(mktemp -d /tmp/pg360_bundle_${ts}_XXXXXX)"; bundle_dir="${tmp_root}/${bundle_name}"; find reports -maxdepth 1 -type d -name "pg360_bundle_*" -exec rm -rf {} +; mkdir -p "$bundle_dir"; cp -f reports/pg360_topics_main.html reports/pg360_report.html reports/migration_assessment_v1.json reports/migration_gate_v1.txt reports/pg360_0*.html reports/pg360_topic_*.html "$bundle_dir"/; printf "Open pg360_topics_main.html to start.\n" > "$bundle_dir/START_HERE.txt"; (cd "$tmp_root" && zip -qr "$OLDPWD/$bundle_zip" "$bundle_name"); cp -f "$bundle_zip" reports/pg360_bundle_latest.zip; rm -rf "$tmp_root"; printf "%s" "$ts" > reports/.last_bundle_ts'
 
 \set run_ts `cat reports/.last_bundle_ts`
 
