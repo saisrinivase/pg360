@@ -1,0 +1,11 @@
+PG360 permanent Version 0
+
+Locked on: 2026-03-14 12:14:55 America/New_York
+Canonical script: pg360.sql
+Generated report: pg360_2026-03-14 12:14:55.html
+
+Included changes:
+- pg360.sql is the canonical script
+- default output file naming uses pg360_YYYY-MM-DD HH:MI:SS.html
+- printed generated time uses America/New_York
+- current formatting/layout baseline

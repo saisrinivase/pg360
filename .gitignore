@@ -1,0 +1,12 @@
+.DS_Store
+:pg360_output_dir/
+M0
+M01
+M03
+M05
+
+reports/latest/*
+!reports/latest/.gitkeep
+
+*.pyc
+__pycache__/
