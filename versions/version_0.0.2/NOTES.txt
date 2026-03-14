@@ -1,0 +1,7 @@
+PG360 version_0.0.2
+
+Highlights
+- Extension inventory now separates PostgreSQL trusted/common extensions from admin-review utilities.
+- Added a single-pane provider extension catalog showing availability, installation status, PostgreSQL trust, and AWS/Cloud SQL/Azure baseline posture.
+- Reduced extension noise in PUBLIC grant reporting so application-owned exposure stands out clearly.
+- Regenerated validated report snapshot: pg360_20260314_141049.html
