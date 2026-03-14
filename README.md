@@ -1,19 +1,12 @@
-# PG360 Diagnostic
+# PG360
 
-PG360 is a PostgreSQL diagnostic report generator focused on technical evidence, triage, and remediation guidance.
+PG360 is a single-script, read-only PostgreSQL technical diagnostics report.
 
-## Canonical entry points
-- `pg360.sql`: main report generator
-- `pg360_repo_setup.sql`: history repository setup
-- `pg360_repo_capture.sql`: history capture
-- `pg360_sql_deep_dive.sql`: SQL deep-dive companion report
+## What this repo contains
+- `pg360.sql`: the canonical report generator
+- `versions/version_0/`: locked baseline snapshot
 
-## Current baseline
-- Permanent baseline snapshot: `versions/version_0/`
-- Stable canonical script: `pg360.sql`
-- Generated output under `reports/latest/` is ephemeral and intentionally not tracked
-
-## Generate the main report
+## Usage
 ```bash
 cd /Users/saiendla/Desktop/pg360
 
@@ -23,8 +16,15 @@ psql -X -A -t -d <database> \
   -f /Users/saiendla/Desktop/pg360/pg360.sql
 ```
 
-The default output file name is generated as:
-- `pg360_YYYY-MM-DD HH:MI:SS.html`
+## Output
+Each run writes:
+- `reports/latest/pg360_YYYY-MM-DD HH:MI:SS.html`
+- `reports/latest/pg360_latest.html`
+
+## Notes
+- `pg360.sql` is the only runtime script required.
+- The report is read-only.
+- Generated output under `reports/latest/` is ephemeral and intentionally not tracked.
 
 ## Push to GitHub later
 ```bash
