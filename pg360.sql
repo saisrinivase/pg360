@@ -34,7 +34,7 @@
 --     -f pg360.sql
 --
 --   Default output (single execution):
---     ./reports/latest/pg360_YYYY-MM-DD HH:MI:SS.html
+--     ./reports/latest/pg360_YYYYMMDD_HHMMSS.html
 --
 -- SECTIONS:
 --   M01  Executive Summary
@@ -164,7 +164,7 @@ SELECT
   to_char(local_ts, 'YYYYMMDD_HH24MISS') AS pg360_run_ts,
   to_char(local_ts, 'YYYY-MM-DD HH24:MI:SS') AS pg360_run_ts_human,
   'America/New_York' AS pg360_report_tz,
-  'pg360_' || to_char(local_ts, 'YYYY-MM-DD HH24:MI:SS') || '.html' AS pg360_default_report_file
+  'pg360_' || to_char(local_ts, 'YYYYMMDD_HH24MISS') || '.html' AS pg360_default_report_file
 FROM run_clock
 \gset
 

@@ -1,5 +1,5 @@
 -- =============================================================================
--- PG360 vNext - PostgreSQL Master Diagnostic Report
+-- PG360 - PostgreSQL Technical Diagnostics Report
 -- =============================================================================
 -- PURPOSE   : Consultant-grade read-only PostgreSQL 360 assessment engine
 -- AUTHOR    : PG360 Project
@@ -34,7 +34,7 @@
 --     -f pg360.sql
 --
 --   Default output (single execution):
---     ./reports/latest/index.html (single-file report with in-page links)
+--     ./reports/latest/pg360_YYYYMMDD_HHMMSS.html
 --
 -- SECTIONS:
 --   M01  Executive Summary
@@ -164,13 +164,14 @@ SELECT
   to_char(local_ts, 'YYYYMMDD_HH24MISS') AS pg360_run_ts,
   to_char(local_ts, 'YYYY-MM-DD HH24:MI:SS') AS pg360_run_ts_human,
   'America/New_York' AS pg360_report_tz,
-  'pg360_' || to_char(local_ts, 'YYYY-MM-DD HH24:MI:SS') || '.html' AS pg360_default_report_file
+  'pg360_' || to_char(local_ts, 'YYYYMMDD_HH24MISS') || '.html' AS pg360_default_report_file
 FROM run_clock
 \gset
 
 \if :pg360_full_report_file_auto
 \set pg360_full_report_file :pg360_default_report_file
 \endif
+
 
 \if :{?pg360_force_high_load}
 \qecho 'WARNING: pg360_force_high_load=on supplied. Proceeding despite preflight load risk.'
