@@ -17,9 +17,8 @@ psql -X -A -t -d <database> \
 ```
 
 ## Output
-Each run writes:
+Each run writes one file:
 - `reports/latest/pg360_YYYY-MM-DD HH:MI:SS.html`
-- `reports/latest/pg360_latest.html`
 
 ## Notes
 - `pg360.sql` is the only runtime script required.

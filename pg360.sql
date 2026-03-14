@@ -172,7 +172,6 @@ FROM run_clock
 \set pg360_full_report_file :pg360_default_report_file
 \endif
 
-SELECT :'pg360_output_dir' || '/pg360_latest.html' AS pg360_latest_report_path \gset
 
 \if :{?pg360_force_high_load}
 \qecho 'WARNING: pg360_force_high_load=on supplied. Proceeding despite preflight load risk.'
@@ -15288,10 +15287,6 @@ FROM (
 -- =============================================================================
 COMMIT;
 \o
-\setenv PG360_FULL_REPORT_PATH :pg360_full_report_path
-\setenv PG360_LATEST_REPORT_PATH :pg360_latest_report_path
-\! cp "$PG360_FULL_REPORT_PATH" "$PG360_LATEST_REPORT_PATH"
 
 \qecho PG360 output directory: :pg360_output_dir
 \qecho PG360 report page: :pg360_full_report_path
-\qecho PG360 latest alias: :pg360_latest_report_path
