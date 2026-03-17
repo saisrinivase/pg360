@@ -71,9 +71,25 @@
 \else
 \set pg360_redact_user on
 \endif
+\if :{?pg360_share_safe}
+\else
+\set pg360_share_safe off
+\endif
 \if :{?pg360_redaction_token}
 \else
 \set pg360_redaction_token pg360_user
+\endif
+\if :{?pg360_identity_token}
+\else
+\set pg360_identity_token '<redacted_identity>'
+\endif
+\if :{?pg360_application_token}
+\else
+\set pg360_application_token '<redacted_app>'
+\endif
+\if :{?pg360_client_token}
+\else
+\set pg360_client_token '<redacted_client>'
 \endif
 \if :{?pg360_redact_paths}
 \else
@@ -1522,6 +1538,11 @@ SELECT
     WHEN lower(:'pg360_redact_user') IN ('off','false','0','no') THEN 'off'
     ELSE 'on'
   END ||
+  '" data-pg360-share-safe="' ||
+  CASE
+    WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN 'on'
+    ELSE 'off'
+  END ||
   '" data-pg360-redaction-token="' ||
   replace(replace(replace(replace(replace(:'pg360_redaction_token','&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') ||
   '">';
@@ -1531,6 +1552,15 @@ SELECT
   '<h1>PG360 Technical Diagnostics Report</h1>';
 \qecho '</div>'
 \qecho '<div class="panel">'
+SELECT
+  '<div class="security-notice"><strong>Safety:</strong> PG360 runs inside a read-only transaction and does not execute the remediation SQL it prints. ' ||
+  '<strong>Report sensitivity:</strong> ' ||
+  CASE
+    WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes')
+      THEN 'share-safe mode is enabled; identities, client endpoints, and configured paths are redacted.'
+    ELSE 'this report may include operational identities and client/application metadata. Use -v pg360_share_safe=on for safer sharing.'
+  END ||
+  '</div>';
 
 -- =============================================================================
 -- SIDEBAR NAVIGATION
@@ -1994,7 +2024,13 @@ SELECT
       ELSE 'Enable this for pg_stat_io, EXPLAIN, and slower-query I/O diagnosis.'
     END || '</div></div>' ||
   '<div class="card"><div class="card-label">Last Stats Reset</div><div class="card-value">' || stats_reset || '</div><div class="card-sub">Measurement window start for cumulative database statistics</div></div>' ||
-  '<div class="card"><div class="card-label">Privilege Scope</div><div class="card-value">' || privilege_scope || '</div><div class="card-sub">Current user: ' || replace(replace(replace(replace(replace(current_user,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</div></div>' ||
+  '<div class="card"><div class="card-label">Privilege Scope</div><div class="card-value">' || privilege_scope || '</div><div class="card-sub">Current user: ' ||
+  replace(replace(replace(replace(replace(
+    CASE
+      WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token'
+      ELSE current_user
+    END
+  ,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</div></div>' ||
   '</div>'
 FROM ctx;
 \qecho '</div>'
@@ -6800,6 +6836,7 @@ WITH base AS (
   SELECT
     b.queryid_text,
     CASE
+      WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token'
       WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes')
        AND r.rolname = current_user
       THEN :'pg360_redaction_token'
@@ -7150,7 +7187,7 @@ SELECT
     string_agg(
       '<tr>' ||
       '<td class="num">' || pid || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td>' || replace(replace(replace(replace(replace(COALESCE(state,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td class="num ' || CASE WHEN state_age_secs > 600 THEN 'warn' ELSE '' END || '">' || to_char((interval '1 second' * state_age_secs), 'HH24:MI:SS') || '</td>' ||
       '<td class="num ' || CASE WHEN xact_age_secs > 600 THEN 'warn' ELSE '' END || '">' || COALESCE(to_char((interval '1 second' * xact_age_secs), 'HH24:MI:SS'),'00:00:00') || '</td>' ||
@@ -7158,7 +7195,7 @@ SELECT
       '<td>' || COALESCE(replace(replace(wait_event_type,'<','&lt;'),'>','&gt;'),'') ||
       CASE WHEN wait_event IS NOT NULL THEN '/' || replace(replace(wait_event,'<','&lt;'),'>','&gt;') ELSE '' END ||
       '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(application_name,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_application_token' ELSE application_name END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td>' ||
       CASE WHEN client_addr IS NULL THEN 'local'
            ELSE regexp_replace(host(client_addr), '(\\d+)\\.(\\d+)\\.\\d+\\.\\d+', '\\1.\\2.x.x')
@@ -7293,7 +7330,7 @@ SELECT
     string_agg(
       '<tr>' ||
       '<td class="num">' || pid || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td class="num">' || to_char((interval '1 second' * idle_secs::bigint), 'HH24:MI:SS') || '</td>' ||
       '<td class="num ' || CASE WHEN blocked_sessions > 0 THEN 'crit' ELSE 'good' END || '">' || blocked_sessions || '</td>' ||
       '<td class="num">' || COALESCE(to_char(backend_xmin_age, 'FM999,999,999'), 'N/A') || '</td>' ||
@@ -7469,7 +7506,7 @@ SELECT
       '<tr>' ||
       '<td class="num">' || rnk || '</td>' ||
       '<td class="num crit">' || blocker_pid || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND blocker_user = current_user THEN :'pg360_redaction_token' ELSE blocker_user END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND blocker_user = current_user THEN :'pg360_redaction_token' ELSE blocker_user END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td class="num ' || CASE WHEN blocked_sessions >= 3 THEN 'crit' WHEN blocked_sessions = 2 THEN 'warn' ELSE '' END || '">' || blocked_sessions || '</td>' ||
       '<td class="num">' || to_char((interval '1 second' * max_wait_secs::bigint), 'HH24:MI:SS') || '</td>' ||
       '<td class="num">' || to_char((interval '1 second' * blocker_xact_secs::bigint), 'HH24:MI:SS') || '</td>' ||
@@ -7518,7 +7555,7 @@ SELECT
     string_agg(
       '<tr>' ||
       '<td class="num crit">' || blocked_pid || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND blocked_user = current_user THEN :'pg360_redaction_token' ELSE blocked_user END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND blocked_user = current_user THEN :'pg360_redaction_token' ELSE blocked_user END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td class="num">' || to_char((interval '1 second' * wait_secs::bigint), 'HH24:MI:SS') || '</td>' ||
       '<td class="num warn">' || blocker_pid || '</td>' ||
       '<td>' || replace(replace(replace(replace(replace(left(regexp_replace(COALESCE(regexp_replace(blocker_query, E'\\s+', ' ', 'g'),''), E'''[^'']*''', '''?''', 'g'), 100),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
@@ -7647,7 +7684,7 @@ SELECT
     string_agg(
       '<tr>' ||
       '<td class="num">' || pid || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td>' || replace(replace(replace(replace(replace(COALESCE(schema_name,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td>' || replace(replace(replace(replace(replace(COALESCE(relation_name,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td class="' || CASE WHEN granted THEN 'warn' ELSE 'crit' END || '">' || CASE WHEN granted THEN 'YES' ELSE 'WAITING' END || '</td>' ||
@@ -7695,7 +7732,7 @@ SELECT
     string_agg(
       '<tr>' ||
       '<td class="num">' || pid || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td class="num">' || granted_cnt || '</td>' ||
       '<td class="num ' || CASE WHEN waiting_cnt > 0 THEN 'warn' ELSE 'good' END || '">' || waiting_cnt || '</td>' ||
       '<td class="num">' || COALESCE(classid::text,'') || '</td>' ||
@@ -8338,18 +8375,23 @@ FROM (
 \qecho '</tr></thead><tbody>'
 
 SELECT
-  '<tr>' ||
-  '<td>' || replace(replace(replace(replace(replace(trigger_schema,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-  '<td>' || replace(replace(replace(replace(replace(event_object_table,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-  '<td>' || replace(replace(replace(replace(replace(trigger_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-  '<td>' || action_timing || '</td>' ||
-  '<td>' || event_manipulation || '</td>' ||
-  '<td>' || action_orientation || '</td>' ||
-  '<td class="good"></td>' ||
-  '</tr>'
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(trigger_schema,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(event_object_table,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(trigger_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || action_timing || '</td>' ||
+      '<td>' || event_manipulation || '</td>' ||
+      '<td>' || action_orientation || '</td>' ||
+      '<td class="good"></td>' ||
+      '</tr>',
+      E'\n'
+    ),
+    '<tr><td colspan="7" class="table-empty">No triggers found</td></tr>'
+  )
 FROM information_schema.triggers
 WHERE trigger_schema NOT IN ('pg_catalog','information_schema')
-ORDER BY trigger_schema, event_object_table, trigger_name
 LIMIT 100;
 
 \qecho '</tbody></table></div></div>'
@@ -9508,7 +9550,7 @@ SELECT
   COALESCE(
     string_agg(
       '<tr>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(application_name,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_application_token' ELSE application_name END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       -- SECURITY: Mask client IP
       '<td>' || CASE WHEN client_addr IS NULL THEN 'local'
                      ELSE regexp_replace(host(client_addr),'(\d+)\.(\d+)\.\d+\.\d+','\1.\2.x.x')
@@ -9926,8 +9968,8 @@ FROM (
 
 SELECT
   '<tr>' ||
-  '<td>' || replace(replace(replace(replace(replace(COALESCE(application_name,'(unknown)'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-  '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+  '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_application_token' ELSE application_name END,'(unknown)'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+  '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
   '<td>' || replace(replace(replace(replace(replace(COALESCE(datname,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
   '<td class="num">' || total || '</td>' ||
   '<td class="num good">' || active || '</td>' ||
@@ -10025,8 +10067,8 @@ SELECT
     string_agg(
       '<tr>' ||
       '<td class="num">' || pid || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(application_name,'(unknown)'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_application_token' ELSE application_name END,'(unknown)'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td class="' || CASE WHEN state LIKE 'idle in transaction%' THEN 'warn"> ' ELSE '"> ' END || COALESCE(state,'') || '</td>' ||
       '<td class="num">' || to_char(session_age, 'DD "d" HH24:MI:SS') || '</td>' ||
       '<td class="num ' || CASE WHEN xact_age > interval '15 minutes' THEN 'warn' ELSE '' END || '">' ||
@@ -10071,7 +10113,7 @@ SELECT
   COALESCE(
     string_agg(
       '<tr>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,'(unknown)'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,'(unknown)'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td class="num">' || conn_count || '</td>' ||
       '<td class="num ' || CASE WHEN conn_share > 60 THEN 'warn' ELSE '' END || '">' || round(conn_share::numeric,1) || '%</td>' ||
       '<td class="' || CASE WHEN conn_share > 60 THEN 'warn">Single role dominates connections. Review pool partitioning.'
@@ -10541,7 +10583,7 @@ FROM (
 
 SELECT
   '<tr>' ||
-  '<td class="crit">' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND rolname = current_user THEN :'pg360_redaction_token' ELSE rolname END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+  '<td class="crit">' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND rolname = current_user THEN :'pg360_redaction_token' ELSE rolname END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
   '<td class="' || CASE WHEN rolcanlogin THEN 'crit"> YES  Can login as superuser' ELSE 'good">No (role only)' END || '</td>' ||
   '<td class="num">' || CASE WHEN rolconnlimit = -1 THEN 'Unlimited' ELSE rolconnlimit::text END || '</td>' ||
   '<td>' || COALESCE(to_char(rolvaliduntil,'YYYY-MM-DD'),'No expiry') || '</td>' ||
@@ -10565,7 +10607,7 @@ ORDER BY rolcanlogin DESC, rolname;
 
 SELECT
   '<tr>' ||
-  '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND rolname = current_user THEN :'pg360_redaction_token' ELSE rolname END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+  '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND rolname = current_user THEN :'pg360_redaction_token' ELSE rolname END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
   '<td class="' || CASE WHEN rolsuper THEN 'crit"> YES' ELSE 'good">No' END || '</td>' ||
   '<td class="' || CASE WHEN rolcreatedb THEN 'warn">Yes' ELSE '">No' END || '</td>' ||
   '<td class="' || CASE WHEN rolreplication THEN 'warn">Yes' ELSE '">No' END || '</td>' ||
@@ -10594,7 +10636,7 @@ SELECT
       '<tr>' ||
       '<td>' || replace(replace(replace(replace(replace(n.nspname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td>' || replace(replace(replace(replace(replace(p.proname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND r.rolname = current_user THEN :'pg360_redaction_token' ELSE r.rolname END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND r.rolname = current_user THEN :'pg360_redaction_token' ELSE r.rolname END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td class="crit">Attacker can inject functions into search_path</td>' ||
       '<td class="code-block">' ||
       replace(replace(replace(replace(replace(
@@ -10654,7 +10696,7 @@ SELECT
   COALESCE(
     string_agg(
       '<tr>' ||
-      '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND pg_get_userbyid(d.defaclrole) = current_user THEN :'pg360_redaction_token' ELSE pg_get_userbyid(d.defaclrole) END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND pg_get_userbyid(d.defaclrole) = current_user THEN :'pg360_redaction_token' ELSE pg_get_userbyid(d.defaclrole) END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td>' || replace(replace(replace(replace(replace(COALESCE(n.nspname,'(all schemas)'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td>' || CASE d.defaclobjtype
                   WHEN 'r' THEN 'tables'
@@ -10689,8 +10731,8 @@ SELECT
   COALESCE(
     string_agg(
       '<tr>' ||
-      '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND member_name = current_user THEN :'pg360_redaction_token' ELSE member_name END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND granted_name = current_user THEN :'pg360_redaction_token' ELSE granted_name END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND member_name = current_user THEN :'pg360_redaction_token' ELSE member_name END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND granted_name = current_user THEN :'pg360_redaction_token' ELSE granted_name END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td class="' || CASE WHEN admin_option THEN 'warn">YES' ELSE 'good">No' END || '</td>' ||
       '<td>' || CASE WHEN member_inherits THEN 'YES' ELSE 'No' END || '</td>' ||
       '<td class="' ||
@@ -10728,9 +10770,9 @@ SELECT
   COALESCE(
     string_agg(
       '<tr>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND a.usename = current_user THEN :'pg360_redaction_token' ELSE a.usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND a.usename = current_user THEN :'pg360_redaction_token' ELSE a.usename END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td>' || replace(replace(replace(replace(replace(COALESCE(a.datname,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(a.application_name,'(unknown)'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_application_token' ELSE a.application_name END,'(unknown)'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td>' || CASE WHEN a.client_addr IS NULL THEN 'local'
                      ELSE regexp_replace(host(a.client_addr),'(\d+)\.(\d+)\.\d+\.\d+','\1.\2.x.x')
                 END || '</td>' ||
@@ -13151,8 +13193,8 @@ SELECT
 
 SELECT
   '<tr>' ||
-  '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,'?'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-  '<td>' || replace(replace(replace(replace(replace(COALESCE(left(application_name,30),'?'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+  '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token' ELSE usename END,'?'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+  '<td>' || replace(replace(replace(replace(replace(COALESCE(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_application_token' ELSE left(application_name,30) END,'?'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
   '<td class="num good">' || COUNT(*) FILTER (WHERE state='active') || '</td>' ||
   '<td class="num">' || COUNT(*) FILTER (WHERE state='idle') || '</td>' ||
   '<td class="num ' || CASE WHEN COUNT(*) FILTER (WHERE state ILIKE '%idle in transaction%') > 0 THEN 'crit' ELSE '' END || '">' ||
@@ -14258,7 +14300,7 @@ SELECT
   COALESCE(
     string_agg(
       '<tr>' ||
-      '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND rolname = current_user THEN :'pg360_redaction_token' ELSE rolname END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND rolname = current_user THEN :'pg360_redaction_token' ELSE rolname END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td>' || CASE WHEN rolcanlogin THEN 'Yes' ELSE 'No' END || '</td>' ||
       '<td class="' || CASE WHEN rolsuper THEN 'crit">Yes' ELSE 'good">No' END || '</td>' ||
       '<td class="' || CASE WHEN rolcreaterole THEN 'warn">Yes' ELSE 'good">No' END || '</td>' ||
