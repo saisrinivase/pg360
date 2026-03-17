@@ -7809,7 +7809,7 @@ SELECT
   round(dead_pct::numeric,1) || '%</td>' ||
   '<td>' || COALESCE(to_char(last_autovacuum,'YYYY-MM-DD HH24:MI'),'<span class="warn">Never</span>') || '</td>' ||
   '<td>' || COALESCE(to_char(last_autoanalyze,'YYYY-MM-DD HH24:MI'),'<span class="warn">Never</span>') || '</td>' ||
-  '<td class="num ' || CASE WHEN seq_scan > 1000 THEN 'warn' ELSE '' END || '">' || to_char(seq_scan,'FM999,999') || '</td>' ||
+  '<td class="num ' || CASE WHEN seq_scan > 1000 THEN 'warn' ELSE '' END || '">' || to_char(seq_scan,'FM999,999,999') || '</td>' ||
   '</tr>'
 FROM (
   SELECT *,
@@ -8746,10 +8746,10 @@ SELECT
   '<td>' || replace(replace(replace(replace(replace(schemaname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
   '<td>' || replace(replace(replace(replace(replace(relname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
   '<td class="num ' || CASE WHEN seq_scan > 10000 THEN 'crit' WHEN seq_scan > 1000 THEN 'warn' ELSE '' END || '">' ||
-  to_char(seq_scan,'FM999,999') || '</td>' ||
-  '<td class="num">' || to_char(avg_rows,'FM999,999') || '</td>' ||
+  to_char(seq_scan,'FM999,999,999') || '</td>' ||
+  '<td class="num">' || COALESCE(to_char(round(avg_rows,0),'FM999,999,999,999'), 'n/a') || '</td>' ||
   '<td class="num">' || pg_size_pretty(pg_total_relation_size(relid)) || '</td>' ||
-  '<td class="num">' || to_char(COALESCE(idx_scan,0),'FM999,999') || '</td>' ||
+  '<td class="num">' || to_char(COALESCE(idx_scan,0),'FM999,999,999') || '</td>' ||
   '<td class="' ||
   CASE
     WHEN avg_rows > 10000 AND seq_scan > 100 THEN 'crit"> Likely missing index on filter column'
