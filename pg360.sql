@@ -488,23 +488,9 @@ SELECT
 \qecho '  overflow: hidden;'
 \qecho '}'
 \qecho ''
-\qecho '.severity-strip {'
-\qecho '  display: flex;'
-\qecho '  align-items: center;'
-\qecho '  justify-content: space-between;'
-\qecho '  gap: 10px;'
-\qecho '  flex-wrap: wrap;'
-\qecho '  border: 1px solid var(--line);'
-\qecho '  background: var(--panel-alt);'
-\qecho '  padding: 8px 10px;'
-\qecho '  margin: 6px 0 10px;'
-\qecho '}'
-\qecho ''
-\qecho '.severity-strip[hidden] {'
 \qecho '  display: none;'
 \qecho '}'
 \qecho ''
-\qecho '.severity-strip-label {'
 \qecho '  font-size: 10px;'
 \qecho '  font-weight: 700;'
 \qecho '  color: var(--muted);'
@@ -512,14 +498,12 @@ SELECT
 \qecho '  text-transform: uppercase;'
 \qecho '}'
 \qecho ''
-\qecho '.severity-strip-badges {'
 \qecho '  display: flex;'
 \qecho '  align-items: center;'
 \qecho '  gap: 8px;'
 \qecho '  flex-wrap: wrap;'
 \qecho '}'
 \qecho ''
-\qecho '.severity-strip-badge {'
 \qecho '  display: inline-flex;'
 \qecho '  align-items: center;'
 \qecho '  gap: 6px;'
@@ -531,19 +515,16 @@ SELECT
 \qecho '  white-space: nowrap;'
 \qecho '}'
 \qecho ''
-\qecho '.severity-strip-badge.critical {'
 \qecho '  color: var(--accent-red);'
 \qecho '  background: #fff3f5;'
 \qecho '  border-color: #e0b2bc;'
 \qecho '}'
 \qecho ''
-\qecho '.severity-strip-badge.warning {'
 \qecho '  color: var(--accent-yellow);'
 \qecho '  background: #fff8ed;'
 \qecho '  border-color: #e4cd9b;'
 \qecho '}'
 \qecho ''
-\qecho '.severity-strip-count {'
 \qecho '  font-size: 12px;'
 \qecho '  font-weight: 700;'
 \qecho '}'
@@ -1487,121 +1468,6 @@ SELECT
 \qecho '  color: var(--accent-red);'
 \qecho '}'
 \qecho ''
-\qecho '@media (prefers-color-scheme: dark) {'
-\qecho '  :root {'
-\qecho '    color-scheme: dark;'
-\qecho '    --bg: #0f1419;'
-\qecho '    --line: #314150;'
-\qecho '    --line-soft: #253240;'
-\qecho '    --panel: #151d24;'
-\qecho '    --panel-alt: #10171d;'
-\qecho '    --header: #17212a;'
-\qecho '    --ink: #e3edf5;'
-\qecho '    --muted: #9db1c2;'
-\qecho '    --text-muted: #9db1c2;'
-\qecho '    --accent-blue: #7fb1df;'
-\qecho '    --accent-green: #6fc08d;'
-\qecho '    --accent-yellow: #e3b265;'
-\qecho '    --accent-red: #ef8090;'
-\qecho '    --accent-orange: #e59a62;'
-\qecho '  }'
-\qecho ''
-\qecho '  body,'
-\qecho '  .hero,'
-\qecho '  .panel,'
-\qecho '  .report-index,'
-\qecho '  .pg360-catalog,'
-\qecho '  .table-wrap,'
-\qecho '  .subsection-details,'
-\qecho '  .subsection-summary,'
-\qecho '  .subsection-content,'
-\qecho '  .security-notice,'
-\qecho '  .finding,'
-\qecho '  .card,'
-\qecho '  .risk-cell {'
-\qecho '    background: var(--panel);'
-\qecho '  }'
-\qecho ''
-\qecho '  h1,'
-\qecho '  pre {'
-\qecho '    background: var(--panel);'
-\qecho '    color: var(--ink);'
-\qecho '  }'
-\qecho ''
-\qecho '  .sections a,'
-\qecho '  .density-toggle,'
-\qecho '  .theme-toggle,'
-\qecho '  .table-row-toggle,'
-\qecho '  .copy-button {'
-\qecho '    background: var(--panel-alt);'
-\qecho '    color: var(--ink);'
-\qecho '    border-color: var(--line);'
-\qecho '  }'
-\qecho ''
-\qecho '  .sections a:hover,'
-\qecho '  .sections a.active,'
-\qecho '  .density-toggle:hover,'
-\qecho '  .theme-toggle:hover,'
-\qecho '  .table-row-toggle:hover,'
-\qecho '  .copy-button:hover {'
-\qecho '    background: #1b2832;'
-\qecho '  }'
-\qecho ''
-\qecho '  .severity-strip {'
-\qecho '    background: var(--panel-alt);'
-\qecho '  }'
-\qecho ''
-\qecho '  .severity-strip-badge {'
-\qecho '    background: var(--panel);'
-\qecho '    border-color: var(--line);'
-\qecho '  }'
-\qecho ''
-\qecho '  .severity-strip-badge.critical {'
-\qecho '    background: rgba(239,128,144,0.12);'
-\qecho '    border-color: rgba(239,128,144,0.35);'
-\qecho '  }'
-\qecho ''
-\qecho '  .severity-strip-badge.warning {'
-\qecho '    background: rgba(227,178,101,0.12);'
-\qecho '    border-color: rgba(227,178,101,0.35);'
-\qecho '  }'
-\qecho ''
-\qecho '  table.pg360 thead th,'
-\qecho '  table thead th {'
-\qecho '    background: #29597f;'
-\qecho '  }'
-\qecho ''
-\qecho '  table.pg360 tbody tr:nth-child(even),'
-\qecho '  table tbody tr:nth-child(even) {'
-\qecho '    background: #111921;'
-\qecho '  }'
-\qecho ''
-\qecho '  table.pg360 tbody tr:hover,'
-\qecho '  table tbody tr:hover {'
-\qecho '    background: #17232c;'
-\qecho '  }'
-\qecho ''
-\qecho '  .finding-fix,'
-\qecho '  .code-block {'
-\qecho '    background: #111921;'
-\qecho '    border-color: var(--line);'
-\qecho '    color: var(--ink);'
-\qecho '  }'
-\qecho ''
-\qecho '  .pg360-catalog .catalog-item-title,'
-\qecho '  .pg360-catalog li,'
-\qecho '  .pg360-catalog li::marker,'
-\qecho '  .pg360-catalog .catalog-count em {'
-\qecho '    color: var(--ink);'
-\qecho '  }'
-\qecho ''
-\qecho '  .pg360-catalog .catalog-format,'
-\qecho '  .catalog-format,'
-\qecho '  .catalog-count {'
-\qecho '    color: #d4a678;'
-\qecho '  }'
-\qecho '}'
-\qecho ''
 \qecho '@media (max-width: 1024px) {'
 \qecho '  .index-grid {'
 \qecho '    grid-template-columns: repeat(2, minmax(0, 1fr));'
@@ -1635,10 +1501,6 @@ SELECT
 \qecho ''
 \qecho '  .section-header {'
 \qecho '    flex-wrap: wrap;'
-\qecho '  }'
-\qecho ''
-\qecho '  .severity-strip {'
-\qecho '    padding: 8px;'
 \qecho '  }'
 \qecho ''
 \qecho '  .table-wrap {'
@@ -1769,7 +1631,6 @@ SELECT
     '&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') ||
   ' generated:' || :'pg360_run_ts_human' || ' ' || :'pg360_report_tz' ||
   ' mode:read-only</pre>';
-\qecho '<div class="report-index severity-strip" id="severity_strip" hidden></div>'
 \qecho '<table class="pg360-catalog" id="evidence_catalog_shell">'
 \qecho '  <tr class="main">'
 \qecho '    <td id="catalog_col_1"></td>'
@@ -4489,7 +4350,7 @@ FROM signals;
 
 -- S00.4 Extensions Posture
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Extensions: Installed / Missing / Risk</div>'
+\qecho '<div class="subsection-title">Extension Posture Snapshot</div>'
 
 WITH provider_ctx AS (
   SELECT
@@ -4591,8 +4452,8 @@ ext_eval AS (
               WHEN e.extname IN ('btree_gin','citext','hstore','pgcrypto','pg_trgm','tablefunc','unaccent','uuid-ossp') THEN 'RDS trusted/common'
               ELSE 'RDS supported'
             END
-          WHEN COALESCE(c.aws_common, false) THEN 'Common on AWS docs; verify engine minor'
-          ELSE 'Verify rds.extensions'
+          WHEN COALESCE(c.aws_common, false) THEN 'Documented by AWS; confirm engine major/minor and rds.extensions before rollout'
+          ELSE 'Check rds.extensions and engine version before planning use'
         END
       WHEN d.provider_guess = 'Azure Database for PostgreSQL' THEN
         CASE
@@ -4601,13 +4462,13 @@ ext_eval AS (
             FROM regexp_split_to_table(regexp_replace(lower(COALESCE(d.azure_extensions,'')), '\s+', '', 'g'), ',') AS x(ext)
             WHERE x.ext = lower(e.extname)
           ) THEN
-            CASE WHEN e.is_trusted THEN 'Azure trusted/common' ELSE 'Azure allowlisted/admin' END
+            CASE WHEN e.is_trusted THEN 'Azure trusted/common' ELSE 'Azure allowlisted/admin-enabled' END
           WHEN COALESCE(c.azure_common, false) THEN
-            CASE WHEN e.is_trusted THEN 'Azure trusted/common' ELSE 'Azure supported/admin' END
-          ELSE 'Check azure.extensions allowlist'
+            CASE WHEN e.is_trusted THEN 'Azure trusted/common' ELSE 'Azure supported/admin-enabled' END
+          ELSE 'Check azure.extensions allowlist and service-tier support'
         END
       WHEN d.provider_guess = 'Google Cloud SQL for PostgreSQL' THEN
-        CASE WHEN COALESCE(c.cloudsql_common, false) THEN 'Cloud SQL supported' ELSE 'Verify Cloud SQL extension list' END
+        CASE WHEN COALESCE(c.cloudsql_common, false) THEN 'Cloud SQL supported' ELSE 'Check Cloud SQL supported extension list for this engine version' END
       ELSE
         CASE
           WHEN COALESCE(c.aws_common, false) OR COALESCE(c.cloudsql_common, false) OR COALESCE(c.azure_common, false) THEN 'Provider-common baseline'
@@ -4659,18 +4520,20 @@ SELECT
   '<div class="card-grid">' ||
   '<div class="card"><div class="card-label">Installed Extensions</div><div class="card-value">' || installed_cnt || '</div></div>' ||
   '<div class="card good"><div class="card-label">Trusted / Common</div><div class="card-value">' || trusted_common_cnt || '</div></div>' ||
-  '<div class="card ' || CASE WHEN admin_review_cnt > 0 THEN 'warning' ELSE 'good' END || '"><div class="card-label">Admin-Review Extensions</div><div class="card-value">' || admin_review_cnt || '</div></div>' ||
-  '<div class="card ' || CASE WHEN missing_diagnostic_cnt > 0 THEN 'warning' ELSE 'good' END || '"><div class="card-label">Diagnostic Missing</div><div class="card-value">' || missing_diagnostic_cnt || '</div></div>' ||
+  '<div class="card ' || CASE WHEN admin_review_cnt > 0 THEN 'warning' ELSE 'good' END || '"><div class="card-label">Admin-Review Needed</div><div class="card-value">' || admin_review_cnt || '</div></div>' ||
+  '<div class="card ' || CASE WHEN missing_diagnostic_cnt > 0 THEN 'warning' ELSE 'good' END || '"><div class="card-label">Diagnostic Gaps</div><div class="card-value">' || missing_diagnostic_cnt || '</div></div>' ||
   '<div class="card"><div class="card-label">Extension Posture Score</div><div class="card-value">' ||
   GREATEST(0, 100 - (high_review_cnt * 15) - (admin_review_cnt * 5) - (missing_diagnostic_cnt * 10))::text || '</div></div>' ||
   '</div>'
 FROM summary;
 
+\qecho '<div class="finding info"><div class="finding-header">'
+\qecho '<span class="finding-title">This is a summary-only extension posture view. Use S29 for the full installed inventory, provider-common catalog, and extension-specific review notes.</span>'
+\qecho '<span class="severity-pill pill-info">SNAPSHOT</span></div></div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
-\qecho '<th>Extension</th><th>Version</th><th>Schema</th><th>Category</th><th>PG Trust</th><th>Provider Posture</th><th>Review</th><th>Notes</th>'
+\qecho '<th>Signal</th><th>Observed</th><th>Follow-up</th>'
 \qecho '</tr></thead><tbody>'
-
 WITH provider_ctx AS (
   SELECT
     version() AS full_version,
@@ -4689,36 +4552,28 @@ provider_det AS (
       WHEN full_version ILIKE '%Cloud SQL%' OR data_directory ILIKE '%cloudsql%' THEN 'Google Cloud SQL for PostgreSQL'
       ELSE 'Self-managed PostgreSQL'
     END AS provider_guess,
-    rds_extensions,
-    azure_extensions,
     shared_preload_libraries,
     pgss_track
   FROM provider_ctx
 ),
 ext_catalog AS (
   SELECT * FROM (VALUES
-    ('pg_stat_statements', 'Diagnostic', 'Required', false, true, true, true, 'Normalized SQL telemetry and query fingerprinting'),
-    ('pg_buffercache',    'Diagnostic', 'Recommended', false, true, true, true, 'Buffer residency validation'),
-    ('pgstattuple',       'Diagnostic', 'Recommended', false, true, true, true, 'Exact table and index bloat validation'),
-    ('pg_visibility',     'Diagnostic', 'Optional', false, true, true, true, 'Visibility map and vacuum evidence'),
-    ('pg_prewarm',        'Diagnostic', 'Optional', false, true, true, true, 'Cache warmup validation'),
-    ('pg_stat_kcache',    'Diagnostic', 'Optional', false, false, false, false, 'Third-party OS-level per-query statistics'),
-    ('btree_gin',         'Feature',    'Common trusted', true,  true, true, true, 'Trusted GIN operator-class support'),
-    ('citext',            'Feature',    'Common trusted', true,  true, true, true, 'Case-insensitive text semantics'),
-    ('hstore',            'Feature',    'Common trusted', true,  true, true, true, 'Key-value data type'),
-    ('pg_trgm',           'Feature',    'Common trusted', true,  true, true, true, 'Similarity search and LIKE acceleration'),
-    ('pgcrypto',          'Security',   'Common trusted', true,  true, true, true, 'Cryptographic functions'),
-    ('tablefunc',         'Feature',    'Common trusted', true,  true, true, true, 'Crosstab and helper functions'),
-    ('unaccent',          'Feature',    'Common trusted', true,  true, true, true, 'Accent-insensitive search'),
-    ('uuid-ossp',         'Feature',    'Common trusted', true,  true, true, true, 'UUID generation')
-  ) AS v(extname, ext_class, recommendation_tier, pg_trusted_expected, aws_common, cloudsql_common, azure_common, purpose)
+    ('pg_stat_statements', 'Diagnostic', 'Required', true),
+    ('pg_buffercache',    'Diagnostic', 'Recommended', true),
+    ('pgstattuple',       'Diagnostic', 'Recommended', true),
+    ('btree_gin',         'Feature',    'Common trusted', false),
+    ('citext',            'Feature',    'Common trusted', false),
+    ('hstore',            'Feature',    'Common trusted', false),
+    ('pg_trgm',           'Feature',    'Common trusted', false),
+    ('pgcrypto',          'Security',   'Common trusted', false),
+    ('tablefunc',         'Feature',    'Common trusted', false),
+    ('unaccent',          'Feature',    'Common trusted', false),
+    ('uuid-ossp',         'Feature',    'Common trusted', false)
+  ) AS v(extname, ext_class, recommendation_tier, diagnostic)
 ),
 ext AS (
   SELECT
     e.extname,
-    e.extversion,
-    n.nspname AS ext_schema,
-    COALESCE(av.superuser, false) AS requires_superuser,
     COALESCE(av.trusted, false) AS is_trusted,
     EXISTS (
       SELECT 1
@@ -4730,148 +4585,38 @@ ext AS (
         AND l.lanname = 'c'
     ) AS has_c_language
   FROM pg_extension e
-  JOIN pg_namespace n ON n.oid = e.extnamespace
   LEFT JOIN LATERAL (
-    SELECT aev.superuser, aev.trusted
+    SELECT aev.trusted
     FROM pg_available_extension_versions aev
     WHERE aev.name = e.extname
       AND aev.version = e.extversion
     LIMIT 1
   ) av ON TRUE
 ),
-ext_eval AS (
+summary AS (
   SELECT
-    e.extname,
-    e.extversion,
-    e.ext_schema,
-    COALESCE(c.ext_class, 'Other') AS category,
-    CASE WHEN e.is_trusted THEN 'Trusted' ELSE 'Admin / untrusted' END AS pg_trust,
-    CASE
-      WHEN e.extname = 'plpgsql' THEN 'LOW'
-      WHEN COALESCE(c.recommendation_tier, '') = 'Common trusted' OR e.is_trusted THEN 'LOW'
-      WHEN e.extname = 'pg_stat_statements'
-       AND (d.shared_preload_libraries NOT ILIKE '%pg_stat_statements%' OR COALESCE(d.pgss_track, '') IN ('', 'none'))
-        THEN 'MEDIUM'
-      WHEN e.extname = 'pg_stat_statements' THEN 'LOW'
-      WHEN e.extname IN ('pg_buffercache','pg_prewarm','pg_visibility','pgstattuple','auto_explain','amcheck','pageinspect') THEN 'MEDIUM'
-      WHEN e.extname IN ('hypopg','pg_stat_kcache','pg_hint_plan') THEN 'MEDIUM'
-      WHEN e.has_c_language AND NOT e.is_trusted THEN 'HIGH'
-      WHEN e.requires_superuser AND NOT e.is_trusted THEN 'MEDIUM'
-      ELSE 'LOW'
-    END AS review_posture,
-    CASE
-      WHEN d.provider_guess LIKE 'AWS %' THEN
-        CASE
-          WHEN EXISTS (
-            SELECT 1
-            FROM regexp_split_to_table(regexp_replace(lower(COALESCE(d.rds_extensions,'')), '\s+', '', 'g'), ',') AS x(ext)
-            WHERE x.ext = lower(e.extname)
-          ) THEN
-            CASE
-              WHEN e.extname IN ('btree_gin','citext','hstore','pgcrypto','pg_trgm','tablefunc','unaccent','uuid-ossp') THEN 'RDS trusted/common'
-              ELSE 'RDS supported'
-            END
-          WHEN COALESCE(c.aws_common, false) THEN 'Common on AWS docs; verify engine minor'
-          ELSE 'Verify rds.extensions'
-        END
-      WHEN d.provider_guess = 'Azure Database for PostgreSQL' THEN
-        CASE
-          WHEN EXISTS (
-            SELECT 1
-            FROM regexp_split_to_table(regexp_replace(lower(COALESCE(d.azure_extensions,'')), '\s+', '', 'g'), ',') AS x(ext)
-            WHERE x.ext = lower(e.extname)
-          ) THEN
-            CASE WHEN e.is_trusted THEN 'Azure trusted/common' ELSE 'Azure allowlisted/admin' END
-          WHEN COALESCE(c.azure_common, false) THEN
-            CASE WHEN e.is_trusted THEN 'Azure trusted/common' ELSE 'Azure supported/admin' END
-          ELSE 'Check azure.extensions allowlist'
-        END
-      WHEN d.provider_guess = 'Google Cloud SQL for PostgreSQL' THEN
-        CASE WHEN COALESCE(c.cloudsql_common, false) THEN 'Cloud SQL supported' ELSE 'Verify Cloud SQL extension list' END
-      ELSE
-        CASE
-          WHEN COALESCE(c.aws_common, false) OR COALESCE(c.cloudsql_common, false) OR COALESCE(c.azure_common, false) THEN 'Provider-common baseline'
-          WHEN e.is_trusted THEN 'Trusted in PostgreSQL'
-          ELSE 'Provider-specific review'
-        END
-    END AS provider_posture,
-    CASE
-      WHEN e.extname = 'plpgsql' THEN 'Core procedural language'
-      WHEN e.extname = 'pg_stat_statements'
-       AND d.shared_preload_libraries NOT ILIKE '%pg_stat_statements%'
-        THEN 'Official telemetry extension; preload/restart still required'
-      WHEN e.extname = 'pg_stat_statements'
-       AND COALESCE(d.pgss_track, '') IN ('', 'none')
-        THEN 'Official telemetry extension; enable useful pg_stat_statements.track scope'
-      WHEN COALESCE(c.recommendation_tier, '') = 'Common trusted' OR e.is_trusted
-        THEN 'Official trusted/common extension'
-      WHEN e.extname = 'pg_stat_statements'
-        THEN 'Official telemetry extension; standard on major providers'
-      WHEN e.extname IN ('pg_visibility','pgstattuple','pg_buffercache','pg_prewarm')
-        THEN 'Official admin/inspection utility; keep lifecycle restricted'
-      WHEN e.extname IN ('hypopg','pg_stat_kcache','pg_hint_plan')
-        THEN 'Third-party or extra-package extension; validate provider support and patch cadence'
-      WHEN e.has_c_language AND NOT e.is_trusted
-        THEN 'C-language extension; validate source, package provenance, and patch cadence'
-      WHEN e.requires_superuser
-        THEN 'Superuser/admin lifecycle required'
-      ELSE ''
-    END AS notes
-  FROM ext e
-  LEFT JOIN ext_catalog c ON c.extname = e.extname
-  CROSS JOIN provider_det d
+    (SELECT provider_guess FROM provider_det) AS provider_guess,
+    COUNT(*) FILTER (WHERE c.recommendation_tier = 'Required') AS required_total,
+    COUNT(*) FILTER (WHERE c.recommendation_tier = 'Required' AND EXISTS (SELECT 1 FROM ext e WHERE e.extname = c.extname)) AS required_installed,
+    COUNT(*) FILTER (WHERE c.recommendation_tier = 'Recommended') AS recommended_total,
+    COUNT(*) FILTER (WHERE c.recommendation_tier = 'Recommended' AND EXISTS (SELECT 1 FROM ext e WHERE e.extname = c.extname)) AS recommended_installed,
+    COUNT(*) FILTER (WHERE c.recommendation_tier = 'Common trusted') AS trusted_total,
+    COUNT(*) FILTER (WHERE c.recommendation_tier = 'Common trusted' AND EXISTS (SELECT 1 FROM ext e WHERE e.extname = c.extname)) AS trusted_installed,
+    COUNT(*) FILTER (
+      WHERE EXISTS (SELECT 1 FROM ext e WHERE e.extname = c.extname)
+        AND c.extname IN ('hypopg','pg_stat_kcache','pg_hint_plan','pg_visibility','pgstattuple','pg_buffercache','pg_prewarm')
+    ) +
+    (SELECT COUNT(*) FROM ext e WHERE e.extname = 'pg_stat_statements' AND ((SELECT shared_preload_libraries FROM provider_det) NOT ILIKE '%pg_stat_statements%' OR COALESCE((SELECT pgss_track FROM provider_det),'') IN ('', 'none'))) AS admin_review_cnt
+  FROM ext_catalog c
 )
 SELECT
-  COALESCE(
-    string_agg(
-      '<tr>' ||
-      '<td>' || replace(replace(replace(replace(replace(extname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '<td class="num">' || replace(replace(replace(replace(replace(extversion,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(ext_schema,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(category,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '<td>' || pg_trust || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(provider_posture,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '<td><span class="severity-pill ' || CASE review_posture WHEN 'HIGH' THEN 'pill-critical' WHEN 'MEDIUM' THEN 'pill-warning' ELSE 'pill-good' END || '">' || review_posture || '</span></td>' ||
-      '<td>' || replace(replace(replace(replace(replace(COALESCE(notes,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '</tr>',
-      E'\n' ORDER BY extname
-    ),
-    '<tr><td colspan="8" class="table-empty">No installed extensions found</td></tr>'
-  )
-FROM ext_eval;
-
-\qecho '</tbody></table></div>'
-
-\qecho '<div class="table-wrap">'
-\qecho '<table class="pg360"><thead><tr>'
-\qecho '<th>Recommended Extension</th><th>Status</th><th>Purpose</th><th>Provider Note</th>'
-\qecho '</tr></thead><tbody>'
-
-WITH recommended AS (
-  SELECT * FROM (VALUES
-    ('pg_stat_statements', 'Required for SQL performance diagnostics (S02/S11/S28)', 'Supported on AWS, Cloud SQL, and Azure; preload/restart still applies'),
-    ('pg_buffercache', 'Useful for deep buffer cache visibility (S07)', 'Common managed-service support; verify allowlist on locked-down platforms'),
-    ('pgstattuple', 'Exact bloat validation for tables and indexes', 'Official admin utility; usually supported but lifecycle stays privileged'),
-    ('pg_visibility', 'Visibility-map and vacuum evidence', 'Official admin utility; verify allowlist where provider exposes extension controls'),
-    ('pg_prewarm', 'Useful for cache warmup strategy validation', 'Supported on major providers; operational value depends on restart/cache-warm workflow')
-  ) AS r(extname, purpose, provider_note)
-)
-SELECT
-  COALESCE(
-    string_agg(
-      '<tr>' ||
-      '<td>' || replace(replace(replace(replace(replace(r.extname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '<td><span class="severity-pill ' || CASE WHEN e.extname IS NOT NULL THEN 'pill-good">INSTALLED' ELSE CASE WHEN r.extname = 'pg_stat_statements' THEN 'pill-critical">MISSING' ELSE 'pill-warning">MISSING' END END || '</span></td>' ||
-      '<td>' || replace(replace(replace(replace(replace(r.purpose,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(r.provider_note,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '</tr>',
-      E'\n' ORDER BY r.extname
-    ),
-    '<tr><td colspan="4" class="table-empty">Recommendation catalog unavailable</td></tr>'
-  )
-FROM recommended r
-LEFT JOIN pg_extension e ON e.extname = r.extname;
-
+  '<tr><td>Provider guess</td><td>' || replace(replace(replace(replace(replace(provider_guess,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td><td>Use S29 for the provider-common catalog and platform-specific extension notes.</td></tr>' ||
+  '<tr><td>Required diagnostic baseline</td><td>' || required_installed || '/' || required_total || '</td><td>' || CASE WHEN required_installed = required_total THEN 'Baseline is complete for required SQL telemetry.' ELSE 'Install missing required diagnostic extensions before relying on deep SQL ranking.' END || '</td></tr>' ||
+  '<tr><td>Recommended diagnostic baseline</td><td>' || recommended_installed || '/' || recommended_total || '</td><td>' || CASE WHEN recommended_installed = recommended_total THEN 'Recommended validation tooling is available.' ELSE 'Optional-but-useful inspection utilities are still missing.' END || '</td></tr>' ||
+  '<tr><td>Trusted / common extensions</td><td>' || trusted_installed || '/' || trusted_total || '</td><td>These are standard provider-common features; they are not treated as high-risk by default.</td></tr>' ||
+  '<tr><td>Admin-review extensions</td><td>' || admin_review_cnt || '</td><td>Reserve manual review for untrusted, third-party, inspection, or preload-sensitive extensions.</td></tr>' ||
+  '<tr><td>Primary source of truth</td><td>S29</td><td>Use Extension Inventory for installed-extension detail, provider support, and extension-specific review posture.</td></tr>'
+FROM summary;
 \qecho '</tbody></table></div></div>'
 
 -- S00.5 Configuration Snapshot
@@ -5871,7 +5616,7 @@ SELECT
     WHEN EXISTS (
       SELECT 1
       FROM pg_attribute
-      WHERE attrelid = 'pg_stat_statements'::regclass
+      WHERE attrelid = to_regclass('pg_stat_statements')
         AND attname = 'total_plan_time'
         AND NOT attisdropped
     ) THEN 'on' ELSE 'off'
@@ -5881,7 +5626,7 @@ SELECT
     WHEN EXISTS (
       SELECT 1
       FROM pg_attribute
-      WHERE attrelid = 'pg_stat_statements'::regclass
+      WHERE attrelid = to_regclass('pg_stat_statements')
         AND attname = 'wal_bytes'
         AND NOT attisdropped
     ) THEN 'on' ELSE 'off'
@@ -5891,14 +5636,14 @@ SELECT
     WHEN EXISTS (
       SELECT 1
       FROM pg_attribute
-      WHERE attrelid = 'pg_stat_statements'::regclass
+      WHERE attrelid = to_regclass('pg_stat_statements')
         AND attname = 'blk_read_time'
         AND NOT attisdropped
     )
     AND EXISTS (
       SELECT 1
       FROM pg_attribute
-      WHERE attrelid = 'pg_stat_statements'::regclass
+      WHERE attrelid = to_regclass('pg_stat_statements')
         AND attname = 'blk_write_time'
         AND NOT attisdropped
     ) THEN 'on' ELSE 'off'
@@ -6014,12 +5759,12 @@ SELECT
       '<div class="finding critical"><div class="finding-header">' ||
       '<span class="finding-title">pg_stat_statements extension is not available</span>' ||
       '<span class="severity-pill pill-critical">BLOCKED</span></div>' ||
-      '<div class="finding-body">Install and preload pg_stat_statements to enable SQL diagnostics in S02.</div></div>'
+      '<div class="finding-body">Install the extension and add pg_stat_statements to shared_preload_libraries to enable SQL diagnostics in S02.<br><strong>Verify:</strong> Restart PostgreSQL, confirm the extension exists, and rerun S02.<br><strong>Owner:</strong> DBA / platform owner.</div></div>'
     WHEN :'s02_preloaded' <> 'on' THEN
       '<div class="finding high"><div class="finding-header">' ||
       '<span class="finding-title">pg_stat_statements is not preloaded at startup</span>' ||
       '<span class="severity-pill pill-high">ACTION</span></div>' ||
-      '<div class="finding-body">Set shared_preload_libraries = ''pg_stat_statements'' and restart PostgreSQL.</div></div>'
+      '<div class="finding-body">Add pg_stat_statements to shared_preload_libraries and restart PostgreSQL or apply the managed-service equivalent.<br><strong>Verify:</strong> Confirm shared_preload_libraries includes pg_stat_statements and rerun S02.<br><strong>Owner:</strong> DBA / platform owner.</div></div>'
     WHEN COALESCE(NULLIF(:'s02_window_hours',''),'0')::numeric > 0
       AND COALESCE(NULLIF(:'s02_window_hours',''),'0')::numeric < 24 THEN
       '<div class="finding high"><div class="finding-header">' ||
@@ -6702,6 +6447,184 @@ SELECT COALESCE(
 
 \qecho '</tbody></table></div></div>'
 
+-- S02.9a Query family classification
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">SQL Workload Family Classification</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>QueryID</th><th>Calls</th><th>Total Exec ms</th><th>Mean Exec ms</th><th>Family</th><th>Evidence</th><th>Confidence</th><th>Tuning Track</th>'
+\qecho '</tr></thead><tbody>'
+
+\if :s02_has_pgss
+WITH base AS (
+  SELECT
+    COALESCE(queryid::text, md5(query)) AS queryid_text,
+    regexp_replace(query, E'\\s+', ' ', 'g') AS query_text,
+    calls::bigint AS calls,
+    total_exec_time::double precision AS total_exec_time,
+    mean_exec_time::double precision AS mean_exec_time,
+    rows::numeric AS rows,
+    (temp_blks_read + temp_blks_written)::bigint AS temp_blks
+  FROM pg_stat_statements
+  WHERE dbid = (SELECT oid FROM pg_database WHERE datname = current_database())
+    AND query NOT ILIKE '%pg360%'
+    AND (:'s02_relax_pgss_filter' = 'on' OR query NOT ILIKE '%pg_stat_statements%')
+    AND query NOT ILIKE 'BEGIN%'
+    AND query NOT ILIKE 'COMMIT%'
+    AND query NOT ILIKE 'SET %'
+), q AS (
+  SELECT
+    queryid_text,
+    calls,
+    total_exec_time,
+    mean_exec_time,
+    rows / NULLIF(calls,0) AS rows_per_call,
+    CASE
+      WHEN query_text ~* '^\\s*(insert|update|delete|merge|copy)\\b' THEN 'DML-heavy'
+      WHEN calls > 20000 AND mean_exec_time < 5 AND COALESCE(rows / NULLIF(calls,0),0) <= 1.5 THEN 'Chatty lookup'
+      WHEN query_text ILIKE '% join %' AND (query_text ILIKE '% group by %' OR query_text ILIKE '% having %' OR query_text ILIKE '% distinct %') THEN 'Join-heavy aggregate'
+      WHEN query_text ILIKE '%jsonb%' OR query_text ILIKE '%::jsonb%' OR query_text LIKE '%->%' OR query_text LIKE '%->>%' OR query_text LIKE '%@>%' OR query_text LIKE '%#>>%' THEN 'Semi-structured search'
+      WHEN temp_blks > 0 OR mean_exec_time >= 100 THEN 'Long scan / reporting'
+      WHEN mean_exec_time < 25
+       AND COALESCE(rows / NULLIF(calls,0),0) <= 10
+       AND query_text NOT ILIKE '% join %'
+       AND query_text NOT ILIKE '% group by %'
+       AND query_text NOT ILIKE '% order by %'
+      THEN 'Short selective lookup'
+      ELSE 'Mixed transactional'
+    END AS query_family,
+    'Heuristic' AS evidence_class,
+    CASE
+      WHEN query_text ~* '^\\s*(insert|update|delete|merge|copy)\\b' THEN 'High'
+      WHEN calls > 20000 AND mean_exec_time < 5 AND COALESCE(rows / NULLIF(calls,0),0) <= 1.5 THEN 'Medium'
+      WHEN query_text ILIKE '% join %' AND (query_text ILIKE '% group by %' OR query_text ILIKE '% having %' OR query_text ILIKE '% distinct %') THEN 'Medium'
+      WHEN temp_blks > 0 OR mean_exec_time >= 100 THEN 'Medium'
+      ELSE 'Low-Medium'
+    END AS confidence,
+    CASE
+      WHEN query_text ~* '^\\s*(insert|update|delete|merge|copy)\\b' THEN 'S19 write amplification, S10/S21 vacuum, S06 index write-cost'
+      WHEN calls > 20000 AND mean_exec_time < 5 AND COALESCE(rows / NULLIF(calls,0),0) <= 1.5 THEN 'S02 over-calling, S22 pooling, app batching'
+      WHEN query_text ILIKE '% join %' AND (query_text ILIKE '% group by %' OR query_text ILIKE '% having %' OR query_text ILIKE '% distinct %') THEN 'S30 rewrite heuristics, S20 stats quality'
+      WHEN query_text ILIKE '%jsonb%' OR query_text ILIKE '%::jsonb%' OR query_text LIKE '%->%' OR query_text LIKE '%->>%' OR query_text LIKE '%@>%' OR query_text LIKE '%#>>%' THEN 'S33 operator/index fit, S06 expression/GIN review'
+      WHEN temp_blks > 0 OR mean_exec_time >= 100 THEN 'S30 long-query rewrite, S07 I/O, S20 analyze freshness'
+      WHEN mean_exec_time < 25 AND COALESCE(rows / NULLIF(calls,0),0) <= 10 THEN 'S06 index fit, S20 planner stats'
+      ELSE 'S11 baseline tuning, S02 leaderboard triage'
+    END AS tuning_track
+  FROM base
+  ORDER BY total_exec_time DESC
+  LIMIT 20
+)
+SELECT COALESCE(
+  string_agg(
+    '<tr>' ||
+    '<td>' || replace(replace(replace(replace(replace(COALESCE(queryid_text,'n/a'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+    '<td class="num">' || to_char(calls, 'FM999,999,999') || '</td>' ||
+    '<td class="num">' || to_char(round(total_exec_time::numeric, 1), 'FM999,999,999,990.0') || '</td>' ||
+    '<td class="num">' || to_char(round(mean_exec_time::numeric, 2), 'FM999,999,990.00') || '</td>' ||
+    '<td>' || query_family || '</td>' ||
+    '<td>' || evidence_class || '</td>' ||
+    '<td>' || confidence || '</td>' ||
+    '<td>' || tuning_track || '</td>' ||
+    '</tr>',
+    E'\n' ORDER BY total_exec_time DESC
+  ),
+  '<tr><td colspan="8" class="table-empty">No query families were classified from pg_stat_statements in this run.</td></tr>'
+) FROM q;
+\else
+SELECT '<tr><td colspan="8" class="table-empty">pg_stat_statements unavailable; query family classification is blocked in this run.</td></tr>';
+\endif
+
+\qecho '</tbody></table></div></div>'
+-- S02.9b Function / procedure hotspots
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Function / Procedure Hotspots</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Schema.Function</th><th>Calls</th><th>Total ms</th><th>Self ms</th><th>Avg ms/call</th><th>Signal</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH cfg AS (
+  SELECT COALESCE(current_setting('track_functions', true), 'none') AS track_functions
+), f AS (
+  SELECT
+    schemaname,
+    funcname,
+    calls,
+    total_time,
+    self_time,
+    total_time / NULLIF(calls,0) AS avg_ms_per_call
+  FROM pg_stat_user_functions
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(schemaname || '.' || funcname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num">' || to_char(calls, 'FM999,999,999') || '</td>' ||
+      '<td class="num">' || to_char(round(total_time::numeric,2), 'FM999,999,990.00') || '</td>' ||
+      '<td class="num">' || to_char(round(self_time::numeric,2), 'FM999,999,990.00') || '</td>' ||
+      '<td class="num">' || COALESCE(to_char(round(avg_ms_per_call::numeric,3), 'FM999,999,990.000'), 'n/a') || '</td>' ||
+      '<td>' ||
+        CASE
+          WHEN self_time / NULLIF(total_time,0) > 0.80 AND total_time > 1000 THEN 'Function body dominates elapsed time; review row-by-row work and SQL inside the function'
+          WHEN calls > 10000 AND avg_ms_per_call < 5 THEN 'Very high call count; validate whether the application is driving function-per-row access'
+          WHEN total_time > 5000 THEN 'Hot function path; correlate with calling SQL and track_functions scope'
+          ELSE 'Moderate function activity'
+        END || '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY total_time DESC, calls DESC
+    ),
+    CASE
+      WHEN (SELECT track_functions FROM cfg) = 'none'
+      THEN '<tr><td colspan="6" class="table-empty">track_functions = none; function hotspot telemetry is disabled in this run. Enable track_functions = pl/all or use the PG360 validation prelude.</td></tr>'
+      ELSE '<tr><td colspan="6" class="table-empty">No function hotspots crossed the reporting threshold in this run.</td></tr>'
+    END
+  )
+FROM (
+  SELECT *
+  FROM f
+  WHERE total_time > 0
+  ORDER BY total_time DESC, calls DESC
+  LIMIT 20
+) q;
+
+\qecho '</tbody></table></div></div>'
+-- S02.9c Prepared plan mix (current sessions)
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Prepared Plan Mix (Current Sessions)</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Name</th><th>Prepared At</th><th>Generic Plans</th><th>Custom Plans</th><th>Assessment</th>'
+\qecho '</tr></thead><tbody>'
+
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(name,'(unnamed)'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || COALESCE(to_char(prepare_time, 'YYYY-MM-DD HH24:MI:SS'), 'n/a') || '</td>' ||
+      '<td class="num">' || generic_plans || '</td>' ||
+      '<td class="num">' || custom_plans || '</td>' ||
+      '<td>' ||
+        CASE
+          WHEN generic_plans > 0 AND custom_plans = 0 THEN 'Generic-plan dominant; validate parameter sensitivity if latency varies by bind values'
+          WHEN custom_plans > generic_plans THEN 'Custom plans dominate; planning overhead may matter at very high call rates'
+          WHEN generic_plans > 0 AND custom_plans > 0 THEN 'Mixed plan strategy visible in current sessions'
+          ELSE 'Prepared statement exists but planning counters are still near zero'
+        END || '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY (generic_plans + custom_plans) DESC, prepare_time DESC
+    ),
+    '<tr><td colspan="5" class="table-empty">No prepared statements were visible in the report session. This view is session-local; use the PG360 validation prelude for demo output.</td></tr>'
+  )
+FROM (
+  SELECT *
+  FROM pg_prepared_statements
+  ORDER BY (generic_plans + custom_plans) DESC, prepare_time DESC
+  LIMIT 20
+) p;
+
+\qecho '</tbody></table></div></div>'
 -- S02.10 Regression vs latest stored snapshot (read-only best effort)
 \qecho '<div class="subsection">'
 \qecho '<div class="subsection-title">Regressions Since Previous Snapshot</div>'
@@ -6984,7 +6907,7 @@ FROM stats;
 
 \qecho '<div class="subsection">'
 \qecho '<div class="subsection-title">Top SQL Diagnostics</div>'
-SELECT '<div class="finding critical"><div class="finding-header"><span class="finding-title">skipped: pg_stat_statements is unavailable</span><span class="severity-pill pill-critical">BLOCKED</span></div><div class="finding-body">Enable extension and restart with shared_preload_libraries to populate this module.</div></div>';
+SELECT '<div class="finding high"><div class="finding-header"><span class="finding-title">Top SQL module blocked: pg_stat_statements is unavailable</span><span class="severity-pill pill-high">BLOCKED</span></div><div class="finding-body">Install and preload pg_stat_statements, then rerun this report. Use S02.1 for the exact prerequisite guidance and managed-service apply path.</div></div>';
 \qecho '</div>'
 
 \endif
@@ -7005,7 +6928,7 @@ SELECT '<div class="finding critical"><div class="finding-header"><span class="f
 
 -- S03.1 Observability confidence
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Diagnostic Confidence</div>'
+\qecho '<div class="subsection-title">Session Telemetry Confidence</div>'
 
 SELECT
   '<div class="finding ' ||
@@ -7030,7 +6953,7 @@ SELECT
 
 -- S03.2 Sampling window with chronic signal (3 snapshots over 30 seconds)
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Session Sampling Window</div>'
+\qecho '<div class="subsection-title">Session Sampling Window &amp; Wait Profile</div>'
 
 WITH s0 AS MATERIALIZED (
   SELECT
@@ -7040,6 +6963,21 @@ WITH s0 AS MATERIALIZED (
     (SELECT COUNT(*) FROM pg_stat_activity WHERE datname = current_database() AND pid <> pg_backend_pid() AND state = 'idle in transaction') AS idle_in_tx,
     (SELECT COUNT(*) FROM pg_stat_activity WHERE datname = current_database() AND pid <> pg_backend_pid() AND state = 'active' AND wait_event_type = 'Lock') AS lock_waits,
     (SELECT COUNT(*) FROM pg_stat_activity WHERE datname = current_database() AND pid <> pg_backend_pid() AND state = 'active' AND wait_event_type = 'IO') AS io_waits
+), s0_events AS MATERIALIZED (
+  SELECT
+    'T+0s'::text AS sample_name,
+    CASE
+      WHEN state = 'active' AND wait_event IS NULL THEN 'CPU/Running'
+      WHEN state = 'idle in transaction' THEN 'IdleInTransaction'
+      WHEN wait_event IS NOT NULL THEN COALESCE(wait_event_type,'Wait') || '/' || wait_event
+      ELSE 'OtherVisible'
+    END AS wait_label,
+    COUNT(*)::int AS sample_count
+  FROM pg_stat_activity
+  WHERE datname = current_database()
+    AND pid <> pg_backend_pid()
+    AND (state = 'active' OR state = 'idle in transaction' OR wait_event IS NOT NULL)
+  GROUP BY 1, 2
 ), pause1 AS MATERIALIZED (
   SELECT pg_sleep(15) FROM s0
 ), s1 AS MATERIALIZED (
@@ -7051,6 +6989,21 @@ WITH s0 AS MATERIALIZED (
     (SELECT COUNT(*) FROM pg_stat_activity WHERE datname = current_database() AND pid <> pg_backend_pid() AND state = 'active' AND wait_event_type = 'Lock') AS lock_waits,
     (SELECT COUNT(*) FROM pg_stat_activity WHERE datname = current_database() AND pid <> pg_backend_pid() AND state = 'active' AND wait_event_type = 'IO') AS io_waits
   FROM pause1
+), s1_events AS MATERIALIZED (
+  SELECT
+    'T+15s'::text AS sample_name,
+    CASE
+      WHEN state = 'active' AND wait_event IS NULL THEN 'CPU/Running'
+      WHEN state = 'idle in transaction' THEN 'IdleInTransaction'
+      WHEN wait_event IS NOT NULL THEN COALESCE(wait_event_type,'Wait') || '/' || wait_event
+      ELSE 'OtherVisible'
+    END AS wait_label,
+    COUNT(*)::int AS sample_count
+  FROM pg_stat_activity
+  WHERE datname = current_database()
+    AND pid <> pg_backend_pid()
+    AND (state = 'active' OR state = 'idle in transaction' OR wait_event IS NOT NULL)
+  GROUP BY 1, 2
 ), pause2 AS MATERIALIZED (
   SELECT pg_sleep(15) FROM s1
 ), s2 AS MATERIALIZED (
@@ -7062,6 +7015,21 @@ WITH s0 AS MATERIALIZED (
     (SELECT COUNT(*) FROM pg_stat_activity WHERE datname = current_database() AND pid <> pg_backend_pid() AND state = 'active' AND wait_event_type = 'Lock') AS lock_waits,
     (SELECT COUNT(*) FROM pg_stat_activity WHERE datname = current_database() AND pid <> pg_backend_pid() AND state = 'active' AND wait_event_type = 'IO') AS io_waits
   FROM pause2
+), s2_events AS MATERIALIZED (
+  SELECT
+    'T+30s'::text AS sample_name,
+    CASE
+      WHEN state = 'active' AND wait_event IS NULL THEN 'CPU/Running'
+      WHEN state = 'idle in transaction' THEN 'IdleInTransaction'
+      WHEN wait_event IS NOT NULL THEN COALESCE(wait_event_type,'Wait') || '/' || wait_event
+      ELSE 'OtherVisible'
+    END AS wait_label,
+    COUNT(*)::int AS sample_count
+  FROM pg_stat_activity
+  WHERE datname = current_database()
+    AND pid <> pg_backend_pid()
+    AND (state = 'active' OR state = 'idle in transaction' OR wait_event IS NOT NULL)
+  GROUP BY 1, 2
 ), samples AS (
   SELECT 1 AS ord, 'T+0s' AS sample_name, * FROM s0
   UNION ALL
@@ -7075,6 +7043,18 @@ WITH s0 AS MATERIALIZED (
     max(lock_waits) AS max_lock_waits,
     max(idle_in_tx) AS max_idle_in_tx
   FROM samples
+), sampled_events AS (
+  SELECT * FROM s0_events
+  UNION ALL SELECT * FROM s1_events
+  UNION ALL SELECT * FROM s2_events
+), event_rollup AS (
+  SELECT
+    wait_label,
+    SUM(sample_count) AS total_sampled_backends,
+    MAX(sample_count) AS peak_sampled_backends,
+    COUNT(*) AS samples_seen
+  FROM sampled_events
+  GROUP BY wait_label
 )
 SELECT
   '<div class="finding ' ||
@@ -7120,6 +7100,37 @@ SELECT
       FROM samples
     ),
     '<tr><td colspan="7" class="table-empty">No sessions available for sampling</td></tr>'
+  ) ||
+  '</tbody></table></div>' ||
+  '<div class="finding info"><div class="finding-header"><span class="finding-title">Sampled wait-event profile</span><span class="severity-pill pill-info">SAMPLED</span></div><div class="finding-body">Counts below are sampled backend counts across the three capture points, not DB server time accounting. Use them as a directional signal, then confirm with Top SQL, I/O, WAL, and lock evidence.</div></div>' ||
+  '<div class="table-wrap"><table class="pg360"><thead><tr>' ||
+  '<th>Event / State</th><th>Total Sampled Backends</th><th>Peak in One Sample</th><th>Seen In Samples</th><th>Interpretation</th>' ||
+  '</tr></thead><tbody>' ||
+  COALESCE(
+    (
+      SELECT string_agg(
+        '<tr>' ||
+        '<td>' || replace(replace(wait_label,'<','&lt;'),'>','&gt;') || '</td>' ||
+        '<td class="num">' || total_sampled_backends || '</td>' ||
+        '<td class="num">' || peak_sampled_backends || '</td>' ||
+        '<td class="num">' || samples_seen || '/3</td>' ||
+        '<td>' ||
+          CASE
+            WHEN wait_label = 'CPU/Running' THEN 'Active backend sampled with no wait_event; treat as a rough running proxy, not time accounting.'
+            WHEN wait_label = 'IdleInTransaction' THEN 'Open transaction left idle; review app transaction scope and timeout guardrails.'
+            WHEN wait_label LIKE 'Lock/%' THEN 'Lock waits were sampled; correlate with S04 blocker tree.'
+            WHEN wait_label LIKE 'IO/%' THEN 'Storage I/O waits were sampled; correlate with S07 and I/O-bound SQL.'
+            WHEN wait_label LIKE '%WAL%' OR wait_label LIKE 'LWLock/%WAL%' THEN 'WAL-related contention or flush pressure is visible; correlate with S08 and S23 WAL tuning.'
+            WHEN wait_label LIKE 'Client/%' THEN 'Client pacing or fetch delay is visible; validate app think time and network pacing.'
+            WHEN wait_label LIKE 'Timeout/%' THEN 'Timer-based or deliberate sleep activity was sampled; verify whether this is workload logic or test instrumentation.'
+            ELSE 'Visible sampled event; correlate with adjacent performance evidence.'
+          END || '</td>' ||
+        '</tr>',
+        E'\n' ORDER BY total_sampled_backends DESC, wait_label
+      )
+      FROM event_rollup
+    ),
+    '<tr><td colspan="5" class="table-empty">No sampled wait or running-state events were captured in this window.</td></tr>'
   ) ||
   '</tbody></table></div>'
 FROM agg;
@@ -7185,18 +7196,24 @@ FROM (
 \qecho '<div class="subsection-title">Wait Event Group Concentration</div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
-\qecho '<th>Wait Group</th><th>Sessions</th><th>% of Waiting Sessions</th><th>Technical Interpretation</th>'
+\qecho '<th>Wait Group</th><th>Sessions</th><th>% of Visible Active / Waiting Sessions</th><th>Technical Interpretation</th>'
 \qecho '</tr></thead><tbody>'
 
 WITH waits AS (
   SELECT
-    COALESCE(wait_event_type, 'Running/Client') AS wait_group,
+    CASE
+      WHEN wait_event_type IS NULL THEN 'CPU/Running'
+      ELSE wait_event_type
+    END AS wait_group,
     COUNT(*) AS cnt
   FROM pg_stat_activity
   WHERE datname = current_database()
     AND pid <> pg_backend_pid()
     AND (state = 'active' OR wait_event IS NOT NULL)
-  GROUP BY COALESCE(wait_event_type, 'Running/Client')
+  GROUP BY CASE
+    WHEN wait_event_type IS NULL THEN 'CPU/Running'
+    ELSE wait_event_type
+  END
 ), totals AS (
   SELECT COALESCE(SUM(cnt),0)::numeric AS total_cnt FROM waits
 )
@@ -7209,13 +7226,14 @@ SELECT
       '<td class="num">' || COALESCE(round(cnt * 100.0 / NULLIF(total_cnt,0),1)::text,'0') || '%</td>' ||
       '<td>' ||
       CASE
-        WHEN wait_group = 'Lock' THEN 'Lock acquisition delays; investigate blocker tree in S04'
-        WHEN wait_group = 'IO' THEN 'Storage latency or cache miss pressure; correlate with S07 and S02'
-        WHEN wait_group = 'LWLock' THEN 'Shared-memory latch contention; review high-concurrency hotspots'
-        WHEN wait_group = 'Client' THEN 'Client side pacing or network backpressure'
-        WHEN wait_group = 'Timeout' THEN 'Timeout-triggered waits; validate timeout settings and retries'
-        WHEN wait_group = 'IPC' THEN 'Inter-process sync waits; inspect parallel or maintenance operations'
-        ELSE 'Mixed or running workload; validate with sampling trend'
+        WHEN wait_group = 'CPU/Running' THEN 'Active backends sampled without a wait_event; useful as a rough running proxy, not DB server time accounting.'
+        WHEN wait_group = 'Lock' THEN 'Lock acquisition delays; investigate blocker tree in S04.'
+        WHEN wait_group = 'IO' THEN 'Storage latency or cache miss pressure; correlate with S07 and S02.'
+        WHEN wait_group = 'LWLock' THEN 'Shared-memory latch contention; review high-concurrency hotspots and WAL pressure.'
+        WHEN wait_group = 'Client' THEN 'Client pacing or network backpressure; validate fetch patterns and application think time.'
+        WHEN wait_group = 'Timeout' THEN 'Timer-based waits or deliberate sleeps; validate workload logic and guardrail settings.'
+        WHEN wait_group = 'IPC' THEN 'Inter-process synchronization waits; inspect parallel, vacuum, or maintenance coordination.'
+        ELSE 'Visible wait-category signal; confirm with the sampled wait profile and adjacent evidence.'
       END ||
       '</td></tr>',
       E'\n' ORDER BY cnt DESC
@@ -7516,7 +7534,90 @@ FROM pairs;
 \qecho '</tbody></table></div>'
 \qecho '</div>'
 
--- S04.3 AccessExclusiveLock and DDL lock detection
+-- S04.3 Relation-level lock hotspots
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Relation-Level Lock Hotspots</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Schema</th><th>Relation</th><th>Waiting Sessions</th><th>Distinct Blockers</th><th>Wait Modes</th><th>Max Wait Age</th><th>Interpretation</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH waiting AS (
+  SELECT
+    l.pid AS waiting_pid,
+    l.relation,
+    COALESCE(n.nspname, '(unknown)') AS schema_name,
+    COALESCE(c.relname, '(unknown)') AS relation_name,
+    l.mode,
+    EXTRACT(EPOCH FROM (clock_timestamp() - COALESCE(a.query_start, a.state_change, a.xact_start, a.backend_start)))::numeric AS wait_secs
+  FROM pg_locks l
+  JOIN pg_stat_activity a ON a.pid = l.pid
+  LEFT JOIN pg_class c ON c.oid = l.relation
+  LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
+  WHERE a.datname = current_database()
+    AND l.granted = false
+    AND l.relation IS NOT NULL
+), blocker_edges AS (
+  SELECT
+    blocked.pid AS blocked_pid,
+    bp.blocker_pid
+  FROM pg_stat_activity blocked
+  JOIN LATERAL unnest(pg_blocking_pids(blocked.pid)) bp(blocker_pid) ON true
+  WHERE blocked.datname = current_database()
+), blocker_rollup AS (
+  SELECT
+    w.relation,
+    COUNT(DISTINCT be.blocker_pid) AS distinct_blockers
+  FROM waiting w
+  LEFT JOIN blocker_edges be ON be.blocked_pid = w.waiting_pid
+  GROUP BY w.relation
+), mode_rollup AS (
+  SELECT
+    relation,
+    string_agg(DISTINCT mode, ', ' ORDER BY mode) AS wait_modes
+  FROM waiting
+  GROUP BY relation
+), agg AS (
+  SELECT
+    w.relation,
+    max(w.schema_name) AS schema_name,
+    max(w.relation_name) AS relation_name,
+    COUNT(DISTINCT w.waiting_pid) AS waiting_sessions,
+    max(w.wait_secs) AS max_wait_secs
+  FROM waiting w
+  GROUP BY w.relation
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(schema_name,'<','&lt;'),'>','&gt;') || '</td>' ||
+      '<td>' || replace(replace(relation_name,'<','&lt;'),'>','&gt;') || '</td>' ||
+      '<td class="num ' || CASE WHEN waiting_sessions >= 3 THEN 'crit' WHEN waiting_sessions >= 1 THEN 'warn' ELSE 'good' END || '">' || waiting_sessions || '</td>' ||
+      '<td class="num ' || CASE WHEN COALESCE(distinct_blockers,0) > 1 THEN 'warn' ELSE 'good' END || '">' || COALESCE(distinct_blockers,0) || '</td>' ||
+      '<td>' || COALESCE(wait_modes, '') || '</td>' ||
+      '<td class="num">' || to_char((interval '1 second' * max_wait_secs::bigint), 'HH24:MI:SS') || '</td>' ||
+      '<td>' ||
+        CASE
+          WHEN wait_modes LIKE '%AccessExclusiveLock%' THEN 'DDL-style blocking is affecting this relation; validate maintenance windows and long transactions.'
+          WHEN waiting_sessions >= 3 THEN 'Multi-session hotspot; resolve the top blocker first and review transaction scope on this relation.'
+          WHEN COALESCE(distinct_blockers,0) > 1 THEN 'Several blockers are contributing; review blocker tree and relation-specific access pattern.'
+          ELSE 'Localized relation wait hotspot; correlate with blocker SQL and workload timing.'
+        END ||
+      '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY waiting_sessions DESC, max_wait_secs DESC, schema_name, relation_name
+    ),
+    '<tr><td colspan="7" class="table-empty">No relation-level lock hotspots detected</td></tr>'
+  )
+FROM agg
+LEFT JOIN blocker_rollup br USING (relation)
+LEFT JOIN mode_rollup mr USING (relation);
+
+\qecho '</tbody></table></div>'
+\qecho '</div>'
+
+-- S04.4 AccessExclusiveLock and DDL lock detection
 \qecho '<div class="subsection">'
 \qecho '<div class="subsection-title">AccessExclusiveLock and DDL Lock Exposure</div>'
 \qecho '<div class="table-wrap">'
@@ -7683,7 +7784,7 @@ FROM blockers, idle_tx, ddl;
 \qecho '  '
 \qecho '  <div>'
 \qecho '    <div class="section-title">Table Health &amp; Bloat</div>'
-\qecho '    <div class="section-desc">Dead tuples, bloat, autovacuum health, XID wraparound risk, sequences, temp tables, triggers.</div>'
+\qecho '    <div class="section-desc">Dead tuples, storage shape, TOAST footprint, HOT efficiency, analyze freshness, autovacuum health, XID wraparound risk, sequences, and triggers.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
@@ -7718,6 +7819,335 @@ FROM (
 ) t
 ORDER BY dead_pct DESC NULLS LAST
 LIMIT 30;
+
+\qecho '</tbody></table></div></div>'
+
+-- S05.1b Top tables by size and storage split
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Top Tables by Size and Storage Split</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Schema</th><th>Table</th><th>Total Size</th><th>Heap Size</th><th>Index Size</th><th>TOAST Size</th><th>Rows (approx)</th><th>Storage Shape</th>'
+\qecho '</tr></thead><tbody>'
+
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(schema_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(table_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num">' || pg_size_pretty(total_bytes) || '</td>' ||
+      '<td class="num">' || pg_size_pretty(heap_bytes) || '</td>' ||
+      '<td class="num ' || CASE WHEN index_bytes > heap_bytes THEN 'warn' ELSE '' END || '">' || pg_size_pretty(index_bytes) || '</td>' ||
+      '<td class="num ' || CASE WHEN toast_bytes > total_bytes * 0.25 THEN 'warn' ELSE '' END || '">' || pg_size_pretty(toast_bytes) || '</td>' ||
+      '<td class="num">' || to_char(row_estimate,'FM999,999,999') || '</td>' ||
+      '<td class="' || CASE storage_shape WHEN 'TOAST-heavy' THEN 'warn' WHEN 'Index-heavy' THEN 'warn' ELSE 'good' END || '">' || storage_shape || '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY total_bytes DESC
+    ),
+    '<tr><td colspan="8" class="table-empty">No user-table storage data available</td></tr>'
+  )
+FROM (
+  SELECT
+    n.nspname AS schema_name,
+    c.relname AS table_name,
+    GREATEST(c.reltuples, 0)::bigint AS row_estimate,
+    pg_total_relation_size(c.oid) AS total_bytes,
+    pg_relation_size(c.oid) AS heap_bytes,
+    pg_indexes_size(c.oid) AS index_bytes,
+    CASE WHEN c.reltoastrelid <> 0 THEN pg_total_relation_size(c.reltoastrelid) ELSE 0 END AS toast_bytes,
+    CASE
+      WHEN CASE WHEN c.reltoastrelid <> 0 THEN pg_total_relation_size(c.reltoastrelid) ELSE 0 END > pg_total_relation_size(c.oid) * 0.25 THEN 'TOAST-heavy'
+      WHEN pg_indexes_size(c.oid) > GREATEST(pg_relation_size(c.oid),1) * 1.2 THEN 'Index-heavy'
+      ELSE 'Heap-dominant'
+    END AS storage_shape
+  FROM pg_class c
+  JOIN pg_namespace n ON n.oid = c.relnamespace
+  WHERE c.relkind IN ('r','m')
+    AND n.nspname NOT IN ('pg_catalog','information_schema','pg_toast')
+  ORDER BY pg_total_relation_size(c.oid) DESC
+  LIMIT 10
+) t;
+
+\qecho '</tbody></table></div></div>'
+
+-- S05.1c Top TOAST tables and candidate columns
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Top TOAST Tables by Size and Candidate Columns</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Schema</th><th>Table</th><th>TOAST Table</th><th>TOAST Size</th><th>Parent Total Size</th><th>TOAST %</th><th>Candidate Wide Columns</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH toast_tables AS (
+  SELECT
+    n.nspname AS schema_name,
+    c.relname AS table_name,
+    t.relname AS toast_table_name,
+    c.oid AS table_oid,
+    pg_total_relation_size(t.oid) AS toast_bytes,
+    pg_total_relation_size(c.oid) AS parent_total_bytes
+  FROM pg_class c
+  JOIN pg_namespace n ON n.oid = c.relnamespace
+  JOIN pg_class t ON t.oid = c.reltoastrelid
+  WHERE c.relkind IN ('r','m')
+    AND c.reltoastrelid <> 0
+    AND n.nspname NOT IN ('pg_catalog','information_schema','pg_toast')
+    AND pg_total_relation_size(t.oid) > 0
+  ORDER BY pg_total_relation_size(t.oid) DESC
+  LIMIT 10
+), toast_columns AS (
+  SELECT
+    tt.*,
+    COALESCE(colset.candidate_columns, 'No obvious varlena columns surfaced') AS candidate_columns
+  FROM toast_tables tt
+  LEFT JOIN LATERAL (
+    SELECT string_agg(col_txt, '<br>' ORDER BY sort_key, attnum) AS candidate_columns
+    FROM (
+      SELECT
+        a.attnum,
+        CASE WHEN typ.typname IN ('jsonb','json','text','bytea','xml','citext','hstore') THEN 0 ELSE 1 END AS sort_key,
+        replace(replace(replace(replace(replace(format('%I (%s)', a.attname, format_type(a.atttypid, a.atttypmod)),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') AS col_txt
+      FROM pg_attribute a
+      JOIN pg_type typ ON typ.oid = a.atttypid
+      WHERE a.attrelid = tt.table_oid
+        AND a.attnum > 0
+        AND NOT a.attisdropped
+        AND (
+          typ.typlen = -1
+          OR typ.typname IN ('jsonb','json','text','bytea','xml','citext','hstore')
+          OR a.attstorage IN ('x','e','m')
+        )
+      ORDER BY sort_key, a.attnum
+      LIMIT 6
+    ) c
+  ) colset ON TRUE
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(schema_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(table_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(toast_table_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num warn">' || pg_size_pretty(toast_bytes) || '</td>' ||
+      '<td class="num">' || pg_size_pretty(parent_total_bytes) || '</td>' ||
+      '<td class="num ' || CASE WHEN (toast_bytes * 100.0 / NULLIF(parent_total_bytes,0)) >= 40 THEN 'crit' WHEN (toast_bytes * 100.0 / NULLIF(parent_total_bytes,0)) >= 20 THEN 'warn' ELSE '' END || '">' ||
+      COALESCE(round((toast_bytes * 100.0 / NULLIF(parent_total_bytes,0))::numeric,1)::text,'0') || '%</td>' ||
+      '<td>' || candidate_columns || '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY toast_bytes DESC
+    ),
+    '<tr><td colspan="7" class="table-empty">No material TOAST tables found</td></tr>'
+  )
+FROM toast_columns;
+
+\qecho '</tbody></table></div></div>'
+
+-- S05.1d Tables where index size exceeds heap
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Tables Where Index Size Exceeds Heap</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Schema</th><th>Table</th><th>Heap Size</th><th>Index Size</th><th>Index/Heap Ratio</th><th>Index Count</th><th>Interpretation</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH idx_summary AS (
+  SELECT
+    n.nspname AS schema_name,
+    c.relname AS table_name,
+    pg_relation_size(c.oid) AS heap_bytes,
+    pg_indexes_size(c.oid) AS index_bytes,
+    COALESCE(ix.index_count, 0) AS index_count
+  FROM pg_class c
+  JOIN pg_namespace n ON n.oid = c.relnamespace
+  LEFT JOIN LATERAL (
+    SELECT count(*)::int AS index_count
+    FROM pg_index i
+    WHERE i.indrelid = c.oid
+  ) ix ON TRUE
+  WHERE c.relkind IN ('r','m')
+    AND n.nspname NOT IN ('pg_catalog','information_schema','pg_toast')
+    AND pg_indexes_size(c.oid) > pg_relation_size(c.oid)
+    AND pg_total_relation_size(c.oid) >= 1048576
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(schema_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(table_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num">' || pg_size_pretty(heap_bytes) || '</td>' ||
+      '<td class="num warn">' || pg_size_pretty(index_bytes) || '</td>' ||
+      '<td class="num ' || CASE WHEN index_bytes > heap_bytes * 2 THEN 'crit' ELSE 'warn' END || '">' || round((index_bytes::numeric / NULLIF(heap_bytes,0))::numeric,2) || 'x</td>' ||
+      '<td class="num">' || index_count || '</td>' ||
+      '<td>' || CASE WHEN index_bytes > heap_bytes * 2 THEN 'Index footprint materially exceeds heap; review duplicate and low-value indexes' ELSE 'Index-heavy table; confirm read benefit vs write cost' END || '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY (index_bytes::numeric / NULLIF(heap_bytes,0)) DESC
+    ),
+    '<tr><td colspan="7" class="table-empty">No tables currently have index size larger than heap size</td></tr>'
+  )
+FROM (
+  SELECT *
+  FROM idx_summary
+  ORDER BY (index_bytes::numeric / NULLIF(heap_bytes,0)) DESC
+  LIMIT 10
+) r;
+
+\qecho '</tbody></table></div></div>'
+
+-- S05.1e HOT update efficiency
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">HOT Update Efficiency by Table</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Schema</th><th>Table</th><th>Updates</th><th>HOT Updates</th><th>HOT %</th><th>Fillfactor</th><th>Assessment</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH hot_stats AS (
+  SELECT
+    s.schemaname,
+    s.relname,
+    s.n_tup_upd,
+    s.n_tup_hot_upd,
+    COALESCE(round((s.n_tup_hot_upd * 100.0 / NULLIF(s.n_tup_upd,0))::numeric,1), 0) AS hot_pct,
+    COALESCE(ff.fillfactor, 'default') AS fillfactor
+  FROM pg_stat_user_tables s
+  LEFT JOIN LATERAL (
+    SELECT option_value AS fillfactor
+    FROM pg_options_to_table((SELECT c.reloptions FROM pg_class c WHERE c.oid = s.relid))
+    WHERE option_name = 'fillfactor'
+    LIMIT 1
+  ) ff ON TRUE
+  WHERE s.n_tup_upd > 0
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(schemaname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(relname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num">' || to_char(n_tup_upd,'FM999,999,999') || '</td>' ||
+      '<td class="num">' || to_char(n_tup_hot_upd,'FM999,999,999') || '</td>' ||
+      '<td class="num ' || CASE WHEN n_tup_upd >= 10000 AND hot_pct < 20 THEN 'crit' WHEN hot_pct < 40 THEN 'warn' ELSE 'good' END || '">' || hot_pct || '%</td>' ||
+      '<td>' || fillfactor || '</td>' ||
+      '<td>' ||
+      CASE
+        WHEN n_tup_upd >= 10000 AND hot_pct < 20 THEN 'Low HOT on an update-heavy table; review fillfactor and indexed-column churn'
+        WHEN hot_pct >= 70 THEN 'Healthy HOT reuse'
+        ELSE 'Monitor HOT efficiency against update volume'
+      END ||
+      '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY n_tup_upd DESC
+    ),
+    '<tr><td colspan="7" class="table-empty">No table updates recorded since the last stats reset</td></tr>'
+  )
+FROM (
+  SELECT *
+  FROM hot_stats
+  ORDER BY n_tup_upd DESC
+  LIMIT 20
+) r;
+
+\qecho '</tbody></table></div></div>'
+
+-- S05.1f Analyze freshness
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Analyze Freshness by Table</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Schema</th><th>Table</th><th>Rows (approx)</th><th>Mods Since Analyze</th><th>Mods %</th><th>Last Analyze</th><th>Last Autoanalyze</th><th>Assessment</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH analyze_stats AS (
+  SELECT
+    schemaname,
+    relname,
+    GREATEST(n_live_tup, 0)::bigint AS live_rows,
+    n_mod_since_analyze,
+    COALESCE(round((n_mod_since_analyze * 100.0 / NULLIF(GREATEST(n_live_tup,1),0))::numeric,1), 0) AS mods_pct,
+    last_analyze,
+    last_autoanalyze
+  FROM pg_stat_user_tables
+  WHERE GREATEST(n_live_tup,0) >= 1000 OR n_mod_since_analyze >= 1000
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(schemaname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(relname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num">' || to_char(live_rows,'FM999,999,999') || '</td>' ||
+      '<td class="num">' || to_char(n_mod_since_analyze,'FM999,999,999') || '</td>' ||
+      '<td class="num ' || CASE WHEN live_rows >= 1000 AND mods_pct >= 20 THEN 'crit' WHEN live_rows >= 1000 AND mods_pct >= 5 THEN 'warn' WHEN n_mod_since_analyze >= 100000 THEN 'warn' ELSE 'good' END || '">' || mods_pct || '%</td>' ||
+      '<td>' || COALESCE(to_char(last_analyze,'YYYY-MM-DD HH24:MI'), '<span class="warn">Never</span>') || '</td>' ||
+      '<td>' || COALESCE(to_char(last_autoanalyze,'YYYY-MM-DD HH24:MI'), '<span class="warn">Never</span>') || '</td>' ||
+      '<td>' ||
+      CASE
+        WHEN live_rows < 1000 AND n_mod_since_analyze < 1000 THEN 'Small table; lower-priority stats refresh'
+        WHEN last_analyze IS NULL AND last_autoanalyze IS NULL AND live_rows > 1000 THEN 'Never analyzed at table level; collect stats soon'
+        WHEN mods_pct >= 20 OR n_mod_since_analyze >= 100000 THEN 'Stats likely stale; prioritize ANALYZE or autoanalyze tuning'
+        WHEN mods_pct >= 5 OR n_mod_since_analyze >= 10000 THEN 'Moderate stats churn; monitor plan stability'
+        ELSE 'Stats freshness looks reasonable'
+      END ||
+      '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY mods_pct DESC, n_mod_since_analyze DESC
+    ),
+    '<tr><td colspan="8" class="table-empty">No analyze-freshness signals found</td></tr>'
+  )
+FROM (
+  SELECT *
+  FROM analyze_stats
+  ORDER BY mods_pct DESC, n_mod_since_analyze DESC
+  LIMIT 20
+) r;
+
+\qecho '</tbody></table></div></div>'
+
+-- S05.1g Table-level storage and autovacuum overrides
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Table Storage and Autovacuum Overrides</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Schema</th><th>Table</th><th>Table Reloptions</th><th>TOAST Reloptions</th><th>Assessment</th>'
+\qecho '</tr></thead><tbody>'
+
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(schema_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(table_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || COALESCE(table_reloptions_html, '<span class="muted">None</span>') || '</td>' ||
+      '<td>' || COALESCE(toast_reloptions_html, '<span class="muted">None</span>') || '</td>' ||
+      '<td>' || assessment || '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY schema_name, table_name
+    ),
+    '<tr><td colspan="5" class="table-empty">No table-level storage or autovacuum overrides found</td></tr>'
+  )
+FROM (
+  SELECT
+    n.nspname AS schema_name,
+    c.relname AS table_name,
+    CASE WHEN c.reloptions IS NOT NULL THEN replace(replace(replace(replace(replace(array_to_string(c.reloptions, ', '),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') END AS table_reloptions_html,
+    CASE WHEN tc.reloptions IS NOT NULL THEN replace(replace(replace(replace(replace(array_to_string(tc.reloptions, ', '),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') END AS toast_reloptions_html,
+    CASE
+      WHEN c.reloptions::text ILIKE '%autovacuum_enabled=false%' OR tc.reloptions::text ILIKE '%autovacuum_enabled=false%' THEN 'Autovacuum disabled at table or TOAST level; validate this exception carefully'
+      WHEN c.reloptions IS NOT NULL OR tc.reloptions IS NOT NULL THEN 'Custom storage or autovacuum policy in effect'
+      ELSE 'Default settings'
+    END AS assessment
+  FROM pg_class c
+  JOIN pg_namespace n ON n.oid = c.relnamespace
+  LEFT JOIN pg_class tc ON tc.oid = c.reltoastrelid
+  WHERE c.relkind IN ('r','m')
+    AND n.nspname NOT IN ('pg_catalog','information_schema','pg_toast')
+    AND (c.reloptions IS NOT NULL OR tc.reloptions IS NOT NULL)
+  ORDER BY n.nspname, c.relname
+  LIMIT 20
+) r;
 
 \qecho '</tbody></table></div></div>'
 
@@ -8148,13 +8578,14 @@ FROM stats;
 \qecho '  '
 \qecho '  <div>'
 \qecho '    <div class="section-title">Index Health &amp; Missing Index Suggestions</div>'
-\qecho '    <div class="section-desc">Unused indexes, duplicate indexes, bloated indexes, and AI-driven missing index suggestions based on query patterns.</div>'
+\qecho '    <div class="section-desc">Unused indexes, duplicate indexes, write-cost posture, and heuristic missing-index candidates based on catalog and workload signals.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
--- S06.1 Unused indexes (save write overhead by dropping)
+-- S06.1 Unused secondary indexes (review queue)
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Unused Non-Unique Indexes Since Last Stats Reset</div>'
+\qecho '<div class="subsection-title">Unused Secondary Indexes</div>'
+\qecho '<div class="finding info"><div class="finding-body">Review queue only. This list is based on cumulative index statistics since the last stats reset, and it excludes primary keys, unique indexes, exclusion indexes, tiny indexes under 64 kB, and indexes that appear to support foreign-key columns. Zero scans since reset does not by itself prove the index is safe to drop.</div></div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
 \qecho '<th>Schema</th><th>Table</th><th>Index</th><th>Size</th><th>Scans</th><th>Type</th><th>Review Script</th>'
@@ -8335,6 +8766,86 @@ FROM (
 ) t
 ORDER BY seq_scan * avg_rows DESC NULLS LAST
 LIMIT 25;
+
+\qecho '</tbody></table></div></div>'
+
+-- S06.4a Sequential scan interpretation heuristics
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Sequential Scan Interpretation Heuristics</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Schema</th><th>Table</th><th>Seq Scans</th><th>Avg Rows/Scan</th><th>Est Rows</th><th>Valid Indexes</th><th>Likely Reason</th><th>Evidence</th><th>Confidence</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH idx_counts AS (
+  SELECT indrelid, COUNT(*)::int AS idx_count
+  FROM pg_index
+  WHERE indisvalid AND indisready
+  GROUP BY indrelid
+), base AS (
+  SELECT
+    s.relid,
+    s.schemaname,
+    s.relname,
+    s.seq_scan,
+    COALESCE(s.idx_scan, 0) AS idx_scan,
+    CASE WHEN s.seq_scan > 0 THEN s.seq_tup_read::numeric / s.seq_scan ELSE NULL END AS avg_rows_per_scan,
+    GREATEST(c.reltuples, 0)::numeric AS est_rows,
+    pg_total_relation_size(s.relid) AS total_bytes,
+    COALESCE(i.idx_count, 0) AS idx_count
+  FROM pg_stat_user_tables s
+  JOIN pg_class c ON c.oid = s.relid
+  LEFT JOIN idx_counts i ON i.indrelid = s.relid
+  WHERE s.seq_scan > 50
+), q AS (
+  SELECT
+    schemaname,
+    relname,
+    seq_scan,
+    avg_rows_per_scan,
+    est_rows,
+    idx_count,
+    CASE
+      WHEN total_bytes < 16 * 1024 * 1024 THEN 'Small table: sequential scans are often cheaper than index startup cost'
+      WHEN est_rows > 0 AND avg_rows_per_scan >= est_rows * 0.20 THEN 'Large scan fraction: planner may rationally prefer a sequential scan'
+      WHEN idx_count = 0 THEN 'No valid index inventory on this table'
+      WHEN idx_scan = 0 THEN 'Indexes exist but are not being chosen; review selectivity, expressions, and leading-column order'
+      ELSE 'Mixed evidence: validate predicates and operator fit with EXPLAIN before adding indexes'
+    END AS likely_reason,
+    CASE
+      WHEN total_bytes < 16 * 1024 * 1024 OR (est_rows > 0 AND avg_rows_per_scan >= est_rows * 0.20) THEN 'Derived'
+      ELSE 'Heuristic'
+    END AS evidence_class,
+    CASE
+      WHEN total_bytes < 16 * 1024 * 1024 THEN 'High'
+      WHEN est_rows > 0 AND avg_rows_per_scan >= est_rows * 0.20 THEN 'Medium-High'
+      WHEN idx_count = 0 THEN 'High'
+      ELSE 'Medium'
+    END AS confidence
+  FROM base
+  WHERE total_bytes > 1024 * 1024
+  ORDER BY seq_scan * GREATEST(COALESCE(avg_rows_per_scan, 0), 1) DESC
+  LIMIT 20
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(schemaname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(relname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num">' || to_char(seq_scan, 'FM999,999,999') || '</td>' ||
+      '<td class="num">' || COALESCE(to_char(round(avg_rows_per_scan,0), 'FM999,999,999'), 'n/a') || '</td>' ||
+      '<td class="num">' || COALESCE(to_char(round(est_rows,0), 'FM999,999,999'), 'n/a') || '</td>' ||
+      '<td class="num">' || idx_count || '</td>' ||
+      '<td>' || likely_reason || '</td>' ||
+      '<td>' || evidence_class || '</td>' ||
+      '<td>' || confidence || '</td>' ||
+      '</tr>',
+      E'\n'
+    ),
+    '<tr><td colspan="9" class="table-empty">No high-sequential-scan tables crossed the interpretation threshold in this run.</td></tr>'
+  )
+FROM q;
 
 \qecho '</tbody></table></div></div>'
 
@@ -8946,7 +9457,7 @@ FROM (
     END AS relkind,
     COUNT(*) AS buffer_pages,
     COUNT(*) FILTER (WHERE b.isdirty) AS dirty_pages,
-    COUNT(*) * 100.0 / NULLIF(current_setting('shared_buffers')::numeric, 0) AS cache_share
+    COUNT(*) * 100.0 / NULLIF(pg_size_bytes(current_setting('shared_buffers')) / current_setting('block_size')::numeric, 0) AS cache_share
   FROM pg_buffercache b
   JOIN pg_database d
     ON d.oid = b.reldatabase
@@ -8980,8 +9491,8 @@ SELECT
 \qecho '<div class="section-header">'
 \qecho '  '
 \qecho '  <div>'
-\qecho '    <div class="section-title">WAL &amp; Replication</div>'
-\qecho '    <div class="section-desc">Replication lag, slot health, WAL generation, archive status.</div>'
+\qecho '    <div class="section-title">WAL &amp; Replication Runtime</div>'
+\qecho '    <div class="section-desc">Runtime replication state, slot health, WAL generation, and archive pipeline signals.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
@@ -9376,7 +9887,7 @@ FROM (
 \qecho '  '
 \qecho '  <div>'
 \qecho '    <div class="section-title">Connections &amp; Pooling</div>'
-\qecho '    <div class="section-desc">Connection utilization, age distribution, pooler recommendations.</div>'
+\qecho '    <div class="section-desc">Live connection pressure, state distribution, session age, and queue-risk evidence. Use S22 for pool sizing and PgBouncer guidance.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
@@ -9611,7 +10122,7 @@ FROM (
 \qecho '  '
 \qecho '  <div>'
 \qecho '    <div class="section-title">Vacuum &amp; Maintenance</div>'
-\qecho '    <div class="section-desc">Autovacuum health, pending vacuum/analyze, wraparound risk.</div>'
+\qecho '    <div class="section-desc">Live vacuum, analyze, dead-tuple, freeze-age, and maintenance backlog evidence. Use S21 for per-table tuning guidance.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
@@ -9994,64 +10505,17 @@ FROM (
 
 \qecho '</tbody></table></div></div>'
 
--- S11.3 Parameter action matrix
+-- S11.2a Diagnostic evidence model
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Parameter Action Matrix</div>'
+\qecho '<div class="subsection-title">Diagnostic Evidence Model</div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
-\qecho '<th>Parameter</th><th>Direction</th><th>Reason</th><th>Change Safety</th><th>Evidence Source</th>'
+\qecho '<th>Evidence Class</th><th>Meaning</th><th>Examples in PG360</th><th>How to Use It</th>'
 \qecho '</tr></thead><tbody>'
-
-SELECT
-  COALESCE(
-    string_agg(
-      '<tr>' ||
-      '<td>' || param || '</td>' ||
-      '<td>' || direction || '</td>' ||
-      '<td>' || reason || '</td>' ||
-      '<td class="' || CASE WHEN safety = 'SAFE NOW' THEN 'good">SAFE NOW' ELSE 'warn">LOAD TEST FIRST' END || '</td>' ||
-      '<td>' || source_module || '</td>' ||
-      '</tr>',
-      ''
-      ORDER BY sort_order
-    ),
-    '<tr><td colspan="5" class="table-empty"> No parameter recommendations produced</td></tr>'
-  )
-FROM (
-  SELECT 1 AS sort_order, 'log_lock_waits' AS param, 'ensure = on' AS direction,
-         'Low risk observability improvement for lock diagnostics.' AS reason,
-         'SAFE NOW' AS safety, 'S03, S04' AS source_module
-  UNION ALL
-  SELECT 2, 'log_min_duration_statement', 'set threshold per SLA',
-         'Captures slow SQL for regression analysis without full statement logging.',
-         'SAFE NOW', 'S02'
-  UNION ALL
-  SELECT 3, 'autovacuum_max_workers', 'increase if vacuum debt is high',
-         'Reduces dead tuple backlog and freeze debt when S10 debt score is elevated.',
-         CASE WHEN current_setting('autovacuum_max_workers')::int < 3 THEN 'LOAD TEST FIRST' ELSE 'SAFE NOW' END,
-         'S10'
-  UNION ALL
-  SELECT 4, 'autovacuum_vacuum_scale_factor', 'decrease for large write-heavy tables',
-         'Triggers vacuum earlier on large relations; can increase background I/O.',
-         'LOAD TEST FIRST', 'S10'
-  UNION ALL
-  SELECT 5, 'max_wal_size', 'increase when forced checkpoints are frequent',
-         'Reduces checkpoint storms and write bursts.',
-         'LOAD TEST FIRST', 'S07, S08'
-  UNION ALL
-  SELECT 6, 'checkpoint_completion_target', 'move toward 0.9 for write-heavy patterns',
-         'Spreads checkpoint writes; too aggressive can affect latency if I/O is constrained.',
-         'LOAD TEST FIRST', 'S07, S08'
-  UNION ALL
-  SELECT 7, 'work_mem', 'raise selectively for spill-heavy workloads',
-         'Global increases can cause memory pressure under concurrency.',
-         'LOAD TEST FIRST', 'S02, S11'
-  UNION ALL
-  SELECT 8, 'effective_cache_size', 'align to OS cache + shared_buffers',
-         'Improves planner decisions for index usage.',
-         'SAFE NOW', 'S07, S11'
-) actions;
-
+\qecho '<tr><td>Fact</td><td>Direct PostgreSQL catalog, settings, or live-stat evidence.</td><td>pg_settings, pg_stat_activity, pg_stat_replication.</td><td>Treat as authoritative for the current visibility envelope.</td></tr>'
+\qecho '<tr><td>Derived</td><td>Ratios or rankings computed from direct PostgreSQL facts.</td><td>Cache hit %, HOT ratio, dead tuple %, WAL MB/s.</td><td>Use for prioritization, but validate thresholds in workload context.</td></tr>'
+\qecho '<tr><td>Heuristic</td><td>Pattern-based interpretation where SQL alone cannot fully prove root cause.</td><td>Query family classification, rewrite candidates, partition candidates.</td><td>Use as a candidate queue, not a blind change script.</td></tr>'
+\qecho '<tr><td>Not provable from SQL</td><td>Requires logs, plans, historical baselines, or external runbook evidence.</td><td>Restore drill quality, failover proof, exact plan-node mistakes.</td><td>Treat as assisted-mode scope or operational follow-up.</td></tr>'
 \qecho '</tbody></table></div></div>'
 \qecho '</div>'
 
@@ -10062,8 +10526,8 @@ FROM (
 \qecho '<div class="section-header">'
 \qecho '  '
 \qecho '  <div>'
-\qecho '    <div class="section-title">Security Audit</div>'
-\qecho '    <div class="section-desc">Role privileges, superusers, public schema exposure, SSL, RLS gaps. Password hashes are NEVER shown.</div>'
+\qecho '    <div class="section-title">Security Baseline</div>'
+\qecho '    <div class="section-desc">Identity, authentication, default privilege posture, and logging baseline. Password hashes are never shown.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
@@ -10164,7 +10628,10 @@ SELECT
          '<span class="finding-title">PUBLIC role has CREATE on public schema</span>' ||
          '<span class="severity-pill pill-high">HIGH</span></div>' ||
          '<div class="finding-body">Any user can create objects in the public schema. ' ||
-         'This is the default in PostgreSQL &lt; 15 but is a security risk.</div>' ||
+         'This is the default in PostgreSQL &lt; 15 but is a security risk.<br>' ||
+         '<strong>Verify:</strong> Reconnect as a non-owner application role and confirm CREATE TABLE in public now fails.<br>' ||
+         '<strong>Rollback:</strong> GRANT CREATE ON SCHEMA public TO PUBLIC; only if a legacy application dependency is confirmed.<br>' ||
+         '<strong>Owner:</strong> DBA + platform owner.</div>' ||
          '<div class="fix-label">FIX</div>' ||
          '<div class="finding-fix">REVOKE CREATE ON SCHEMA public FROM PUBLIC;</div>' ||
          '</div>'
@@ -10284,7 +10751,7 @@ WHERE a.pid <> pg_backend_pid()
 
 -- S12.8 Authentication and audit logging posture
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Authentication and Audit Logging Posture</div>'
+\qecho '<div class="subsection-title">Authentication, SSL, and Audit Logging Baseline</div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
 \qecho '<th>Parameter</th><th>Value</th><th>Assessment</th>'
@@ -10472,8 +10939,8 @@ FROM (
 
 SELECT
   '<tr><td>pg_partman extension</td><td>' || partman_installed || '</td><td class="' ||
-  CASE WHEN partman_installed = 'installed' THEN 'good">Automated partition maintenance tooling available.'
-       ELSE 'warn">No built-in partition automation detected.' END || '</td></tr>' ||
+  CASE WHEN partman_installed = 'installed' THEN 'good">In-database partition maintenance tooling is available.'
+       ELSE 'warn">No in-database partition automation extension detected; external scheduling may still be in place.' END || '</td></tr>' ||
   '<tr><td>Partitioned tables count</td><td class="num">' || partitioned_tables || '</td><td></td></tr>' ||
   '<tr><td>Parents missing default partition</td><td class="num ' ||
   CASE WHEN parents_missing_default > 0 THEN 'warn' ELSE 'good' END || '">' || parents_missing_default || '</td><td class="' ||
@@ -10496,6 +10963,94 @@ FROM (
      WHERE n.nspname NOT IN ('pg_catalog','information_schema')
        AND COALESCE(x.has_default, false) = false) AS parents_missing_default
 ) m;
+
+\qecho '</tbody></table></div></div>'
+
+-- S13.5 Large-table partition candidates
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Large-Table Partition Candidates</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Schema.Table</th><th>Total Size</th><th>Est Rows</th><th>Inserts</th><th>Deletes</th><th>Candidate Columns</th><th>Candidate Class</th><th>Recommendation</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH base AS (
+  SELECT
+    s.relid,
+    s.schemaname,
+    s.relname,
+    pg_total_relation_size(s.relid) AS total_bytes,
+    GREATEST(c.reltuples, 0)::numeric AS est_rows,
+    s.n_tup_ins,
+    s.n_tup_upd,
+    s.n_tup_del
+  FROM pg_stat_user_tables s
+  JOIN pg_class c ON c.oid = s.relid
+  WHERE pg_total_relation_size(s.relid) >= 256 * 1024 * 1024
+    AND NOT EXISTS (
+      SELECT 1
+      FROM pg_partitioned_table p
+      WHERE p.partrelid = s.relid
+    )
+), col_signals AS (
+  SELECT
+    b.relid,
+    string_agg(a.attname, ', ' ORDER BY a.attnum) FILTER (
+      WHERE a.attname ~* '(^created_at$|^updated_at$|^event_ts$|^event_time$|_at$|_ts$|_dt$|date$|time$|day$|month$|year$|^tenant_id$|^account_id$|^customer_id$|^org_id$|^region_id$|^site_id$|^workspace_id$)'
+    ) AS candidate_cols,
+    bool_or(a.attname ~* '(^created_at$|^updated_at$|^event_ts$|^event_time$|_at$|_ts$|_dt$|date$|time$|day$|month$|year$)') AS has_timeish,
+    bool_or(a.attname ~* '(^tenant_id$|^account_id$|^customer_id$|^org_id$|^region_id$|^site_id$|^workspace_id$)') AS has_tenantish
+  FROM base b
+  JOIN pg_attribute a
+    ON a.attrelid = b.relid
+   AND a.attnum > 0
+   AND NOT a.attisdropped
+  GROUP BY b.relid
+), q AS (
+  SELECT
+    b.schemaname,
+    b.relname,
+    b.total_bytes,
+    b.est_rows,
+    b.n_tup_ins,
+    b.n_tup_del,
+    COALESCE(c.candidate_cols, '(no obvious partition key columns)') AS candidate_cols,
+    CASE
+      WHEN c.has_timeish AND b.n_tup_ins > GREATEST(b.n_tup_del * 2, 10000) THEN 'Time-series / retention'
+      WHEN c.has_tenantish AND b.est_rows >= 100000 THEN 'Tenant / account'
+      WHEN c.has_timeish THEN 'Time-key present'
+      WHEN c.has_tenantish THEN 'Domain-key present'
+      ELSE 'No obvious key'
+    END AS candidate_class,
+    CASE
+      WHEN b.total_bytes >= 1024 * 1024 * 1024 AND c.has_timeish AND b.n_tup_ins > GREATEST(b.n_tup_del * 2, 10000) THEN 'Strong candidate: large append-heavy table with time-like key'
+      WHEN b.total_bytes >= 512 * 1024 * 1024 AND c.has_tenantish THEN 'Possible candidate: validate tenant / account pruning benefit'
+      WHEN c.has_timeish OR c.has_tenantish THEN 'Candidate signal present; verify access patterns and retention needs'
+      ELSE 'Weak evidence: size alone is not enough for partitioning'
+    END AS recommendation
+  FROM base b
+  LEFT JOIN col_signals c ON c.relid = b.relid
+  ORDER BY b.total_bytes DESC, b.n_tup_ins DESC
+  LIMIT 20
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(schemaname || '.' || relname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num">' || pg_size_pretty(total_bytes) || '</td>' ||
+      '<td class="num">' || to_char(round(est_rows,0), 'FM999,999,999') || '</td>' ||
+      '<td class="num">' || to_char(n_tup_ins, 'FM999,999,999') || '</td>' ||
+      '<td class="num">' || to_char(n_tup_del, 'FM999,999,999') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(left(candidate_cols, 90),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || candidate_class || '</td>' ||
+      '<td>' || recommendation || '</td>' ||
+      '</tr>',
+      E'\n'
+    ),
+    '<tr><td colspan="8" class="table-empty">No large non-partitioned tables crossed the candidate threshold in this run.</td></tr>'
+  )
+FROM q;
 
 \qecho '</tbody></table></div></div>'
 \qecho '</div>'
@@ -10641,7 +11196,7 @@ SELECT
         WHEN NOT con.convalidated AND NOT has_fk_index THEN 'crit">Highest risk: unvalidated FK + no child index'
         WHEN NOT con.convalidated THEN 'warn">Validate FK to enforce integrity'
         WHEN NOT has_fk_index THEN 'warn">Add child-side FK index for DML stability'
-        ELSE 'good">No immediate metadata risk'
+        ELSE 'good">Validated FK and child index present'
       END || '</td>' ||
       '</tr>',
       E'\n' ORDER BY child_ns.nspname, child.relname
@@ -10685,7 +11240,7 @@ SELECT
       '<td>' || replace(replace(replace(replace(replace(column_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td>' || replace(replace(replace(replace(replace(data_type,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td class="num">' || to_char(reltuples::bigint,'FM999,999,999') || '</td>' ||
-      '<td class="warn">ID-like column lacks UNIQUE/PK coverage; verify business key intent.</td>' ||
+      '<td class="warn">ID-like column lacks UNIQUE/PK. Confirm identifier semantics and add UNIQUE/PK if intended.</td>' ||
       '</tr>',
       E'\n' ORDER BY reltuples DESC
     ),
@@ -10754,6 +11309,100 @@ FROM (
 ) c;
 
 \qecho '</tbody></table></div></div>'
+
+-- S15.7 Data-model smell signals
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Data-Model Smell Signals</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Schema.Table</th><th>Rows (approx)</th><th>Signals</th><th>Why It Matters</th><th>Review Focus</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH table_profile AS (
+  SELECT
+    c.oid AS relid,
+    n.nspname,
+    c.relname,
+    GREATEST(c.reltuples, 0)::numeric AS est_rows,
+    COUNT(a.attnum) FILTER (WHERE a.attnum > 0 AND NOT a.attisdropped) AS total_cols,
+    COUNT(a.attnum) FILTER (WHERE a.attnum > 0 AND NOT a.attisdropped AND a.attnotnull) AS notnull_cols,
+    COUNT(a.attnum) FILTER (
+      WHERE a.attnum > 0 AND NOT a.attisdropped
+        AND pg_catalog.format_type(a.atttypid, a.atttypmod) IN ('json', 'jsonb')
+    ) AS json_cols,
+    COUNT(a.attnum) FILTER (
+      WHERE a.attnum > 0 AND NOT a.attisdropped
+        AND pg_catalog.format_type(a.atttypid, a.atttypmod) LIKE '%[]'
+    ) AS array_cols
+  FROM pg_class c
+  JOIN pg_namespace n ON n.oid = c.relnamespace
+  LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+  WHERE c.relkind = 'r'
+    AND n.nspname NOT IN ('pg_catalog','information_schema','pg_toast')
+  GROUP BY c.oid, n.nspname, c.relname, c.reltuples
+), constraint_flags AS (
+  SELECT
+    c.relid,
+    EXISTS (SELECT 1 FROM pg_constraint con WHERE con.conrelid = c.relid AND con.contype = 'p') AS has_pk,
+    EXISTS (SELECT 1 FROM pg_constraint con WHERE con.conrelid = c.relid AND con.contype = 'c') AS has_check
+  FROM table_profile c
+), trig_flags AS (
+  SELECT tgrelid AS relid, COUNT(*) FILTER (WHERE NOT tgisinternal AND tgenabled <> 'D') AS trigger_cnt
+  FROM pg_trigger
+  GROUP BY tgrelid
+), q AS (
+  SELECT
+    t.nspname,
+    t.relname,
+    t.est_rows,
+    trim(both ';' FROM
+      COALESCE(CASE WHEN NOT c.has_pk AND t.est_rows > 1000 THEN 'no primary key; ' ELSE '' END, '') ||
+      COALESCE(CASE WHEN t.total_cols >= 30 THEN t.total_cols::text || ' columns; ' ELSE '' END, '') ||
+      COALESCE(CASE WHEN (t.json_cols + t.array_cols) >= 2 THEN (t.json_cols + t.array_cols)::text || ' semi-structured columns; ' ELSE '' END, '') ||
+      COALESCE(CASE WHEN t.total_cols > 0 AND t.notnull_cols::numeric / NULLIF(t.total_cols,0) < 0.4 THEN 'low NOT NULL coverage; ' ELSE '' END, '') ||
+      COALESCE(CASE WHEN NOT c.has_check AND t.est_rows > 10000 THEN 'no CHECK constraints on sizable table; ' ELSE '' END, '') ||
+      COALESCE(CASE WHEN COALESCE(tr.trigger_cnt,0) >= 5 THEN COALESCE(tr.trigger_cnt,0)::text || ' triggers; ' ELSE '' END, '')
+    ) AS signals,
+    CASE
+      WHEN NOT c.has_pk AND (t.json_cols + t.array_cols) >= 2 THEN 'Application logic may be carrying identity and schema enforcement.'
+      WHEN t.total_cols >= 30 AND t.total_cols > 0 AND t.notnull_cols::numeric / NULLIF(t.total_cols,0) < 0.4 THEN 'Wide, sparse rows often increase TOAST, maintenance cost, and ambiguity.'
+      WHEN (t.json_cols + t.array_cols) >= 2 THEN 'Semi-structured columns can hide access paths and integrity rules.'
+      ELSE 'Review whether schema semantics rely more on application code than PostgreSQL constraints.'
+    END AS why_it_matters,
+    CASE
+      WHEN NOT c.has_pk THEN 'Confirm business key / identity model and uniqueness.'
+      WHEN (t.json_cols + t.array_cols) >= 2 THEN 'Review whether hot predicates should be promoted to typed columns or expression indexes.'
+      WHEN t.total_cols >= 30 THEN 'Review normalization, sparse-column usage, and archive/history split.'
+      ELSE 'Review integrity ownership between schema and application.'
+    END AS review_focus
+  FROM table_profile t
+  JOIN constraint_flags c ON c.relid = t.relid
+  LEFT JOIN trig_flags tr ON tr.relid = t.relid
+  WHERE t.est_rows > 1000
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(nspname || '.' || relname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num">' || to_char(round(est_rows,0), 'FM999,999,999') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(signals,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || why_it_matters || '</td>' ||
+      '<td>' || review_focus || '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY est_rows DESC
+    ),
+    '<tr><td colspan="5" class="table-empty">No higher-order data-model smell signals crossed the reporting threshold in this run.</td></tr>'
+  )
+FROM (
+  SELECT *
+  FROM q
+  WHERE signals <> ''
+  ORDER BY est_rows DESC
+  LIMIT 20
+) s;
+
+\qecho '</tbody></table></div></div>'
 \qecho '</div>'
 
 -- =============================================================================
@@ -10763,8 +11412,8 @@ FROM (
 \qecho '<div class="section-header">'
 \qecho '  '
 \qecho '  <div>'
-\qecho '    <div class="section-title">Capacity &amp; Growth Projections</div>'
-\qecho '    <div class="section-desc">Insert rate-based growth projections, WAL generation, index overhead.</div>'
+\qecho '    <div class="section-title">Capacity &amp; Growth Snapshot</div>'
+\qecho '    <div class="section-desc">High-level capacity signals and growth direction. Use S26 for full storage breakdown and projection detail.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
@@ -10786,7 +11435,7 @@ SELECT
   '<td class="num">' || to_char(n_tup_del,'FM999,999,999') || '</td>' ||
   '<td class="' ||
   CASE
-    WHEN n_tup_ins > n_tup_del * 10 THEN 'warn">Growing fast  monitor capacity'
+    WHEN n_tup_ins > n_tup_del * 10 THEN 'warn">Growing fast; confirm 30-day runway and tablespace headroom'
     WHEN n_tup_ins > 0 AND n_tup_del > n_tup_ins * 0.9 THEN 'good">Queue-like pattern'
     ELSE '">Stable'
   END ||
@@ -10916,7 +11565,7 @@ LIMIT 30;
 \qecho '  '
 \qecho '  <div>'
 \qecho '    <div class="section-title">HA &amp; Disaster Recovery Readiness</div>'
-\qecho '    <div class="section-desc">Archive mode, WAL level, backup readiness, PITR capability.</div>'
+\qecho '    <div class="section-desc">Restore readiness, PITR coverage, failover posture, and disaster-recovery runbook evidence.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
@@ -11684,6 +12333,85 @@ SELECT
 FROM wa;
 
 \qecho '</tbody></table></div></div>'
+
+-- S19.4 DML query hotspots
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">DML Query Hotspots</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>QueryID</th><th>Verb</th><th>Calls</th><th>Total Exec ms</th><th>Mean Exec ms</th><th>Rows/call</th><th>Pattern</th><th>Tuning Focus</th>'
+\qecho '</tr></thead><tbody>'
+
+\if :s02_has_pgss
+WITH base AS (
+  SELECT
+    COALESCE(queryid::text, md5(query)) AS queryid_text,
+    regexp_replace(query, E'\\s+', ' ', 'g') AS query_text,
+    calls::bigint AS calls,
+    total_exec_time::double precision AS total_exec_time,
+    mean_exec_time::double precision AS mean_exec_time,
+    rows::numeric AS rows
+  FROM pg_stat_statements
+  WHERE dbid = (SELECT oid FROM pg_database WHERE datname = current_database())
+    AND query NOT ILIKE '%pg360%'
+    AND (:'s02_relax_pgss_filter' = 'on' OR query NOT ILIKE '%pg_stat_statements%')
+    AND query ~* '^\\s*(insert|update|delete|merge|copy)\\b'
+), q AS (
+  SELECT
+    queryid_text,
+    CASE
+      WHEN query_text ~* '^\\s*insert\\b' THEN 'INSERT'
+      WHEN query_text ~* '^\\s*update\\b' THEN 'UPDATE'
+      WHEN query_text ~* '^\\s*delete\\b' THEN 'DELETE'
+      WHEN query_text ~* '^\\s*merge\\b' THEN 'MERGE'
+      ELSE 'COPY'
+    END AS verb,
+    calls,
+    total_exec_time,
+    mean_exec_time,
+    rows / NULLIF(calls,0) AS rows_per_call,
+    CASE
+      WHEN query_text ~* '^\\s*update\\b' AND calls > 5000 AND COALESCE(rows / NULLIF(calls,0),0) <= 1.5 THEN 'Row-by-row update loop'
+      WHEN query_text ~* '^\\s*insert\\b' AND calls > 5000 AND COALESCE(rows / NULLIF(calls,0),0) <= 1.5 THEN 'Singleton ingest path'
+      WHEN query_text ~* '^\\s*delete\\b' AND calls > 1000 AND mean_exec_time > 25 THEN 'Delete churn / retention pressure'
+      WHEN query_text ~* '^\\s*update\\b' AND mean_exec_time > 100 THEN 'Expensive maintenance update'
+      WHEN query_text ~* '^\\s*insert\\b' AND mean_exec_time > 50 THEN 'Insert path with secondary index / FK cost'
+      ELSE 'DML hotspot'
+    END AS pattern,
+    CASE
+      WHEN query_text ~* '^\\s*update\\b' AND calls > 5000 AND COALESCE(rows / NULLIF(calls,0),0) <= 1.5 THEN 'Batch updates where possible and review HOT coverage, indexed columns, and triggers'
+      WHEN query_text ~* '^\\s*insert\\b' AND calls > 5000 AND COALESCE(rows / NULLIF(calls,0),0) <= 1.5 THEN 'Batch inserts or COPY and validate low-value secondary indexes'
+      WHEN query_text ~* '^\\s*delete\\b' AND calls > 1000 AND mean_exec_time > 25 THEN 'Review retention strategy, partitioning, and FK cascade cost'
+      WHEN query_text ~* '^\\s*update\\b' AND mean_exec_time > 100 THEN 'Check indexed columns touched, fillfactor, and trigger/FK side effects'
+      ELSE 'Correlate with S19 HOT ratio, S06 index write-cost, and S10/S21 vacuum pressure'
+    END AS tuning_focus
+  FROM base
+  ORDER BY total_exec_time DESC
+  LIMIT 20
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(queryid_text,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || verb || '</td>' ||
+      '<td class="num">' || to_char(calls, 'FM999,999,999') || '</td>' ||
+      '<td class="num">' || to_char(round(total_exec_time::numeric,1), 'FM999,999,999,990.0') || '</td>' ||
+      '<td class="num">' || to_char(round(mean_exec_time::numeric,2), 'FM999,999,990.00') || '</td>' ||
+      '<td class="num">' || COALESCE(to_char(round(rows_per_call::numeric,2), 'FM999,999,990.00'), 'n/a') || '</td>' ||
+      '<td>' || pattern || '</td>' ||
+      '<td>' || tuning_focus || '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY total_exec_time DESC
+    ),
+    '<tr><td colspan="8" class="table-empty">No DML fingerprints crossed the reporting threshold in this run.</td></tr>'
+  )
+FROM q;
+\else
+SELECT '<tr><td colspan="8" class="table-empty">pg_stat_statements unavailable; DML hotspot ranking is blocked in this run.</td></tr>';
+\endif
+
+\qecho '</tbody></table></div></div>'
 \qecho '</div>'
 
 -- =============================================================================
@@ -11698,9 +12426,9 @@ FROM wa;
 \qecho '  </div>'
 \qecho '</div>'
 
-\qecho '<div class="finding critical"><div class="finding-header">'
-\qecho '<span class="finding-title">Why This Matters: A Bad Estimate = A Catastrophically Wrong Plan</span>'
-\qecho '<span class="severity-pill pill-critical">PLAN QUALITY</span></div>'
+\qecho '<div class="finding info"><div class="finding-header">'
+\qecho '<span class="finding-title">Why Planner Estimate Quality Matters</span>'
+\qecho '<span class="severity-pill pill-info">PLAN QUALITY</span></div>'
 \qecho '<div class="finding-body">'
 \qecho '<strong>The #1 cause of slow queries in PostgreSQL is bad planner row estimates.</strong><br>'
 \qecho 'If the planner thinks a table has 100 rows but it actually has 1,000,000 rows, it will:'
@@ -11950,13 +12678,13 @@ WHERE mod_ratio >= 5;
 \qecho '  '
 \qecho '  <div>'
 \qecho '    <div class="section-title">Autovacuum Full Advisor</div>'
-\qecho '    <div class="section-desc">Per-table vacuum thresholds, cost delay impact, wraparound countdown, and per-table tuning scripts.</div>'
+\qecho '    <div class="section-desc">Advisor-only autovacuum thresholds, cost settings, wraparound countdown, and per-table tuning scripts.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
-\qecho '<div class="finding critical"><div class="finding-header">'
-\qecho '<span class="finding-title">Autovacuum is the Most Misunderstood and Most Critical PostgreSQL Feature</span>'
-\qecho '<span class="severity-pill pill-critical">CRITICAL KNOWLEDGE</span></div>'
+\qecho '<div class="finding info"><div class="finding-header">'
+\qecho '<span class="finding-title">Autovacuum Drives Space Reuse, Statistics, and XID Safety</span>'
+\qecho '<span class="severity-pill pill-info">OPERATING MODEL</span></div>'
 \qecho '<div class="finding-body">'
 \qecho '<strong>What autovacuum does:</strong> (1) Reclaims dead tuple space. (2) Prevents XID wraparound.'
 \qecho '(3) Updates statistics for the planner. Without it: table bloat, planner failures, database shutdown.<br>'
@@ -12129,7 +12857,10 @@ WHERE v.phase IS NOT NULL;
 \qecho 'age > 1B = HIGH (schedule VACUUM FREEZE this week). age > 500M = MEDIUM (monitor).<br>'
 \qecho '<strong>Emergency fix:</strong> VACUUM FREEZE VERBOSE schema.large_table;<br>'
 \qecho '<strong>Full database emergency:</strong> vacuumdb --all --freeze --analyze-in-stages<br>'
-\qecho '<strong>Prevention:</strong> Ensure autovacuum is running and not falling behind. Monitor with this report weekly.'
+\qecho '<strong>Prevention:</strong> Ensure autovacuum is running and not falling behind. Monitor with this report weekly.<br>'
+\qecho '<strong>Verify:</strong> Rerun this section and confirm database and table ages move back below the critical band.<br>'
+\qecho '<strong>Rollback:</strong> Do not roll back emergency freeze work. Revert only temporary aggressive autovacuum overrides after ages return to a safe range.<br>'
+\qecho '<strong>Owner:</strong> DBA / platform owner.'
 \qecho '</div></div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
@@ -12274,7 +13005,7 @@ FROM (
 \qecho '  '
 \qecho '  <div>'
 \qecho '    <div class="section-title">Connection Pooling Advisor</div>'
-\qecho '    <div class="section-desc">Connection utilization, idle waste, pooler detection, and PgBouncer setup recommendations.</div>'
+\qecho '    <div class="section-desc">Advisor-only guidance for pool sizing, idle waste reduction, queue-risk handling, and PgBouncer rollout.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
@@ -12399,7 +13130,10 @@ SELECT
          'listen_port = 6432\n' ||
          'auth_type = md5\n' ||
          '</pre>' ||
-         '<strong>Result:</strong> 1000 app connections  20 PostgreSQL connections. 98% fewer connections.' ||
+         '<strong>Result:</strong> 1000 app connections  20 PostgreSQL connections. 98% fewer connections.<br>' ||
+         '<strong>Verify:</strong> Confirm application traffic succeeds through the pooler and idle PostgreSQL backends drop materially.<br>' ||
+         '<strong>Rollback:</strong> Route traffic back to PostgreSQL directly and restore previous connection limits if pooler rollout causes application errors.<br>' ||
+         '<strong>Owner:</strong> DBA + application/platform owner.' ||
          '</div></div>'
     ELSE '<div class="finding info"><div class="finding-header">' ||
          '<span class="finding-title">No pooler detected. Low idle count  monitor as traffic grows</span>' ||
@@ -12528,9 +13262,11 @@ FROM app_cov;
 \qecho '  '
 \qecho '  <div>'
 \qecho '    <div class="section-title">Full Configuration Parameter Audit (40+ Critical Settings)</div>'
-\qecho '    <div class="section-desc">Every critical postgresql.conf parameter vs recommended value with impact assessment.</div>'
+\qecho '    <div class="section-desc">Non-default settings, baseline guardrails, mutability, workload-driven tuning signals, and action priorities.</div>'
 \qecho '  </div>'
 \qecho '</div>'
+
+\qecho '<div class="finding info"><div class="finding-header"><span class="finding-title">How to use this section</span><span class="severity-pill pill-info">READ TOP TO BOTTOM</span></div><div class="finding-body">Start with non-default settings and baseline guardrails, then use mutability, workload-aligned focus, the discovery matrix, and the action summary to decide what to change. Baseline rows are posture checks; workload-driven rows are evidence-based tuning candidates.</div></div>'
 
 \qecho '<div class="finding info"><div class="finding-header">'
 \qecho '<span class="finding-title">Non-Default Parameters (settings changed from PostgreSQL defaults)</span>'
@@ -12570,7 +13306,7 @@ ORDER BY
 
 -- Full parameter recommendations
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Critical Parameter Recommendations</div>'
+\qecho '<div class="subsection-title">Baseline Parameter Guardrails</div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
 \qecho '<th>Category</th><th>Parameter</th><th>Current Value</th>'
@@ -12832,6 +13568,368 @@ SELECT
 FROM w;
 
 \qecho '</tbody></table></div></div>'
+-- S23.4 Evidence-based parameter tuning matrix
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Evidence-Based Parameter Tuning Matrix</div>'
+\qecho '<div class="finding info"><div class="finding-body">These rows are driven by the current workload window and observable evidence in this report. Treat them as tuning candidates, not blanket best-practice overrides; use the Safety and Verify columns before changing global settings.</div></div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Parameter</th><th>Current</th><th>Observed Trigger</th><th>Why Tune</th><th>Suggested Direction</th><th>Safety</th><th>Verify</th><th>Confidence</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH db AS (
+  SELECT
+    d.tup_fetched::numeric AS reads,
+    (d.tup_inserted + d.tup_updated + d.tup_deleted)::numeric AS writes,
+    d.temp_bytes::numeric AS temp_bytes,
+    d.temp_files::numeric AS temp_files,
+    (d.xact_commit + d.xact_rollback)::numeric AS xacts,
+    100.0 * d.blks_hit / NULLIF(d.blks_hit + d.blks_read, 0) AS cache_hit_pct
+  FROM pg_stat_database d
+  WHERE d.datname = current_database()
+), ckpt AS (
+  SELECT 100.0 * num_requested / NULLIF(num_timed + num_requested, 0) AS forced_ckpt_pct
+  FROM pg_stat_checkpointer
+), vac AS (
+  SELECT
+    COUNT(*) FILTER (WHERE n_dead_tup > GREATEST(10000, COALESCE(n_live_tup,0) * 0.10)) AS high_dead_tbls,
+    COALESCE(MAX(n_dead_tup), 0) AS max_dead_tup,
+    COALESCE(SUM(n_mod_since_analyze), 0) AS mod_since_analyze
+  FROM pg_stat_user_tables
+), planner AS (
+  SELECT
+    COALESCE((
+      SELECT COUNT(*)
+      FROM pg_stat_statements
+      WHERE dbid = (SELECT oid FROM pg_database WHERE datname = current_database())
+        AND query NOT ILIKE '%pg360%'
+        AND query NOT ILIKE '%pg_stat_statements%'
+        AND (temp_blks_read + temp_blks_written) > 0
+    ), 0) AS spill_queries,
+    COALESCE((
+      SELECT COUNT(*)
+      FROM pg_stat_statements
+      WHERE dbid = (SELECT oid FROM pg_database WHERE datname = current_database())
+        AND query NOT ILIKE '%pg360%'
+        AND query NOT ILIKE '%pg_stat_statements%'
+        AND calls >= 5
+        AND COALESCE(total_plan_time,0) > total_exec_time * 0.20
+    ), 0) AS planning_heavy_queries,
+    COALESCE((
+      SELECT COUNT(*)
+      FROM pg_stat_statements
+      WHERE dbid = (SELECT oid FROM pg_database WHERE datname = current_database())
+        AND query NOT ILIKE '%pg360%'
+        AND query NOT ILIKE '%pg_stat_statements%'
+        AND (mean_exec_time >= 100 OR (temp_blks_read + temp_blks_written) > 0)
+    ), 0) AS long_or_spill_queries
+), prep AS (
+  SELECT COUNT(*)::int AS prepared_cnt FROM pg_prepared_statements
+), s AS (
+  SELECT
+    MAX(CASE WHEN name = 'work_mem' THEN COALESCE(pg_size_pretty(pg_size_bytes(setting || unit)), setting) END) AS work_mem,
+    MAX(CASE WHEN name = 'max_wal_size' THEN COALESCE(pg_size_pretty(pg_size_bytes(setting || unit)), setting) END) AS max_wal_size,
+    MAX(CASE WHEN name = 'checkpoint_completion_target' THEN setting END) AS checkpoint_completion_target,
+    MAX(CASE WHEN name = 'autovacuum_max_workers' THEN setting END) AS autovacuum_max_workers,
+    MAX(CASE WHEN name = 'autovacuum_vacuum_scale_factor' THEN setting END) AS autovacuum_vacuum_scale_factor,
+    MAX(CASE WHEN name = 'effective_cache_size' THEN COALESCE(pg_size_pretty(pg_size_bytes(setting || unit)), setting) END) AS effective_cache_size,
+    MAX(CASE WHEN name = 'default_statistics_target' THEN setting END) AS default_statistics_target,
+    MAX(CASE WHEN name = 'max_parallel_workers_per_gather' THEN setting END) AS max_parallel_workers_per_gather,
+    MAX(CASE WHEN name = 'plan_cache_mode' THEN setting END) AS plan_cache_mode,
+    MAX(CASE WHEN name = 'random_page_cost' THEN setting END) AS random_page_cost
+  FROM pg_settings
+  WHERE name IN (
+    'work_mem','max_wal_size','checkpoint_completion_target','autovacuum_max_workers',
+    'autovacuum_vacuum_scale_factor','effective_cache_size','default_statistics_target',
+    'max_parallel_workers_per_gather','plan_cache_mode','random_page_cost'
+  )
+), recs AS (
+  SELECT 1 AS sort_order, 'work_mem' AS param, s.work_mem AS current_val,
+    CASE
+      WHEN planner.spill_queries > 0 OR db.temp_bytes / NULLIF(db.xacts,0) > 1024 * 1024 THEN 'Temp spill visible in current workload window'
+      ELSE 'No material spill signal in current workload window'
+    END AS trigger_seen,
+    'Per sort/hash node memory. Too low pushes work to temp files; too high multiplies memory under concurrency.' AS why_tune,
+    CASE
+      WHEN planner.spill_queries > 0 OR db.temp_bytes / NULLIF(db.xacts,0) > 1024 * 1024 THEN 'Raise selectively for spill-heavy roles or sessions'
+      ELSE 'Keep current; revisit only if spills appear'
+    END AS suggested_direction,
+    CASE
+      WHEN planner.spill_queries > 0 OR db.temp_bytes / NULLIF(db.xacts,0) > 1024 * 1024 THEN 'LOAD TEST FIRST'
+      ELSE 'MONITOR'
+    END AS safety,
+    'Check S02 temp I/O and OS memory after change' AS verify,
+    CASE
+      WHEN planner.spill_queries > 0 THEN 'Medium'
+      ELSE 'Low-Medium'
+    END AS confidence
+  FROM db, planner, s
+
+  UNION ALL
+  SELECT 2, 'max_wal_size', s.max_wal_size,
+    CASE
+      WHEN ckpt.forced_ckpt_pct > 10 OR db.writes > db.reads * 2 THEN 'Forced checkpoint or write-heavy signal present'
+      ELSE 'Checkpoint pressure is currently limited'
+    END,
+    'Larger WAL runway reduces forced checkpoints and write bursts.',
+    CASE
+      WHEN ckpt.forced_ckpt_pct > 10 OR db.writes > db.reads * 2 THEN 'Increase to reduce checkpoint storms'
+      ELSE 'Keep current and monitor with S08'
+    END,
+    CASE
+      WHEN ckpt.forced_ckpt_pct > 10 OR db.writes > db.reads * 2 THEN 'LOAD TEST FIRST'
+      ELSE 'MONITOR'
+    END,
+    'Forced checkpoint ratio should fall and write latency should smooth out',
+    CASE WHEN ckpt.forced_ckpt_pct > 10 THEN 'Medium' ELSE 'Low-Medium' END
+  FROM db, ckpt, s
+
+  UNION ALL
+  SELECT 3, 'checkpoint_completion_target', s.checkpoint_completion_target,
+    CASE
+      WHEN db.writes > db.reads * 2 THEN 'Write-heavy pattern increases checkpoint smoothing importance'
+      ELSE 'No strong write-burst signal in current window'
+    END,
+    'This spreads checkpoint writes across the interval; low values create burstier I/O.',
+    CASE
+      WHEN db.writes > db.reads * 2 AND s.checkpoint_completion_target::numeric < 0.9 THEN 'Move toward 0.9'
+      ELSE 'Current value is already near the common target'
+    END,
+    CASE
+      WHEN db.writes > db.reads * 2 AND s.checkpoint_completion_target::numeric < 0.9 THEN 'LOAD TEST FIRST'
+      ELSE 'SAFE NOW'
+    END,
+    'Check checkpoint pressure and write latency distribution after change',
+    CASE
+      WHEN db.writes > db.reads * 2 THEN 'Medium'
+      ELSE 'Low-Medium'
+    END
+  FROM db, s
+
+  UNION ALL
+  SELECT 4, 'autovacuum_max_workers', s.autovacuum_max_workers,
+    CASE
+      WHEN vac.high_dead_tbls > 0 OR db.writes > db.reads * 2 THEN 'Dead-tuple backlog or write-heavy pattern detected'
+      ELSE 'No clear worker-pressure signal in current window'
+    END,
+    'More workers reduce cleanup lag on high-churn relations, but increase background I/O.',
+    CASE
+      WHEN vac.high_dead_tbls > 0 OR db.writes > db.reads * 2 THEN 'Increase if backlog persists across runs'
+      ELSE 'Keep current'
+    END,
+    CASE
+      WHEN vac.high_dead_tbls > 0 OR db.writes > db.reads * 2 THEN 'LOAD TEST FIRST'
+      ELSE 'MONITOR'
+    END,
+    'S10 dead tuple backlog should fall without creating new I/O saturation',
+    CASE
+      WHEN vac.high_dead_tbls > 0 THEN 'Medium'
+      ELSE 'Low-Medium'
+    END
+  FROM db, vac, s
+
+  UNION ALL
+  SELECT 5, 'autovacuum_vacuum_scale_factor', s.autovacuum_vacuum_scale_factor,
+    CASE
+      WHEN vac.max_dead_tup > 100000 THEN 'Large-table dead tuple accumulation visible'
+      ELSE 'No large dead-tuple accumulation signal right now'
+    END,
+    'Lower scale factors trigger vacuum earlier on large tables; too low can add background churn.',
+    CASE
+      WHEN vac.max_dead_tup > 100000 THEN 'Lower selectively on high-churn large tables'
+      ELSE 'Keep global setting; prefer per-table tuning if needed'
+    END,
+    CASE
+      WHEN vac.max_dead_tup > 100000 THEN 'LOAD TEST FIRST'
+      ELSE 'MONITOR'
+    END,
+    'Largest tables should show lower dead tuple peaks and steadier vacuum cadence',
+    CASE
+      WHEN vac.max_dead_tup > 100000 THEN 'Medium'
+      ELSE 'Low'
+    END
+  FROM vac, s
+
+  UNION ALL
+  SELECT 6, 'effective_cache_size', s.effective_cache_size,
+    CASE
+      WHEN db.reads > db.writes * 4 THEN 'Read-heavy profile detected'
+      WHEN db.cache_hit_pct < 95 THEN 'Cache hit ratio is below the usual comfort band'
+      ELSE 'Planner cache hint should still match real OS cache'
+    END,
+    'This is a planner hint, not allocated memory. It shapes index-vs-scan costing.',
+    'Align with shared buffers plus realistic OS page cache',
+    'SAFE NOW',
+    'Index/scan choices should better match observed storage behavior',
+    'Medium'
+  FROM db, s
+
+  UNION ALL
+  SELECT 7, 'default_statistics_target', s.default_statistics_target,
+    CASE
+      WHEN vac.mod_since_analyze > 100000 OR planner.long_or_spill_queries > 0 THEN 'Planner-risk signal from modification backlog or long SQL'
+      ELSE 'No strong stats-resolution pressure in this window'
+    END,
+    'Higher stats targets improve histograms and MCV lists for skewed or complex predicates.',
+    CASE
+      WHEN vac.mod_since_analyze > 100000 OR planner.long_or_spill_queries > 0 THEN 'Raise selectively on hot schemas/tables before global changes'
+      ELSE 'Keep current and use table/column-level raises only where needed'
+    END,
+    CASE
+      WHEN vac.mod_since_analyze > 100000 OR planner.long_or_spill_queries > 0 THEN 'LOAD TEST FIRST'
+      ELSE 'MONITOR'
+    END,
+    'Re-ANALYZE and compare plan stability / estimate quality in S20',
+    CASE
+      WHEN planner.long_or_spill_queries > 0 THEN 'Medium'
+      ELSE 'Low-Medium'
+    END
+  FROM vac, planner, s
+
+  UNION ALL
+  SELECT 8, 'max_parallel_workers_per_gather', s.max_parallel_workers_per_gather,
+    CASE
+      WHEN planner.long_or_spill_queries > 0 THEN 'Long-running or spill-prone SQL is visible'
+      ELSE 'No strong large-scan pressure in current window'
+    END,
+    'Controls how much parallel help a single large query can receive.',
+    CASE
+      WHEN planner.long_or_spill_queries > 0 AND s.max_parallel_workers_per_gather::int < 4 THEN 'Consider increasing for reporting-heavy paths'
+      ELSE 'Keep current'
+    END,
+    CASE
+      WHEN planner.long_or_spill_queries > 0 AND s.max_parallel_workers_per_gather::int < 4 THEN 'LOAD TEST FIRST'
+      ELSE 'MONITOR'
+    END,
+    'Check worker availability and total CPU saturation, not just query speed',
+    CASE
+      WHEN planner.long_or_spill_queries > 0 THEN 'Medium'
+      ELSE 'Low'
+    END
+  FROM planner, s
+
+  UNION ALL
+  SELECT 9, 'plan_cache_mode', s.plan_cache_mode,
+    CASE
+      WHEN prep.prepared_cnt > 0 OR planner.planning_heavy_queries > 0 THEN 'Prepared-plan or planning-overhead signal visible'
+      ELSE 'No strong prepared-plan signal in this report session'
+    END,
+    'This affects generic vs custom plan behavior and should only move when parameter sensitivity is proven.',
+    CASE
+      WHEN prep.prepared_cnt > 0 OR planner.planning_heavy_queries > 0 THEN 'Keep auto unless assisted evidence proves generic/custom plan pain'
+      ELSE 'Keep auto'
+    END,
+    'EVIDENCE ONLY',
+    'Use S02 planning overhead plus assisted plan review before changing',
+    CASE
+      WHEN prep.prepared_cnt > 0 THEN 'Medium'
+      ELSE 'Low'
+    END
+  FROM prep, planner, s
+
+  UNION ALL
+  SELECT 10, 'random_page_cost', s.random_page_cost,
+    CASE
+      WHEN s.random_page_cost::numeric >= 4 AND db.reads > db.writes * 4 THEN 'Read-heavy profile with HDD-era planner cost default still present'
+      ELSE 'Storage class is not provable from SQL alone'
+    END,
+    'This controls how expensive random index access looks to the planner.',
+    CASE
+      WHEN s.random_page_cost::numeric >= 4 AND db.reads > db.writes * 4 THEN 'Lower only after confirming SSD/NVMe-backed storage'
+      ELSE 'Do not change without storage evidence'
+    END,
+    'EVIDENCE ONLY',
+    'Validate with EXPLAIN and storage reality; do not tune from SQL alone',
+    CASE
+      WHEN s.random_page_cost::numeric >= 4 AND db.reads > db.writes * 4 THEN 'Low-Medium'
+      ELSE 'Low'
+    END
+  FROM db, s
+)
+SELECT COALESCE(
+  string_agg(
+    '<tr>' ||
+    '<td>' || param || '</td>' ||
+    '<td>' || current_val || '</td>' ||
+    '<td>' || trigger_seen || '</td>' ||
+    '<td>' || why_tune || '</td>' ||
+    '<td>' || suggested_direction || '</td>' ||
+    '<td class="' || CASE
+      WHEN safety = 'SAFE NOW' THEN 'good'
+      WHEN safety = 'MONITOR' THEN 'good'
+      WHEN safety = 'EVIDENCE ONLY' THEN 'warn'
+      ELSE 'warn'
+    END || '">' || safety || '</td>' ||
+    '<td>' || verify || '</td>' ||
+    '<td>' || confidence || '</td>' ||
+    '</tr>',
+    E'\n' ORDER BY sort_order
+  ),
+  '<tr><td colspan="8" class="table-empty">No workload-driven parameter signals were produced.</td></tr>'
+)
+FROM recs;
+
+\qecho '</tbody></table></div></div>'
+
+-- S23.5 Parameter action matrix
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Parameter Action Summary</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Parameter</th><th>Direction</th><th>Reason</th><th>Change Safety</th><th>Evidence Source</th>'
+\qecho '</tr></thead><tbody>'
+
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || param || '</td>' ||
+      '<td>' || direction || '</td>' ||
+      '<td>' || reason || '</td>' ||
+      '<td class="' || CASE WHEN safety = 'SAFE NOW' THEN 'good">SAFE NOW' ELSE 'warn">LOAD TEST FIRST' END || '</td>' ||
+      '<td>' || source_module || '</td>' ||
+      '</tr>',
+      ''
+      ORDER BY sort_order
+    ),
+    '<tr><td colspan="5" class="table-empty"> No parameter recommendations produced</td></tr>'
+  )
+FROM (
+  SELECT 1 AS sort_order, 'log_lock_waits' AS param, 'ensure = on' AS direction,
+         'Low risk observability improvement for lock diagnostics.' AS reason,
+         'SAFE NOW' AS safety, 'S03, S04' AS source_module
+  UNION ALL
+  SELECT 2, 'log_min_duration_statement', 'set threshold per SLA',
+         'Captures slow SQL for regression analysis without full statement logging.',
+         'SAFE NOW', 'S02'
+  UNION ALL
+  SELECT 3, 'autovacuum_max_workers', 'increase if vacuum debt is high',
+         'Reduces dead tuple backlog and freeze debt when S10 debt score is elevated.',
+         CASE WHEN current_setting('autovacuum_max_workers')::int < 3 THEN 'LOAD TEST FIRST' ELSE 'SAFE NOW' END,
+         'S10'
+  UNION ALL
+  SELECT 4, 'autovacuum_vacuum_scale_factor', 'decrease for large write-heavy tables',
+         'Triggers vacuum earlier on large relations; can increase background I/O.',
+         'LOAD TEST FIRST', 'S10'
+  UNION ALL
+  SELECT 5, 'max_wal_size', 'increase when forced checkpoints are frequent',
+         'Reduces checkpoint storms and write bursts.',
+         'LOAD TEST FIRST', 'S07, S08'
+  UNION ALL
+  SELECT 6, 'checkpoint_completion_target', 'move toward 0.9 for write-heavy patterns',
+         'Spreads checkpoint writes; too aggressive can affect latency if I/O is constrained.',
+         'LOAD TEST FIRST', 'S07, S08'
+  UNION ALL
+  SELECT 7, 'work_mem', 'raise selectively for spill-heavy workloads',
+         'Global increases can cause memory pressure under concurrency.',
+         'LOAD TEST FIRST', 'S02, S11'
+  UNION ALL
+  SELECT 8, 'effective_cache_size', 'align to OS cache + shared_buffers',
+         'Improves planner decisions for index usage.',
+         'SAFE NOW', 'S07, S11'
+) actions;
+
+\qecho '</tbody></table></div></div>'
 \qecho '</div>'
 
 -- =============================================================================
@@ -13010,7 +14108,7 @@ WHERE wasted_bytes > 0;
 \qecho '  '
 \qecho '  <div>'
 \qecho '    <div class="section-title">Security &amp; Access Review</div>'
-\qecho '    <div class="section-desc">RLS posture, role membership, grant exposure, SSL, and access hardening evidence for least-privilege review.</div>'
+\qecho '    <div class="section-desc">RLS posture, PUBLIC exposure, role inheritance, and grant hardening evidence. Authentication baseline stays in S12; extension posture stays in S29.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
@@ -13029,7 +14127,10 @@ WHERE wasted_bytes > 0;
 \qecho 'CREATE POLICY user_orders ON orders FOR ALL TO app_role<br>'
 \qecho '  USING (user_id = current_setting(''app.current_user_id'')::int);<br>'
 \qecho 'REVOKE ALL ON orders FROM PUBLIC;<br>'
-\qecho 'GRANT SELECT ON orders TO app_role;'
+\qecho 'GRANT SELECT ON orders TO app_role;<br>'
+\qecho '<strong>Verify:</strong> Test with two application identities and confirm each can see only its own rows.<br>'
+\qecho '<strong>Rollback:</strong> DISABLE ROW LEVEL SECURITY only if the policy causes an application outage and compensating access controls are in place.<br>'
+\qecho '<strong>Owner:</strong> DBA + application owner.'
 \qecho '</div></div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
@@ -13045,7 +14146,7 @@ SELECT
   '<td class="' ||
   CASE
     WHEN NOT c.relrowsecurity AND policy_count = 0
-      THEN 'warn">No RLS  consider if row isolation needed'
+      THEN 'warn">No RLS. Assess tenant or user isolation now and enable before broader access'
     WHEN c.relrowsecurity AND policy_count = 0
       THEN 'crit">RLS enabled but NO POLICIES  all queries will return 0 rows!'
     WHEN c.relrowsecurity AND policy_count > 0
@@ -13066,96 +14167,6 @@ LIMIT 40;
 
 \qecho '</tbody></table></div></div>'
 
--- S25.2 Extension security audit
-\qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Extension Security Audit</div>'
-\qecho '<div class="table-wrap">'
-\qecho '<table class="pg360"><thead><tr>'
-\qecho '<th>Extension</th><th>Version</th><th>Schema</th><th>Risk Level</th><th>Notes</th>'
-\qecho '</tr></thead><tbody>'
-
-WITH ext AS (
-  SELECT
-    e.extname,
-    e.extversion,
-    n.nspname AS ext_schema,
-    COALESCE(av.trusted, false) AS is_trusted
-  FROM pg_extension e
-  JOIN pg_namespace n ON n.oid = e.extnamespace
-  LEFT JOIN LATERAL (
-    SELECT aev.trusted
-    FROM pg_available_extension_versions aev
-    WHERE aev.name = e.extname AND aev.version = e.extversion
-    LIMIT 1
-  ) av ON TRUE
-)
-SELECT
-  '<tr>' ||
-  '<td class="num">' || replace(replace(extname,'<','&lt;'),'>','&gt;') || '</td>' ||
-  '<td>' || replace(replace(extversion,'<','&lt;'),'>','&gt;') || '</td>' ||
-  '<td>' || replace(replace(ext_schema,'<','&lt;'),'>','&gt;') || '</td>' ||
-  '<td class="' ||
-  CASE extname
-    WHEN 'pg_stat_statements' THEN 'good">Low  official telemetry extension'
-    WHEN 'pg_buffercache'     THEN 'warn">Medium  official inspection utility'
-    WHEN 'pg_visibility'      THEN 'warn">Medium  official inspection utility'
-    WHEN 'pgstattuple'        THEN 'warn">Medium  official inspection utility'
-    WHEN 'btree_gin'          THEN 'good">Low  trusted/common operator class'
-    WHEN 'citext'             THEN 'good">Low  trusted/common data type'
-    WHEN 'hstore'             THEN 'good">Low  trusted/common data type'
-    WHEN 'pg_trgm'            THEN 'good">Low  trusted/common text search support'
-    WHEN 'tablefunc'          THEN 'good">Low  trusted/common helper functions'
-    WHEN 'unaccent'           THEN 'good">Low  trusted/common text normalization'
-    WHEN 'uuid-ossp'          THEN 'good">Low  UUID generation only'
-    WHEN 'pgcrypto'           THEN 'warn">Medium  review key handling and usage patterns'
-    WHEN 'hypopg'             THEN 'warn">Medium  third-party hypothetical-index extension'
-    WHEN 'pg_cron'            THEN 'warn">Medium  can schedule arbitrary SQL'
-    WHEN 'dblink'             THEN 'crit">High  can connect to other databases'
-    WHEN 'postgres_fdw'       THEN 'warn">Medium  can access remote databases'
-    WHEN 'file_fdw'           THEN 'crit">High  can read files from server filesystem'
-    WHEN 'adminpack'          THEN 'crit">High  administrative functions, superuser required'
-    WHEN 'postgis'            THEN 'good">Low  spatial types only'
-    WHEN 'plpgsql'            THEN 'good">Low  built-in procedural language'
-    WHEN 'plpython3u'         THEN 'crit">Critical  untrusted Python, can execute OS commands'
-    WHEN 'plperlu'            THEN 'crit">Critical  untrusted Perl, can execute OS commands'
-    WHEN 'pltclu'             THEN 'crit">Critical  untrusted Tcl, can execute OS commands'
-    ELSE CASE WHEN is_trusted THEN 'good">Low  trusted/common extension' ELSE 'warn">Review  provider/common posture' END
-  END || '</td>' ||
-  '<td>' ||
-  CASE extname
-    WHEN 'pg_stat_statements' THEN 'Official PostgreSQL telemetry extension; focus on preload and access scope, not blanket risk.'
-    WHEN 'pg_buffercache'     THEN 'Official inspection utility; keep installation and execution limited to DBA/admin roles.'
-    WHEN 'pg_visibility'      THEN 'Official inspection utility; keep lifecycle restricted to admin users and maintenance workflows.'
-    WHEN 'pgstattuple'        THEN 'Official inspection utility; useful for exact bloat validation, but keep use to admin roles.'
-    WHEN 'btree_gin'          THEN 'Official trusted/common extension; normal feature usage, not a special security concern by itself.'
-    WHEN 'citext'             THEN 'Official trusted/common extension; case-insensitive type, normal application feature usage.'
-    WHEN 'hstore'             THEN 'Official trusted/common extension; common key-value type, normal application feature usage.'
-    WHEN 'pg_trgm'            THEN 'Official trusted/common extension; review only if search helpers are exposed broadly.'
-    WHEN 'tablefunc'          THEN 'Official trusted/common helper extension; usually low risk in normal usage.'
-    WHEN 'unaccent'           THEN 'Official trusted/common text-normalization extension; low standalone exposure.'
-    WHEN 'uuid-ossp'          THEN 'Generates UUID values only; low standalone exposure.'
-    WHEN 'pgcrypto'           THEN 'Review key management, function exposure, and application usage patterns.'
-    WHEN 'hypopg'             THEN 'Third-party extension; validate package provenance, patch cadence, and who can execute its routines.'
-    WHEN 'dblink'             THEN 'Ensure only trusted users can execute dblink functions.'
-    WHEN 'file_fdw'           THEN 'Restrict to superuser only: REVOKE ALL ON FOREIGN SERVER FROM PUBLIC.'
-    WHEN 'plpython3u'         THEN 'Untrusted language: only superuser should create functions in plpython3u.'
-    WHEN 'plperlu'            THEN 'Untrusted language: only superuser should create functions in plperlu.'
-    WHEN 'pg_cron'            THEN 'Audit scheduled jobs and restrict who can create or alter them.'
-    ELSE CASE WHEN is_trusted THEN 'Trusted/common extension from the PostgreSQL catalog.' ELSE '' END
-  END || '</td></tr>'
-FROM ext
-ORDER BY
-  CASE extname
-    WHEN 'plpython3u' THEN 0 WHEN 'plperlu' THEN 0 WHEN 'file_fdw' THEN 0
-    WHEN 'dblink' THEN 1 WHEN 'adminpack' THEN 1
-    WHEN 'pg_cron' THEN 2 WHEN 'postgres_fdw' THEN 2 WHEN 'hypopg' THEN 2
-    WHEN 'pg_visibility' THEN 3 WHEN 'pgstattuple' THEN 3 WHEN 'pg_buffercache' THEN 3
-    ELSE 4
-  END,
-  extname;
-
-\qecho '</tbody></table></div></div>'
-
 -- S25.3 Object privilege explosion
 \qecho '<div class="subsection">'
 \qecho '<div class="subsection-title">Application Objects Accessible to PUBLIC</div>'
@@ -13165,7 +14176,9 @@ ORDER BY
 \qecho '<div class="finding-body">'
 \qecho '<strong>Focus:</strong> This section shows application-owned tables/views granted to PUBLIC.'
 \qecho 'Trusted extension-owned objects are excluded here so the report stays focused on business-data exposure.<br>'
-\qecho '<strong>Fix:</strong> REVOKE from PUBLIC and re-grant to named application or reporting roles only.'
+\qecho '<strong>Fix:</strong> REVOKE from PUBLIC and re-grant to named application or reporting roles only.<br>'
+\qecho '<strong>Verify:</strong> Reconnect as an application or reporting role and confirm required access still succeeds after revokes.<br>'
+\qecho '<strong>Owner:</strong> DBA + application owner.'
 \qecho '</div></div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
@@ -13254,7 +14267,7 @@ SELECT
       '<td class="' ||
       CASE
         WHEN rolsuper OR rolbypassrls THEN 'crit">Highest privilege surface'
-        WHEN rolcreaterole OR rolreplication THEN 'warn">Elevated privilege; validate need'
+        WHEN rolcreaterole OR rolreplication THEN 'warn">Document owner and use case; remove if not required'
         ELSE 'good">Standard role'
       END || '</td>' ||
       '</tr>',
@@ -13441,11 +14454,11 @@ SELECT
       '<td class="' || CASE risk_level WHEN 'HIGH' THEN 'crit">High' WHEN 'MEDIUM' THEN 'warn">Medium' ELSE 'good">Low' END || '</td>' ||
       '<td>' ||
         CASE
-          WHEN grantee = 'PUBLIC' AND extname IS NULL THEN 'Application object exposed to every role. Revoke from PUBLIC and re-grant to named roles.'
-          WHEN grantee = 'PUBLIC' AND extname IN ('pg_stat_statements','pg_visibility','pgstattuple','pg_buffercache','pg_prewarm') THEN 'Official extension object exposed broadly. Review whether DBA-only or monitoring-role access is more appropriate.'
-          WHEN grantee = 'PUBLIC' AND extname IS NOT NULL THEN 'Extension-owned object exposed broadly. Review whether default PUBLIC access is acceptable for this environment.'
-          WHEN is_grantable = 'YES' THEN 'Review delegation chain and remove grant option if not required.'
-          ELSE 'No immediate issue.'
+          WHEN grantee = 'PUBLIC' AND extname IS NULL THEN 'Application object exposed to every role. Revoke from PUBLIC, re-grant to named roles, and re-test application access.'
+          WHEN grantee = 'PUBLIC' AND extname IN ('pg_stat_statements','pg_visibility','pgstattuple','pg_buffercache','pg_prewarm') THEN 'Official extension object exposed broadly. Limit to DBA or monitoring roles if broad visibility is not required.'
+          WHEN grantee = 'PUBLIC' AND extname IS NOT NULL THEN 'Extension-owned object exposed broadly. Confirm provider/default behavior and revoke from PUBLIC if not required.'
+          WHEN is_grantable = 'YES' THEN 'Trace the grant chain, remove GRANT OPTION where unnecessary, and re-test dependent roles.'
+          ELSE 'Low-risk pattern; keep under named-role review.'
         END ||
       '</td>' ||
       '</tr>',
@@ -13462,79 +14475,7 @@ WHERE risk_level <> 'LOW';
 
 \qecho '</tbody></table></div></div>'
 
--- S25.7 SSL and authentication posture
-\qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">SSL and Authentication Posture</div>'
-\qecho '<div class="table-wrap">'
-\qecho '<table class="pg360"><thead><tr>'
-\qecho '<th>Control</th><th>Observed Value</th><th>Status</th><th>Action</th>'
-\qecho '</tr></thead><tbody>'
 
-WITH ssl_state AS (
-  SELECT
-    current_setting('ssl', true) AS ssl_on,
-    current_setting('password_encryption', true) AS password_encryption,
-    COALESCE((SELECT COUNT(*)
-              FROM pg_stat_activity a
-              LEFT JOIN pg_stat_ssl s ON s.pid = a.pid
-              WHERE a.datname = current_database()
-                AND a.pid <> pg_backend_pid()
-                AND COALESCE(s.ssl, false) = false), 0) AS non_ssl_sessions
-)
-SELECT
-  '<tr><td>ssl</td><td>' || ssl_on || '</td><td class="' ||
-  CASE WHEN ssl_on = 'on' THEN 'good">Enabled' ELSE 'crit">Disabled' END ||
-  '</td><td>' ||
-  CASE WHEN ssl_on = 'on' THEN 'Keep enabled and enforce hostssl in pg_hba.' ELSE 'Enable TLS in server config and restart.' END ||
-  '</td></tr>' ||
-  '<tr><td>password_encryption</td><td>' || password_encryption || '</td><td class="' ||
-  CASE WHEN password_encryption = 'scram-sha-256' THEN 'good">Strong' ELSE 'warn">Legacy/default' END ||
-  '</td><td>' ||
-  CASE WHEN password_encryption = 'scram-sha-256' THEN 'No change required.' ELSE 'Switch to scram-sha-256 and rotate credentials in waves.' END ||
-  '</td></tr>' ||
-  '<tr><td>Active non-SSL sessions</td><td class="num">' || non_ssl_sessions || '</td><td class="' ||
-  CASE WHEN non_ssl_sessions = 0 THEN 'good">Compliant' WHEN non_ssl_sessions < 5 THEN 'warn">Partial' ELSE 'crit">Exposure' END ||
-  '</td><td>Investigate clients/poolers not enforcing SSL and update connection strings.</td></tr>'
-FROM ssl_state;
-
-\qecho '</tbody></table></div></div>'
-
--- S25.8 Audit logging posture
-\qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Audit Logging Posture</div>'
-\qecho '<div class="table-wrap">'
-\qecho '<table class="pg360"><thead><tr>'
-\qecho '<th>Signal</th><th>Value</th><th>Status</th><th>Operational Guidance</th>'
-\qecho '</tr></thead><tbody>'
-
-WITH lg AS (
-  SELECT
-    current_setting('log_connections', true) AS log_connections,
-    current_setting('log_disconnections', true) AS log_disconnections,
-    current_setting('log_lock_waits', true) AS log_lock_waits,
-    current_setting('log_min_duration_statement', true) AS log_min_duration_statement,
-    current_setting('log_statement', true) AS log_statement,
-    EXISTS (SELECT 1 FROM pg_extension WHERE extname = 'pgaudit') AS pgaudit_installed
-)
-SELECT
-  '<tr><td>Connection logging</td><td>' || log_connections || '/' || log_disconnections || '</td><td class="' ||
-  CASE WHEN log_connections = 'on' AND log_disconnections = 'on' THEN 'good">Enabled' ELSE 'warn">Partial' END ||
-  '</td><td>Enable both to support access forensics and session lifecycle auditing.</td></tr>' ||
-  '<tr><td>Lock wait logging</td><td>' || log_lock_waits || '</td><td class="' ||
-  CASE WHEN log_lock_waits = 'on' THEN 'good">Enabled' ELSE 'warn">Disabled' END ||
-  '</td><td>Keep on for incident triage of blocking chains.</td></tr>' ||
-  '<tr><td>Slow query logging</td><td>' || log_min_duration_statement || '</td><td class="' ||
-  CASE WHEN log_min_duration_statement = '-1' THEN 'warn">Disabled' ELSE 'good">Enabled' END ||
-  '</td><td>Use bounded threshold (e.g., 500-2000ms) for performance forensics.</td></tr>' ||
-  '<tr><td>Statement audit mode</td><td>' || log_statement || '</td><td class="' ||
-  CASE WHEN log_statement IN ('all','mod') THEN 'warn">High volume' ELSE 'good">Controlled' END ||
-  '</td><td>Prefer scoped audit controls to avoid log amplification.</td></tr>' ||
-  '<tr><td>pgaudit extension</td><td>' || CASE WHEN pgaudit_installed THEN 'installed' ELSE 'not installed' END || '</td><td class="' ||
-  CASE WHEN pgaudit_installed THEN 'good">Available' ELSE 'warn">Optional for regulated workloads' END ||
-  '</td><td>Enable where compliance requires statement-class audit trails.</td></tr>'
-FROM lg;
-
-\qecho '</tbody></table></div></div>'
 \qecho '</div>'
 
 -- =============================================================================
@@ -13544,8 +14485,8 @@ FROM lg;
 \qecho '<div class="section-header">'
 \qecho '  '
 \qecho '  <div>'
-\qecho '    <div class="section-title">Capacity &amp; Growth Projections (Enhanced)</div>'
-\qecho '    <div class="section-desc">Table growth velocity, disk usage trends, tablespace free space, and projected capacity dates.</div>'
+\qecho '    <div class="section-title">Capacity Detail &amp; Projections</div>'
+\qecho '    <div class="section-desc">Detailed storage composition, growth velocity, projection assumptions, and top growth drivers.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
@@ -13579,7 +14520,7 @@ SELECT
   '<td class="' ||
   CASE
     WHEN n_tup_ins > 0 AND n_tup_del > n_tup_ins * 0.9 THEN 'good">Queue/log pattern  stable size'
-    WHEN n_tup_ins > n_tup_del * 10 AND n_tup_ins > 100000 THEN 'warn">Growing fast  monitor capacity'
+    WHEN n_tup_ins > n_tup_del * 10 AND n_tup_ins > 100000 THEN 'warn">Growing fast; confirm 30-day runway and tablespace headroom'
     WHEN n_tup_ins = 0 AND n_tup_del = 0 THEN '">Static reference table'
     WHEN n_tup_ins > 0 THEN '">Normal insert pattern'
     ELSE '">'
@@ -14340,20 +15281,20 @@ ext_eval AS (
             SELECT 1 FROM regexp_split_to_table(regexp_replace(lower(COALESCE(d.rds_extensions,'')), '\s+', '', 'g'), ',') AS x(ext)
             WHERE x.ext = lower(e.extname)
           ) THEN CASE WHEN e.extname IN ('btree_gin','citext','hstore','pgcrypto','pg_trgm','tablefunc','unaccent','uuid-ossp') THEN 'RDS trusted/common' ELSE 'RDS supported' END
-          WHEN COALESCE(c.aws_common, false) THEN 'Common on AWS docs; verify engine minor'
-          ELSE 'Verify rds.extensions'
+          WHEN COALESCE(c.aws_common, false) THEN 'Documented by AWS; confirm engine major/minor and rds.extensions before rollout'
+          ELSE 'Check rds.extensions and engine version before planning use'
         END
       WHEN d.provider_guess = 'Azure Database for PostgreSQL' THEN
         CASE
           WHEN EXISTS (
             SELECT 1 FROM regexp_split_to_table(regexp_replace(lower(COALESCE(d.azure_extensions,'')), '\s+', '', 'g'), ',') AS x(ext)
             WHERE x.ext = lower(e.extname)
-          ) THEN CASE WHEN e.is_trusted THEN 'Azure trusted/common' ELSE 'Azure allowlisted/admin' END
-          WHEN COALESCE(c.azure_common, false) THEN CASE WHEN e.is_trusted THEN 'Azure trusted/common' ELSE 'Azure supported/admin' END
-          ELSE 'Check azure.extensions allowlist'
+          ) THEN CASE WHEN e.is_trusted THEN 'Azure trusted/common' ELSE 'Azure allowlisted/admin-enabled' END
+          WHEN COALESCE(c.azure_common, false) THEN CASE WHEN e.is_trusted THEN 'Azure trusted/common' ELSE 'Azure supported/admin-enabled' END
+          ELSE 'Check azure.extensions allowlist and service-tier support'
         END
       WHEN d.provider_guess = 'Google Cloud SQL for PostgreSQL' THEN
-        CASE WHEN COALESCE(c.cloudsql_common, false) THEN 'Cloud SQL supported' ELSE 'Verify Cloud SQL extension list' END
+        CASE WHEN COALESCE(c.cloudsql_common, false) THEN 'Cloud SQL supported' ELSE 'Check Cloud SQL supported extension list for this engine version' END
       ELSE CASE WHEN COALESCE(c.aws_common, false) OR COALESCE(c.cloudsql_common, false) OR COALESCE(c.azure_common, false) THEN 'Provider-common baseline' ELSE 'Provider-specific review' END
     END AS provider_posture,
     CASE
@@ -14409,11 +15350,11 @@ FROM ext_eval;
 
 WITH provider_catalog AS (
   SELECT * FROM (VALUES
-    (1, 'pg_stat_statements', 'Required', 'Supported; preload/restart required', 'Supported', 'Supported/admin', 'Primary SQL telemetry source'),
-    (2, 'pg_buffercache', 'Recommended', 'Supported', 'Supported', 'Supported/admin', 'Buffer residency validation'),
-    (3, 'pgstattuple', 'Recommended', 'Supported', 'Supported', 'Supported/admin', 'Exact table and index bloat validation'),
-    (4, 'pg_visibility', 'Optional', 'Supported', 'Supported', 'Supported/admin', 'Visibility map and vacuum evidence'),
-    (5, 'pg_prewarm', 'Optional', 'Supported', 'Supported', 'Supported/admin', 'Cache warmup validation'),
+    (1, 'pg_stat_statements', 'Required', 'Supported; enable preload and restart if not already configured', 'Supported', 'Supported; admin-enabled', 'Primary SQL telemetry source'),
+    (2, 'pg_buffercache', 'Recommended', 'Supported', 'Supported', 'Supported; admin-enabled', 'Buffer residency validation'),
+    (3, 'pgstattuple', 'Recommended', 'Supported', 'Supported', 'Supported; admin-enabled', 'Exact table and index bloat validation'),
+    (4, 'pg_visibility', 'Optional', 'Supported', 'Supported', 'Supported; admin-enabled', 'Visibility map and vacuum evidence'),
+    (5, 'pg_prewarm', 'Optional', 'Supported', 'Supported', 'Supported; admin-enabled', 'Cache warmup validation'),
     (6, 'pg_stat_kcache', 'Optional', 'Varies / third-party', 'Varies / third-party', 'Varies / third-party', 'OS-level per-query attribution'),
     (7, 'btree_gin', 'Common trusted', 'Trusted/common', 'Supported', 'Trusted/common', 'Trusted GIN operator-class support'),
     (8, 'citext', 'Common trusted', 'Trusted/common', 'Supported', 'Trusted/common', 'Case-insensitive text semantics'),
@@ -14466,7 +15407,7 @@ LEFT JOIN avail a ON a.ext_name = pc.ext_name;
 \qecho '<div class="subsection-title">Optimal pg_stat_statements Configuration</div>'
 \qecho '<div class="code-block">'
 \qecho '-- Add to postgresql.conf (requires restart for shared_preload_libraries):'
-\qecho 'shared_preload_libraries = ''pg_stat_statements''  -- REQUIRED for PG11-'
+\qecho 'shared_preload_libraries = ''pg_stat_statements''  -- required when pg_stat_statements is used'
 \qecho ''
 \qecho '-- Tune pg_stat_statements:'
 \qecho 'pg_stat_statements.max = 10000          -- track top 10k unique query shapes (default 5000)'
@@ -14534,6 +15475,74 @@ LEFT JOIN avail a ON a.ext_name = pc.ext_name;
 \qecho '</div>'
 \qecho '</div>'
 
+
+-- S29.6 Advanced assisted diagnostics readiness
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Advanced Assisted Diagnostics Readiness</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Capability</th><th>Status</th><th>Observed Signal</th><th>Assisted Outcome</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH caps AS (
+  SELECT
+    COALESCE(current_setting('shared_preload_libraries', true), '') AS preload_libs,
+    COALESCE(current_setting('track_io_timing', true), 'off') AS track_io_timing,
+    COALESCE(current_setting('track_wal_io_timing', true), 'off') AS track_wal_io_timing,
+    COALESCE(current_setting('track_functions', true), 'none') AS track_functions,
+    COALESCE(current_setting('log_min_duration_statement', true), '-1') AS log_min_duration_statement,
+    COALESCE(current_setting('log_lock_waits', true), 'off') AS log_lock_waits,
+    COALESCE(current_setting('pg_stat_statements.track_planning', true), 'off') AS track_planning,
+    COALESCE(current_setting('auto_explain.log_min_duration', true), '') AS auto_explain_log_min_duration,
+    COALESCE(current_setting('auto_explain.log_analyze', true), 'off') AS auto_explain_log_analyze,
+    COALESCE(current_setting('auto_explain.log_buffers', true), 'off') AS auto_explain_log_buffers,
+    COALESCE(current_setting('compute_query_id', true), '') AS compute_query_id
+), history AS (
+  SELECT
+    to_regclass('pg360_history.run_snapshot') IS NOT NULL
+      AND to_regclass('pg360_history.sql_snapshot') IS NOT NULL AS has_history_repo,
+    to_regclass('pg360_runtime.s02_pgss_snapshot') IS NOT NULL AS has_legacy_snapshot
+)
+SELECT
+  '<tr><td>Log-assisted plan capture</td><td class="' ||
+  CASE
+    WHEN preload_libs ILIKE '%auto_explain%' AND auto_explain_log_analyze = 'on' AND auto_explain_log_buffers = 'on' THEN 'good">READY'
+    WHEN preload_libs ILIKE '%auto_explain%' THEN 'warn">PARTIAL'
+    ELSE 'warn">LIMITED'
+  END ||
+  '</td><td>' ||
+  CASE
+    WHEN preload_libs ILIKE '%auto_explain%' THEN 'auto_explain loaded; log_min_duration=' || COALESCE(NULLIF(auto_explain_log_min_duration,''),'not visible')
+    ELSE 'auto_explain not preloaded'
+  END || '</td><td>Enables assisted plan-node review outside SQL-only core.</td></tr>' ||
+  '<tr><td>Planning telemetry</td><td class="' ||
+  CASE WHEN track_planning = 'on' THEN 'good">READY' ELSE 'warn">PARTIAL' END ||
+  '</td><td>pg_stat_statements.track_planning=' || track_planning || '</td><td>Supports planner-overhead and prepared-statement churn analysis.</td></tr>' ||
+  '<tr><td>I/O timing attribution</td><td class="' ||
+  CASE WHEN track_io_timing = 'on' THEN 'good">READY' ELSE 'warn">LIMITED' END ||
+  '</td><td>track_io_timing=' || track_io_timing || '; track_wal_io_timing=' || track_wal_io_timing || '</td><td>Improves assisted CPU-vs-I/O interpretation; WAL timing is optional enrichment.</td></tr>' ||
+  '<tr><td>Function hotspot telemetry</td><td class="' ||
+  CASE WHEN track_functions <> 'none' THEN 'good">READY' ELSE 'warn">LIMITED' END ||
+  '</td><td>track_functions=' || track_functions || '</td><td>Enables pg_stat_user_functions-based hotspot review.</td></tr>' ||
+  '<tr><td>Historical regression baseline</td><td class="' ||
+  CASE WHEN has_history_repo OR has_legacy_snapshot THEN 'good">READY' ELSE 'warn">LIMITED' END ||
+  '</td><td>' ||
+    CASE WHEN has_history_repo THEN 'pg360_history tables present'
+         WHEN has_legacy_snapshot THEN 'legacy pg360_runtime snapshot present'
+         ELSE 'no repository tables visible'
+    END || '</td><td>Unlocks run-to-run drift analysis beyond a single stats window.</td></tr>' ||
+  '<tr><td>Slow-query + lock log context</td><td class="' ||
+  CASE WHEN log_min_duration_statement <> '-1' AND log_lock_waits = 'on' THEN 'good">READY'
+       WHEN log_min_duration_statement <> '-1' OR log_lock_waits = 'on' THEN 'warn">PARTIAL'
+       ELSE 'warn">LIMITED'
+  END ||
+  '</td><td>log_min_duration_statement=' || log_min_duration_statement || '; log_lock_waits=' || log_lock_waits || '</td><td>Provides assisted forensic context for slow SQL and blocking chains.</td></tr>' ||
+  '<tr><td>Query identity stability</td><td class="' ||
+  CASE WHEN compute_query_id IN ('on','auto') THEN 'good">READY' ELSE 'warn">LIMITED' END ||
+  '</td><td>compute_query_id=' || COALESCE(NULLIF(compute_query_id,''),'not visible') || '</td><td>Improves cross-run fingerprint correlation for assisted mode.</td></tr>'
+FROM caps, history;
+
+\qecho '</tbody></table></div></div>'
 \qecho '</div>'
 
 -- =============================================================================
@@ -14643,6 +15652,7 @@ FROM missing;
 \qecho '<th>QueryID</th><th>Calls</th><th>Total Exec ms</th><th>Mean Exec ms</th><th>Shared Reads</th><th>Temp Writes</th><th>Fingerprint</th>'
 \qecho '</tr></thead><tbody>'
 
+\if :s02_has_pgss
 SELECT
   COALESCE(
     string_agg(
@@ -14673,6 +15683,86 @@ FROM (
   ORDER BY total_exec_time DESC
   LIMIT 20
 ) q;
+\else
+SELECT '<tr><td colspan="7" class="table-empty">pg_stat_statements unavailable; join-risk fingerprints cannot be ranked in this run.</td></tr>';
+\endif
+
+\qecho '</tbody></table></div></div>'
+
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Long-Query Rewrite Candidates</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>QueryID</th><th>Calls</th><th>Mean Exec ms</th><th>Temp Writes</th><th>Heuristic Signal</th><th>Rewrite Focus</th><th>Confidence</th>'
+\qecho '</tr></thead><tbody>'
+
+\if :s02_has_pgss
+WITH base AS (
+  SELECT
+    COALESCE(queryid::text, md5(query)) AS queryid_text,
+    regexp_replace(query, E'\\s+', ' ', 'g') AS query_text,
+    calls::bigint AS calls,
+    mean_exec_time::double precision AS mean_exec_time,
+    total_exec_time::double precision AS total_exec_time,
+    temp_blks_written::bigint AS temp_blks_written
+  FROM pg_stat_statements
+  WHERE dbid = (SELECT oid FROM pg_database WHERE datname = current_database())
+    AND query NOT ILIKE '%pg360%'
+    AND (:'s02_relax_pgss_filter' = 'on' OR query NOT ILIKE '%pg_stat_statements%')
+), q AS (
+  SELECT
+    queryid_text,
+    calls,
+    mean_exec_time,
+    temp_blks_written,
+    CASE
+      WHEN query_text ILIKE '% join %' AND query_text ILIKE '% group by %' THEN 'Join + aggregate over a large working set'
+      WHEN query_text ILIKE '% order by %' AND query_text ILIKE '% limit %' THEN 'Late sort on a LIMIT-shaped query'
+      WHEN query_text ILIKE 'with %' THEN 'CTE or multi-stage statement'
+      WHEN ((length(lower(query_text)) - length(replace(lower(query_text), ' join ', ''))) / 6) >= 3 THEN 'Multi-join statement with possible join-order sensitivity'
+      WHEN query_text ILIKE '% distinct %' AND query_text ILIKE '% join %' THEN 'DISTINCT after join expansion'
+      ELSE 'Long-running statement with rewrite potential'
+    END AS heuristic_signal,
+    CASE
+      WHEN query_text ILIKE '% join %' AND query_text ILIKE '% group by %' THEN 'Filter and pre-aggregate before wide joins; consider summary tables or materialized views if reused'
+      WHEN query_text ILIKE '% order by %' AND query_text ILIKE '% limit %' THEN 'Review order-supporting indexes and prefer keyset pagination over OFFSET loops'
+      WHEN query_text ILIKE 'with %' THEN 'Validate whether WITH is forcing extra scans or materialization that a simpler query shape can avoid'
+      WHEN ((length(lower(query_text)) - length(replace(lower(query_text), ' join ', ''))) / 6) >= 3 THEN 'Review selective predicate placement, join order sensitivity, and extended statistics'
+      WHEN query_text ILIKE '% distinct %' AND query_text ILIKE '% join %' THEN 'Confirm DISTINCT is required and whether uniqueness can be enforced earlier'
+      ELSE 'Review scan fraction, filter placement, and plan shape before adding more indexes'
+    END AS rewrite_focus,
+    CASE
+      WHEN temp_blks_written > 0 THEN 'Medium-High'
+      WHEN mean_exec_time >= 250 THEN 'Medium'
+      ELSE 'Low-Medium'
+    END AS confidence
+  FROM base
+  WHERE mean_exec_time >= 50
+     OR total_exec_time >= 60000
+     OR temp_blks_written > 0
+  ORDER BY total_exec_time DESC
+  LIMIT 20
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(queryid_text,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num">' || to_char(calls, 'FM999,999,999') || '</td>' ||
+      '<td class="num">' || to_char(round(mean_exec_time::numeric,2), 'FM999,999,990.00') || '</td>' ||
+      '<td class="num">' || to_char(temp_blks_written, 'FM999,999,999') || '</td>' ||
+      '<td>' || heuristic_signal || '</td>' ||
+      '<td>' || rewrite_focus || '</td>' ||
+      '<td>' || confidence || '</td>' ||
+      '</tr>',
+      E'\n'
+    ),
+    '<tr><td colspan="7" class="table-empty">No long-query rewrite candidates crossed the reporting threshold in this run.</td></tr>'
+  )
+FROM q;
+\else
+SELECT '<tr><td colspan="7" class="table-empty">pg_stat_statements unavailable; rewrite-candidate heuristics are blocked in this run.</td></tr>';
+\endif
 
 \qecho '</tbody></table></div></div>'
 \qecho '</div>'
@@ -14745,6 +15835,7 @@ FROM cfg;
 \qecho '<th>QueryID</th><th>Calls</th><th>Workers Requested</th><th>Workers Launched</th><th>Fulfillment %</th><th>Total Exec ms</th><th>Fingerprint</th>'
 \qecho '</tr></thead><tbody>'
 
+\if :s02_has_pgss
 SELECT
   COALESCE(
     string_agg(
@@ -14782,6 +15873,9 @@ FROM (
   ORDER BY total_exec_time DESC
   LIMIT 20
 ) q;
+\else
+SELECT '<tr><td colspan="7" class="table-empty">pg_stat_statements unavailable; parallel query fingerprints cannot be ranked in this run.</td></tr>';
+\endif
 
 \qecho '</tbody></table></div></div>'
 \qecho '</div>'
@@ -14843,6 +15937,7 @@ FROM cfg;
 \qecho '<th>QueryID</th><th>Calls</th><th>Total Exec ms</th><th>Total JIT ms</th><th>JIT % of Exec</th><th>Interpretation</th><th>Fingerprint</th>'
 \qecho '</tr></thead><tbody>'
 
+\if :s02_has_pgss
 SELECT
   COALESCE(
     string_agg(
@@ -14896,6 +15991,9 @@ FROM (
   ORDER BY total_jit_ms DESC
   LIMIT 20
 ) q;
+\else
+SELECT '<tr><td colspan="7" class="table-empty">pg_stat_statements unavailable; JIT-active fingerprints cannot be ranked in this run.</td></tr>';
+\endif
 
 \qecho '</tbody></table></div></div>'
 \qecho '</div>'
@@ -14979,6 +16077,7 @@ FROM (
 \qecho '<th>QueryID</th><th>Calls</th><th>Total Exec ms</th><th>Mean Exec ms</th><th>Temp Writes</th><th>Fingerprint</th>'
 \qecho '</tr></thead><tbody>'
 
+\if :s02_has_pgss
 SELECT
   COALESCE(
     string_agg(
@@ -15012,6 +16111,73 @@ FROM (
   ORDER BY total_exec_time DESC
   LIMIT 20
 ) q;
+\else
+SELECT '<tr><td colspan="6" class="table-empty">pg_stat_statements unavailable; JSON-heavy SQL fingerprints cannot be ranked in this run.</td></tr>';
+\endif
+
+\qecho '</tbody></table></div></div>'
+
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">JSONB / Array Operator Fit Guidance</div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Operator Pattern</th><th>Observed Fingerprints</th><th>Total Exec ms</th><th>Likely Index Fit</th><th>Review Guidance</th>'
+\qecho '</tr></thead><tbody>'
+
+\if :s02_has_pgss
+WITH op_usage AS (
+  SELECT
+    COUNT(*) FILTER (WHERE query LIKE '%@>%') AS containment_cnt,
+    COALESCE(SUM(total_exec_time) FILTER (WHERE query LIKE '%@>%'), 0) AS containment_time,
+    COUNT(*) FILTER (WHERE query LIKE '%?|%' OR query LIKE '%?&%') AS existence_cnt,
+    COALESCE(SUM(total_exec_time) FILTER (WHERE query LIKE '%?|%' OR query LIKE '%?&%'), 0) AS existence_time,
+    COUNT(*) FILTER (WHERE query LIKE '%->>%' OR query LIKE '%#>>%') AS extraction_cnt,
+    COALESCE(SUM(total_exec_time) FILTER (WHERE query LIKE '%->>%' OR query LIKE '%#>>%'), 0) AS extraction_time,
+    COUNT(*) FILTER (WHERE query LIKE '% && %' OR query LIKE '% = ANY(%') AS array_cnt,
+    COALESCE(SUM(total_exec_time) FILTER (WHERE query LIKE '% && %' OR query LIKE '% = ANY(%'), 0) AS array_time
+  FROM pg_stat_statements
+  WHERE dbid = (SELECT oid FROM pg_database WHERE datname = current_database())
+    AND query NOT ILIKE '%pg360%'
+    AND (:'s02_relax_pgss_filter' = 'on' OR query NOT ILIKE '%pg_stat_statements%')
+), rows AS (
+  SELECT 1 AS ord, 'JSONB containment (@>)' AS operator_pattern, containment_cnt AS observed_cnt, containment_time AS total_exec_ms,
+         'GIN on jsonb; prefer jsonb_path_ops only when containment dominates the workload' AS index_fit,
+         'Best when predicates are mostly containment checks. Keep default jsonb_ops if existence operators are also common.' AS guidance
+  FROM op_usage
+  UNION ALL
+  SELECT 2, 'JSONB key existence (?| / ?&)', existence_cnt, existence_time,
+         'GIN using default jsonb_ops operator class',
+         'Existence operators need default jsonb_ops; jsonb_path_ops is too narrow for this pattern.'
+  FROM op_usage
+  UNION ALL
+  SELECT 3, 'JSON path extraction (->> / #>>)', extraction_cnt, extraction_time,
+         'Expression B-tree on extracted scalar path',
+         'If predicates or ORDER BY use extracted scalar values repeatedly, review targeted expression indexes.'
+  FROM op_usage
+  UNION ALL
+  SELECT 4, 'Array membership / overlap', array_cnt, array_time,
+         'GIN on arrays when membership/overlap is frequent',
+         'Validate operator usage before adding GIN; some array workloads still scan well enough without it.'
+  FROM op_usage
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || operator_pattern || '</td>' ||
+      '<td class="num">' || observed_cnt || '</td>' ||
+      '<td class="num">' || to_char(round(total_exec_ms::numeric,1), 'FM999,999,999,990.0') || '</td>' ||
+      '<td>' || index_fit || '</td>' ||
+      '<td>' || guidance || '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY ord
+    ),
+    '<tr><td colspan="5" class="table-empty">No semi-structured operator usage was detected in pg_stat_statements for this run.</td></tr>'
+  )
+FROM rows;
+\else
+SELECT '<tr><td colspan="5" class="table-empty">pg_stat_statements unavailable; operator-fit guidance is limited to inventory-only signals in this run.</td></tr>';
+\endif
 
 \qecho '</tbody></table></div></div>'
 \qecho '</div>'
@@ -15365,30 +16531,8 @@ FROM (
 \qecho '    });'
 \qecho '  }'
 \qecho ''
-\qecho '  function countSeveritySignals(selector) {'
-\qecho '    var seen = new Set();'
-\qecho '    Array.prototype.forEach.call(document.querySelectorAll(selector), function (el) {'
-\qecho '      if (!el.closest(''.section'')) {'
-\qecho '        return;'
-\qecho '      }'
-\qecho '      seen.add(el);'
-\qecho '    });'
-\qecho '    return seen.size;'
-\qecho '  }'
 \qecho ''
 \qecho '  function initSeverityStrip() {'
-\qecho '    var strip = document.getElementById(''severity_strip'');'
-\qecho '    if (!strip) {'
-\qecho '      return;'
-\qecho '    }'
-\qecho '    var criticalCount = countSeveritySignals(''.section .crit, .section .finding.critical, .section .card.critical, .section .severity-pill.pill-critical, .section .kpi-critical'');'
-\qecho '    var warningCount = countSeveritySignals(''.section .warn, .section .finding.high, .section .card.warning, .section .severity-pill.pill-high, .section .severity-pill.pill-warning'');'
-\qecho '    strip.innerHTML = ''<div class="severity-strip-label">Severity Signals</div>'' +'
-\qecho '      ''<div class="severity-strip-badges">'' +'
-\qecho '      ''<span class="severity-strip-badge critical"><span class="severity-strip-count">'' + criticalCount + ''</span> critical</span>'' +'
-\qecho '      ''<span class="severity-strip-badge warning"><span class="severity-strip-count">'' + warningCount + ''</span> warning</span>'' +'
-\qecho '      ''</div>'';'
-\qecho '    strip.hidden = false;'
 \qecho '  }'
 \qecho ''
 \qecho '  function parseDurationToSeconds(text) {'
@@ -15874,7 +17018,7 @@ FROM (
 \qecho '     {label: ''1b. Database Overview'', sectionId: ''s01''},'
 \qecho '     {label: ''1c. Config Audit'', sectionId: ''s23''},'
 \qecho '     {label: ''1d. Extension Inventory'', sectionId: ''s29''},'
-\qecho '     {label: ''1e. Security Audit'', sectionId: ''s12''},'
+\qecho '     {label: ''1e. Security Baseline'', sectionId: ''s12''},'
 \qecho '     {label: ''1f. Access Review'', sectionId: ''s25''}],'
 \qecho '    [{label: ''2a. Top SQL Analysis'', sectionId: ''s02''},'
 \qecho '     {label: ''2b. Workload & Tuning'', sectionId: ''s11''},'
@@ -15928,8 +17072,14 @@ FROM (
 \qecho '    ''Root Cause Summary and Operational Actions'': ''Root Cause Summary'','
 \qecho '    ''AccessExclusiveLock and DDL Lock Exposure'': ''DDL Lock Exposure'','
 \qecho '    ''Ranked Mitigation Actions (Fix / Verify / Rollback)'': ''Mitigation Actions'','
-\qecho '    ''Authentication and Audit Logging Posture'': ''Authentication & Audit Logging'','
+\qecho '    ''Authentication, SSL, and Audit Logging Baseline'': ''Auth, SSL & Audit Baseline'','
 \qecho '    ''Top Tables by Dead Tuple Ratio (bloat risk)'': ''Top Tables by Dead Tuples'','
+\qecho '    ''Top Tables by Size and Storage Split'': ''Top Tables by Size'','
+\qecho '    ''Top TOAST Tables by Size and Candidate Columns'': ''Top TOAST Tables'','
+\qecho '    ''Tables Where Index Size Exceeds Heap'': ''Index Size &gt; Heap'','
+\qecho '    ''HOT Update Efficiency by Table'': ''HOT Update Efficiency'','
+\qecho '    ''Analyze Freshness by Table'': ''Analyze Freshness'','
+\qecho '    ''Table Storage and Autovacuum Overrides'': ''Storage &amp; AV Overrides'','
 \qecho '    ''XID Wraparound Risk (CRITICAL if age &gt; 1.5 billion)'': ''XID Wraparound Risk'','
 \qecho '    ''Sequence Synchronization Check (post-migration risk: next insert = PK violation)'': ''Sequence Synchronization Check'','
 \qecho '    ''Trigger Inventory (High trigger count = potential Oracle migration artifact)'': ''Trigger Inventory'','
@@ -16002,7 +17152,6 @@ FROM (
 \qecho '    ''Critical Parameter Recommendations vs Current Values'': ''Critical Parameter Recommendations'','
 \qecho '    ''BTree Index Bloat Estimation (heuristic  use REINDEX CONCURRENTLY to reclaim)'': ''BTree Index Bloat Estimation'','
 \qecho '    ''Reindex Priority Queue (Waste and Access Combined)'': ''Reindex Priority Queue'','
-\qecho '    ''Extension Security Audit (dangerous extensions in user schemas)'': ''Extension Security Audit'','
 \qecho '    ''Objects Accessible to PUBLIC Role (privilege exposure)'': ''Objects Accessible to PUBLIC'','
 \qecho '    ''Role Membership and Inherited Access'': ''Role Membership & Inherited Access'','
 \qecho '    ''Grant Exposure Audit (PUBLIC and grant-option review)'': ''Grant Exposure Audit'','
@@ -16014,7 +17163,7 @@ FROM (
 \qecho '    ''Observability Tiers (Minimal, Recommended, Advanced)'': ''Observability Tiers'','
 \qecho '    ''auto_explain Safe Baseline (Production-Friendly)'': ''auto_explain Safe Baseline'','
 \qecho '    ''JSON / JSONB / Array Column Inventory'': ''JSON / JSONB Column Inventory'','
-\qecho '    ''Extensions: Installed / Missing / Risk'': ''Extensions: Installed/Missing/Risk'','
+\qecho '    ''Extension Posture Snapshot'': ''Extension Posture Snapshot'','
 \qecho '    ''Foreign Keys Without Supporting Indexes (Oracle auto-indexes these  PG does NOT)'': ''FKs Without Supporting Indexes'','
 \qecho '    ''Join-Column Index Gaps Under Scan Pressure'': ''Join-Column Index Gaps'''
 \qecho '  };'
@@ -16141,7 +17290,7 @@ FROM (
 \qecho '    ''09'': ''Connections & Pooling'','
 \qecho '    ''10'': ''Vacuum & Maintenance'','
 \qecho '    ''11'': ''Workload Profile & Tuning'','
-\qecho '    ''12'': ''Security Audit'','
+\qecho '    ''12'': ''Security Baseline'','
 \qecho '    ''13'': ''Partitioning Health'','
 \qecho '    ''15'': ''Data Quality Checks'','
 \qecho '    ''16'': ''Capacity & Growth'','

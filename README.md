@@ -20,6 +20,14 @@ Recommended visibility grants for the reporting role:
 - `pg_monitor`
 - `pg_read_all_stats`
 
+## Supported PostgreSQL Versions
+- supported target range: PostgreSQL 15 through 18
+- best coverage and deepest telemetry: PostgreSQL 16+
+- on-prem and managed PostgreSQL are both supported with graceful degradation when optional telemetry is unavailable
+
+## Release Gate
+- see RELEASE_GATE.md for support scope, validation lanes, release blockers, and signoff criteria
+
 ## Usage
 ```bash
 cd pg360
