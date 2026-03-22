@@ -8,6 +8,9 @@ PG360 is a single-script, read-only PostgreSQL diagnostics report generator.
 - Release snapshot: `versions/version_1.0.0/`
 - Sample report: `versions/version_1.0.0/pg360_20260322_140334.html`
 
+## Repository
+- Planned public repository: [saisrinivase/pg360](https://github.com/saisrinivase/pg360)
+
 ## What this repository contains
 - `pg360.sql`: canonical runtime script
 - `versions/version_1.0.0/`: locked release snapshot with sample report
@@ -15,6 +18,8 @@ PG360 is a single-script, read-only PostgreSQL diagnostics report generator.
 - `RELEASE_GATE.md`: release criteria and validation lanes
 - `VALIDATION_CHECKLIST.md`: validation checklist used during QA
 - `SCRIPT_SAFETY_AUDIT.md`: execution safety posture and caveats
+- `DISCLAIMER.md`: usage and liability disclaimer
+- `AUTHORS.md`: author and contributor credits
 - `demo/pg360_validation_prelude.sql`: QA/demo seed script, not for production use
 
 ## Support statement
@@ -27,6 +32,16 @@ PG360 is a single-script, read-only PostgreSQL diagnostics report generator.
 - PG360 does not execute the remediation SQL it prints.
 - PG360 requires an explicit acknowledgement flag before execution.
 - Generated HTML should still be treated as a sensitive operational artifact.
+
+## Open-source use
+- You may use and modify PG360 for your own needs.
+- PG360 is released under the [MIT License](LICENSE).
+- See [DISCLAIMER.md](DISCLAIMER.md) for the no-warranty and no-liability statement.
+
+## Author and contributors
+- Author: Sai Endla
+- Contributors: Nagesh, Srikanth, Codex (OpenAI)
+- Full credits: [AUTHORS.md](AUTHORS.md)
 
 ## Prerequisites
 - `psql` installed and available in `PATH`
@@ -141,13 +156,3 @@ This flag does not change report content. It is only a deliberate pre-flight con
 - `VALIDATION_CHECKLIST.md`
 - `SCRIPT_SAFETY_AUDIT.md`
 - `versions/version_1.0.0/NOTES.txt`
-
-## GitHub push
-This local repository currently has no Git remote configured.
-
-When ready to publish, add a remote and push:
-
-```bash
-git remote add origin <your-github-repo-url>
-git push -u origin main --tags
-```

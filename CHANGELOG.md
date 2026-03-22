@@ -13,6 +13,7 @@ Highlights
 - Added sequence exhaustion runway check for migration-oriented risk detection.
 - Added share-safe mode for safer report distribution.
 - Typography/readability pass applied for laptop, monitor, and mobile-friendly viewing.
+- Open-source packaging added with MIT license, disclaimer, author/contributor credits, and public-release documentation.
 
 Release artifacts
 - Script snapshot: `versions/version_1.0.0/pg360.sql`
