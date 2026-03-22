@@ -1,0 +1,28 @@
+PG360 version_1.0.0
+
+Locked on: 2026-03-22 America/New_York
+Canonical script: pg360.sql
+Release sample report: pg360_20260322_140334.html
+Validated target: pgbenchc_test on PostgreSQL 18.3
+
+Release scope
+- Single-script, read-only PostgreSQL diagnostics report.
+- Supported target range: PostgreSQL 15 through 18.
+- Best telemetry coverage on PostgreSQL 16+.
+- Intended for on-prem and managed PostgreSQL with graceful degradation when optional telemetry is unavailable.
+
+Key release characteristics
+- Read-only execution model with explicit acknowledgement gate.
+- HTML report generation with a validated sample artifact.
+- Helvetica-based report typography tuned for laptop and mobile readability.
+- Workload, wait, lock, index, vacuum, WAL, configuration, and security coverage.
+- Share-safe mode available for safer report distribution.
+
+Included artifacts
+- versions/version_1.0.0/pg360.sql
+- versions/version_1.0.0/pg360_20260322_140334.html
+
+Release notes and usage
+- See README.md for usage, variables, and examples.
+- See CHANGELOG.md for release summary.
+- See RELEASE_GATE.md and VALIDATION_CHECKLIST.md for validation scope.
