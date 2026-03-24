@@ -3297,49 +3297,49 @@ WITH cfg AS (
            WHEN auto_explain_log_min_duration IS NOT NULL OR shared_preload_libraries ILIKE '%auto_explain%' THEN 'PASS'
            ELSE 'WARN'
          END AS status,
-         'Use a targeted role or session baseline before enabling broad plan capture.' AS recommended_use
+         'Readiness only. Use S23 configuration posture before changing live plan-capture settings.' AS recommended_use
   FROM cfg
   UNION ALL
   SELECT 2, 'auto_explain.log_min_duration',
          COALESCE(auto_explain_log_min_duration, 'not exposed'),
          CASE WHEN auto_explain_log_min_duration IS NULL THEN 'WARN' ELSE 'INFO' END,
-         'Start with 500ms to 1000ms for production-safe slow-plan capture.'
+         'Current threshold only; review S23 for the operating baseline and overhead tradeoff.'
   FROM cfg
   UNION ALL
   SELECT 3, 'auto_explain.log_analyze',
          COALESCE(auto_explain_log_analyze, 'not exposed'),
          CASE WHEN auto_explain_log_analyze = 'on' THEN 'INFO' ELSE 'WARN' END,
-         'If you enable this, keep log_timing off first to limit overhead.'
+         'Readiness signal only; S23 explains when this should be on and what overhead it adds.'
   FROM cfg
   UNION ALL
   SELECT 4, 'auto_explain.log_timing',
          COALESCE(auto_explain_log_timing, 'not exposed'),
          CASE WHEN auto_explain_log_timing = 'off' THEN 'PASS' ELSE 'WARN' END,
-         'Off is the safer starting point when collecting plans under load.'
+         'Readiness signal only; S23 carries the baseline recommendation for production-safe rollout.'
   FROM cfg
   UNION ALL
   SELECT 5, 'auto_explain.log_buffers',
          COALESCE(auto_explain_log_buffers, 'not exposed'),
          CASE WHEN auto_explain_log_buffers = 'on' THEN 'PASS' ELSE 'INFO' END,
-         'Helpful for proving whether a slow plan is cache-heavy, read-heavy, or spill-prone.'
+         'Readiness signal only; S23 shows whether this is part of the active operating baseline.'
   FROM cfg
   UNION ALL
   SELECT 6, 'auto_explain.sample_rate',
          COALESCE(auto_explain_sample_rate, 'not exposed'),
          CASE WHEN auto_explain_sample_rate IS NULL THEN 'WARN' ELSE 'INFO' END,
-         'Use a sample rate below 1.0 if the workload is too busy for full capture.'
+         'Readiness signal only; S23 shows the recommended baseline when full capture is too aggressive.'
   FROM cfg
   UNION ALL
   SELECT 7, 'pg_stat_statements.track_planning',
          COALESCE(pgss_track_planning, 'not exposed'),
          CASE WHEN pgss_track_planning = 'on' THEN 'PASS' ELSE 'INFO' END,
-         'Planning telemetry improves regression detection even without full plan capture.'
+         'Capability signal only; review S23 pg_stat_statements posture for the live setting guidance.'
   FROM cfg
   UNION ALL
   SELECT 8, 'pg_stat_statements.track',
          COALESCE(pgss_track, 'not exposed'),
          CASE WHEN pgss_track = 'all' THEN 'PASS' ELSE 'INFO' END,
-         'Use all when nested statements matter more than the extra cardinality.'
+         'Capability signal only; review S23 pg_stat_statements posture for the preferred operating mode.'
   FROM cfg
 )
 SELECT COALESCE(
@@ -13952,9 +13952,13 @@ FROM pg_settings, platform
 WHERE name IN (
   'shared_buffers','work_mem','maintenance_work_mem','effective_cache_size',
   'max_connections','max_worker_processes','max_parallel_workers','max_parallel_workers_per_gather',
-  'wal_level','max_wal_size','checkpoint_timeout','checkpoint_completion_target',
+  'wal_level','max_wal_size','checkpoint_timeout','checkpoint_completion_target','wal_buffers','synchronous_commit',
   'autovacuum','autovacuum_vacuum_scale_factor','autovacuum_analyze_scale_factor',
-  'track_io_timing','log_min_duration_statement','log_lock_waits','ssl'
+  'track_io_timing','track_wal_io_timing','log_min_duration_statement','log_lock_waits','log_temp_files','log_autovacuum_min_duration','log_checkpoints','deadlock_timeout','ssl',
+  'shared_preload_libraries','compute_query_id',
+  'pg_stat_statements.max','pg_stat_statements.track','pg_stat_statements.track_planning','pg_stat_statements.track_utility','pg_stat_statements.save',
+  'auto_explain.log_min_duration','auto_explain.log_analyze','auto_explain.log_buffers','auto_explain.log_timing','auto_explain.log_nested_statements','auto_explain.sample_rate',
+  'auto_explain.log_format','auto_explain.log_level','auto_explain.log_verbose','auto_explain.log_wal','auto_explain.log_triggers','auto_explain.log_parameter_max_length','auto_explain.log_settings'
 );
 
 \qecho '</tbody></table></div></div>'
@@ -14162,6 +14166,260 @@ SELECT COALESCE(
 )
 FROM rows;
 
+\qecho '</tbody></table></div></div>'
+
+-- S23.2b pg_stat_statements configuration posture
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">pg_stat_statements Configuration Posture</div>'
+\qecho '<div class="finding info"><div class="finding-body">This keeps SQL fingerprint telemetry from being assumed when it is only partially enabled. It shows whether pg_stat_statements is installed, stable, and capturing enough detail for tuning and regression work.</div></div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Parameter</th><th>Current</th><th>Status</th><th>Why It Matters</th><th>Suggested Baseline</th>'
+\qecho '</tr></thead><tbody>'
+WITH cfg AS (
+  SELECT
+    EXISTS (SELECT 1 FROM pg_extension WHERE extname = 'pg_stat_statements') AS ext_installed,
+    COALESCE(current_setting('shared_preload_libraries', true), '') AS shared_preload_libraries,
+    COALESCE(current_setting('compute_query_id', true), 'not exposed') AS compute_query_id,
+    current_setting('pg_stat_statements.max', true) AS pgss_max,
+    current_setting('pg_stat_statements.track', true) AS pgss_track,
+    current_setting('pg_stat_statements.track_planning', true) AS pgss_track_planning,
+    current_setting('pg_stat_statements.track_utility', true) AS pgss_track_utility,
+    current_setting('pg_stat_statements.save', true) AS pgss_save
+), rows AS (
+  SELECT 1 AS ord, 'shared_preload_libraries'::text AS param,
+         CASE WHEN shared_preload_libraries = '' THEN '(none)' ELSE shared_preload_libraries END AS current_val,
+         CASE WHEN shared_preload_libraries ILIKE '%pg_stat_statements%' THEN 'OK' ELSE 'WARNING' END AS status,
+         'pg_stat_statements must be preloaded at startup for stable cluster-wide SQL telemetry.' AS why_it_matters,
+         'Include pg_stat_statements in shared_preload_libraries and restart if it is missing.' AS suggested_baseline
+  FROM cfg
+  UNION ALL
+  SELECT 2, 'extension installed',
+         CASE WHEN ext_installed THEN 'yes' ELSE 'no' END,
+         CASE WHEN ext_installed THEN 'OK' ELSE 'WARNING' END,
+         'Without the extension, Top SQL and workload fingerprint analysis are blocked even if the library is preloaded.',
+         'CREATE EXTENSION IF NOT EXISTS pg_stat_statements;'
+  FROM cfg
+  UNION ALL
+  SELECT 3, 'compute_query_id',
+         compute_query_id,
+         CASE WHEN compute_query_id IN ('on','auto') THEN 'OK' ELSE 'WARNING' END,
+         'Stable query identity is required for reliable fingerprinting, drift analysis, and cross-run comparisons.',
+         'Use auto or on.'
+  FROM cfg
+  UNION ALL
+  SELECT 4, 'pg_stat_statements.max',
+         COALESCE(pgss_max, 'not exposed'),
+         CASE WHEN pgss_max IS NULL THEN 'WARNING' WHEN pgss_max::int >= 10000 THEN 'OK' ELSE 'INFO' END,
+         'This limits how many unique query shapes are retained before older entries are evicted.',
+         '10000 or higher for busy application estates.'
+  FROM cfg
+  UNION ALL
+  SELECT 5, 'pg_stat_statements.track',
+         COALESCE(pgss_track, 'not exposed'),
+         CASE WHEN pgss_track = 'all' THEN 'OK' WHEN pgss_track = 'top' THEN 'INFO' ELSE 'WARNING' END,
+         'This controls whether nested statements inside functions and procedures are included.',
+         'top is leaner; all is better when nested SQL behavior matters.'
+  FROM cfg
+  UNION ALL
+  SELECT 6, 'pg_stat_statements.track_planning',
+         COALESCE(pgss_track_planning, 'not exposed'),
+         CASE WHEN pgss_track_planning = 'on' THEN 'OK' WHEN pgss_track_planning IS NULL THEN 'WARNING' ELSE 'INFO' END,
+         'Planning telemetry helps separate planner churn from execution cost and supports regression analysis.',
+         'on when planner overhead matters.'
+  FROM cfg
+  UNION ALL
+  SELECT 7, 'pg_stat_statements.track_utility',
+         COALESCE(pgss_track_utility, 'not exposed'),
+         CASE WHEN pgss_track_utility = 'on' THEN 'OK' WHEN pgss_track_utility IS NULL THEN 'WARNING' ELSE 'INFO' END,
+         'Utility statements can matter during maintenance windows, ETL, or migration-heavy runs.',
+         'on if maintenance and utility visibility matter in your environment.'
+  FROM cfg
+  UNION ALL
+  SELECT 8, 'pg_stat_statements.save',
+         COALESCE(pgss_save, 'not exposed'),
+         CASE WHEN pgss_save = 'on' THEN 'OK' WHEN pgss_save IS NULL THEN 'WARNING' ELSE 'INFO' END,
+         'Persisting statistics across restarts helps preserve context between controlled restarts and failovers.',
+         'on unless you intentionally want reset-at-restart behavior.'
+  FROM cfg
+)
+SELECT COALESCE(
+  string_agg(
+    '<tr>' ||
+    '<td>' || param || '</td>' ||
+    '<td>' || replace(replace(replace(replace(replace(current_val,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+    '<td><span class="severity-pill ' ||
+    CASE status
+      WHEN 'OK' THEN 'pill-good"> OK'
+      WHEN 'WARNING' THEN 'pill-high"> WARNING'
+      ELSE 'pill-info"> INFO'
+    END || '</span></td>' ||
+    '<td>' || why_it_matters || '</td>' ||
+    '<td>' || suggested_baseline || '</td>' ||
+    '</tr>', E'\n' ORDER BY ord
+  ),
+  '<tr><td colspan="5" class="table-empty">pg_stat_statements settings are not exposed on this platform or version.</td></tr>'
+)
+FROM rows;
+\qecho '</tbody></table></div></div>'
+
+-- S23.2c logging forensic posture
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Logging Forensic Posture</div>'
+\qecho '<div class="finding info"><div class="finding-body">This subsection is about preserving evidence after the incident. If these are off, the database can still be healthy, but forensic depth drops sharply once stats reset or activity moves on.</div></div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Parameter</th><th>Current</th><th>Status</th><th>Why It Matters</th><th>Suggested Baseline</th>'
+\qecho '</tr></thead><tbody>'
+WITH cfg AS (
+  SELECT
+    COALESCE(current_setting('log_min_duration_statement', true), '-1') AS log_min_duration_statement,
+    COALESCE(current_setting('log_lock_waits', true), 'off') AS log_lock_waits,
+    COALESCE(current_setting('log_temp_files', true), '-1') AS log_temp_files,
+    COALESCE(current_setting('log_checkpoints', true), 'off') AS log_checkpoints,
+    COALESCE(current_setting('log_autovacuum_min_duration', true), '-1') AS log_autovacuum_min_duration,
+    COALESCE(current_setting('deadlock_timeout', true), '1s') AS deadlock_timeout
+), rows AS (
+  SELECT 1 AS ord, 'log_min_duration_statement'::text AS param,
+         log_min_duration_statement AS current_val,
+         CASE WHEN log_min_duration_statement = '-1' THEN 'WARNING' ELSE 'OK' END AS status,
+         'Slow-query logging preserves evidence beyond the stats-reset window and is the simplest production-safe forensic trail.' AS why_it_matters,
+         '500ms to 2000ms, aligned to your SLA and workload.' AS suggested_baseline
+  FROM cfg
+  UNION ALL
+  SELECT 2, 'log_lock_waits', log_lock_waits,
+         CASE WHEN log_lock_waits = 'on' THEN 'OK' ELSE 'WARNING' END,
+         'Without this, blocking chains are harder to reconstruct after the incident.',
+         'on'
+  FROM cfg
+  UNION ALL
+  SELECT 3, 'log_temp_files', log_temp_files,
+         CASE WHEN log_temp_files = '-1' THEN 'WARNING' ELSE 'OK' END,
+         'Temp spill logs connect work_mem pressure and query shape to real disk spill events.',
+         '0 or a small threshold during investigations; keep a bounded threshold in steady state.'
+  FROM cfg
+  UNION ALL
+  SELECT 4, 'log_checkpoints', log_checkpoints,
+         CASE WHEN log_checkpoints = 'on' THEN 'OK' ELSE 'WARNING' END,
+         'Checkpoint logs explain forced-checkpoint bursts, sync stalls, and write smoothing issues.',
+         'on'
+  FROM cfg
+  UNION ALL
+  SELECT 5, 'log_autovacuum_min_duration', log_autovacuum_min_duration,
+         CASE WHEN log_autovacuum_min_duration = '-1' THEN 'INFO' ELSE 'OK' END,
+         'Autovacuum logs help explain cleanup debt, table churn, and maintenance side effects under load.',
+         '0 or a low threshold in focused investigations; bounded threshold otherwise.'
+  FROM cfg
+  UNION ALL
+  SELECT 6, 'deadlock_timeout', deadlock_timeout,
+         'INFO',
+         'This controls how quickly PostgreSQL starts checking and logging lock waits that cross the threshold.',
+         '1s is a common starting point; tune with lock_waits and incident policy.'
+  FROM cfg
+)
+SELECT COALESCE(
+  string_agg(
+    '<tr>' ||
+    '<td>' || param || '</td>' ||
+    '<td>' || replace(replace(replace(replace(replace(current_val,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+    '<td><span class="severity-pill ' ||
+    CASE status
+      WHEN 'OK' THEN 'pill-good"> OK'
+      WHEN 'WARNING' THEN 'pill-high"> WARNING'
+      ELSE 'pill-info"> INFO'
+    END || '</span></td>' ||
+    '<td>' || why_it_matters || '</td>' ||
+    '<td>' || suggested_baseline || '</td>' ||
+    '</tr>', E'\n' ORDER BY ord
+  ),
+  '<tr><td colspan="5" class="table-empty">Logging settings are not exposed on this platform or version.</td></tr>'
+)
+FROM rows;
+\qecho '</tbody></table></div></div>'
+
+-- S23.2d checkpoint and WAL tuning posture
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Checkpoint &amp; WAL Tuning Posture</div>'
+\qecho '<div class="finding info"><div class="finding-body">This subsection keeps the write-path knobs together. It blends live checkpoint pressure with the settings that most often shape WAL bursts, checkpoint smoothing, and commit-path behavior.</div></div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Parameter</th><th>Current</th><th>Status</th><th>Why It Matters</th><th>Suggested Baseline</th>'
+\qecho '</tr></thead><tbody>'
+WITH cfg AS (
+  SELECT
+    MAX(CASE WHEN name = 'max_wal_size' THEN CASE WHEN unit IS NOT NULL AND unit <> '' THEN setting || unit ELSE setting END END) AS max_wal_size,
+    MAX(CASE WHEN name = 'checkpoint_timeout' THEN CASE WHEN unit IS NOT NULL AND unit <> '' THEN setting || unit ELSE setting END END) AS checkpoint_timeout,
+    MAX(CASE WHEN name = 'checkpoint_completion_target' THEN setting END) AS checkpoint_completion_target,
+    MAX(CASE WHEN name = 'wal_buffers' THEN CASE WHEN unit IS NOT NULL AND unit <> '' THEN setting || unit ELSE setting END END) AS wal_buffers,
+    MAX(CASE WHEN name = 'synchronous_commit' THEN setting END) AS synchronous_commit,
+    MAX(CASE WHEN name = 'track_wal_io_timing' THEN setting END) AS track_wal_io_timing
+  FROM pg_settings
+  WHERE name IN ('max_wal_size','checkpoint_timeout','checkpoint_completion_target','wal_buffers','synchronous_commit','track_wal_io_timing')
+), live AS (
+  SELECT 100.0 * num_requested / NULLIF(num_timed + num_requested, 0) AS forced_ckpt_pct
+  FROM pg_stat_checkpointer
+), rows AS (
+  SELECT 1 AS ord, 'live forced checkpoint ratio'::text AS param,
+         COALESCE(round(forced_ckpt_pct::numeric,2)::text,'0') || '%' AS current_val,
+         CASE WHEN forced_ckpt_pct > 10 THEN 'WARNING' ELSE 'OK' END AS status,
+         'This is the best live signal that max_wal_size or write cadence is too tight for the workload.' AS why_it_matters,
+         'Keep below 10% when possible; correlate with S08 and S07 before changing settings.' AS suggested_baseline
+  FROM live
+  UNION ALL
+  SELECT 2, 'max_wal_size', max_wal_size,
+         CASE WHEN forced_ckpt_pct > 10 THEN 'WARNING' ELSE 'INFO' END,
+         'More WAL runway reduces forced checkpoints and write bursts.',
+         'Increase when forced checkpoints are frequent; many busy systems need several GB, not the minimum.'
+  FROM cfg, live
+  UNION ALL
+  SELECT 3, 'checkpoint_timeout', checkpoint_timeout,
+         'INFO',
+         'This sets how often timed checkpoints occur even when WAL pressure is low.',
+         'Validate against recovery objectives; 5 to 15 minutes is a common operating range.'
+  FROM cfg
+  UNION ALL
+  SELECT 4, 'checkpoint_completion_target', checkpoint_completion_target,
+         CASE WHEN checkpoint_completion_target::numeric < 0.9 THEN 'WARNING' ELSE 'OK' END,
+         'Higher values spread checkpoint writes more evenly and reduce burstiness.',
+         '0.9 is the common starting point for steady write smoothing.'
+  FROM cfg
+  UNION ALL
+  SELECT 5, 'wal_buffers', wal_buffers,
+         'INFO',
+         'This affects how WAL records are buffered before flush; auto is usually fine unless write pressure is unusual.',
+         'Keep auto (-1) unless sustained write-heavy evidence points elsewhere.'
+  FROM cfg
+  UNION ALL
+  SELECT 6, 'synchronous_commit', synchronous_commit,
+         'INFO',
+         'This trades durability latency for commit speed and should move only with explicit durability requirements.',
+         'Keep on unless the business explicitly accepts relaxed durability semantics.'
+  FROM cfg
+  UNION ALL
+  SELECT 7, 'track_wal_io_timing', COALESCE(track_wal_io_timing, 'not exposed'),
+         CASE WHEN track_wal_io_timing = 'on' THEN 'OK' WHEN track_wal_io_timing IS NULL THEN 'WARNING' ELSE 'INFO' END,
+         'This improves WAL write and sync attribution during write-path investigations.',
+         'on when deep WAL latency forensics matter; optional for the baseline.'
+  FROM cfg
+)
+SELECT COALESCE(
+  string_agg(
+    '<tr>' ||
+    '<td>' || param || '</td>' ||
+    '<td>' || replace(replace(replace(replace(replace(current_val,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+    '<td><span class="severity-pill ' ||
+    CASE status
+      WHEN 'OK' THEN 'pill-good"> OK'
+      WHEN 'WARNING' THEN 'pill-high"> WARNING'
+      ELSE 'pill-info"> INFO'
+    END || '</span></td>' ||
+    '<td>' || why_it_matters || '</td>' ||
+    '<td>' || suggested_baseline || '</td>' ||
+    '</tr>', E'\n' ORDER BY ord
+  ),
+  '<tr><td colspan="5" class="table-empty">Checkpoint and WAL settings are not exposed on this platform or version.</td></tr>'
+)
+FROM rows;
 \qecho '</tbody></table></div></div>'
 
 -- S23.3 Workload-aligned tuning focus (linking settings to workload profile)
@@ -16031,6 +16289,7 @@ LEFT JOIN avail a ON a.ext_name = pc.ext_name;
 -- pg_stat_statements configuration advice
 \qecho '<div class="subsection">'
 \qecho '<div class="subsection-title">Optimal pg_stat_statements Configuration</div>'
+\qecho '<div class="finding info"><div class="finding-body">Baseline template only. Review live pg_stat_statements posture in S23 before changing startup settings.</div></div>'
 \qecho '<div class="code-block">'
 \qecho '-- Add to postgresql.conf (requires restart for shared_preload_libraries):'
 \qecho 'shared_preload_libraries = ''pg_stat_statements''  -- required when pg_stat_statements is used'
@@ -16064,6 +16323,7 @@ LEFT JOIN avail a ON a.ext_name = pc.ext_name;
 -- S29.4 auto_explain safe baseline
 \qecho '<div class="subsection">'
 \qecho '<div class="subsection-title">auto_explain Safe Baseline</div>'
+\qecho '<div class="finding info"><div class="finding-body">Baseline template only. Review S04 for readiness and S23 for live posture before broad rollout.</div></div>'
 \qecho '<div class="code-block">'
 \qecho '-- postgresql.conf (restart required for shared_preload_libraries if missing auto_explain)'
 \qecho 'shared_preload_libraries = ''pg_stat_statements,auto_explain'''
