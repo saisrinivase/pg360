@@ -10632,7 +10632,7 @@ FROM progress;
 \qecho '  '
 \qecho '  <div>'
 \qecho '    <div class="section-title">Workload Profile &amp; Configuration Tuning</div>'
-\qecho '    <div class="section-desc">Detected workload type with tailored configuration recommendations.</div>'
+\qecho '    <div class="section-desc">Detected workload type, SQL tuning workflow, and tailored configuration recommendations.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
@@ -10789,6 +10789,24 @@ FROM (
 \qecho '<tr><td>Derived</td><td>Ratios or rankings computed from direct PostgreSQL facts.</td><td>Cache hit %, HOT ratio, dead tuple %, WAL MB/s.</td><td>Use for prioritization, but validate thresholds in workload context.</td></tr>'
 \qecho '<tr><td>Heuristic</td><td>Pattern-based interpretation where SQL alone cannot fully prove root cause.</td><td>Query family classification, rewrite candidates, partition candidates.</td><td>Use as a candidate queue, not a blind change script.</td></tr>'
 \qecho '<tr><td>Not provable from SQL</td><td>Requires logs, plans, historical baselines, or external runbook evidence.</td><td>Restore drill quality, failover proof, exact plan-node mistakes.</td><td>Treat as assisted-mode scope or operational follow-up.</td></tr>'
+\qecho '</tbody></table></div></div>'
+
+-- S11.3 SQL tuning framework
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">5-Dimension SQL Tuning Framework</div>'
+\qecho '<div class="finding info"><div class="finding-header">'
+\qecho '<span class="finding-title">Start with query forensics, then move through statistics, object support, query shape, and platform behavior</span>'
+\qecho '<span class="severity-pill pill-info">TUNING FLOW</span></div>'
+\qecho '<div class="finding-body">This framework is already present in PG360 as linked evidence sections. Use it as a root-cause path: first identify the slow fingerprint, then validate planner statistics, object support, query shape, and finally version or configuration behavior before making changes.</div></div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Dimension</th><th>What It Answers</th><th>Primary PG360 Evidence</th><th>Typical Root Cause</th><th>What To Do Next</th>'
+\qecho '</tr></thead><tbody>'
+\qecho '<tr><td>01 · Query Forensics</td><td>Which SQL fingerprints are hurting latency, reads, locks, or spills right now?</td><td><a href="#s02">Top SQL Analysis</a>, <a href="#s03">Wait Events and Session Activity</a>, <a href="#s04">Lock Analysis</a></td><td>Expensive query family, lock wait, spill-heavy plan, or over-calling pattern.</td><td>Start in <a href="#s02">S02</a> with the heaviest fingerprints, then correlate waits or blockers before changing indexes or GUCs.</td></tr>'
+\qecho '<tr><td>02 · Statistics</td><td>Are stale or missing planner statistics making good paths invisible?</td><td><a href="#s20">Planner Statistics Quality &amp; Estimation Errors</a>, <a href="#s05">Table Health &amp; Bloat</a></td><td>Stale ANALYZE state, weak extended stats, row-count drift, or correlation blind spots.</td><td>Check <a href="#s20">S20</a> before adding indexes; bad stats can hide good indexes and force bad joins.</td></tr>'
+\qecho '<tr><td>03 · Object DDL</td><td>Do the physical structures actually support the access path the query needs?</td><td><a href="#s06">Index Health</a>, <a href="#s13">Partitioning Health</a>, <a href="#s19">HOT Updates &amp; Write Amplification</a></td><td>Missing or redundant indexes, wrong left-prefix support, weak partition layout, or write-heavy storage choices.</td><td>Use <a href="#s06">S06</a> and <a href="#s13">S13</a> to confirm the query has the right structural support before rewriting it.</td></tr>'
+\qecho '<tr><td>04 · Query Style</td><td>Is the SQL shape helping or fighting the planner?</td><td><a href="#s02">Top SQL Analysis</a>, <a href="#s30">Join Risk Detection</a>, <a href="#s33">JSONB Workload Detection</a></td><td>Non-SARGable predicates, chatty ORM access, late DISTINCT or ORDER BY, multi-join expansion, or JSON-heavy filters.</td><td>Review query shape after 01-03; use rewrite candidates and join-risk signals before adding more indexes.</td></tr>'
+\qecho '<tr><td>05 · PG Version / Platform</td><td>Are version defaults, platform limits, or configuration choices affecting the result?</td><td><a href="#s23">Full Configuration Parameter Audit</a>, <a href="#s31">Parallel Query Efficiency</a>, <a href="#m02">Platform and Diagnostic Context</a></td><td>Planner-cost settings, parallel worker limits, managed-service constraints, or version-specific behavior.</td><td>Validate <a href="#s23">S23</a> and platform context last; tune configuration after the query, stats, and DDL path are understood.</td></tr>'
 \qecho '</tbody></table></div></div>'
 \qecho '</div>'
 
