@@ -13168,7 +13168,137 @@ ORDER BY age(datfrozenxid) DESC;
 
 \qecho '</tbody></table></div></div>'
 
--- S21.5 Table-level XID age  per table countdown
+-- S21.5 Oldest open transactions that can delay freeze progress
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Wraparound Blockers: Oldest Open Transactions</div>'
+\qecho '<div class="finding info"><div class="finding-header">'
+\qecho '<span class="finding-title">Old open transactions can hold back VACUUM FREEZE progress</span>'
+\qecho '<span class="severity-pill pill-info">XMIN HORIZON</span></div>'
+\qecho '<div class="finding-body">'
+\qecho 'These rows show the oldest visible client transactions in the current database, sorted by oldest first. '
+\qecho 'Any long-running transaction can hold back cleanup visibility, but <strong>idle in transaction</strong> sessions are the most common preventable blocker. '
+\qecho 'Use this table together with the database-level XID countdown above: if wraparound pressure is rising, clear abandoned transactions first, then run targeted VACUUM FREEZE work.'
+\qecho '</div></div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>PID</th><th>User</th><th>Application</th><th>State</th><th>Transaction Age</th><th>backend_xmin Age</th><th>Wait</th><th>Risk</th><th>Action</th><th>Query (normalized)</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH oldest_xacts AS (
+  SELECT
+    a.pid,
+    a.usename,
+    a.application_name,
+    a.state,
+    a.query,
+    a.wait_event_type,
+    a.wait_event,
+    EXTRACT(EPOCH FROM (clock_timestamp() - a.xact_start))::numeric AS xact_age_secs,
+    CASE WHEN a.backend_xmin IS NOT NULL THEN age(a.backend_xmin)::numeric ELSE NULL END AS backend_xmin_age
+  FROM pg_stat_activity a
+  WHERE a.datname = current_database()
+    AND a.pid <> pg_backend_pid()
+    AND a.backend_type = 'client backend'
+    AND a.xact_start IS NOT NULL
+  ORDER BY a.xact_start ASC
+  LIMIT 10
+), ranked AS (
+  SELECT
+    pid,
+    usename,
+    application_name,
+    state,
+    query,
+    wait_event_type,
+    wait_event,
+    xact_age_secs,
+    backend_xmin_age,
+    CASE
+      WHEN state = 'idle in transaction' AND xact_age_secs >= 3600 THEN 'CRITICAL'
+      WHEN xact_age_secs >= 21600 THEN 'HIGH'
+      WHEN COALESCE(backend_xmin_age,0) > 100000000 THEN 'HIGH'
+      WHEN state = 'idle in transaction' AND xact_age_secs >= 900 THEN 'WATCH'
+      WHEN xact_age_secs >= 3600 THEN 'MEDIUM'
+      ELSE 'MONITOR'
+    END AS risk_label,
+    CASE
+      WHEN state = 'idle in transaction' AND xact_age_secs >= 900 THEN 'Confirm ownership and end the abandoned transaction if it is no longer needed.'
+      WHEN COALESCE(backend_xmin_age,0) > 100000000 THEN 'Commit or roll back promptly after validation; this old snapshot can pin freeze progress.'
+      WHEN xact_age_secs >= 21600 THEN 'Validate the business reason for the long transaction and shorten the unit of work if possible.'
+      ELSE 'Monitor during wraparound review and keep transaction scope short.'
+    END AS action_text
+  FROM oldest_xacts
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td class="num">' || pid || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(
+        CASE
+          WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token'
+          WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND usename = current_user THEN :'pg360_redaction_token'
+          ELSE usename
+        END,''),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(
+        CASE
+          WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token'
+          ELSE NULLIF(application_name,'')
+        END,'(not set)'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(COALESCE(state,'unknown'),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num ' ||
+        CASE
+          WHEN risk_label = 'CRITICAL' THEN 'crit'
+          WHEN risk_label IN ('HIGH','WATCH','MEDIUM') THEN 'warn'
+          ELSE ''
+        END || '">' ||
+        CASE
+          WHEN xact_age_secs >= 86400 THEN round(xact_age_secs / 86400.0, 1)::text || ' d'
+          WHEN xact_age_secs >= 3600 THEN round(xact_age_secs / 3600.0, 1)::text || ' h'
+          ELSE round(xact_age_secs / 60.0, 1)::text || ' min'
+        END || '</td>' ||
+      '<td class="num ' ||
+        CASE
+          WHEN COALESCE(backend_xmin_age,0) > 100000000 THEN 'crit'
+          WHEN COALESCE(backend_xmin_age,0) > 10000000 THEN 'warn'
+          ELSE ''
+        END || '">' ||
+        COALESCE(to_char(backend_xmin_age, 'FM999,999,999'), 'N/A') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(
+        COALESCE(wait_event_type || ':' || wait_event, 'running'),
+        '&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td><span class="severity-pill ' ||
+        CASE risk_label
+          WHEN 'CRITICAL' THEN 'pill-critical">CRITICAL'
+          WHEN 'HIGH' THEN 'pill-high">HIGH'
+          WHEN 'WATCH' THEN 'pill-warning">WATCH'
+          WHEN 'MEDIUM' THEN 'pill-medium">MEDIUM'
+          ELSE 'pill-info">MONITOR'
+        END || '</span></td>' ||
+      '<td>' || replace(replace(replace(replace(replace(action_text,
+        '&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td title="' || replace(replace(replace(replace(replace(
+        CASE
+          WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN '[redacted in share-safe mode]'
+          ELSE regexp_replace(COALESCE(query,''), '\s+', ' ', 'g')
+        END,
+        '&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '">' ||
+        replace(replace(replace(replace(replace(
+          CASE
+            WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN '[redacted in share-safe mode]'
+            ELSE left(regexp_replace(COALESCE(query,''), '\s+', ' ', 'g'), 140)
+          END,
+          '&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY xact_age_secs DESC
+    ),
+    '<tr><td colspan="10" class="table-empty">No open client transactions with xact_start are visible right now.</td></tr>'
+  )
+FROM ranked;
+
+\qecho '</tbody></table></div></div>'
+
+-- S21.6 Table-level XID age  per table countdown
 \qecho '<div class="subsection">'
 \qecho '<div class="subsection-title">Per-Table XID Age</div>'
 \qecho '<div class="table-wrap">'
@@ -13208,7 +13338,7 @@ LIMIT 30;
 
 \qecho '</tbody></table></div></div>'
 
--- S21.6 Safe application guardrails (fix / verify / rollback matrix)
+-- S21.7 Safe application guardrails (fix / verify / rollback matrix)
 \qecho '<div class="subsection">'
 \qecho '<div class="subsection-title">Autovacuum Tuning Guardrails</div>'
 \qecho '<div class="table-wrap">'
@@ -17419,6 +17549,7 @@ SELECT '<tr><td colspan="5" class="table-empty">pg_stat_statements unavailable; 
 \qecho '    ''Current Autovacuum Global Configuration vs Recommended'': ''Autovacuum Global Configuration'','
 \qecho '    ''Per-Table Vacuum Urgency Matrix with Custom Settings Script'': ''Per-Table Vacuum Urgency Matrix'','
 \qecho '    ''XID Wraparound Countdown (Database Level)'': ''XID Wraparound Countdown'','
+\qecho '    ''Wraparound Blockers: Oldest Open Transactions'': ''Wraparound Blockers'','
 \qecho '    ''Per-Table XID Age (tables needing VACUUM FREEZE first)'': ''Per-Table XID Age'','
 \qecho '    ''Autovacuum Tuning Guardrails (Apply Safely in Production)'': ''Autovacuum Tuning Guardrails'','
 \qecho '    ''Pool Sizing Calculator and Recommended Pooling Mode'': ''Pool Sizing Calculator'','
