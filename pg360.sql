@@ -13959,6 +13959,211 @@ WHERE name IN (
 
 \qecho '</tbody></table></div></div>'
 
+-- S23.2a auto_explain configuration posture
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">auto_explain Configuration Posture</div>'
+\qecho '<div class="finding info"><div class="finding-body">This keeps slow-plan capture from getting missed during configuration review. It shows whether auto_explain is loaded, how aggressive plan capture is, and which settings add overhead or deeper forensic detail.</div></div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Parameter</th><th>Current</th><th>Status</th><th>Why It Matters</th><th>Suggested Baseline</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH cfg AS (
+  SELECT
+    COALESCE(current_setting('shared_preload_libraries', true), '') AS shared_preload_libraries,
+    current_setting('auto_explain.log_min_duration', true) AS log_min_duration,
+    current_setting('auto_explain.log_analyze', true) AS log_analyze,
+    current_setting('auto_explain.log_buffers', true) AS log_buffers,
+    current_setting('auto_explain.log_timing', true) AS log_timing,
+    current_setting('auto_explain.log_nested_statements', true) AS log_nested_statements,
+    current_setting('auto_explain.sample_rate', true) AS sample_rate,
+    current_setting('auto_explain.log_format', true) AS log_format,
+    current_setting('auto_explain.log_level', true) AS log_level,
+    current_setting('auto_explain.log_verbose', true) AS log_verbose,
+    current_setting('auto_explain.log_wal', true) AS log_wal,
+    current_setting('auto_explain.log_triggers', true) AS log_triggers,
+    current_setting('auto_explain.log_parameter_max_length', true) AS log_parameter_max_length,
+    current_setting('auto_explain.log_settings', true) AS log_settings
+), rows AS (
+  SELECT 1 AS ord,
+         'shared_preload_libraries'::text AS param,
+         CASE
+           WHEN shared_preload_libraries = '' THEN '(none)'
+           ELSE shared_preload_libraries
+         END AS current_val,
+         CASE
+           WHEN shared_preload_libraries ILIKE '%auto_explain%' THEN 'OK'
+           ELSE 'WARNING'
+         END AS status,
+         'auto_explain must be preloaded for cluster-wide plan capture; adding it requires restart or the managed-service equivalent.' AS why_it_matters,
+         'Include auto_explain next to pg_stat_statements when slow-plan capture is part of the operating baseline.' AS suggested_baseline
+  FROM cfg
+  UNION ALL
+  SELECT 2, 'auto_explain.log_min_duration',
+         COALESCE(log_min_duration, 'not exposed'),
+         CASE
+           WHEN log_min_duration IS NULL OR log_min_duration = '-1' THEN 'WARNING'
+           WHEN log_min_duration = '0' THEN 'WARNING'
+           ELSE 'OK'
+         END,
+         'Controls which slow statements emit plans. -1 disables capture; 0 can be too aggressive under load.',
+         '500ms to 1000ms for production-safe slow-plan capture.'
+  FROM cfg
+  UNION ALL
+  SELECT 3, 'auto_explain.log_analyze',
+         COALESCE(log_analyze, 'not exposed'),
+         CASE
+           WHEN log_analyze = 'on' THEN 'OK'
+           WHEN log_analyze IS NULL THEN 'WARNING'
+           ELSE 'WARNING'
+         END,
+         'Adds actual runtime counters to the logged plan. This is what turns plan capture into practical evidence.',
+         'on for targeted slow-plan investigation; combine with log_timing=off first.'
+  FROM cfg
+  UNION ALL
+  SELECT 4, 'auto_explain.log_buffers',
+         COALESCE(log_buffers, 'not exposed'),
+         CASE
+           WHEN log_buffers = 'on' THEN 'OK'
+           WHEN log_buffers IS NULL THEN 'WARNING'
+           ELSE 'INFO'
+         END,
+         'Shows buffer usage so slow plans can be tied to cache misses, reads, writes, or spill-heavy behavior.',
+         'on when using auto_explain for performance work.'
+  FROM cfg
+  UNION ALL
+  SELECT 5, 'auto_explain.log_timing',
+         COALESCE(log_timing, 'not exposed'),
+         CASE
+           WHEN log_timing = 'off' THEN 'OK'
+           WHEN log_timing IS NULL THEN 'WARNING'
+           ELSE 'WARNING'
+         END,
+         'Per-node timing adds overhead. It is useful later, but it is not the safest starting point under production load.',
+         'off for the first rollout; enable only for focused follow-up when overhead is acceptable.'
+  FROM cfg
+  UNION ALL
+  SELECT 6, 'auto_explain.log_nested_statements',
+         COALESCE(log_nested_statements, 'not exposed'),
+         CASE
+           WHEN log_nested_statements = 'off' THEN 'OK'
+           WHEN log_nested_statements IS NULL THEN 'WARNING'
+           ELSE 'INFO'
+         END,
+         'Nested statement capture logs SQL inside functions and procedures. Helpful, but it increases log volume quickly.',
+         'off by default; turn on only for function-internal investigations.'
+  FROM cfg
+  UNION ALL
+  SELECT 7, 'auto_explain.sample_rate',
+         COALESCE(sample_rate, 'not exposed'),
+         CASE
+           WHEN sample_rate IS NULL THEN 'WARNING'
+           WHEN sample_rate::numeric > 0.25 THEN 'WARNING'
+           ELSE 'OK'
+         END,
+         'Sampling controls how many qualifying statements emit plans. Higher values improve coverage but increase overhead and log volume.',
+         '0.1 as a safe baseline; raise temporarily only during focused investigations.'
+  FROM cfg
+  UNION ALL
+  SELECT 8, 'auto_explain.log_format',
+         COALESCE(log_format, 'not exposed'),
+         CASE
+           WHEN log_format IN ('text','json') THEN 'OK'
+           WHEN log_format IS NULL THEN 'WARNING'
+           ELSE 'INFO'
+         END,
+         'Format affects downstream analysis and readability. Text is simple; JSON is easier for structured ingestion.',
+         'text for simple local review; json if you plan to parse logs.'
+  FROM cfg
+  UNION ALL
+  SELECT 9, 'auto_explain.log_level',
+         COALESCE(log_level, 'not exposed'),
+         CASE
+           WHEN log_level = 'log' THEN 'OK'
+           WHEN log_level IS NULL THEN 'WARNING'
+           ELSE 'INFO'
+         END,
+         'Determines which server log level receives plan output. It should match the logging policy so plans are retained.',
+         'log unless your logging policy intentionally routes plan output elsewhere.'
+  FROM cfg
+  UNION ALL
+  SELECT 10, 'auto_explain.log_verbose',
+         COALESCE(log_verbose, 'not exposed'),
+         CASE
+           WHEN log_verbose = 'off' THEN 'OK'
+           WHEN log_verbose IS NULL THEN 'WARNING'
+           ELSE 'INFO'
+         END,
+         'Verbose output adds more plan detail, but it also adds more noise and longer log lines.',
+         'off unless a focused deep-dive needs extra plan detail.'
+  FROM cfg
+  UNION ALL
+  SELECT 11, 'auto_explain.log_wal',
+         COALESCE(log_wal, 'not exposed'),
+         CASE
+           WHEN log_wal = 'on' THEN 'INFO'
+           WHEN log_wal IS NULL THEN 'WARNING'
+           ELSE 'OK'
+         END,
+         'WAL details can help with write-heavy forensics, but they are not needed for the safe baseline.',
+         'off unless you are investigating write amplification or WAL-heavy plans.'
+  FROM cfg
+  UNION ALL
+  SELECT 12, 'auto_explain.log_triggers',
+         COALESCE(log_triggers, 'not exposed'),
+         CASE
+           WHEN log_triggers = 'on' THEN 'INFO'
+           WHEN log_triggers IS NULL THEN 'WARNING'
+           ELSE 'OK'
+         END,
+         'Trigger detail is useful for write-path diagnosis, but it is extra noise for most plan-capture baselines.',
+         'off unless trigger-heavy DML behavior is under investigation.'
+  FROM cfg
+  UNION ALL
+  SELECT 13, 'auto_explain.log_parameter_max_length',
+         COALESCE(log_parameter_max_length, 'not exposed'),
+         CASE
+           WHEN log_parameter_max_length IS NULL THEN 'WARNING'
+           WHEN log_parameter_max_length = '-1' THEN 'INFO'
+           ELSE 'OK'
+         END,
+         'Controls how much bind-parameter text is logged. Full values can help debugging but can also expose sensitive data.',
+         'Review with privacy policy in mind; cap or redact in shared environments.'
+  FROM cfg
+  UNION ALL
+  SELECT 14, 'auto_explain.log_settings',
+         COALESCE(log_settings, 'not exposed'),
+         CASE
+           WHEN log_settings = 'on' THEN 'INFO'
+           WHEN log_settings IS NULL THEN 'WARNING'
+           ELSE 'OK'
+         END,
+         'Including non-default session settings helps explain plan drift caused by per-session GUC changes.',
+         'off by default; turn on during controlled investigations if session-level GUC drift is suspected.'
+  FROM cfg
+)
+SELECT COALESCE(
+  string_agg(
+    '<tr>' ||
+    '<td>' || param || '</td>' ||
+    '<td>' || replace(replace(replace(replace(replace(current_val,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+    '<td><span class="severity-pill ' ||
+    CASE status
+      WHEN 'OK' THEN 'pill-good"> OK'
+      WHEN 'WARNING' THEN 'pill-high"> WARNING'
+      ELSE 'pill-info"> INFO'
+    END || '</span></td>' ||
+    '<td>' || why_it_matters || '</td>' ||
+    '<td>' || suggested_baseline || '</td>' ||
+    '</tr>',
+    E'\n' ORDER BY ord
+  ),
+  '<tr><td colspan="5" class="table-empty">auto_explain settings are not exposed on this platform or version.</td></tr>'
+)
+FROM rows;
+
+\qecho '</tbody></table></div></div>'
+
 -- S23.3 Workload-aligned tuning focus (linking settings to workload profile)
 \qecho '<div class="subsection">'
 \qecho '<div class="subsection-title">Workload-Aligned Tuning Focus</div>'
