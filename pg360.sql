@@ -2551,7 +2551,7 @@ SELECT
   CASE
     WHEN md5_rules IS NULL THEN 'Unable to inspect pg_hba_file_rules with current visibility.'
     WHEN md5_rules = 0 THEN 'No MD5 rules detected in pg_hba.'
-    ELSE 'MD5 authentication rules remain. Migrate to SCRAM and review PostgreSQL 18 OAuth options where relevant.'
+    ELSE 'MD5 authentication rules remain. Migrate to SCRAM and review PostgreSQL 18+ OAuth options where relevant.'
   END || '</td></tr>' ||
   '<tr><td>SCRAM coverage in pg_hba</td><td>' || COALESCE(scram_rules::text, 'unknown') || '</td><td class="' ||
   CASE
@@ -9514,9 +9514,9 @@ WITH v AS (
 )
 SELECT
   '<tr><td>Server version</td><td>' || (vnum / 10000) || '.' || CASE WHEN vnum >= 100000 THEN (vnum % 10000) ELSE ((vnum / 100) % 100) END || '</td><td class="good">INFO</td><td>' ||
-  CASE WHEN vnum >= 180000 THEN 'Planner can use PostgreSQL 18 skip scan behavior where applicable.' ELSE 'Skip scan is not available on this branch; multicolumn index recommendations should assume classic left-prefix rules.' END ||
+  CASE WHEN vnum >= 180000 THEN 'Planner can use PostgreSQL 18+ skip scan behavior where applicable.' ELSE 'Skip scan is not available on this branch; multicolumn index recommendations should assume classic left-prefix rules.' END ||
   '</td></tr>' ||
-  '<tr><td>PG18 skip scan awareness</td><td>' || CASE WHEN vnum >= 180000 THEN 'yes' ELSE 'no' END || '</td><td class="' ||
+  '<tr><td>PG18+ skip scan awareness</td><td>' || CASE WHEN vnum >= 180000 THEN 'yes' ELSE 'no' END || '</td><td class="' ||
   CASE WHEN vnum >= 180000 THEN 'good">ENABLED' ELSE 'warn">N/A' END || '</td><td>' ||
   CASE WHEN vnum >= 180000 THEN 'Review low-leading-column selectivity findings carefully before adding duplicate single-column indexes.' ELSE 'On pre-18 branches, left-prefix access rules remain stricter.' END ||
   '</td></tr>' ||

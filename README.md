@@ -34,7 +34,8 @@ PG360 is a single-script, read-only PostgreSQL operations workbook and diagnosti
 - `demo/pg360_validation_prelude.sql`: QA/demo seed script, not for production use
 
 ## Support statement
-- Supported target range: PostgreSQL `15` through `18`
+- Stable support target: PostgreSQL `15` through `18`
+- Preview validation target: PostgreSQL `19` prerelease builds, with GA support claims added only after version-lane validation completes
 - Best coverage and deepest telemetry: PostgreSQL `16+`
 - Supported environments: on-prem PostgreSQL and managed PostgreSQL with graceful degradation when optional telemetry is unavailable
 

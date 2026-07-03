@@ -16,14 +16,19 @@ This document defines the minimum validation standard for releasing `pg360.sql` 
 - if any code, copied text, CSS, templates, or other protected material from `eDB360` / `SQLdb360` remains, it must be rewritten/removed or PG360 must be released under a GPL-compatible license before publication
 
 ## Supported scope
-Current support target:
+Current stable support target:
 - PostgreSQL 15
 - PostgreSQL 16
 - PostgreSQL 17
 - PostgreSQL 18
 
+Forward-compatibility preview target:
+- PostgreSQL 19 prerelease builds
+
 Support statement:
 - minimum supported branch for release claims: PostgreSQL 15
+- current stable ceiling for release claims: PostgreSQL 18
+- PostgreSQL 19 stays in preview validation status until GA plus full lane completion
 - best coverage and deepest telemetry: PostgreSQL 16+
 - one single `pg360.sql` must run across supported branches
 - if optional telemetry is unavailable, the report must degrade gracefully and continue
@@ -44,6 +49,9 @@ Must be exercised on:
 - PostgreSQL 16
 - PostgreSQL 17
 - PostgreSQL 18
+
+Preview-next lane when available:
+- PostgreSQL 19 beta / release candidate builds
 
 ### 2. Environment lane
 Must be exercised on:
@@ -188,7 +196,7 @@ These are the review questions for every section and subsection.
 - does this subsection still behave safely on both on-prem and RDS?
 
 7. Version portability
-- does this subsection still behave safely on PostgreSQL 15 through 18?
+- does this subsection still behave safely on PostgreSQL 15 through 18, and on PostgreSQL 19 when next-branch compatibility is claimed?
 
 8. Missing telemetry handling
 - does the report say `limited`, `unavailable`, or `blocked` instead of failing?
@@ -286,7 +294,7 @@ A release candidate is acceptable only when all of the following are true.
 
 5. Release statement
 Safe public release statement:
-- `PG360 is a single-script, read-only PostgreSQL diagnostic report for PostgreSQL 15-18, designed for on-prem and managed environments, with graceful degradation when optional telemetry is unavailable.`
+- `PG360 is a single-script, read-only PostgreSQL diagnostic report for PostgreSQL 15-18, designed for on-prem and managed environments, with graceful degradation when optional telemetry is unavailable. PostgreSQL 19 is a preview-validation target until GA support is fully validated.`
 
 ## Recommended release workflow
 1. Run the report on an idle or low-load database.

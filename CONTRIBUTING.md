@@ -8,7 +8,7 @@ Thanks for helping improve PG360.
 - Preserve the single-script execution model.
 - Degrade gracefully when optional views or extensions are unavailable.
 - Keep wording honest about what is fact, derived signal, or heuristic.
-- Maintain compatibility across PostgreSQL `15` through `18` unless a change is explicitly version-gated.
+- Maintain compatibility across PostgreSQL `15` through `18`, and keep PostgreSQL `19` prerelease compatibility in view unless a change is explicitly version-gated.
 
 ## Before opening a change
 

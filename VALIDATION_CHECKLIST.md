@@ -34,6 +34,7 @@ Status values:
 | 16 | NOT RUN | NOT RUN | |
 | 17 | NOT RUN | NOT RUN | |
 | 18 | NOT RUN | NOT RUN | |
+| 19 (beta/RC preview) | NOT RUN | NOT RUN | |
 
 ## 3. Telemetry Lane
 | Scenario | Status | Notes |
