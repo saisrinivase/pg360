@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+Release preparation updates.
+
+Highlights
+- Added open-source release docs for acknowledgments, contributing, code of conduct, security reporting, and public-release checklist.
+- Documented provenance review as a publication gate because PG360 is intentionally similar in operator experience to `eDB360` / `SQLdb360`.
+- Reframed the runtime report skeleton from an executive/remediation scorecard into a PostgreSQL operations workbook with posture, evidence, and operator action queues.
+
 ## v1.0.0 - 2026-03-22
 
 Initial release baseline.

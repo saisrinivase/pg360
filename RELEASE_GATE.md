@@ -9,6 +9,12 @@ This document defines the minimum validation standard for releasing `pg360.sql` 
 - one report generated per run
 - usable on both on-prem PostgreSQL and managed PostgreSQL platforms such as Amazon RDS / Aurora PostgreSQL
 
+## Open-source publication gate
+- repository license, provenance note, and community docs must be present
+- tracked sample artifacts must be reviewed for sensitive data before publication
+- repo must not include accidental workstation files or scratch outputs
+- if any code, copied text, CSS, templates, or other protected material from `eDB360` / `SQLdb360` remains, it must be rewritten/removed or PG360 must be released under a GPL-compatible license before publication
+
 ## Supported scope
 Current support target:
 - PostgreSQL 15

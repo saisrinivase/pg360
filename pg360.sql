@@ -1,7 +1,7 @@
 -- =============================================================================
--- PG360 - PostgreSQL Technical Diagnostics Report
+-- PG360 - PostgreSQL Operations Workbook
 -- =============================================================================
--- PURPOSE   : Consultant-grade read-only PostgreSQL 360 assessment engine
+-- PURPOSE   : Consultant-grade read-only PostgreSQL operations and diagnostics workbook
 -- AUTHOR    : PG360 Project
 -- LICENSE   : MIT
 -- DESIGN    : Self-contained single SQL report generator (no external CSS/JS dependency)
@@ -37,25 +37,25 @@
 --     ./reports/latest/pg360_YYYYMMDD_HHMMSS.html
 --
 -- SECTIONS:
---   M01  Executive Summary
---   M02  Platform and Diagnostic Context
---   M03  Instance and Database Profile
---   M04  Monitoring and Observability Readiness
---   M05  Workload Characterization
---   M06  SQL Performance and Plan Risk
---   M07  Concurrency, Waits, and Lock Pressure
---   M08  Memory Efficiency and IO Pressure
---   M09  Table Storage Health
---   M10  Index Strategy and Access Paths
---   M11  Vacuum, Analyze, and Statistics Health
---   M12  Configuration Review
---   M13  Connection Management
---   M14  WAL, Replication, and Recovery Readiness
---   M15  Capacity Planning and Growth
---   M16  Security and Governance
---   M17  Schema Design and Data Quality
---   M18  Prioritized Remediation Plan
---   M19  Appendix and Evidence
+--   M01  Current Posture
+--   M02  Runtime Context and Guardrails
+--   M03  Instance and Database Shape
+--   M04  Telemetry Readiness
+--   M05  Workload Fingerprint
+--   M06  SQL and Plan Pressure
+--   M07  Concurrency and Lock Pressure
+--   M08  Memory and I/O Path
+--   M09  Storage and Table Debt
+--   M10  Index and Access Path Review
+--   M11  Maintenance and Statistics Debt
+--   M12  Configuration Guardrails
+--   M13  Session and Pooling Posture
+--   M14  WAL and Recovery Path
+--   M15  Capacity and Growth Signals
+--   M16  Access and Governance Posture
+--   M17  Schema and Data Quality Signals
+--   M18  Operator Action Queue
+--   M19  Evidence Appendix
 -- =============================================================================
 
 -- =============================================================================
@@ -265,7 +265,7 @@ SELECT :'pg360_output_dir' || '/' || :'pg360_full_report_file' AS pg360_full_rep
 \qecho '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
 \qecho '<meta http-equiv="Content-Security-Policy" content="default-src ''self''; script-src ''self'' ''unsafe-inline''; style-src ''self'' ''unsafe-inline''; img-src ''self'' data:;">'
 SELECT
-  '<title>PG360 Technical Diagnostics Report - ' ||
+  '<title>PG360 PostgreSQL Operations Workbook - ' ||
   replace(replace(replace(replace(replace(current_database(),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') ||
   '</title>';
 \qecho '<style>'
@@ -363,7 +363,7 @@ SELECT
 \qecho '.finding,'
 \qecho '.card,'
 \qecho '.security-notice,'
-\qecho '.oracle-origin-banner,'
+\qecho '.lineage-note,'
 \qecho '.risk-cell,'
 \qecho '.code-block,'
 \qecho '.finding-fix {'
@@ -831,7 +831,8 @@ SELECT
 \qecho '  border-top: 0;'
 \qecho '  font-size: calc(var(--font-title) - 1px);'
 \qecho '  line-height: 1.08;'
-\qecho '  white-space: nowrap;'
+\qecho '  white-space: normal;'
+\qecho '  overflow-wrap: anywhere;'
 \qecho '}'
 \qecho ''
 \qecho '.pg360-catalog td {'
@@ -851,13 +852,14 @@ SELECT
 \qecho '}'
 \qecho ''
 \qecho '.pg360-catalog li {'
+\qecho '  display: list-item;'
 \qecho '  font-size: 12px;'
 \qecho '  color: black;'
 \qecho '  padding-left: 0;'
 \qecho '  padding-right: 4px;'
 \qecho '  padding-bottom: 2px;'
 \qecho '  line-height: 1.22;'
-\qecho '  white-space: nowrap;'
+\qecho '  white-space: normal;'
 \qecho '}'
 \qecho ''
 \qecho '.pg360-catalog li::marker {'
@@ -866,9 +868,11 @@ SELECT
 \qecho '}'
 \qecho ''
 \qecho '.pg360-catalog .catalog-item-title {'
+\qecho '  display: inline;'
 \qecho '  color: black;'
 \qecho '  margin-right: 2px;'
-\qecho '  white-space: nowrap;'
+\qecho '  white-space: normal;'
+\qecho '  overflow-wrap: anywhere;'
 \qecho '}'
 \qecho ''
 \qecho '.pg360-catalog .catalog-format {'
@@ -1444,7 +1448,7 @@ SELECT
 \qecho '  background: #eff3f9;'
 \qecho '}'
 \qecho ''
-\qecho '.oracle-origin-banner {'
+\qecho '.lineage-note {'
 \qecho '  border: 1px solid var(--line);'
 \qecho '  background: #eff3f9;'
 \qecho '  border-radius: 0;'
@@ -1568,7 +1572,7 @@ SELECT
 \qecho '<div class="container">'
 \qecho '<div class="hero">'
 SELECT
-  '<h1>PG360 Technical Diagnostics Report</h1>';
+  '<h1>PG360 PostgreSQL Operations Workbook</h1>';
 \qecho '</div>'
 \qecho '<div class="panel">'
 SELECT
@@ -1588,39 +1592,39 @@ SELECT
 \qecho '<div id="sidebar">'
 \qecho '  <div id="sidebar-header">'
 \qecho '    <div class="sidebar-logo">PG360</div>'
-\qecho '    <div class="sidebar-sub">PostgreSQL 360 Diagnostic</div>'
+\qecho '    <div class="sidebar-sub">PostgreSQL Operations Workbook</div>'
 \qecho '  </div>'
 \qecho '  <nav>'
-\qecho '    <div class="nav-section-title">Overview</div>'
+\qecho '    <div class="nav-section-title">Posture</div>'
 \qecho '    <a class="nav-item active" href="#s00">Environment</a>'
 \qecho '    <a class="nav-item" href="#s01">Database Overview</a>'
-\qecho '    <a class="nav-item" href="#s18">Health Score</a>'
-\qecho '    <div class="nav-section-title">Performance</div>'
-\qecho '    <a class="nav-item" href="#s02">Top SQL Analysis</a>'
-\qecho '    <a class="nav-item" href="#s03">Wait Events</a>'
-\qecho '    <a class="nav-item" href="#s04">Lock Analysis</a>'
+\qecho '    <a class="nav-item" href="#s18">Posture Score</a>'
+\qecho '    <div class="nav-section-title">Workload Path</div>'
+\qecho '    <a class="nav-item" href="#s02">SQL Pressure</a>'
+\qecho '    <a class="nav-item" href="#s03">Session Signals</a>'
+\qecho '    <a class="nav-item" href="#s04">Lock Pressure</a>'
 \qecho '    <a class="nav-item" href="#s07">Buffer Cache &amp; I/O</a>'
 \qecho '    <a class="nav-item" href="#s11">Workload &amp; Config</a>'
 \qecho '    <a class="nav-item" href="#s19">HOT Updates &amp; Fillfactor</a>'
-\qecho '    <a class="nav-item" href="#s20">Planner Statistics</a>'
-\qecho '    <div class="nav-section-title">Storage &amp; Objects</div>'
-\qecho '    <a class="nav-item" href="#s05">Table Health</a>'
-\qecho '    <a class="nav-item" href="#s06">Index Health</a>'
+\qecho '    <a class="nav-item" href="#s20">Planner Evidence</a>'
+\qecho '    <div class="nav-section-title">Storage Path</div>'
+\qecho '    <a class="nav-item" href="#s05">Table Debt</a>'
+\qecho '    <a class="nav-item" href="#s06">Index Fit</a>'
 \qecho '    <a class="nav-item" href="#s24">Index Bloat</a>'
 \qecho '    <a class="nav-item" href="#s13">Partitioning</a>'
 \qecho '    <a class="nav-item" href="#s26">Capacity &amp; Growth</a>'
-\qecho '    <div class="nav-section-title">Maintenance</div>'
+\qecho '    <div class="nav-section-title">Maintenance Path</div>'
 \qecho '    <a class="nav-item" href="#s21">Autovacuum Full Advisor</a>'
 \qecho '    <a class="nav-item" href="#s10">Vacuum Status</a>'
-\qecho '    <div class="nav-section-title">Infrastructure</div>'
+\qecho '    <div class="nav-section-title">Recovery Path</div>'
 \qecho '    <a class="nav-item" href="#s08">WAL &amp; Replication</a>'
 \qecho '    <a class="nav-item" href="#s09">Connections</a>'
 \qecho '    <a class="nav-item" href="#s22">Connection Pool Advisor</a>'
 \qecho '    <a class="nav-item" href="#s17">HA &amp; DR Readiness</a>'
-\qecho '    <div class="nav-section-title">Configuration</div>'
+\qecho '    <div class="nav-section-title">Control Plane</div>'
 \qecho '    <a class="nav-item" href="#s23">Config Audit (40+ params)</a>'
 \qecho '    <a class="nav-item" href="#s29">Extension Inventory</a>'
-\qecho '    <div class="nav-section-title">Governance</div>'
+\qecho '    <div class="nav-section-title">Access Path</div>'
 \qecho '    <a class="nav-item" href="#s12">Security Audit</a>'
 \qecho '    <a class="nav-item" href="#s25">Security &amp; Access Review</a>'
 \qecho '    <a class="nav-item" href="#s15">Data Quality</a>'
@@ -1628,8 +1632,8 @@ SELECT
 \qecho '    <a class="nav-item" href="#s31">Parallel Query Efficiency</a>'
 \qecho '    <a class="nav-item" href="#s32">JIT Usage Analysis</a>'
 \qecho '    <a class="nav-item" href="#s33">JSONB Workload Detection</a>'
-\qecho '    <div class="nav-section-title">Action Plan</div>'
-\qecho '    <a class="nav-item" href="#s28">Remediation Action Plan</a>'
+\qecho '    <div class="nav-section-title">Action Queue</div>'
+\qecho '    <a class="nav-item" href="#s28">Operator Runbook</a>'
 \qecho '  </nav>'
 \qecho '</div>'
 
@@ -1691,19 +1695,19 @@ SELECT
 \qecho '</table>'
 
 -- =============================================================================
--- MODULE M01: EXECUTIVE SUMMARY
+-- MODULE M01: CURRENT POSTURE
 -- =============================================================================
 \qecho '<div class="section" id="m01">'
 \qecho '<div class="section-header">'
 \qecho '  <span class="section-id">1</span>'
 \qecho '  <div>'
-\qecho '    <div class="section-title">Executive Summary</div>'
-\qecho '    <div class="section-desc">Immediate understanding of health, risk concentration, workload shape, and the first fixes that matter most.</div>'
+\qecho '    <div class="section-title">Current Posture</div>'
+\qecho '    <div class="section-desc">A first-pass operating picture: posture, risk concentration, workload shape, and the next verification step.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Executive Dashboard</div>'
+\qecho '<div class="subsection-title">Posture Dashboard</div>'
 WITH base AS (
   SELECT
     COALESCE((SELECT age(datfrozenxid)::numeric / 2000000000
@@ -1855,7 +1859,7 @@ WITH base AS (
 )
 SELECT
   '<div class="card-grid executive-grid">' ||
-  '<div class="card ' || CASE WHEN overall_score < 60 THEN 'critical' WHEN overall_score < 80 THEN 'warning' ELSE 'good' END || '"><div class="card-label">Overall Health Score</div><div class="card-value">' || overall_score || '/100</div><div class="card-sub">Weighted stability, performance, maintenance, and observability indicators</div></div>' ||
+  '<div class="card ' || CASE WHEN overall_score < 60 THEN 'critical' WHEN overall_score < 80 THEN 'warning' ELSE 'good' END || '"><div class="card-label">Operational Posture Score</div><div class="card-value">' || overall_score || '/100</div><div class="card-sub">Weighted stability, performance, maintenance, and observability indicators</div></div>' ||
   '<div class="card ' || CASE WHEN critical_cnt > 0 THEN 'critical' ELSE 'good' END || '"><div class="card-label">Critical Issues</div><div class="card-value">' || critical_cnt || '</div><div class="card-sub">Immediate outage, data-loss, or severe governance risks</div></div>' ||
   '<div class="card ' || CASE WHEN high_cnt > 0 THEN 'warning' ELSE 'good' END || '"><div class="card-label">High Issues</div><div class="card-value">' || high_cnt || '</div><div class="card-sub">Severe performance or resilience problems</div></div>' ||
   '<div class="card"><div class="card-label">Medium / Low</div><div class="card-value">' || medium_cnt || ' / ' || low_cnt || '</div><div class="card-sub">Efficiency and best-practice improvements</div></div>' ||
@@ -1929,12 +1933,12 @@ SELECT
   '</div>'
 FROM hist, curr, base;
 \else
-SELECT '<div class="finding info"><div class="finding-header"><span class="finding-title">Repository mode not enabled yet</span><span class="severity-pill pill-info">HISTORY</span></div><div class="finding-body">PG360 is running in snapshot-only mode. Add pg360_history tables and capture runs to unlock trend context, baseline comparisons, and SQLd360-style drift reporting.</div></div>';
+SELECT '<div class="finding info"><div class="finding-header"><span class="finding-title">Repository mode not enabled yet</span><span class="severity-pill pill-info">HISTORY</span></div><div class="finding-body">PG360 is running in snapshot-only mode. Add pg360_history tables and capture runs to unlock trend context, baseline comparisons, and PG360 drift reporting.</div></div>';
 \endif
 \qecho '</div>'
 
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Top Immediate Risks</div>'
+\qecho '<div class="subsection-title">Immediate Review Queue</div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
 \qecho '<th>Priority</th><th>Severity</th><th>Finding</th><th>Why it Matters</th><th>Owner</th><th>Supporting Evidence</th>'
@@ -2004,7 +2008,7 @@ SELECT COALESCE(
 \qecho '<div class="section-header">'
 \qecho '  <span class="section-id">2</span>'
 \qecho '  <div>'
-\qecho '    <div class="section-title">Platform and Diagnostic Context</div>'
+\qecho '    <div class="section-title">Runtime Context and Guardrails</div>'
 \qecho '    <div class="section-desc">Environment facts, visibility constraints, and telemetry caveats that affect interpretation confidence.</div>'
 \qecho '  </div>'
 \qecho '</div>'
@@ -2571,7 +2575,7 @@ FROM parsed, hba;
 \qecho '<div class="section-header">'
 \qecho '  <span class="section-id">3</span>'
 \qecho '  <div>'
-\qecho '    <div class="section-title">Instance and Database Profile</div>'
+\qecho '    <div class="section-title">Instance and Database Shape</div>'
 \qecho '    <div class="section-desc">The shape of the system: database footprint, object inventory, storage layout, and connection envelope.</div>'
 \qecho '  </div>'
 \qecho '</div>'
@@ -2616,7 +2620,7 @@ FROM inv;
 \qecho '<div class="section-header">'
 \qecho '  <span class="section-id">4</span>'
 \qecho '  <div>'
-\qecho '    <div class="section-title">Monitoring and Observability Readiness</div>'
+\qecho '    <div class="section-title">Telemetry Readiness</div>'
 \qecho '    <div class="section-desc">Assess whether the database exposes enough telemetry to support trustworthy diagnosis and change validation.</div>'
 \qecho '  </div>'
 \qecho '</div>'
@@ -3371,7 +3375,7 @@ SELECT COALESCE(
 \qecho '<div class="section-header">'
 \qecho '  <span class="section-id">5</span>'
 \qecho '  <div>'
-\qecho '    <div class="section-title">Workload Characterization</div>'
+\qecho '    <div class="section-title">Workload Fingerprint</div>'
 \qecho '    <div class="section-desc">Describe the live workload before tuning: throughput shape, read/write balance, concurrency, and spill pressure.</div>'
 \qecho '  </div>'
 \qecho '</div>'
@@ -3663,12 +3667,12 @@ SELECT '<div class="finding info"><div class="finding-header"><span class="findi
 \qecho '<div class="section-header">'
 \qecho '  <span class="section-id">6</span>'
 \qecho '  <div>'
-\qecho '    <div class="section-title">Prioritized Remediation Plan</div>'
-\qecho '    <div class="section-desc">Fix-first ordering across DBA, application, infrastructure, and security owners with direct evidence paths.</div>'
+\qecho '    <div class="section-title">Operator Action Queue</div>'
+\qecho '    <div class="section-desc">Owner-ready work queue across DBA, application, infrastructure, and security paths with direct evidence links.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Remediation Priority Board</div>'
+\qecho '<div class="subsection-title">Action Priority Board</div>'
 WITH action_counts AS (
   SELECT
     (CASE WHEN (SELECT age(datfrozenxid) FROM pg_database WHERE datname=current_database()) > 1500000000 THEN 1 ELSE 0 END) +
@@ -3692,7 +3696,7 @@ SELECT
 FROM action_counts;
 \qecho '</div>'
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Baseline-Driven Priority Escalation</div>'
+\qecho '<div class="subsection-title">Baseline-Driven Action Escalation</div>'
 \if :pg360_has_history_db
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
@@ -3768,7 +3772,7 @@ SELECT '<div class="finding info"><div class="finding-header"><span class="findi
 \endif
 \qecho '</div>'
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Timeout, Wait, and Telemetry Priorities</div>'
+\qecho '<div class="subsection-title">Runtime Action Priorities</div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
 \qecho '<th>Severity</th><th>Owner</th><th>Finding</th><th>Blast Radius</th><th>Confidence</th><th>Apply Path</th><th>Recommended Action</th><th>Supporting Evidence</th>'
@@ -3928,9 +3932,9 @@ SELECT COALESCE(
 ) FROM rows;
 \qecho '</tbody></table></div></div>'
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Fix-First Routing</div>'
+\qecho '<div class="subsection-title">Operator Routing</div>'
 \qecho '<div class="module-index"><div class="index-grid">'
-\qecho '  <a class="index-card" href="#s28"><span class="idx-title">Legacy Action Plan Detail</span><span class="idx-desc">Existing detailed remediation queue and scripts.</span></a>'
+\qecho '  <a class="index-card" href="#s28"><span class="idx-title">Detailed Runbook Queue</span><span class="idx-desc">Existing detailed action queue and verification scripts.</span></a>'
 \qecho '  <a class="index-card" href="#s21"><span class="idx-title">Autovacuum Full Advisor</span><span class="idx-desc">DBA-owned maintenance and XID safety actions.</span></a>'
 \qecho '  <a class="index-card" href="#s08"><span class="idx-title">WAL &amp; Replication</span><span class="idx-desc">Infra-owned replication and slot safety actions.</span></a>'
 \qecho '  <a class="index-card" href="#s25"><span class="idx-title">Security &amp; Access Review</span><span class="idx-desc">Security-owned privilege, membership, and access actions.</span></a>'
@@ -5935,6 +5939,8 @@ WITH base AS (
   WHERE dbid = (SELECT oid FROM pg_database WHERE datname = current_database())
     AND query NOT ILIKE '%pg360%'
     AND (:'s02_relax_pgss_filter' = 'on' OR query NOT ILIKE '%pg_stat_statements%')
+    AND query !~* '\bpg_(class|namespace|proc|type|attribute|index|constraint|settings|database|extension|inherits|partitioned_table|stat_[[:alnum:]_]+)\b'
+    AND query !~* '\b(information_schema|pg_catalog)\b'
     AND query NOT ILIKE 'BEGIN%'
     AND query NOT ILIKE 'COMMIT%'
     AND query NOT ILIKE 'SET %'
@@ -6378,6 +6384,105 @@ SELECT COALESCE(
 
 \qecho '</tbody></table></div></div>'
 
+-- S02.7b Data type and cast mismatch candidates
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Data Type &amp; Cast Mismatch Candidates</div>'
+\qecho '<div class="finding info"><div class="finding-body">Heuristic only. This flags SQL fingerprints whose text suggests column-side casts, casted join keys, or wrapper expressions in hot predicates. Those patterns can weaken statistics selectivity, index matching, or partition pruning. Confirm with EXPLAIN before rewriting production SQL.</div></div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Query (normalized)</th><th>Calls</th><th>Total Exec (ms)</th><th>Detected Pattern</th><th>Why It Hurts</th><th>Recommended Rewrite</th><th>Confidence</th>'
+\qecho '</tr></thead><tbody>'
+
+WITH base AS (
+  SELECT
+    regexp_replace(lower(query), E'\\s+', ' ', 'g') AS query_text,
+    calls::bigint AS calls,
+    total_exec_time::double precision AS total_exec_time
+  FROM pg_stat_statements
+  WHERE dbid = (SELECT oid FROM pg_database WHERE datname = current_database())
+    AND query NOT ILIKE '%pg360%'
+    AND (:'s02_relax_pgss_filter' = 'on' OR query NOT ILIKE '%pg_stat_statements%')
+    AND query !~* '\bpg_(class|namespace|proc|type|attribute|index|constraint|settings|database|extension|inherits|partitioned_table|stat_[[:alnum:]_]+)\b'
+    AND query !~* '\b(information_schema|pg_catalog)\b'
+    AND query NOT ILIKE 'with user_tables as %'
+    AND query NOT ILIKE 'with defs as %'
+), q AS (
+  SELECT
+    query_text,
+    calls,
+    total_exec_time,
+    CASE
+      WHEN query_text ~ '[[:alpha:]_"][[:alnum:]_\." ]*::[[:alnum:]_ ]+[[:space:]]*(=|<>|<|>|<=|>=|like|ilike)' THEN 'Column-side cast in predicate'
+      WHEN query_text ~ 'cast\([[:alpha:]_"][[:alnum:]_\." ]+[[:space:]]+as[[:space:]]+[[:alnum:]_ ]+\)[[:space:]]*(=|<>|<|>|<=|>=|like|ilike)' THEN 'CAST(...) around predicate expression'
+      WHEN query_text ~ ' join .* on .*::[[:alnum:]_ ]+[[:space:]]*=[[:space:]]*.*'
+        OR query_text ~ ' join .* on .*=[[:space:]]*.*::[[:alnum:]_ ]+' THEN 'Cast in join condition'
+      WHEN query_text LIKE '%::date%' THEN 'Date cast on filter expression'
+      WHEN query_text LIKE '%date_trunc(%' OR query_text LIKE '%timezone(%' THEN 'Function-wrapped time predicate'
+      ELSE NULL
+    END AS detected_pattern,
+    CASE
+      WHEN query_text ~ '[[:alpha:]_"][[:alnum:]_\." ]*::[[:alnum:]_ ]+[[:space:]]*(=|<>|<|>|<=|>=|like|ilike)'
+        OR query_text ~ 'cast\([[:alpha:]_"][[:alnum:]_\." ]+[[:space:]]+as[[:space:]]+[[:alnum:]_ ]+\)[[:space:]]*(=|<>|<|>|<=|>=|like|ilike)'
+        THEN 'Casting the column or predicate expression can bypass native column statistics and make index conditions harder for the planner to match.'
+      WHEN query_text ~ ' join .* on .*::[[:alnum:]_ ]+[[:space:]]*=[[:space:]]*.*'
+        OR query_text ~ ' join .* on .*=[[:space:]]*.*::[[:alnum:]_ ]+'
+        THEN 'Type coercion inside join predicates can weaken operator-class matching and distort row estimates.'
+      WHEN query_text LIKE '%::date%' OR query_text LIKE '%date_trunc(%' OR query_text LIKE '%timezone(%'
+        THEN 'Wrapping the filter key changes the searchable expression and can block direct range predicates, index use, or pruning.'
+      ELSE 'Review the predicate shape with EXPLAIN.'
+    END AS why_it_hurts,
+    CASE
+      WHEN query_text ~ '[[:alpha:]_"][[:alnum:]_\." ]*::[[:alnum:]_ ]+[[:space:]]*(=|<>|<|>|<=|>=|like|ilike)'
+        OR query_text ~ 'cast\([[:alpha:]_"][[:alnum:]_\." ]+[[:space:]]+as[[:space:]]+[[:alnum:]_ ]+\)[[:space:]]*(=|<>|<|>|<=|>=|like|ilike)'
+        THEN 'Cast the literal or parameter to the column type instead of casting the column; confirm with EXPLAIN that the base-column index condition is preserved.'
+      WHEN query_text ~ ' join .* on .*::[[:alnum:]_ ]+[[:space:]]*=[[:space:]]*.*'
+        OR query_text ~ ' join .* on .*=[[:space:]]*.*::[[:alnum:]_ ]+'
+        THEN 'Align join-key data types across tables, or cast the smaller/non-indexed side outside the hot predicate path.'
+      WHEN query_text LIKE '%::date%' OR query_text LIKE '%date_trunc(%' OR query_text LIKE '%timezone(%'
+        THEN 'Prefer direct bounds on the base column (for example key >= ? AND key < ?) and keep the filter key bare when possible.'
+      ELSE 'Validate with EXPLAIN before rewriting.'
+    END AS recommended_rewrite,
+    CASE
+      WHEN query_text ~ '[[:alpha:]_"][[:alnum:]_\." ]*::[[:alnum:]_ ]+[[:space:]]*(=|<>|<|>|<=|>=|like|ilike)'
+        OR query_text ~ 'cast\([[:alpha:]_"][[:alnum:]_\." ]+[[:space:]]+as[[:space:]]+[[:alnum:]_ ]+\)[[:space:]]*(=|<>|<|>|<=|>=|like|ilike)'
+        OR query_text ~ ' join .* on .*::[[:alnum:]_ ]+[[:space:]]*=[[:space:]]*.*'
+        OR query_text ~ ' join .* on .*=[[:space:]]*.*::[[:alnum:]_ ]+'
+        THEN 'MEDIUM'
+      WHEN query_text LIKE '%::date%' OR query_text LIKE '%date_trunc(%' OR query_text LIKE '%timezone(%'
+        THEN 'LOW-MEDIUM'
+      ELSE 'LOW'
+    END AS confidence
+  FROM base
+  WHERE total_exec_time > 1000
+    AND (
+      query_text ~ '[[:alpha:]_"][[:alnum:]_\." ]*::[[:alnum:]_ ]+[[:space:]]*(=|<>|<|>|<=|>=|like|ilike)'
+      OR query_text ~ 'cast\([[:alpha:]_"][[:alnum:]_\." ]+[[:space:]]+as[[:space:]]+[[:alnum:]_ ]+\)[[:space:]]*(=|<>|<|>|<=|>=|like|ilike)'
+      OR query_text ~ ' join .* on .*::[[:alnum:]_ ]+[[:space:]]*=[[:space:]]*.*'
+      OR query_text ~ ' join .* on .*=[[:space:]]*.*::[[:alnum:]_ ]+'
+      OR query_text LIKE '%::date%'
+      OR query_text LIKE '%date_trunc(%'
+      OR query_text LIKE '%timezone(%'
+    )
+  ORDER BY total_exec_time DESC, calls DESC
+  LIMIT 20
+)
+SELECT COALESCE(
+  string_agg(
+    '<tr>' ||
+    '<td>' || replace(replace(replace(replace(replace(left(regexp_replace(regexp_replace(query_text,E'''[^'']*''','''?''','g'),'\\b\\d+\\.?\\d*\\b','?','g'),110),'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+    '<td class="num">' || to_char(calls,'FM999,999,999') || '</td>' ||
+    '<td class="num">' || to_char(round(total_exec_time::numeric,1),'FM999,999,990.0') || '</td>' ||
+    '<td>' || detected_pattern || '</td>' ||
+    '<td>' || why_it_hurts || '</td>' ||
+    '<td>' || recommended_rewrite || '</td>' ||
+    '<td>' || confidence || '</td>' ||
+    '</tr>', E'\n' ORDER BY total_exec_time DESC, calls DESC
+  ),
+  '<tr><td colspan="7" class="table-empty">No obvious cast or type-mismatch candidates were detected in this run.</td></tr>'
+) FROM q;
+
+\qecho '</tbody></table></div></div>'
+
 -- S02.8 Over-calling / chatty query patterns
 \qecho '<div class="subsection">'
 \qecho '<div class="subsection-title">Over-calling and Chatty Access Patterns</div>'
@@ -6595,32 +6700,49 @@ SELECT '<tr><td colspan="8" class="table-empty">pg_stat_statements unavailable; 
 \qecho '<div class="subsection-title">Function / Procedure Hotspots</div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
-\qecho '<th>Schema.Function</th><th>Calls</th><th>Total ms</th><th>Self ms</th><th>Avg ms/call</th><th>Signal</th>'
+\qecho '<th>Schema.Function</th><th>Volatility</th><th>Calls</th><th>Total ms</th><th>Self ms</th><th>Avg ms/call</th><th>Planner Note</th><th>Hotspot Signal</th>'
 \qecho '</tr></thead><tbody>'
 
 WITH cfg AS (
   SELECT COALESCE(current_setting('track_functions', true), 'none') AS track_functions
 ), f AS (
   SELECT
-    schemaname,
-    funcname,
-    calls,
-    total_time,
-    self_time,
-    total_time / NULLIF(calls,0) AS avg_ms_per_call
-  FROM pg_stat_user_functions
+    s.funcid,
+    s.schemaname,
+    s.funcname,
+    s.calls,
+    s.total_time,
+    s.self_time,
+    s.total_time / NULLIF(s.calls,0) AS avg_ms_per_call,
+    p.provolatile,
+    CASE p.provolatile
+      WHEN 'i' THEN 'IMMUTABLE'
+      WHEN 's' THEN 'STABLE'
+      WHEN 'v' THEN 'VOLATILE'
+      ELSE 'UNKNOWN'
+    END AS volatility_label
+  FROM pg_stat_user_functions s
+  JOIN pg_proc p ON p.oid = s.funcid
 )
 SELECT
   COALESCE(
     string_agg(
       '<tr>' ||
       '<td>' || replace(replace(replace(replace(replace(schemaname || '.' || funcname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="' || CASE provolatile WHEN 'v' THEN 'warn' WHEN 's' THEN 'good' ELSE 'good' END || '">' || volatility_label || '</td>' ||
       '<td class="num">' || to_char(calls, 'FM999,999,999') || '</td>' ||
       '<td class="num">' || to_char(round(total_time::numeric,2), 'FM999,999,990.00') || '</td>' ||
       '<td class="num">' || to_char(round(self_time::numeric,2), 'FM999,999,990.00') || '</td>' ||
       '<td class="num">' || COALESCE(to_char(round(avg_ms_per_call::numeric,3), 'FM999,999,990.000'), 'n/a') || '</td>' ||
       '<td>' ||
+        CASE provolatile
+          WHEN 'v' THEN 'VOLATILE functions are re-evaluated during execution; avoid relying on them in partition predicates or index expressions unless semantics require it.'
+          WHEN 's' THEN 'STABLE functions are safe within a statement, but direct bounds or precomputed values are often friendlier for pruning and index use.'
+          ELSE 'IMMUTABLE functions are safest for index expressions and deterministic rewrites when semantics are correct.'
+        END || '</td>' ||
+      '<td>' ||
         CASE
+          WHEN provolatile = 'v' AND total_time > 1000 THEN 'VOLATILE hot path; review whether the function is embedded in filter predicates or row-by-row SQL'
           WHEN self_time / NULLIF(total_time,0) > 0.80 AND total_time > 1000 THEN 'Function body dominates elapsed time; review row-by-row work and SQL inside the function'
           WHEN calls > 10000 AND avg_ms_per_call < 5 THEN 'Very high call count; validate whether the application is driving function-per-row access'
           WHEN total_time > 5000 THEN 'Hot function path; correlate with calling SQL and track_functions scope'
@@ -6631,8 +6753,8 @@ SELECT
     ),
     CASE
       WHEN (SELECT track_functions FROM cfg) = 'none'
-      THEN '<tr><td colspan="6" class="table-empty">track_functions = none; function hotspot telemetry is disabled in this run. Enable track_functions = pl/all or use the PG360 validation prelude.</td></tr>'
-      ELSE '<tr><td colspan="6" class="table-empty">No function hotspots crossed the reporting threshold in this run.</td></tr>'
+      THEN '<tr><td colspan="8" class="table-empty">track_functions = none; function hotspot telemetry is disabled in this run. Enable track_functions = pl/all or use the PG360 validation prelude.</td></tr>'
+      ELSE '<tr><td colspan="8" class="table-empty">No function hotspots crossed the reporting threshold in this run.</td></tr>'
     END
   )
 FROM (
@@ -8560,7 +8682,7 @@ FROM (
 
 \qecho '</tbody></table></div></div>'
 
--- S05.5 Trigger inventory (Oracle migration: trigger explosion)
+-- S05.5 Trigger inventory (migration and write-path complexity)
 \qecho '<div class="subsection">'
 \qecho '<div class="subsection-title">Trigger Inventory</div>'
 \qecho '<div class="table-wrap">'
@@ -8813,7 +8935,7 @@ FROM stats;
 \qecho '<div class="section-header">'
 \qecho '  '
 \qecho '  <div>'
-\qecho '    <div class="section-title">Index Health &amp; Missing Index Suggestions</div>'
+\qecho '    <div class="section-title">Index Fit &amp; Access Path Gaps</div>'
 \qecho '    <div class="section-desc">Unused indexes, duplicate indexes, write-cost posture, and heuristic missing-index candidates based on catalog and workload signals.</div>'
 \qecho '  </div>'
 \qecho '</div>'
@@ -9448,7 +9570,7 @@ WHERE n.nspname NOT IN ('pg_catalog','information_schema','pg_toast')
 
 -- S06.10 Action queue
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Index Remediation Queue</div>'
+\qecho '<div class="subsection-title">Index Action Queue</div>'
 
 WITH stats AS (
   SELECT
@@ -10804,9 +10926,9 @@ FROM (
 \qecho '</tr></thead><tbody>'
 \qecho '<tr><td>01 · Query Forensics</td><td>Which SQL fingerprints are hurting latency, reads, locks, or spills right now?</td><td><a href="#s02">Top SQL Analysis</a>, <a href="#s03">Wait Events and Session Activity</a>, <a href="#s04">Lock Analysis</a></td><td>Expensive query family, lock wait, spill-heavy plan, or over-calling pattern.</td><td>Start in <a href="#s02">S02</a> with the heaviest fingerprints, then correlate waits or blockers before changing indexes or GUCs.</td></tr>'
 \qecho '<tr><td>02 · Statistics</td><td>Are stale or missing planner statistics making good paths invisible?</td><td><a href="#s20">Planner Statistics Quality &amp; Estimation Errors</a>, <a href="#s05">Table Health &amp; Bloat</a></td><td>Stale ANALYZE state, weak extended stats, row-count drift, or correlation blind spots.</td><td>Check <a href="#s20">S20</a> before adding indexes; bad stats can hide good indexes and force bad joins.</td></tr>'
-\qecho '<tr><td>03 · Object DDL</td><td>Do the physical structures actually support the access path the query needs?</td><td><a href="#s06">Index Health</a>, <a href="#s13">Partitioning Health</a>, <a href="#s19">HOT Updates &amp; Write Amplification</a></td><td>Missing or redundant indexes, wrong left-prefix support, weak partition layout, or write-heavy storage choices.</td><td>Use <a href="#s06">S06</a> and <a href="#s13">S13</a> to confirm the query has the right structural support before rewriting it.</td></tr>'
+\qecho '<tr><td>03 · Object DDL</td><td>Do the physical structures actually support the access path the query needs?</td><td><a href="#s06">Index Fit</a>, <a href="#s13">Partitioning Posture</a>, <a href="#s19">HOT Updates &amp; Write Amplification</a></td><td>Missing or redundant indexes, wrong left-prefix support, weak partition layout, or write-heavy storage choices.</td><td>Use <a href="#s06">S06</a> and <a href="#s13">S13</a> to confirm the query has the right structural support before rewriting it.</td></tr>'
 \qecho '<tr><td>04 · Query Style</td><td>Is the SQL shape helping or fighting the planner?</td><td><a href="#s02">Top SQL Analysis</a>, <a href="#s30">Join Risk Detection</a>, <a href="#s33">JSONB Workload Detection</a></td><td>Non-SARGable predicates, chatty ORM access, late DISTINCT or ORDER BY, multi-join expansion, or JSON-heavy filters.</td><td>Review query shape after 01-03; use rewrite candidates and join-risk signals before adding more indexes.</td></tr>'
-\qecho '<tr><td>05 · PG Version / Platform</td><td>Are version defaults, platform limits, or configuration choices affecting the result?</td><td><a href="#s23">Full Configuration Parameter Audit</a>, <a href="#s31">Parallel Query Efficiency</a>, <a href="#m02">Platform and Diagnostic Context</a></td><td>Planner-cost settings, parallel worker limits, managed-service constraints, or version-specific behavior.</td><td>Validate <a href="#s23">S23</a> and platform context last; tune configuration after the query, stats, and DDL path are understood.</td></tr>'
+\qecho '<tr><td>05 · PG Version / Platform</td><td>Are version defaults, platform limits, or configuration choices affecting the result?</td><td><a href="#s23">Full Configuration Parameter Audit</a>, <a href="#s31">Parallel Query Efficiency</a>, <a href="#m02">Runtime Context and Guardrails</a></td><td>Planner-cost settings, parallel worker limits, managed-service constraints, or version-specific behavior.</td><td>Validate <a href="#s23">S23</a> and platform context last; tune configuration after the query, stats, and DDL path are understood.</td></tr>'
 \qecho '</tbody></table></div></div>'
 \qecho '</div>'
 
@@ -10871,12 +10993,12 @@ ORDER BY rolsuper DESC, rolname;
 
 \qecho '</tbody></table></div></div>'
 
--- S12.3 Security definer functions without search_path (privilege escalation risk)
+-- S12.3 Security definer routines without search_path (privilege escalation risk)
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">SECURITY DEFINER search_path Risk</div>'
+\qecho '<div class="subsection-title">SECURITY DEFINER routine search_path Risk</div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
-\qecho '<th>Schema</th><th>Function</th><th>Owner</th><th>Risk</th><th>Fix</th>'
+\qecho '<th>Schema</th><th>Routine</th><th>Owner</th><th>Risk</th><th>Fix</th>'
 \qecho '</tr></thead><tbody>'
 
 SELECT
@@ -10884,24 +11006,28 @@ SELECT
     string_agg(
       '<tr>' ||
       '<td>' || replace(replace(replace(replace(replace(n.nspname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
-      '<td>' || replace(replace(replace(replace(replace(p.proname,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || replace(replace(replace(replace(replace(p.oid::regprocedure::text,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td>' || replace(replace(replace(replace(replace(CASE WHEN lower(:'pg360_share_safe') IN ('on','true','1','yes') THEN :'pg360_identity_token' WHEN lower(:'pg360_redact_user') IN ('on','true','1','yes') AND r.rolname = current_user THEN :'pg360_redaction_token' ELSE r.rolname END,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
       '<td class="crit">Attacker can inject functions into search_path</td>' ||
       '<td class="code-block">' ||
       replace(replace(replace(replace(replace(
-        format('ALTER FUNCTION %s SET search_path = %I, pg_catalog;', p.oid::regprocedure, n.nspname)
+        CASE
+          WHEN p.prokind = 'p'
+            THEN format('ALTER PROCEDURE %s SET search_path = %I, pg_catalog;', p.oid::regprocedure, n.nspname)
+          ELSE format('ALTER FUNCTION %s SET search_path = %I, pg_catalog;', p.oid::regprocedure, n.nspname)
+        END
       ,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') ||
       '</td></tr>',
       ''
     ),
-    '<tr><td colspan="5" class="table-empty"> No vulnerable SECURITY DEFINER functions found</td></tr>'
+    '<tr><td colspan="5" class="table-empty"> No vulnerable SECURITY DEFINER routines found</td></tr>'
   )
 FROM pg_proc p
 JOIN pg_namespace n ON n.oid = p.pronamespace
 JOIN pg_roles r ON r.oid = p.proowner
 WHERE p.prosecdef = true
-AND NOT (p.proconfig @> ARRAY['search_path=pg_catalog'])
-AND NOT (p.proconfig::text ILIKE '%search_path%')
+AND NOT COALESCE(p.proconfig @> ARRAY['search_path=pg_catalog'], false)
+AND COALESCE(array_to_string(p.proconfig, ','), '') NOT ILIKE '%search_path%'
 AND n.nspname NOT IN ('pg_catalog','information_schema');
 
 \qecho '</tbody></table></div></div>'
@@ -11342,6 +11468,144 @@ SELECT
     '<tr><td colspan="8" class="table-empty">No large non-partitioned tables crossed the candidate threshold in this run.</td></tr>'
   )
 FROM q;
+
+\qecho '</tbody></table></div></div>'
+
+-- S13.6 Partition pruning recommendations
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Partition Pruning Recommendations</div>'
+\qecho '<div class="finding info"><div class="finding-body">These are pruning-oriented recommendations from partition metadata only. They do not prove missed pruning by themselves; they show the predicate shapes most likely to benefit from the current partition design.</div></div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Parent Table</th><th>Strategy</th><th>Partition Key</th><th>Partitions</th><th>Best Predicate Pattern</th><th>Recommendation</th>'
+\qecho '</tr></thead><tbody>'
+
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(parent_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td>' || strategy || '</td>' ||
+      '<td class="code-block">' || replace(replace(replace(replace(replace(part_key,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num ' || CASE WHEN part_count > 200 THEN 'warn' ELSE 'good' END || '">' || part_count || '</td>' ||
+      '<td>' || predicate_pattern || '</td>' ||
+      '<td>' || recommendation || '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY part_count DESC, parent_name
+    ),
+    '<tr><td colspan="6" class="table-empty">No partitioned tables are present, so there are no pruning recommendations in this run.</td></tr>'
+  )
+FROM (
+  SELECT
+    format('%I.%I', n.nspname, c.relname) AS parent_name,
+    CASE p.partstrat WHEN 'r' THEN 'RANGE' WHEN 'l' THEN 'LIST' WHEN 'h' THEN 'HASH' ELSE p.partstrat::text END AS strategy,
+    pg_get_partkeydef(c.oid) AS part_key,
+    COUNT(i.inhrelid) AS part_count,
+    CASE p.partstrat
+      WHEN 'r' THEN 'Use direct bounds on the partition key (key >= ? AND key < ?).'
+      WHEN 'l' THEN 'Use direct equality / IN predicates on the partition key.'
+      WHEN 'h' THEN 'Use direct equality on the partition key for the best pruning alignment.'
+      ELSE 'Use direct predicates on the partition key.'
+    END AS predicate_pattern,
+    CASE
+      WHEN p.partstrat = 'r' AND COUNT(i.inhrelid) > 100 THEN 'High-value pruning surface. Keep the partition key bare in predicates and avoid wrapping it in date/time or timezone functions.'
+      WHEN p.partstrat = 'l' THEN 'Prefer direct equality or IN predicates that match listed partition values; avoid transforming the key in the WHERE clause.'
+      WHEN p.partstrat = 'h' THEN 'Hash partitioning aligns with equality lookups, not range windows. Validate that the workload is point-lookup oriented.'
+      ELSE 'Validate predicate shape against the partition key with EXPLAIN.'
+    END AS recommendation
+  FROM pg_partitioned_table p
+  JOIN pg_class c ON c.oid = p.partrelid
+  JOIN pg_namespace n ON n.oid = c.relnamespace
+  LEFT JOIN pg_inherits i ON i.inhparent = c.oid
+  WHERE n.nspname NOT IN ('pg_catalog','information_schema')
+  GROUP BY n.nspname, c.relname, c.oid, p.partstrat
+) x;
+
+\qecho '</tbody></table></div></div>'
+
+-- S13.7 Function-wrapped pruning risk heuristics
+\qecho '<div class="subsection">'
+\qecho '<div class="subsection-title">Pruning Risk from Function-Wrapped Predicates</div>'
+\qecho '<div class="finding info"><div class="finding-body">Heuristic only. This surfaces SQL fingerprints that touch partitioned parents and also use time or wrapper functions often associated with weaker pruning. SQL text alone cannot prove missed pruning; confirm with EXPLAIN on the fingerprint.</div></div>'
+\qecho '<div class="table-wrap">'
+\qecho '<table class="pg360"><thead><tr>'
+\qecho '<th>Parent Table</th><th>QueryID</th><th>Calls</th><th>Total Exec ms</th><th>Detected Pattern</th><th>Pruning / Volatility Note</th><th>Recommendation</th>'
+\qecho '</tr></thead><tbody>'
+
+\if :s02_has_pgss
+WITH parents AS (
+  SELECT
+    format('%I.%I', n.nspname, c.relname) AS parent_name,
+    lower(c.relname) AS rel_token,
+    lower(n.nspname || '.' || c.relname) AS qualified_token,
+    pg_get_partkeydef(c.oid) AS part_key
+  FROM pg_partitioned_table p
+  JOIN pg_class c ON c.oid = p.partrelid
+  JOIN pg_namespace n ON n.oid = c.relnamespace
+  WHERE n.nspname NOT IN ('pg_catalog','information_schema')
+), raw AS (
+  SELECT
+    COALESCE(queryid::text, md5(query)) AS queryid_text,
+    calls::bigint AS calls,
+    total_exec_time::double precision AS total_exec_time,
+    regexp_replace(lower(query), E'\s+', ' ', 'g') AS query_text
+  FROM pg_stat_statements
+  WHERE dbid = (SELECT oid FROM pg_database WHERE datname = current_database())
+    AND query NOT ILIKE '%pg360%'
+    AND (:'s02_relax_pgss_filter' = 'on' OR query NOT ILIKE '%pg_stat_statements%')
+), matched AS (
+  SELECT
+    p.parent_name,
+    r.queryid_text,
+    r.calls,
+    r.total_exec_time,
+    CASE
+      WHEN r.query_text LIKE '%clock_timestamp(%' THEN 'clock_timestamp()'
+      WHEN r.query_text LIKE '%statement_timestamp(%' THEN 'statement_timestamp()'
+      WHEN r.query_text LIKE '%transaction_timestamp(%' OR r.query_text LIKE '%now()%' OR r.query_text LIKE '%current_timestamp%' THEN 'transaction time function'
+      WHEN r.query_text LIKE '%date_trunc(%' THEN 'date_trunc(...)'
+      WHEN r.query_text LIKE '%timezone(%' THEN 'timezone(...)'
+      WHEN r.query_text LIKE '%::date%' THEN '::date cast'
+      ELSE NULL
+    END AS detected_pattern,
+    CASE
+      WHEN r.query_text LIKE '%clock_timestamp(%' THEN 'VOLATILE: changing value during execution can defeat plan-time pruning.'
+      WHEN r.query_text LIKE '%statement_timestamp(%' OR r.query_text LIKE '%transaction_timestamp(%' OR r.query_text LIKE '%now()%' OR r.query_text LIKE '%current_timestamp%' THEN 'STABLE time function: often safer than VOLATILE, but direct literal or parameter bounds are still clearer for pruning.'
+      WHEN r.query_text LIKE '%date_trunc(%' OR r.query_text LIKE '%timezone(%' OR r.query_text LIKE '%::date%' THEN 'Wrapper expression: applying functions or casts around time bounds or the key can weaken prune-friendly shapes.'
+      ELSE NULL
+    END AS volatility_note,
+    'Prefer direct bounds on the partition key (' || p.part_key || ') and validate with EXPLAIN before keeping a function-wrapped predicate.' AS recommendation
+  FROM raw r
+  JOIN parents p
+    ON r.query_text LIKE '%' || p.rel_token || '%'
+    OR r.query_text LIKE '%' || p.qualified_token || '%'
+)
+SELECT
+  COALESCE(
+    string_agg(
+      '<tr>' ||
+      '<td>' || replace(replace(replace(replace(replace(parent_name,'&','&amp;'),'<','&lt;'),'>','&gt;'),'"','&quot;'),'''','&#39;') || '</td>' ||
+      '<td class="num">' || queryid_text || '</td>' ||
+      '<td class="num">' || to_char(calls, 'FM999,999,999') || '</td>' ||
+      '<td class="num">' || to_char(round(total_exec_time::numeric,1), 'FM999,999,999,990.0') || '</td>' ||
+      '<td>' || detected_pattern || '</td>' ||
+      '<td>' || volatility_note || '</td>' ||
+      '<td>' || recommendation || '</td>' ||
+      '</tr>',
+      E'\n' ORDER BY total_exec_time DESC, calls DESC
+    ),
+    '<tr><td colspan="7" class="table-empty">No partitioned-table fingerprints with obvious function-wrapped pruning risk were detected in this run.</td></tr>'
+  )
+FROM (
+  SELECT *
+  FROM matched
+  WHERE detected_pattern IS NOT NULL
+  ORDER BY total_exec_time DESC, calls DESC
+  LIMIT 20
+) q;
+\else
+SELECT '<tr><td colspan="7" class="table-empty">pg_stat_statements unavailable; pruning-risk fingerprint heuristics are blocked in this run.</td></tr>';
+\endif
 
 \qecho '</tbody></table></div></div>'
 \qecho '</div>'
@@ -12098,14 +12362,14 @@ SELECT COALESCE(
 
 
 -- =============================================================================
--- SECTION S18: EXECUTIVE HEALTH SCORE
+-- SECTION S18: OPERATIONAL POSTURE SCORE
 -- =============================================================================
 \qecho '<div class="section" id="s18">'
 \qecho '<div class="section-header">'
 \qecho '  '
 \qecho '  <div>'
-\qecho '    <div class="section-title">Executive Health Score</div>'
-\qecho '    <div class="section-desc">Aggregated health across all dimensions. Red items require immediate attention.</div>'
+\qecho '    <div class="section-title">Operational Posture Score</div>'
+\qecho '    <div class="section-desc">Aggregated posture across stability, performance, maintenance, resilience, and access dimensions. Red items require immediate attention.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
@@ -12179,7 +12443,7 @@ FROM (
 ) seq_check;
 
 \qecho '<div class="subsection">'
-\qecho '<div class="subsection-title">Category Score Breakdown</div>'
+\qecho '<div class="subsection-title">Posture Dimension Breakdown</div>'
 \qecho '<div class="table-wrap">'
 \qecho '<table class="pg360"><thead><tr>'
 \qecho '<th>Category</th><th>Score (0-100)</th><th>Weight</th><th>Weighted Contribution</th><th>Evidence Basis</th>'
@@ -12274,7 +12538,7 @@ SELECT
       '</tr>',
       E'\n' ORDER BY weight DESC, category
     ),
-    '<tr><td colspan="5" class="table-empty">Score components unavailable</td></tr>'
+    '<tr><td colspan="5" class="table-empty">Posture components unavailable</td></tr>'
   )
 FROM categories;
 
@@ -12322,7 +12586,7 @@ SELECT
     ELSE 'critical'
   END || '"><div class="finding-header">' ||
   '' ||
-  '<span class="finding-title">Weighted Health Score: ' || overall_score || '/100</span>' ||
+  '<span class="finding-title">Weighted Posture Score: ' || overall_score || '/100</span>' ||
   '<span class="severity-pill ' ||
   CASE
     WHEN overall_score >= 85 THEN 'pill-good">Stable'
@@ -12798,8 +13062,7 @@ LIMIT 30;
 \qecho '<strong>Problem:</strong> When you write WHERE city=''NYC'' AND state=''NY'', the planner multiplies'
 \qecho 'the individual selectivities: 5%  10% = 0.5%. But city and state are correlated!'
 \qecho 'The actual selectivity might be 8%. This mis-estimate causes nested loops instead of hash joins.<br>'
-\qecho '<strong>Oracle equivalent:</strong> Oracle''s adaptive query optimization handles this automatically.'
-\qecho 'PostgreSQL requires manual CREATE STATISTICS.<br>'
+\qecho '<strong>PostgreSQL note:</strong> extended statistics make correlated-column selectivity visible to the planner.<br>'
 \qecho '<strong>Fix:</strong> CREATE STATISTICS stat_city_state ON city, state FROM addresses;<br>'
 \qecho 'Then: ANALYZE addresses;<br>'
 \qecho '<strong>Verify:</strong> EXPLAIN shows actual vs estimated rows  estimate should be within 2x of actual.'
@@ -15005,7 +15268,7 @@ WHERE wasted_bytes > 0;
 \qecho '<div class="finding-body">'
 \qecho '<strong>Root Cause:</strong> PostgreSQL tables are accessible to any role with SELECT privilege.'
 \qecho 'Without RLS, user A can query user B''s private data.<br>'
-\qecho '<strong>Oracle equivalent:</strong> Virtual Private Database (VPD) / Fine-Grained Auditing (FGA).<br>'
+\qecho '<strong>PostgreSQL note:</strong> row-level security policies belong with explicit grants, role design, and application identity mapping.<br>'
 \qecho '<strong>Fix:</strong><br>'
 \qecho 'ALTER TABLE orders ENABLE ROW LEVEL SECURITY;<br>'
 \qecho 'CREATE POLICY user_orders ON orders FOR ALL TO app_role<br>'
@@ -15583,20 +15846,20 @@ LIMIT 25;
 \qecho '</div>'
 
 -- =============================================================================
--- SECTION S28: CONSULTING REMEDIATION ACTION PLAN
+-- SECTION S28: OPERATOR RUNBOOK QUEUE
 -- =============================================================================
 \qecho '<div class="section" id="s28">'
 \qecho '<div class="section-header">'
 \qecho '  '
 \qecho '  <div>'
-\qecho '    <div class="section-title">Consulting Remediation Action Plan</div>'
-\qecho '    <div class="section-desc">Prioritized action plan  what to fix now, this week, and this quarter. Each item includes root cause, business impact, fix script, and verification steps.</div>'
+\qecho '    <div class="section-title">Operator Runbook Queue</div>'
+\qecho '    <div class="section-desc">Prioritized operator queue: what to verify now, this week, and this quarter. Each item includes root cause, impact, fix script, and verification steps.</div>'
 \qecho '  </div>'
 \qecho '</div>'
 
 \qecho '<div class="finding critical"><div class="finding-header">'
-\qecho '<span class="finding-title">How to Use This Remediation Plan</span>'
-\qecho '<span class="severity-pill pill-info">CONSULTING GUIDE</span></div>'
+\qecho '<span class="finding-title">How to Use This Operator Queue</span>'
+\qecho '<span class="severity-pill pill-info">RUNBOOK</span></div>'
 \qecho '<div class="finding-body">'
 \qecho '<strong>Priority 1 (TODAY):</strong> XID wraparound risk, inactive replication slots (disk full risk),'
 \qecho 'sequences out of sync, invalid indexes, any SECURITY DEFINER without search_path.<br>'
@@ -15739,7 +16002,7 @@ SELECT
        '<td><span class="severity-pill pill-high"> P2 WEEK</span></td>' ||
        '<td>S06.3</td>' ||
        '<td>' || cnt || ' foreign key column(s) without supporting index</td>' ||
-       '<td>Oracle auto-creates FK indexes. PostgreSQL does not. Migration tools miss this.</td>' ||
+       '<td>PostgreSQL does not automatically create child-side FK indexes; application delete/update paths can expose the gap.</td>' ||
        '<td class="warn">Every DELETE/UPDATE on parent table  full sequential scan of child table. 100-1000x slower on large tables.</td>' ||
        '<td class="code-block">-- See Section S06.3 for exact CREATE INDEX CONCURRENTLY scripts per FK column</td>' ||
        '<td>After: idx_scan count for new index should increase. seq_scan should decrease.</td></tr>'
@@ -17900,20 +18163,20 @@ SELECT '<tr><td colspan="5" class="table-empty">pg_stat_statements unavailable; 
 \qecho '  }'
 \qecho ''
 \qecho '  var CATALOG_LAYOUT = ['
-\qecho '    [{label: ''1a. Environment & Instance'', sectionId: ''s00''},'
+\qecho '    [{label: ''1a. Runtime Identity'', sectionId: ''s00''},'
 \qecho '     {label: ''1b. Database Overview'', sectionId: ''s01''},'
 \qecho '     {label: ''1c. Config Audit'', sectionId: ''s23''},'
 \qecho '     {label: ''1d. Extension Inventory'', sectionId: ''s29''},'
 \qecho '     {label: ''1e. Security Baseline'', sectionId: ''s12''},'
 \qecho '     {label: ''1f. Access Review'', sectionId: ''s25''}],'
-\qecho '    [{label: ''2a. Top SQL Analysis'', sectionId: ''s02''},'
+\qecho '    [{label: ''2a. SQL Pressure'', sectionId: ''s02''},'
 \qecho '     {label: ''2b. Workload & Tuning'', sectionId: ''s11''},'
 \qecho '     {label: ''2c. Join Risk Detection'', sectionId: ''s30''},'
 \qecho '     {label: ''2d. Parallel Efficiency'', sectionId: ''s31''},'
 \qecho '     {label: ''2e. JIT Analysis'', sectionId: ''s32''},'
 \qecho '     {label: ''2f. JSONB Detection'', sectionId: ''s33''}],'
-\qecho '    [{label: ''3a. Table Health & Bloat'', sectionId: ''s05''},'
-\qecho '     {label: ''3b. Index Health'', sectionId: ''s06''},'
+\qecho '    [{label: ''3a. Table Debt'', sectionId: ''s05''},'
+\qecho '     {label: ''3b. Index Fit'', sectionId: ''s06''},'
 \qecho '     {label: ''3c. Index Bloat'', sectionId: ''s24''},'
 \qecho '     {label: ''3d. HOT & Fillfactor'', sectionId: ''s19''},'
 \qecho '     {label: ''3e. Planner Statistics'', sectionId: ''s20''},'
@@ -17930,7 +18193,7 @@ SELECT '<tr><td colspan="5" class="table-empty">pg_stat_statements unavailable; 
 \qecho '     {label: ''5c. Capacity & Growth'', sectionId: ''s16''},'
 \qecho '     {label: ''5d. Capacity Detail'', sectionId: ''s26''},'
 \qecho '     {label: ''5e. HA & DR Readiness'', sectionId: ''s17''},'
-\qecho '     {label: ''5f. Action Plan Detail'', sectionId: ''s28''}]'
+\qecho '     {label: ''5f. Operator Runbook'', sectionId: ''s28''}]'
 \qecho '  ];'
 \qecho ''
 \qecho '  var CATALOG_TITLE_OVERRIDES = {'
@@ -17969,7 +18232,7 @@ SELECT '<tr><td colspan="5" class="table-empty">pg_stat_statements unavailable; 
 \qecho '    ''XID Wraparound Risk (CRITICAL if age &gt; 1.5 billion)'': ''XID Wraparound Risk'','
 \qecho '    ''Sequence Synchronization Check (post-migration risk: next insert = PK violation)'': ''Sequence Synchronization Check'','
 \qecho '    ''Sequence Exhaustion and Runway Check (post-migration risk: key space nearly exhausted)'': ''Sequence Exhaustion Check'','
-\qecho '    ''Trigger Inventory (High trigger count = potential Oracle migration artifact)'': ''Trigger Inventory'','
+\qecho '    ''Trigger Inventory (High trigger count = potential migration artifact)'': ''Trigger Inventory'','
 \qecho '    ''Tables Without Primary Keys (replication risk, data quality issue)'': ''Tables Without Primary Keys'','
 \qecho '    ''Freeze Age and Wraparound Countdown'': ''Freeze Age & Wraparound Countdown'','
 \qecho '    ''Table Churn Rate Profile (Insert/Update/Delete)'': ''Table Churn Rate Profile'','
@@ -17982,7 +18245,7 @@ SELECT '<tr><td colspan="5" class="table-empty">pg_stat_statements unavailable; 
 \qecho '    ''Foreign Key Supporting Index Gaps (Benefit and Risk)'': ''Foreign Key Index Gaps'','
 \qecho '    ''SQL Performance Telemetry and Version-Aware Insights'': ''SQL Telemetry & Version Insights'','
 \qecho '    ''Index Readiness Status (invalid or not ready)'': ''Index Readiness Status'','
-\qecho '    ''Index Remediation Queue (Fix / Verify / Rollback)'': ''Index Remediation Queue'','
+\qecho '    ''Index Action Queue (Fix / Verify / Rollback)'': ''Index Action Queue'','
 \qecho '    ''BGWriter &amp; Checkpoint Statistics'': ''BGWriter & Checkpoints'','
 \qecho '    ''Table-Level Cache Hit Ratios (Bottom 20)'': ''Table Cache Hit Ratios'','
 \qecho '    ''Background Write Pressure Classification'': ''BG Write Pressure Classification'','
@@ -18019,7 +18282,8 @@ SELECT '<tr><td colspan="5" class="table-empty">pg_stat_statements unavailable; 
 \qecho '    ''Failover Readiness and RPO Posture'': ''Failover Readiness & RPO Posture'','
 \qecho '    ''Replication Evidence for RPO Discussion'': ''Repl Evidence for RPO Discussion'','
 \qecho '    ''Operational DR Checklist (Runbook Completeness)'': ''Operational DR Checklist'','
-\qecho '    ''Category Score Breakdown (Transparent Weighting)'': ''Category Score Breakdown'','
+\qecho '    ''Posture Dimension Breakdown (Transparent Weighting)'': ''Posture Dimension Breakdown'','
+\qecho '    ''Posture Dimension Breakdown'': ''Posture Dimension Breakdown'','
 \qecho '    ''Diagnostic Confidence (Data Completeness)'': ''Diagnostic Confidence'','
 \qecho '    ''Timeout, Wait, and Telemetry Priorities'': ''Timeout / Wait / Telemetry'','
 \qecho '    ''HOT Update Ratio by Table (low ratio = fillfactor tuning opportunity)'': ''HOT Update Ratio by Table'','
@@ -18027,7 +18291,7 @@ SELECT '<tr><td colspan="5" class="table-empty">pg_stat_statements unavailable; 
 \qecho '    ''Write Amplification Posture (HOT Misses, Dead Tuples, Vacuum Debt)'': ''Write Amplification Posture'','
 \qecho '    ''Tables With Stale Statistics (modified since last analyze)'': ''Tables With Stale Statistics'','
 \qecho '    ''Column Correlation Gaps (tables that may benefit from extended statistics)'': ''Column Correlation Gaps'','
-\qecho '    ''Extended Statistics Remediation Queue (Fix, Verify, Rollback)'': ''Extended Statistics Queue'','
+\qecho '    ''Extended Statistics Action Queue (Fix, Verify, Rollback)'': ''Extended Statistics Queue'','
 \qecho '    ''Analyze Policy Tuning Queue (High Modification Tables)'': ''Analyze Policy Tuning Queue'','
 \qecho '    ''Current Autovacuum Global Configuration vs Recommended'': ''Autovacuum Global Configuration'','
 \qecho '    ''Per-Table Vacuum Urgency Matrix with Custom Settings Script'': ''Per-Table Vacuum Urgency Matrix'','
@@ -18052,8 +18316,46 @@ SELECT '<tr><td colspan="5" class="table-empty">pg_stat_statements unavailable; 
 \qecho '    ''auto_explain Safe Baseline (Production-Friendly)'': ''auto_explain Safe Baseline'','
 \qecho '    ''JSON / JSONB / Array Column Inventory'': ''JSON / JSONB Column Inventory'','
 \qecho '    ''Extension Posture Snapshot'': ''Extension Posture Snapshot'','
-\qecho '    ''Foreign Keys Without Supporting Indexes (Oracle auto-indexes these  PG does NOT)'': ''FKs Without Supporting Indexes'','
-\qecho '    ''Join-Column Index Gaps Under Scan Pressure'': ''Join-Column Index Gaps'''
+\qecho '    ''Foreign Keys Without Supporting Indexes (child-side FK scan risk)'': ''FKs Without Supporting Indexes'','
+\qecho '    ''Rows Efficiency &amp; Wasted-Work'': ''Rows Efficiency &amp; Waste'','
+\qecho '    ''Data Type &amp; Cast Mismatch Candidates'': ''Type &amp; Cast Mismatch'','
+\qecho '    ''Session Sampling Window &amp; Wait Profile'': ''Sampling &amp; Wait Profile'','
+\qecho '    ''Evidence-Based Parameter Tuning Matrix'': ''Parameter Tuning Matrix'','
+\qecho '    ''Available / Trusted Provider Extension Catalog'': ''Provider Extension Catalog'','
+\qecho '    ''Partitioned Tables Overview'': ''Partitioned Tables'','
+\qecho '    ''Partition Count Pressure'': ''Partition Count'','
+\qecho '    ''Child Partitions Missing Indexes'': ''Child Parts Missing Idx'','
+\qecho '    ''Partition Maintenance Automation Signals'': ''Partition Maint Signals'','
+\qecho '    ''Large-Table Partition Candidates'': ''Partition Candidates'','
+\qecho '    ''Partition Pruning Recommendations'': ''Pruning Recommendations'','
+\qecho '    ''Pruning Risk from Function-Wrapped Predicates'': ''Pruning Risk: Wrapped Predicates'','
+\qecho '    ''Sequential Scan Interpretation Heuristics'': ''Sequential Scan Heuristics'','
+\qecho '    ''Join-Column Index Gaps Under Scan Pressure'': ''Join-Column Index Gaps'','
+\qecho '    ''Advanced Assisted Diagnostics Readiness'': ''Assisted Diagnostics Ready?'','
+\qecho '    ''Version Currency &amp; Security Posture'': ''Version &amp; Security Posture'','
+\qecho '    ''Timeout Starting Points by Workload'': ''Timeout Starting Points'','
+\qecho '    ''Regressions Since Previous Snapshot'': ''Prev Snapshot Regressions'','
+\qecho '    ''Projection Confidence and Assumptions'': ''Projection Confidence'','
+\qecho '    ''JSONB / Array Operator Fit Guidance'': ''JSONB / Array Fit'','
+\qecho '    ''Baseline-Driven Priority Escalation'': ''Baseline Escalation'','
+\qecho '    ''Sequence Exhaustion and Runway Check'': ''Sequence Runway Check'','
+\qecho '    ''SQL Workload Family Classification'': ''SQL Workload Class.'','
+\qecho '    ''Row-Level Security Policy Coverage'': ''RLS Policy Coverage'','
+\qecho '    ''Role Membership and Inherited Access'': ''Role Membership &amp; Access'','
+\qecho '    ''Rebuild vs Leave Decision Criteria'': ''Rebuild vs Leave'','
+\qecho '    ''Read-Only Monitoring Role Template'': ''Read-Only Role Template'','
+\qecho '    ''Parallel Planner &amp; Worker Settings'': ''Parallel Planner Settings'','
+\qecho '    ''Connection Saturation and Queue Risk'': ''Connection Saturation'','
+\qecho '    ''Workload Attribution Completeness'': ''App Name Coverage'','
+\qecho '    ''Tables With Low NOT NULL Coverage'': ''Low NOT NULL Coverage'','
+\qecho '    ''Incident Triage Telemetry Posture'': ''Incident Triage Telemetry'','
+\qecho '    ''Wait Event Group Concentration'': ''Wait Group Concentration'','
+\qecho '    ''5-Dimension SQL Tuning Framework'': ''5-Dim SQL Tuning'','
+\qecho '    ''Blocking Tree with Blast Radius'': ''Blocking Tree &amp; Blast Radius'','
+\qecho '    ''Installed Extensions Inventory'': ''Extensions Inventory'','
+\qecho '    ''ALTER DEFAULT PRIVILEGES Drift'': ''Default Privileges Drift'','
+\qecho '    ''Workload-Aligned Tuning Focus'': ''Workload Tuning Focus'','
+\qecho '    ''Tables Most in Need of Vacuum'': ''Vacuum Priority Tables'''
 \qecho '  };'
 \qecho ''
 \qecho '  function compactCatalogTitle(rawText) {'
@@ -18171,8 +18473,8 @@ SELECT '<tr><td colspan="5" class="table-empty">pg_stat_statements unavailable; 
 \qecho '    ''02'': ''Top SQL Analysis'','
 \qecho '    ''03'': ''Wait Events & Sessions'','
 \qecho '    ''04'': ''Lock Analysis'','
-\qecho '    ''05'': ''Table Health & Bloat'','
-\qecho '    ''06'': ''Index Health'','
+\qecho '    ''05'': ''Table Debt & Bloat'','
+\qecho '    ''06'': ''Index Fit'','
 \qecho '    ''07'': ''Buffer Cache & I/O'','
 \qecho '    ''08'': ''WAL & Replication'','
 \qecho '    ''09'': ''Connections & Pooling'','
@@ -18183,7 +18485,7 @@ SELECT '<tr><td colspan="5" class="table-empty">pg_stat_statements unavailable; 
 \qecho '    ''15'': ''Data Quality Checks'','
 \qecho '    ''16'': ''Capacity & Growth'','
 \qecho '    ''17'': ''HA & DR Readiness'','
-\qecho '    ''18'': ''Executive Health Score'','
+\qecho '    ''18'': ''Operational Posture Score'','
 \qecho '    ''19'': ''HOT Updates & Fillfactor'','
 \qecho '    ''20'': ''Planner Statistics Quality'','
 \qecho '    ''21'': ''Autovacuum Full Advisor'','
@@ -18192,18 +18494,18 @@ SELECT '<tr><td colspan="5" class="table-empty">pg_stat_statements unavailable; 
 \qecho '    ''24'': ''Index Bloat Estimation'','
 \qecho '    ''25'': ''Security & Access Review'','
 \qecho '    ''26'': ''Capacity Enhanced View'','
-\qecho '    ''28'': ''Remediation Action Plan'','
+\qecho '    ''28'': ''Operator Runbook Queue'','
 \qecho '    ''29'': ''Extension Inventory'','
 \qecho '    ''30'': ''Join Risk Detection'','
 \qecho '    ''31'': ''Parallel Query Efficiency'','
 \qecho '    ''32'': ''JIT Usage Analysis'','
 \qecho '    ''33'': ''JSONB Workload Detection'''
-\qecho '    ,''m01'': ''Executive Summary'''
-\qecho '    ,''m02'': ''Platform and Diagnostic Context'''
-\qecho '    ,''m03'': ''Instance and Database Profile'''
-\qecho '    ,''m04'': ''Monitoring and Observability Readiness'''
-\qecho '    ,''m05'': ''Workload Characterization'''
-\qecho '    ,''m18'': ''Prioritized Remediation Plan'''
+\qecho '    ,''m01'': ''Current Posture'''
+\qecho '    ,''m02'': ''Runtime Context and Guardrails'''
+\qecho '    ,''m03'': ''Instance and Database Shape'''
+\qecho '    ,''m04'': ''Telemetry Readiness'''
+\qecho '    ,''m05'': ''Workload Fingerprint'''
+\qecho '    ,''m18'': ''Operator Action Queue'''
 \qecho '  };'
 \qecho ''
 \qecho '  function normalizeAreaReferences() {'

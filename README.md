@@ -1,6 +1,12 @@
 # PG360
 
-PG360 is a single-script, read-only PostgreSQL diagnostics report generator.
+PG360 is a single-script, read-only PostgreSQL operations workbook and diagnostics generator.
+
+## Open-source release status
+- PG360 is being prepared for public open-source release.
+- Repository license: `MIT` for original PG360 material in this repository.
+- Provenance gate before publishing: verify that no GPL-licensed code, copied report text, CSS, templates, or other protected material from `eDB360` / `SQLdb360` remain here unless PG360 is relicensed compatibly.
+- See [ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md) and [OPEN_SOURCE_RELEASE_CHECKLIST.md](OPEN_SOURCE_RELEASE_CHECKLIST.md).
 
 ## Release
 - Current release baseline: `v1.0.0`
@@ -19,7 +25,12 @@ PG360 is a single-script, read-only PostgreSQL diagnostics report generator.
 - `VALIDATION_CHECKLIST.md`: validation checklist used during QA
 - `SCRIPT_SAFETY_AUDIT.md`: execution safety posture and caveats
 - `DISCLAIMER.md`: usage and liability disclaimer
+- `ACKNOWLEDGMENTS.md`: attribution, inspiration, and provenance note
 - `AUTHORS.md`: author and contributor credits
+- `CONTRIBUTING.md`: contribution workflow and guardrails
+- `CODE_OF_CONDUCT.md`: collaboration expectations
+- `SECURITY.md`: security reporting guidance
+- `OPEN_SOURCE_RELEASE_CHECKLIST.md`: publication checklist for the first public release
 - `demo/pg360_validation_prelude.sql`: QA/demo seed script, not for production use
 
 ## Support statement
@@ -35,8 +46,9 @@ PG360 is a single-script, read-only PostgreSQL diagnostics report generator.
 
 ## Open-source use
 - You may use and modify PG360 for your own needs.
-- PG360 is released under the [MIT License](LICENSE).
+- PG360 is released under the [MIT License](LICENSE) for original PG360 material in this repository.
 - See [DISCLAIMER.md](DISCLAIMER.md) for the no-warranty and no-liability statement.
+- PG360 intentionally follows a DBA-friendly "360-degree report" experience similar in spirit to `eDB360` / `SQLdb360`; see [ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md) for the thank-you note and provenance guidance.
 
 ## Author and contributors
 - Author: Sai Endla
@@ -155,4 +167,11 @@ This flag does not change report content. It is only a deliberate pre-flight con
 - `RELEASE_GATE.md`
 - `VALIDATION_CHECKLIST.md`
 - `SCRIPT_SAFETY_AUDIT.md`
+- `ACKNOWLEDGMENTS.md`
+- `OPEN_SOURCE_RELEASE_CHECKLIST.md`
 - `versions/version_1.0.0/NOTES.txt`
+
+## Community
+- Contribution guide: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Code of conduct: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- Security reporting: [SECURITY.md](SECURITY.md)
